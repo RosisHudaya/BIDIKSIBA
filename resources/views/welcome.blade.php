@@ -1,111 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Login &mdash; Stisla</title>
-
-  <!-- General CSS Files -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-  <!-- CSS Libraries -->
-  <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
-
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
-</head>
-
-<body>
-  <div id="app">
-    <section class="section">
-      <div class="d-flex flex-wrap align-items-stretch">
-        <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
-          <div class="p-4 m-3">
-            <img src="../assets/img/stisla-fill.svg" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
-            <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Stisla</span></h4>
-            <p class="text-muted">Before you get started, you must login or register if you don't already have an account.</p>
-            <form action="{{ route('login') }}" method="POST">
-              @csrf
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input  type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email" tabindex="1" required autofocus>
-                <div class="invalid-feedback">
-                  Please fill in your email
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="d-block">
-                  <label for="password" class="control-label">Password</label>
-                </div>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" tabindex="2" required>
-                <div class="invalid-feedback">
-                  please fill in your password
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                  <label class="custom-control-label" for="remember-me">Remember Me</label>
-                </div>
-              </div>
-
-              <div class="form-group text-right">
-                <a href="/forgot-password" class="float-left mt-3">
-                  Forgot Password?
-                </a>
-                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
-                  Login
-                </button>
-              </div>
-
-              <div class="mt-5 text-center">
-                Don't have an account? <a href="/register">Create new one</a>
-              </div>
-            </form>
-
-            <div class="text-center mt-5 text-small">
-              Copyright &copy; Your Company. Made with 💙 by Stisla
-              <div class="mt-2">
-                <a href="#">Privacy Policy</a>
-                <div class="bullet"></div>
-                <a href="#">Terms of Service</a>
-              </div>
-            </div>
-          </div>
+@extends('landing-page.app')
+@section('title', 'BIDIKSIBA POLINEMA | Dashborad')
+@push('style')
+    <link rel="stylesheet" href="/assets/css/dashboard.css">
+@endpush
+@section('main')
+    <div class="col-md-11 d-flex mx-auto info my-4">
+        <span class="s-info py-2 px-3">UPDATE INFO</span>
+        <marquee class="m-desc py-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam distinctio beatae consectetur vel
+            perferendis, enim itaque, dolor, eveniet unde nihil alias quos eius nulla autem hic nobis. Ducimus, commodi.
+            Quam aliquid nihil tempore, nostrum placeat ducimus. Quibusdam neque explicabo quod ut facilis temporibus ea
+            magni eum ullam quisquam, tenetur esse, corrupti delectus. Sunt sint porro modi magnam laborum? Perspiciatis
+            laboriosam voluptate dolor, maiores architecto nam eius voluptatibus vel sed dolore amet numquam voluptates qui
+            recusandae. Ipsum minima corrupti repellat, iusto et assumenda natus animi cupiditate voluptatibus in mollitia
+            quia reiciendis impedit, ea dolores? Sequi mollitia reprehenderit similique cum eligendi soluta?
+        </marquee>
+    </div>
+    <div class="d-flex col-md-11 mx-auto text-justify">
+        <div class="col-md-8 p-0">
+            <p class="p-main-title mb-0 py-1 px-3">TINJAUAN SINGKAT</p>
+            <p class="p-main py-1 px-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore vel nihil, placeat
+                mollitia consectetur tempora distinctio ut? Voluptates voluptatibus tenetur impedit unde ipsa mollitia
+                perferendis! Voluptatem id harum libero, ipsam, maxime tenetur molestiae quisquam quo quia, nihil dolore
+                laboriosam deleniti unde. Nisi praesentium inventore ipsa nesciunt neque enim debitis facere. Assumenda
+                praesentium, dignissimos illum sed eos unde eaque odit mollitia reprehenderit iste consectetur! Veniam velit
+                ipsam nulla laudantium, vitae illum aliquam sapiente, quis expedita voluptate quos doloribus? Dicta
+                similique non saepe, facere iure fuga tenetur aut perspiciatis? Placeat mollitia delectus id. Optio hic,
+                sunt, veniam doloremque quo dicta accusantium id repellat quas nesciunt corrupti tempore eveniet adipisci
+                saepe sed fuga? Libero fuga modi ut ipsa incidunt nulla expedita vel nihil quaerat neque soluta dolore
+                praesentium cum illum itaque maiores dicta est architecto, sunt rerum ratione repellendus. Dicta tenetur
+                excepturi culpa quidem, iure nemo quis ut reiciendis atque ducimus. Architecto quos exercitationem aperiam
+                quod fugit, laboriosam sequi laudantium assumenda tenetur? Nemo odio reiciendis ab laborum enim nobis minima
+                consectetur. Ea sequi in, architecto a ipsum temporibus eaque, nisi earum inventore maiores at reiciendis.
+                Aperiam, exercitationem ut ipsa est quam architecto alias, quibusdam distinctio praesentium porro facere
+                totam doloribus beatae eligendi provident nulla hic esse a. Quasi expedita illum maxime dicta sapiente rerum
+                minus ducimus fugit placeat, aperiam asperiores itaque deserunt enim consequatur, ipsam non quo. Animi
+                dolorem tempore minus ab exercitationem nam dolor soluta non sit ex architecto quae vel modi libero
+                corporis, similique officia. Error, deleniti id nihil consequuntur tempore vero sit unde sunt placeat
+                exercitationem, nemo similique dolorem ea necessitatibus eos ab, corrupti illum iste! Facere repudiandae,
+                quis repellat assumenda ipsam recusandae, in ut eum eligendi alias nam dolore voluptate soluta. Quaerat
+                dolore fuga fugit facilis reprehenderit est nesciunt natus culpa, assumenda deleniti, optio repellat, ab
+                magnam perferendis iste! Commodi, praesentium porro! Impedit laboriosam id, sint dolorum sequi nobis nisi
+                eligendi totam, culpa quidem at ex temporibus nemo aspernatur vel perferendis amet quibusdam. Optio facere
+                illo dicta, adipisci, doloribus soluta ea deserunt suscipit deleniti dolore quidem, esse quasi? Voluptatum,
+                consequuntur accusantium! Dolor quae totam esse similique impedit sequi est inventore voluptas aut sit
+                molestiae ipsa quam sint nesciunt dicta odio debitis animi, dolores alias quasi beatae corrupti laboriosam.
+                Aperiam cumque laudantium, fuga a voluptate facilis provident ut temporibus nam nisi eos vel? Asperiores,
+                sunt itaque voluptatibus necessitatibus aspernatur vitae natus. Esse similique consectetur molestias
+                voluptate, impedit aspernatur, ea error, quam possimus eligendi sunt. Repellat quas minima quo obcaecati
+                neque veniam, est, pariatur dolorem illum consequatur exercitationem quos error assumenda incidunt earum
+                reiciendis ducimus. Reiciendis illo odio deleniti voluptate eaque odit minima nihil. Eveniet mollitia,
+                facilis aperiam quos consequatur cumque fuga dignissimos quibusdam eos culpa vel vero consequuntur rerum,
+                sequi explicabo minus maxime est possimus! Laboriosam dolorem natus provident maxime unde laudantium,
+                consequuntur eligendi et tenetur fugiat, possimus distinctio, at ipsum officiis vero ipsam cum? Explicabo,
+                perferendis quo facilis, vitae saepe doloribus accusantium dicta minima vel necessitatibus quas veniam
+                deleniti velit. Tempore accusantium sit repellendus omnis, est quasi necessitatibus pariatur.
+            </p>
         </div>
-        <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="../assets/img/unsplash/login-bg.jpg">
-          <div class="absolute-bottom-left index-2">
-            <div class="text-light p-5 pb-2">
-              <div class="mb-5 pb-3">
-                <h1 class="mb-2 display-4 font-weight-bold">Good Morning</h1>
-                <h5 class="font-weight-normal text-muted-transparent">Bali, Indonesia</h5>
-              </div>
-              Photo by <a class="text-light bb" target="_blank" href="https://unsplash.com/photos/a8lTjWJJgLA">Justin Kauffman</a> on <a class="text-light bb" target="_blank" href="https://unsplash.com">Unsplash</a>
+        <div class="col-md-4 pr-0">
+            <p class="p-sub-title mb-0 py-1 px-3 text-center">INFORMASI</p>
+            <div class="p-sub py-1 p-2 my-2">
+                <hr>
+                <div class="d-flex">
+                    <img class="img-fluid img-h mr-3" src="{{ asset('assets/img/logo.png') }}">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dicta autem eaque velit
+                        voluptate! Impedit at mollitia repellat doloremque eius necessitatibus quaerat magnam, in quia.
+                    </p>
+                </div>
+                <hr class="mt-0">
             </div>
-          </div>
+            <div class="p-sub py-1 p-2 my-2">
+                <hr>
+                <div class="d-flex">
+                    <img class="img-fluid img-h mr-3" src="{{ asset('assets/img/logo.png') }}">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dicta autem eaque velit
+                        voluptate! Impedit at mollitia repellat doloremque eius necessitatibus quaerat magnam, in quia.
+                    </p>
+                </div>
+                <hr class="mt-0">
+            </div>
+            <div class="p-sub py-1 p-2 my-2">
+                <hr>
+                <div class="d-flex">
+                    <img class="img-fluid img-h mr-3" src="{{ asset('assets/img/logo.png') }}">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dicta autem eaque velit
+                        voluptate! Impedit at mollitia repellat doloremque eius necessitatibus quaerat magnam, in quia.
+                    </p>
+                </div>
+                <hr class="mt-0">
+            </div>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- General JS Scripts -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="../assets/js/stisla.js"></script>
-
-  <!-- JS Libraies -->
-
-  <!-- Template JS File -->
-  <script src="../assets/js/scripts.js"></script>
-  <script src="../assets/js/custom.js"></script>
-
-  <!-- Page Specific JS File -->
-</body>
-</html>
+    </div>
+@endsection

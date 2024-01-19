@@ -1,0 +1,50 @@
+.info {
+    text-align: justify;
+}
+
+.s-info {
+    background-color: #004181;
+    color: white;
+    white-space: nowrap;
+    font-size: 16px;
+    font-weight: 800;
+    border-radius: 15px 0 0 15px;
+}
+
+.m-desc {
+    /* background-color: white; */
+    backdrop-filter: blur(25px);
+    font-size: 14px;
+    font-style: italic;
+    border: solid 1px white;
+    border-radius: 0 15px 15px 0;
+}
+
+.p-main-title,
+.p-sub-title {
+    background-color: #004181;
+    border: solid 2px #004181;
+    color: white;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.p-main-title {
+    border-radius: 15px 15px 0 0;
+}
+
+.p-sub-title {
+    border-radius: 15px;
+}
+
+.p-main {
+    background-color: white;
+    border-radius: 0 0 15px 15px;
+    font-size: 14px;
+}
+
+.p-sub {
+    background-color: white;
+    border-radius: 15px;
+    font-size: 14px;
+}

@@ -27,9 +27,21 @@ use App\Models\Category;
 |
 */
 
+// Route::get('/', function () {
+//     return view('auth/login');
+// });
+
 Route::get('/', function () {
-    return view('auth/login');
+    return view('welcome');
 });
+
+Route::get('/login', function () {
+    if (auth()->check()) {
+        return redirect('/dashboard');
+    } else {
+        return view('auth/login');
+    }
+})->name('login');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', function () {
