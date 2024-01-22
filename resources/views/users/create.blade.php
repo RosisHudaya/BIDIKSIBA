@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <section class="section">
         <div class="section-header">
             <h1>Table</h1>
@@ -50,6 +49,10 @@
                                     {{ $message }}
                                 </div>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <input type="text" class="form-control" name="role" value="calon-mahasiswa" readonly>
                         </div>
                 </div>
                 <div class="card-footer text-right">

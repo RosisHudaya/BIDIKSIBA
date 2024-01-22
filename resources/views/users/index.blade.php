@@ -5,11 +5,6 @@
     <section class="section">
         <div class="section-header">
             <h1>User List</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Table</div>
-            </div>
         </div>
         <div class="section-body">
             <h2 class="section-title">User Management</h2>
@@ -23,62 +18,29 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>User List</h4>
-                            <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('user.create') }}">Create New
-                                    User</a>
-                                <a class="btn btn-info btn-primary active import">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                    Import User</a>
-                                <a class="btn btn-info btn-primary active" href="{{ route('user.export') }}">
-                                    <i class="fa fa-upload" aria-hidden="true"></i>
-                                    Export User</a>
-                                <a class="btn btn-info btn-primary active search">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                    Search User</a>
-                            </div>
+                            <a class="btn btn-primary" href="{{ route('user.create') }}">
+                                <i class="fas fa-user-plus"></i> Tambah User
+                            </a>
                         </div>
                         <div class="card-body">
-                            <div class="show-import" style="display: none">
-                                <div class="custom-file">
-                                    <form action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
-                                        {{ csrf_field() }}
-                                        <label class="custom-file-label" for="file-upload">Choose File</label>
-                                        <input type="file" id="file-upload" class="custom-file-input" name="import_file">
-                                        <br /> <br />
-                                        <div class="footer text-right">
-                                            <button class="btn btn-primary">Import File</button>
-                                        </div>
-                                    </form>
+                            <form id="search" method="GET" action="{{ route('user.index') }}">
+                                <div class="d-flex mb-3">
+                                    <input type="text" name="name" class="form-control mr-2" id="name"
+                                        placeholder="cari nama..." value="{{ app('request')->input('name') }}">
+                                    <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
+                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('user.index') }}">Reset</a>
                                 </div>
-                            </div>
-                            <div class="show-search mb-3" style="display: none">
-                                <form id="search" method="GET" action="{{ route('user.index') }}">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="role">User</label>
-                                            <input type="text" name="name" class="form-control" id="name"
-                                                placeholder="User Name">
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                        <a class="btn btn-secondary" href="{{ route('user.index') }}">Reset</a>
-                                    </div>
-                                </form>
-                            </div>
+                            </form>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-md">
                                     <tbody>
                                         <tr>
                                             <th>#</th>
-                                            <th>Name</th>
+                                            <th>Nama</th>
                                             <th>Email</th>
-                                            <th>Created At</th>
-                                            <th>Roles</th>
-                                            {{-- <th>Update Roles</th> --}}
-                                            <th>Verify</th>
-                                            <th class="text-center">Action</th>
+                                            <th>Role</th>
+                                            <th class="text-center">Akun</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                         @foreach ($users as $key => $user)
                                             <tr>
@@ -86,29 +48,23 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>
-                                                    @if ($user->email_verified_at)
-                                                        {{ $user->email_verified_at }}
-                                                    @else
-                                                        Access Denied
-                                                    @endif
-                                                </td>
-                                                <td>
                                                     @foreach ($user->roles as $role)
                                                         {{ $role->name }}
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex justify-content-start">
+                                                    <div class="d-flex justify-content-center">
                                                         @if (is_null($user->email_verified_at))
                                                             <form
                                                                 action="{{ route('user.verify-email', ['id' => $user->id, 'hash' => sha1($user->email)]) }}"
                                                                 method="POST" class="d-inline-block"
                                                                 id="vel-<?= $user->id ?>">
                                                                 @csrf
-                                                                <button type="submit" class="btn btn-sm btn-primary ml-2"
-                                                                    data-confirm="Verifikasi Data User |Apakah Kamu Yakin Verifikasi ?"
+                                                                <button type="submit" class="btn btn-sm btn-primary px-3"
+                                                                    data-confirm="Aktifkan Akun User | Apakah kamu yakin meaktifkan akun user ?"
                                                                     data-confirm-yes="submitVeri(<?= $user->id ?>)"
-                                                                    data-id="vel-{{ $user->id }}">Verify Email</button>
+                                                                    data-id="vel-{{ $user->id }}">Aktifkan akun
+                                                                </button>
                                                             </form>
                                                         @else
                                                             <form
@@ -117,11 +73,11 @@
                                                                 id="vel-<?= $user->id ?>">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-sm btn-danger ml-2"
-                                                                    data-confirm="Verifikasi Data User |Apakah Kamu Yakin Batalkan Verifikasi ?"
+                                                                <button type="submit" class="btn btn-sm btn-light"
+                                                                    data-confirm="Nonaktifkan Akun User |Apakah kamu yakin menonatifkan akun user ?"
                                                                     data-confirm-yes="submitVeri(<?= $user->id ?>)"
-                                                                    data-id="vel-{{ $user->id }}">Hapus Verify
-                                                                    Email</button>
+                                                                    data-id="vel-{{ $user->id }}">Nonaktifkan akun
+                                                                </button>
                                                             </form>
                                                         @endif
                                                     </div>
@@ -130,8 +86,8 @@
                                                     <div class="d-flex justify-content-center">
                                                         <a href="{{ route('user.edit', $user->id) }}"
                                                             class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
-                                                            Edit</a>
+                                                                class="fas fa-edit"></i> Edit
+                                                        </a>
                                                         <form action="{{ route('user.destroy', $user->id) }}"
                                                             method="POST" class="ml-2">
                                                             {{-- <input type="hidden" name="_method" value="DELETE">
