@@ -19,18 +19,28 @@ body {
     font-size: 36px;
     font-weight: 800;
     color: #2d3250;
+    cursor: default;
 }
 
 .s-b {
     font-size: 16px;
     font-weight: 800;
     color: #fba605;
+    cursor: pointer;
+}
+
+.s-b:hover {
+    font-size: 16px;
+    font-weight: 800;
+    color: #fba605;
+    cursor: pointer;
 }
 
 .s-p {
     font-size: 16px;
     font-weight: 800;
     color: #003c77;
+    cursor: default;
 }
 
 .form-auth {

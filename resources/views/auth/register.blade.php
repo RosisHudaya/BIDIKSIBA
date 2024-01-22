@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>{{ config('app.name') }} - Register</title>
+    <title>BIDIKSIBA POLINEMA | Register</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -30,7 +30,7 @@
                         <img class="img-fluid img-auth mr-3" src="{{ asset('assets/img/graduation.svg') }}">
                         <div>
                             <p class="mb-1 mt-2 p-w">Register</p>
-                            <span class="s-b">BIDIKSIBA </span><span class="s-p">POLINEMA</span>
+                            <a href="/" class="s-b">BIDIKSIBA </a><span class="s-p">POLINEMA</span>
                         </div>
                     </div>
                     <div class="col-md-10 mx-auto mt-4">

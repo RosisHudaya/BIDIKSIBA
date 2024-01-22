@@ -69,13 +69,17 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         //simpan data
-        User::create([
+        $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
+
+        $roleName = 'calon-mahasiswa';
+        $role = Role::where('name', $roleName)->first();
+        $user->assignRole($role);
+
         return redirect(route('user.index'))->with('success', 'Data Berhasil Ditambahkan');
-        ;
     }
 
     public function show(User $user)

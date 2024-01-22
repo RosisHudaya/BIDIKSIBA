@@ -29,7 +29,7 @@
                     <img class="img-fluid img-auth mr-3" src="{{ asset('assets/img/graduation.svg') }}">
                     <div>
                         <p class="mb-0 mt-2 p-w">Welcome</p>
-                        <span class="s-b">BIDIKSIBA </span><span class="s-p">POLINEMA</span>
+                        <a href="/" class="s-b">BIDIKSIBA </a><span class="s-p">POLINEMA</span>
                     </div>
                 </div>
                 @if (session('status'))

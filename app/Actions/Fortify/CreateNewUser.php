@@ -33,7 +33,7 @@ class CreateNewUser implements CreatesNewUsers
             'email_verified_at' => now(),
         ]);
 
-        $user->assignRole('user');
+        $user->assignRole('calon-mahasiswa');
 
         return $user;
     }
