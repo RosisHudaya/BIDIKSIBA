@@ -1,8 +1,10 @@
-<div class="footer-left">
-    Copyright &copy; {{ now()->year }} <div class="bullet"></div> Design By <a
-        href="https://nauval.in/">Muhamad Nauval
-        Azhar</a> Laravel Code By <a href="https://putraprima.id">Putra Prima Arhandi</a>
-</div>
-<div class="footer-right">
-    2.3.0
+<div class="footer-admin col-md-12 py-4">
+    <div class="col-md-11 mx-auto">
+        <span class="f-c">Copyright</span>
+        <span class="f-m"> &copy; {{ now()->year }}</span>
+        <span class="f-b"> BIDIKSIBA</span>
+        <span class="f-m"> ~ POLITEKNIK NEGERI MALANG</span>
+        <span> |</span>
+        <span class="f-m"> All rights reserved</span>
+    </div>
 </div>
