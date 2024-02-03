@@ -24,6 +24,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'dashboard']);
         Permission::create(['name' => 'user.management']);
         Permission::create(['name' => 'role.permission.management']);
+        Permission::create(['name' => 'menu.pendidikan']);
         Permission::create(['name' => 'menu.management']);
         //user
         Permission::create(['name' => 'user.index']);
@@ -60,6 +61,18 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'assign.user.create']);
         Permission::create(['name' => 'assign.user.edit']);
 
+        //jurusan
+        Permission::create(['name' => 'jurusan.index']);
+        Permission::create(['name' => 'jurusan.create']);
+        Permission::create(['name' => 'jurusan.edit']);
+        Permission::create(['name' => 'jurusan.destroy']);
+
+        //prodi
+        Permission::create(['name' => 'prodi.index']);
+        Permission::create(['name' => 'prodi.create']);
+        Permission::create(['name' => 'prodi.edit']);
+        Permission::create(['name' => 'prodi.destroy']);
+
         //menu group 
         Permission::create(['name' => 'menu-group.index']);
         Permission::create(['name' => 'menu-group.create']);
@@ -76,8 +89,8 @@ class RoleAndPermissionSeeder extends Seeder
         $roleUser = Role::create(['name' => 'calon-mahasiswa']);
         $roleUser->givePermissionTo([
             'dashboard',
-            'user.management',
-            'user.index',
+            // 'user.management',
+            // 'user.index',
         ]);
 
         // create Super Admin

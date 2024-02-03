@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
-                        <div class="card-header">
+                        <div class="header ml-4 mt-3">
                             <a class="btn btn-primary" href="{{ route('user.create') }}">
                                 <i class="fas fa-user-plus"></i> Tambah User
                             </a>

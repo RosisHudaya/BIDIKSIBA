@@ -55,16 +55,28 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 3,
                 ],
                 [
+                    'name' => 'Jurusan',
+                    'route' => 'menu-pendidikan/jurusan',
+                    'permission_name' => 'jurusan.index',
+                    'menu_group_id' => 4,
+                ],
+                [
+                    'name' => 'Program Studi',
+                    'route' => 'menu-pendidikan/program-studi',
+                    'permission_name' => 'prodi.index',
+                    'menu_group_id' => 4,
+                ],
+                [
                     'name' => 'Menu Group',
                     'route' => 'menu-management/menu-group',
                     'permission_name' => 'menu-group.index',
-                    'menu_group_id' => 4,
+                    'menu_group_id' => 5,
                 ],
                 [
                     'name' => 'Menu Item',
                     'route' => 'menu-management/menu-item',
                     'permission_name' => 'menu-item.index',
-                    'menu_group_id' => 4,
+                    'menu_group_id' => 5,
                 ],
             ]
         );

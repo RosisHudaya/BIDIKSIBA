@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
+use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
 use App\Http\Controllers\RoleAndPermission\AssignUserToRoleController;
 use App\Http\Controllers\RoleAndPermission\ExportPermissionController;
@@ -65,6 +67,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::resource('menu-group', MenuGroupController::class);
         Route::resource('menu-item', MenuItemController::class);
     });
+
+    Route::prefix('menu-pendidikan')->group(function () {
+        Route::resource('jurusan', JurusanController::class);
+        Route::resource('program-studi', ProdiController::class);
+    });
+
     Route::group(['prefix' => 'role-and-permission'], function () {
         //role
         Route::resource('role', RoleController::class);

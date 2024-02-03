@@ -34,6 +34,11 @@ class MenuGroupSeeder extends Seeder
                     'permisison_name' => 'role.permission.management',
                 ],
                 [
+                    'name' => 'Pendidikan',
+                    'icon' => 'fas fa-graduation-cap',
+                    'permisison_name' => 'menu.pendidikan',
+                ],
+                [
                     'name' => 'Menu Management',
                     'icon' => 'fas fa-bars',
                     'permisison_name' => 'menu.management',
