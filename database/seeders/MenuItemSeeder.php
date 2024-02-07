@@ -55,6 +55,12 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 3,
                 ],
                 [
+                    'name' => 'Asal Jurusan SMA/SMK',
+                    'route' => 'menu-pendidikan/asal-jurusan',
+                    'permission_name' => 'asal-jurusan.index',
+                    'menu_group_id' => 4,
+                ],
+                [
                     'name' => 'Jurusan',
                     'route' => 'menu-pendidikan/jurusan',
                     'permission_name' => 'jurusan.index',

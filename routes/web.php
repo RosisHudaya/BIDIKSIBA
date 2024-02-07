@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsalJurusanController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Menu\MenuGroupController;
@@ -69,6 +70,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 
     Route::prefix('menu-pendidikan')->group(function () {
+        Route::resource('asal-jurusan', AsalJurusanController::class);
         Route::resource('jurusan', JurusanController::class);
         Route::resource('program-studi', ProdiController::class);
     });

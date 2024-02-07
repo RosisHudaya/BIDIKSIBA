@@ -61,6 +61,12 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'assign.user.create']);
         Permission::create(['name' => 'assign.user.edit']);
 
+        //asal jurusan
+        Permission::create(['name' => 'asal-jurusan.index']);
+        Permission::create(['name' => 'asal-jurusan.create']);
+        Permission::create(['name' => 'asal-jurusan.edit']);
+        Permission::create(['name' => 'asal-jurusan.destroy']);
+
         //jurusan
         Permission::create(['name' => 'jurusan.index']);
         Permission::create(['name' => 'jurusan.create']);

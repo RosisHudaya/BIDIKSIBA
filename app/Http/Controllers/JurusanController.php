@@ -52,10 +52,6 @@ class JurusanController extends Controller
 
     public function update(UpdateJurusanRequest $request, Jurusan $jurusan)
     {
-        $request->validate([
-            'jurusan' => 'required|unique:jurusans,jurusan,' . $jurusan->id,
-        ]);
-
         $jurusan->update($request->all());
 
         return redirect()->route('jurusan.index')

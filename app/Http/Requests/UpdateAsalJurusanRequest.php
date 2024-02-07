@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProdiRequest extends FormRequest
+class UpdateAsalJurusanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,19 +23,18 @@ class StoreProdiRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('asal_jurusan')->id;
         return [
-            'id_jurusan' => 'required',
-            'prodi' => 'required|unique:prodis,prodi|regex:/^[a-zA-Z0-9\s]+$/u'
+            'asal_jurusan' => 'required|regex:/^[a-zA-Z\s()]+$/u|unique:asal_jurusans,asal_jurusan,' . $id
         ];
     }
 
     public function messages()
     {
         return [
-            'id_jurusan' => 'Form jurusan tidak boleh kosong',
-            'prodi.required' => 'Form program studi tidak boleh kosong',
-            'prodi.unique' => 'Program studi sudah digunakan sebelumnya',
-            'prodi.regex' => 'Program studi tidak boleh mengandung simbol',
+            'asal_jurusan.required' => 'Form jurusan SMA/SMk tidak boleh kosong',
+            'asal_jurusan.unique' => 'Jurusan SMA/SMK sudah digunakan sebelumnya',
+            'asal_jurusan.regex' => 'Jurusan SMA/SMK tidak boleh mengandung angka dan simbol (kecuali tanda kurung)',
         ];
     }
 }

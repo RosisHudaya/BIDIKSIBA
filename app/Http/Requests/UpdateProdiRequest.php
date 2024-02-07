@@ -23,9 +23,10 @@ class UpdateProdiRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('program_studi')->id;
         return [
             'id_jurusan' => 'required',
-            'prodi' => 'required|unique:jurusans,jurusan|regex:/^[a-zA-Z0-9\s]+$/u'
+            'prodi' => 'required|regex:/^[a-zA-Z0-9\s]+$/u|unique:prodis,prodi,' . $id
         ];
     }
 
