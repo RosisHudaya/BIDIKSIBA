@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AsalJurusan;
 use App\Models\Jurusan;
 use App\Http\Requests\StoreJurusanRequest;
 use App\Http\Requests\UpdateJurusanRequest;
@@ -21,21 +22,35 @@ class JurusanController extends Controller
 
     public function index(Request $request)
     {
-        $jurusans = DB::table('jurusans')
+        $jurusans = DB::table('jurusans as j')
+            ->join('asal_jurusan_pivots as jp', 'j.id', '=', 'jp.id_jurusan')
+            ->join('asal_jurusans as aj', 'jp.id_asal_jurusan', '=', 'aj.id')
+            ->select(
+                'j.id',
+                'j.jurusan',
+                DB::raw("GROUP_CONCAT(aj.asal_jurusan SEPARATOR ', ') as asal"),
+            )
+            ->groupBy('j.id', 'j.jurusan')
             ->paginate(10);
         return view('jurusan.index', compact('jurusans'));
     }
 
     public function create()
     {
-        return view('jurusan.create');
+        $asal_jurusans = AsalJurusan::all();
+
+        return view('jurusan.create', [
+            'asal_jurusans' => $asal_jurusans,
+        ])->with(['asal_jurusans' => $asal_jurusans]);
     }
 
     public function store(StoreJurusanRequest $request)
     {
-        Jurusan::create([
+        $jurusan = Jurusan::create([
             'jurusan' => $request->jurusan,
         ]);
+
+        $jurusan->asal_jurusan()->attach($request->id_asal_jurusan);
 
         return redirect()->route('jurusan.index')->with('success', 'Jurusan baru berhasil ditambahkan');
     }
@@ -47,12 +62,19 @@ class JurusanController extends Controller
 
     public function edit(Jurusan $jurusan)
     {
-        return view('jurusan.edit', compact('jurusan'));
+        $asal_jurusans = AsalJurusan::all();
+
+        return view('jurusan.edit', [
+            'jurusan' => $jurusan,
+            'asal_jurusans' => $asal_jurusans,
+        ])->with(['asal_jurusans' => $asal_jurusans]);
     }
 
     public function update(UpdateJurusanRequest $request, Jurusan $jurusan)
     {
         $jurusan->update($request->all());
+
+        $jurusan->asal_jurusan()->sync($request->id_asal_jurusan);
 
         return redirect()->route('jurusan.index')
             ->with('success', 'Data jurusan berhasil diperbarui');

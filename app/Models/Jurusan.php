@@ -12,4 +12,9 @@ class Jurusan extends Model
     protected $fillable = [
         'jurusan',
     ];
+
+    public function asal_jurusan()
+    {
+        return $this->belongsToMany(AsalJurusan::class, 'asal_jurusan_pivots', 'id_jurusan', 'id_asal_jurusan');
+    }
 }

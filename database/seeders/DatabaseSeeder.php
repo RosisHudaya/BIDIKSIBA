@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             AsalJurusanSeeder::class,
             JurusanSeeder::class,
+            AsalJurusanPivotSeeder::class,
             ProdiSeeder::class,
         ]);
     }

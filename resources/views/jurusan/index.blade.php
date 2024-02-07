@@ -34,6 +34,7 @@
                                     <tbody>
                                         <tr>
                                             <th class="text-center">#</th>
+                                            <th style="width: 350px;">Jurusan SMA/SMK</th>
                                             <th>Jurusan</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
@@ -42,6 +43,7 @@
                                                 <td class="text-center">
                                                     {{ ($jurusans->currentPage() - 1) * $jurusans->perPage() + $key + 1 }}
                                                 </td>
+                                                <td>{{ $jurusan->asal }}</td>
                                                 <td>{{ $jurusan->jurusan }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">

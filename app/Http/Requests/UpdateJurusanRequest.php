@@ -25,6 +25,7 @@ class UpdateJurusanRequest extends FormRequest
     {
         $id = $this->route('jurusan')->id;
         return [
+            'id_asal_jurusan' => 'required',
             'jurusan' => 'required|regex:/^[a-zA-Z\s]+$/u|unique:jurusans,jurusan,' . $id
         ];
     }
@@ -32,6 +33,7 @@ class UpdateJurusanRequest extends FormRequest
     public function messages()
     {
         return [
+            'id_asal_jurusan.required' => 'Form jurusan SMA/SMK tidak boleh kosong',
             'jurusan.required' => 'Form jurusan tidak boleh kosong',
             'jurusan.unique' => 'Jurusan sudah digunakan sebelumnya',
             'jurusan.regex' => 'Jurusan tidak boleh mengandung angka dan simbol',
