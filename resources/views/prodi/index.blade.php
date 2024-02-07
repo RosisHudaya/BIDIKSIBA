@@ -56,10 +56,13 @@
                                                             Edit
                                                         </a>
                                                         <form action="{{ route('program-studi.destroy', $prodi->id) }}"
-                                                            method="POST" class="ml-2">
+                                                            method="POST" class="ml-2" id="del-<?= $prodi->id ?>">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
+                                                            <button class="btn btn-sm btn-danger btn-icon"
+                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus jurusan ini?"
+                                                                data-confirm-yes="submitDel(<?= $prodi->id ?>)"
+                                                                data-id="del-{{ $prodi->id }}">
                                                                 <i class="fas fa-times"></i> Delete </button>
                                                         </form>
                                                     </div>

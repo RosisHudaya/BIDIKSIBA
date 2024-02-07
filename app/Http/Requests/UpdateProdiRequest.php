@@ -13,7 +13,7 @@ class UpdateProdiRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class UpdateProdiRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id_jurusan' => 'required',
+            'prodi' => 'required|unique:jurusans,jurusan|regex:/^[a-zA-Z0-9\s]+$/u'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'id_jurusan' => 'Form jurusan tidak boleh kosong',
+            'prodi.required' => 'Form program studi tidak boleh kosong',
+            'prodi.unique' => 'Program studi sudah digunakan sebelumnya',
+            'prodi.regex' => 'Program studi tidak boleh mengandung simbol',
         ];
     }
 }
