@@ -14,18 +14,19 @@ return new class extends Migration {
     {
         Schema::create('biodatas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_asal_jurusan');
-            $table->unsignedBigInteger('id_jurusan');
-            $table->unsignedBigInteger('id_prodi');
-            $table->string('nik');
-            $table->string('kota_lahir');
-            $table->string('tgl_lahir');
-            $table->enum('gender', ['Laki-laki', 'Perempuan']);
-            $table->string('no_telp');
-            $table->string('nisn');
-            $table->string('asal_sekolah');
-            $table->enum('status', ['Pending', 'Diverifikasi', 'Gagal Diverifikasi']);
+            $table->unsignedBigInteger('id_user')->nullable;
+            $table->unsignedBigInteger('id_asal_jurusan')->nullable;
+            $table->unsignedBigInteger('id_jurusan')->nullable;
+            $table->unsignedBigInteger('id_prodi')->nullable;
+            $table->string('nik')->nullable;
+            $table->string('nama')->nullable;
+            $table->string('kota_lahir')->nullable;
+            $table->string('tgl_lahir')->nullable;
+            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable;
+            $table->string('no_telp')->nullable;
+            $table->string('nisn')->nullable;
+            $table->string('asal_sekolah')->nullable;
+            $table->enum('status', ['Pending', 'Diverifikasi', 'Gagal Diverifikasi'])->nullable;
             $table->foreign('id_user')->references('id')->on('users')->restrictOnDelete;
             $table->foreign('id_asal_jurusan')->references('id')->on('asal_jurusans')->restrictOnDelete;
             $table->foreign('id_jurusan')->references('id')->on('jurusans')->restrictOnDelete;

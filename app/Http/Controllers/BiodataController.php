@@ -11,18 +11,22 @@ use App\Models\Jurusan;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BiodataController extends Controller
 {
     public function index()
     {
+        $id = Auth::id();
         $asalJurusans = AsalJurusan::all();
         $jurusans = Jurusan::all();
         $prodis = Prodi::all();
+        $biodatas = Biodata::where('id_user', $id)->first();
         return view('biodata.index')->with([
             'asalJurusans' => $asalJurusans,
             'jurusans' => $jurusans,
-            'prodis' => $prodis
+            'prodis' => $prodis,
+            'biodatas' => $biodatas,
         ]);
     }
 
@@ -66,6 +70,33 @@ class BiodataController extends Controller
     {
         $prodis = Prodi::all()->where('id_jurusan', $request->jurusan_id);
         return response()->json(['prodis' => $prodis]);
+    }
+
+    public function storeOrUpdate(Request $request, Biodata $biodata)
+    {
+        $id = Auth::id();
+        $idUser = Biodata::where('id_user', $id)->first();
+
+        if ($idUser == null) {
+            Biodata::create([
+                'id_user' => $id,
+                'id_asal_jurusan' => $request->asal_jurusan_id,
+                'id_jurusan' => $request->jurusan_id,
+                'id_prodi' => $request->prodi_id,
+                'nik' => $request->nik,
+                'nama' => $request->nama,
+                'kota_lahir' => $request->kota_lahir,
+                'tgl_lahir' => $request->tgl_lahir,
+                'gender' => $request->gender,
+                'no_telp' => $request->no_telp,
+                'nisn' => $request->nisn,
+                'asal_sekolah' => $request->asal_sekolah,
+            ]);
+        } else {
+            $biodata->update($request->all());
+        }
+
+        return redirect()->route('biodata.index');
     }
 
     public function create()
