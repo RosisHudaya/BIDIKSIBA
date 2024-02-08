@@ -66,7 +66,6 @@
             </nav>
             <div class="main-sidebar">
                 <x-sidebar title="Test" />
-                {{-- @include('layouts.sidebar') --}}
             </div>
 
             <!-- Main Content -->

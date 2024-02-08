@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AsalJurusanController;
+use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Menu\MenuGroupController;
@@ -100,4 +101,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('assing-user/{user}/edit', [AssignUserToRoleController::class, 'edit'])->name('assign.user.edit');
         Route::put('assign-user/{user}', [AssignUserToRoleController::class, 'update'])->name('assign.user.update');
     });
+
+    Route::get('biodata', [BiodataController::class, 'index'])->name('biodata.index');
+    Route::post('load-filter-prodi', [BiodataController::class, 'loadFilterProdi'])->name('loadFilterProdi');
+    Route::get('get-prodi', [BiodataController::class, 'getProdis'])->name('getProdis');
+    Route::post('load-filter-jurusan', [BiodataController::class, 'loadFilterJurusan'])->name('loadFilterJurusan');
+    Route::get('get-jurusan', [BiodataController::class, 'getJurusans'])->name('getJurusans');
+
 });

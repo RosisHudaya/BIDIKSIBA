@@ -29,18 +29,23 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-5 py-1">
                 <li class="nav-item mr-5">
-                    <a href=""><i class="fas fa-home a-nav"></i></a>
+                    <a href="{{ url('/') }}"><i class="fas fa-home a-nav"></i></a>
                 </li>
-                <li class="nav-item mr-5">
-                    <a href="" class="a-nav">BIODATA Pendaftar</a>
-                </li>
-                <li class="nav-item mr-5">
-                    <a href="" class="a-nav">Lihat TOKEN</a>
-                </li>
-                <li class="nav-item">
-                    @if (!auth()->user())
+                @if (!auth()->user())
+                    <li class="nav-item">
                         <a href="{{ route('login') }}" class="a-nav">LOGIN</a>
-                    @else
+                    </li>
+                @else
+                    <li class="nav-item mr-5">
+                        <a href="{{ route('biodata.index') }}" class="a-nav">BIODATA Pendaftar</a>
+                    </li>
+                    <li class="nav-item mr-5">
+                        <a href="" class="a-nav">Lihat TOKEN</a>
+                    </li>
+                    <li class="nav-item mr-5">
+                        <a href="" class="a-nav">LOGIN Ujian</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="a-nav text-danger">LOGOUT
@@ -48,9 +53,8 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                    @endif
-                </li>
-
+                    </li>
+                @endif
             </ul>
         </div>
     </nav>
