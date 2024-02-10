@@ -34,6 +34,37 @@ $(document).ready(function () {
     });
 });
 
+if (selectAsalJurusanId != null) {
+    if ($("#asal_jurusan_id").val() != null) {
+        $("#asal_jurusan_id").removeAttr("disabled", true);
+    }
+    var idAsalJurusanSelected = $("#asal_jurusan_id").val();
+    $.ajax({
+        url: "/load-filter-jurusan",
+        method: "POST",
+        data: {
+            id: idAsalJurusanSelected,
+            _token: "{{ csrf_token() }}",
+        },
+        dataType: "json",
+        success: function (response) {
+            $("#jurusan_id").empty();
+            $("#jurusan_id").append("<option>-- Pilih jurusan --</option>");
+
+            $.each(response["jurusans"], function (key, value) {
+                var option =
+                    '<option value="' +
+                    value.id +
+                    '">' +
+                    value.jurusan +
+                    "</option>";
+                $("#jurusan_id").append(option);
+            });
+            $("#jurusan_id").val(selectJurusan);
+        },
+    });
+}
+
 $(document).ready(function () {
     $("#jurusan_id").change(function () {
         if ($(this).val() == "") {
@@ -69,3 +100,34 @@ $(document).ready(function () {
         });
     });
 });
+
+if (selectJurusanId != null) {
+    if ($("#jurusan_id").val() != null) {
+        $("#jurusan_id").removeAttr("disabled", true);
+    }
+    var idJurusanSelected = selectJurusan;
+    $.ajax({
+        url: "/load-filter-prodi",
+        method: "POST",
+        data: {
+            id: idJurusanSelected,
+            _token: "{{ csrf_token() }}",
+        },
+        dataType: "json",
+        success: function (response) {
+            $("#prodi_id").empty();
+            $("#prodi_id").append("<option>-- Pilih program studi --</option>");
+
+            $.each(response["prodis"], function (key, value) {
+                var option =
+                    '<option value="' +
+                    value.id +
+                    '">' +
+                    value.prodi +
+                    "</option>";
+                $("#prodi_id").append(option);
+            });
+            $("#prodi_id").val(selectProdi);
+        },
+    });
+}

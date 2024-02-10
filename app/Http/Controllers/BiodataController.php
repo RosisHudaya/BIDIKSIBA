@@ -21,11 +21,13 @@ class BiodataController extends Controller
         $asalJurusans = AsalJurusan::all();
         $jurusans = Jurusan::all();
         $prodis = Prodi::all();
+        $asalJurusanPivots = AsalJurusanPivot::all();
         $biodatas = Biodata::where('id_user', $id)->first();
         return view('biodata.index')->with([
             'asalJurusans' => $asalJurusans,
             'jurusans' => $jurusans,
             'prodis' => $prodis,
+            'asalJurusanPivots' => $asalJurusanPivots,
             'biodatas' => $biodatas,
         ]);
     }

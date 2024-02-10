@@ -239,13 +239,19 @@
 @endsection
 
 @push('customScript')
-    <script src="/assets/js/select2.min.js"></script>
-    <script src="/assets/js/pendidikan.js"></script>
-
     <script>
         var getJurusansRoute = '{{ route('getJurusans') }}';
         var getProdisRoute = '{{ route('getProdis') }}';
+        var selectAsalJurusanId =
+            "{{ $biodatas ? $biodatas->id_asal_jurusan : '' }}";
+        var selectJurusan =
+            "{{ $biodatas ? $biodatas->id_jurusan : '' }}";
+        var selectJurusanId = "{{ $biodatas ? $biodatas->id_jurusan : '' }}";
+        var selectProdi = "{{ $biodatas ? $biodatas->id_prodi : '' }}";
     </script>
+
+    <script src="/assets/js/select2.min.js"></script>
+    <script src="/assets/js/pendidikan.js"></script>
 @endpush
 
 @push('style')
