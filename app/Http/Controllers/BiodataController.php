@@ -79,6 +79,27 @@ class BiodataController extends Controller
         $id = Auth::id();
         $idUser = Biodata::where('id_user', $id)->first();
 
+        $request->validate(
+            [
+                'nama' => 'regex:/^[a-zA-Z\s]+$/u',
+                'asal_sekolah' => 'regex:/^[a-zA-Z0-9\s]+$/u',
+                'kota_lahir' => 'regex:/^[a-zA-Z\s]+$/u',
+                'nik' => 'numeric|digits:16',
+                'nisn' => 'numeric|digits:10',
+                'no_telp' => 'numeric',
+            ],
+            [
+                'nama.regex' => 'Form nama tidak boleh mengandung angka dan simbol',
+                'asal_sekolah.regex' => 'Form asal sekolah tidak boleh mengandung simbol',
+                'kota_lahir' => 'Form kota lahir tidak boleh mengandung angka dan simbol',
+                'nik.numeric' => 'Form NIK harus berupa angka',
+                'nik.digits' => 'NIK harus berjumlah 16 digit',
+                'nisn.numeric' => 'Form NISN harus berupa angka',
+                'nisn.digits' => 'NISN harus berjumlah 10',
+                'no_telp.numeric' => 'Form no telepon harus berupa angka',
+            ]
+        );
+
         if ($idUser == null) {
             Biodata::create([
                 'id_user' => $id,
@@ -95,7 +116,20 @@ class BiodataController extends Controller
                 'asal_sekolah' => $request->asal_sekolah,
             ]);
         } else {
-            $biodata->update($request->all());
+            $idUser->update([
+                'id_user' => $id,
+                'id_asal_jurusan' => $request->asal_jurusan_id,
+                'id_jurusan' => $request->jurusan_id,
+                'id_prodi' => $request->prodi_id,
+                'nik' => $request->nik,
+                'nama' => $request->nama,
+                'kota_lahir' => $request->kota_lahir,
+                'tgl_lahir' => $request->tgl_lahir,
+                'gender' => $request->gender,
+                'no_telp' => $request->no_telp,
+                'nisn' => $request->nisn,
+                'asal_sekolah' => $request->asal_sekolah,
+            ]);
         }
 
         return redirect()->route('biodata.index');

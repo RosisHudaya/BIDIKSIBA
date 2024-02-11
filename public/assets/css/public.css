@@ -41,3 +41,16 @@ select {
     font-size: 14px !important;
     height: 42px;
 }
+
+.feed {
+    font-size: 12px !important;
+}
+
+.form-control.is-invalid {
+    border-color: #95a0f4;
+}
+
+.form-control.is-invalid:focus {
+    border-color: #95a0f4;
+    box-shadow: none;
+}
