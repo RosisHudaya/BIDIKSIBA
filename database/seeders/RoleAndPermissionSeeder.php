@@ -26,6 +26,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'role.permission.management']);
         Permission::create(['name' => 'menu.pendidikan']);
         Permission::create(['name' => 'menu.management']);
+
         //user
         Permission::create(['name' => 'user.index']);
         Permission::create(['name' => 'user.create']);
@@ -33,6 +34,11 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'user.destroy']);
         Permission::create(['name' => 'user.import']);
         Permission::create(['name' => 'user.export']);
+
+        //biodata admin
+        Permission::create(['name' => 'verif-admin.index']);
+        Permission::create(['name' => 'verif-admin.edit']);
+        Permission::create(['name' => 'verif-admin.destroy']);
 
         //role
         Permission::create(['name' => 'role.index']);

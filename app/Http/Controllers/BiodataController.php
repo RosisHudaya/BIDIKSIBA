@@ -81,12 +81,15 @@ class BiodataController extends Controller
 
         $request->validate(
             [
-                'nama' => 'regex:/^[a-zA-Z\s]+$/u',
-                'asal_sekolah' => 'regex:/^[a-zA-Z0-9\s]+$/u',
-                'kota_lahir' => 'regex:/^[a-zA-Z\s]+$/u',
-                'nik' => 'numeric|digits:16',
-                'nisn' => 'numeric|digits:10',
-                'no_telp' => 'numeric',
+                'nama' => 'nullable|regex:/^[a-zA-Z\s]+$/u',
+                'asal_sekolah' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/u',
+                'kota_lahir' => 'nullable|regex:/^[a-zA-Z\s]+$/u',
+                'nik' => 'nullable|numeric|digits:16',
+                'nisn' => 'nullable|numeric|digits:10',
+                'no_telp' => 'nullable|numeric',
+                'asal_jurusan_id' => 'nullable',
+                'jurusan_id' => 'nullable',
+                'prodi_id' => 'nullable',
             ],
             [
                 'nama.regex' => 'Form nama tidak boleh mengandung angka dan simbol',
@@ -114,6 +117,8 @@ class BiodataController extends Controller
                 'no_telp' => $request->no_telp,
                 'nisn' => $request->nisn,
                 'asal_sekolah' => $request->asal_sekolah,
+                'status' => 'Pending',
+                'catatan' => '',
             ]);
         } else {
             $idUser->update([
@@ -129,6 +134,8 @@ class BiodataController extends Controller
                 'no_telp' => $request->no_telp,
                 'nisn' => $request->nisn,
                 'asal_sekolah' => $request->asal_sekolah,
+                'status' => 'Pending',
+                'catatan' => '',
             ]);
         }
 

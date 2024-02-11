@@ -23,6 +23,7 @@ class Biodata extends Model
         'nisn',
         'asal_sekolah',
         'status',
+        'catatan',
     ];
 
     public function user()

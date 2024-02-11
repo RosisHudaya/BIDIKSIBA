@@ -15,6 +15,7 @@ use App\Http\Controllers\RoleAndPermission\ImportPermissionController;
 use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
+use App\Http\Controllers\VerifikasiPendaftarController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\UserController;
@@ -52,7 +53,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return view('home', ['users' => User::get(),]);
     });
     //user list
-
     Route::prefix('user-management')->group(function () {
         Route::resource('user', UserController::class);
         Route::match(['get', 'post'], '/verify-email/{id}/{hash}', [UserController::class, 'verifyEmail'])
@@ -63,6 +63,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('export', [UserController::class, 'export'])->name('user.export');
         Route::get('demo', DemoController::class)->name('user.demo');
         Route::post('user/update-roles/{user}', [UserController::class, 'updateRoles'])->name('user.update-roles');
+        Route::resource('verifikasi-pendaftar', VerifikasiPendaftarController::class);
+        Route::put('verifikasi-pendaftar/verifikasi/{biodata}', [VerifikasiPendaftarController::class, 'verif'])->name('verifikasi-pendaftar.verif');
+        Route::put('verifikasi-pendaftar/reject/{biodata}', [VerifikasiPendaftarController::class, 'reject'])->name('verifikasi-pendaftar.reject');
     });
 
     Route::prefix('menu-management')->group(function () {
@@ -70,6 +73,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::resource('menu-item', MenuItemController::class);
     });
 
+    //menu pendidikan
     Route::prefix('menu-pendidikan')->group(function () {
         Route::resource('asal-jurusan', AsalJurusanController::class);
         Route::resource('jurusan', JurusanController::class);

@@ -25,9 +25,15 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 1,
                 ],
                 [
-                    'name' => 'User List',
+                    'name' => 'List User',
                     'route' => 'user-management/user',
                     'permission_name' => 'user.index',
+                    'menu_group_id' => 2,
+                ],
+                [
+                    'name' => 'Verifikasi Pendaftar',
+                    'route' => 'user-management/verifikasi-pendaftar',
+                    'permission_name' => 'verif-admin.index',
                     'menu_group_id' => 2,
                 ],
                 [
