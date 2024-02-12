@@ -145,9 +145,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer text-right">
-                    <button class="btn btn-primary">Submit</button>
-                    <a class="btn btn-secondary" href="{{ route('biodata.index') }}">Cancel</a>
+                <div class="mr-4 text-right">
+                    <button class="btn btn-save px-5">Simpan</button>
                 </div>
             </form>
 

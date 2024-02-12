@@ -40,7 +40,7 @@
                         <a href="{{ route('biodata.index') }}" class="a-nav">BIODATA Pendaftar</a>
                     </li>
                     <li class="nav-item mr-5">
-                        <a href="" class="a-nav">Lihat TOKEN</a>
+                        <a href="{{ route('token-ujian.index') }}" class="a-nav">Lihat TOKEN</a>
                     </li>
                     <li class="nav-item mr-5">
                         <a href="" class="a-nav">LOGIN Ujian</a>

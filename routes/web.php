@@ -16,6 +16,7 @@ use App\Http\Controllers\RoleAndPermission\ImportPermissionController;
 use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
+use App\Http\Controllers\TokenUjianController;
 use App\Http\Controllers\VerifikasiPendaftarController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -114,5 +115,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('get-prodi', [BiodataController::class, 'getProdis'])->name('getProdis');
     Route::post('load-filter-jurusan', [BiodataController::class, 'loadFilterJurusan'])->name('loadFilterJurusan');
     Route::get('get-jurusan', [BiodataController::class, 'getJurusans'])->name('getJurusans');
+
+    Route::get('token-ujian', [TokenUjianController::class, 'index'])->name('token-ujian.index');
 
 });

@@ -54,3 +54,42 @@ select {
     border-color: #95a0f4;
     box-shadow: none;
 }
+
+.btn-save {
+    color: white;
+    background-color: #004181;
+    border-radius: 15px;
+}
+
+.btn-save:active {
+    color: white;
+    background-color: #004181;
+}
+
+.btn-save:hover {
+    color: white;
+    background-color: #0252a1;
+}
+
+.card {
+    border-radius: 20px;
+    border-width: 5px 1px 1px 1px;
+    border-style: solid;
+    border-color: #fba605 #e4e6fc #e4e6fc #e4e6fc;
+}
+
+.text-pre {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.s-pre-n {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.s-pre {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+}
