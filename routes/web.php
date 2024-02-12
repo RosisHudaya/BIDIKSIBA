@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AkunUjianController;
 use App\Http\Controllers\AsalJurusanController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\DemoController;
@@ -66,6 +67,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::resource('verifikasi-pendaftar', VerifikasiPendaftarController::class);
         Route::put('verifikasi-pendaftar/verifikasi/{biodata}', [VerifikasiPendaftarController::class, 'verif'])->name('verifikasi-pendaftar.verif');
         Route::put('verifikasi-pendaftar/reject/{biodata}', [VerifikasiPendaftarController::class, 'reject'])->name('verifikasi-pendaftar.reject');
+        Route::get('akun-ujian', [AkunUjianController::class, 'index'])->name('akun-ujian.index');
     });
 
     Route::prefix('menu-management')->group(function () {

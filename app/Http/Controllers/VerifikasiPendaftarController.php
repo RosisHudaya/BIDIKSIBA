@@ -25,6 +25,7 @@ class VerifikasiPendaftarController extends Controller
                 'p.prodi',
                 'u.email',
             )
+            ->orderBy('b.status', 'asc')
             ->paginate(10);
         return view('verif-admin.index', compact('biodatas'));
     }
@@ -48,12 +49,14 @@ class VerifikasiPendaftarController extends Controller
     public function reject(Request $request, Biodata $biodata)
     {
         $biodata->update([
-            'status' => 'Gagal Diverifikasi',
+            'status' => 'Blm Diverifikasi',
             'catatan' => $request->catatan,
         ]);
 
         $deleteAkunUjian = AkunUjian::where('id_user', $biodata->id_user)->first();
-        $deleteAkunUjian->delete();
+        if ($deleteAkunUjian) {
+            $deleteAkunUjian->delete();
+        }
 
         return redirect()->route('verifikasi-pendaftar.index')->with('success', 'Data belum dapat diverifikasi dan pesan kesalahan berhasil dikirim');
     }

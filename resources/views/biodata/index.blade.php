@@ -15,7 +15,8 @@
                         <div class="col-md-6">
                             <label for="">Nama Lengkap Pendaftar</label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
-                                name="nama" value="{{ $biodatas ? $biodatas->nama : '' }}">
+                                name="nama" value="{{ $biodatas ? $biodatas->nama : '' }}"
+                                placeholder="masukkan nama lengkap anda">
                             @error('nama')
                                 <div class="invalid-feedback feed ml-3">
                                     {{ $message }}
@@ -25,8 +26,8 @@
                         <div class="col-md-6">
                             <label for="">Asal Sekolah</label>
                             <input type="text" class="form-control @error('asal_sekolah') is-invalid @enderror"
-                                id="asal_sekolah" name="asal_sekolah"
-                                value="{{ $biodatas ? $biodatas->asal_sekolah : '' }}">
+                                id="asal_sekolah" name="asal_sekolah" value="{{ $biodatas ? $biodatas->asal_sekolah : '' }}"
+                                placeholder="masukkan asal sekolah anda">
                             @error('asal_sekolah')
                                 <div class="invalid-feedback feed ml-3">
                                     {{ $message }}
@@ -38,7 +39,8 @@
                         <div class="col-md-6">
                             <label for="">Kota Lahir</label>
                             <input type="text" class="form-control @error('kota_lahir') is-invalid @enderror"
-                                id="kota_lahir" name="kota_lahir" value="{{ $biodatas ? $biodatas->kota_lahir : '' }}">
+                                id="kota_lahir" name="kota_lahir" value="{{ $biodatas ? $biodatas->kota_lahir : '' }}"
+                                placeholder="masukkan kota lahir anda">
                             @error('kota_lahir')
                                 <div class="invalid-feedback feed ml-3">
                                     {{ $message }}
@@ -55,7 +57,8 @@
                         <div class="col-md-6">
                             <label for="">NIK</label>
                             <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik"
-                                name="nik" value="{{ $biodatas ? $biodatas->nik : '' }}">
+                                name="nik" value="{{ $biodatas ? $biodatas->nik : '' }}"
+                                placeholder="masukkan nik anda">
                             @error('nik')
                                 <div class="invalid-feedback feed ml-3">
                                     {{ $message }}
@@ -65,7 +68,8 @@
                         <div class="col-md-6">
                             <label for="">NISN</label>
                             <input type="text" class="form-control @error('nisn') is-invalid @enderror" id="nisn"
-                                name="nisn" value="{{ $biodatas ? $biodatas->nisn : '' }}">
+                                name="nisn" value="{{ $biodatas ? $biodatas->nisn : '' }}"
+                                placeholder="masukkan nisn anda">
                             @error('nisn')
                                 <div class="invalid-feedback feed ml-3">
                                     {{ $message }}
@@ -76,8 +80,9 @@
                     <div class="form-group col-md-12 d-flex">
                         <div class="col-md-6">
                             <label for="">No Telepon</label>
-                            <input type="number" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp"
-                                name="no_telp" value="{{ $biodatas ? $biodatas->no_telp : '' }}">
+                            <input type="text" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp"
+                                name="no_telp" value="{{ $biodatas ? $biodatas->no_telp : '' }}"
+                                placeholder="masukan nomer telepon anda">
                             @error('no_telp')
                                 <div class="invalid-feedback feed ml-3">
                                     {{ $message }}
@@ -127,7 +132,8 @@
                     <div class="col-md-12 d-flex">
                         <div class="form-group col-md-6">
                             <label for="">Jurusan Pilihan</label>
-                            <select class="form-control select2" name="jurusan_id" data-id="select-jurusan" id="jurusan_id">
+                            <select class="form-control select2" name="jurusan_id" data-id="select-jurusan"
+                                id="jurusan_id">
                                 <option value="">-- Pilih jurusan --</option>
                             </select>
                         </div>

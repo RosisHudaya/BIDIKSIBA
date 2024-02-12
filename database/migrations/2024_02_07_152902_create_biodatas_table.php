@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->string('no_telp')->nullable();
             $table->string('nisn')->nullable();
             $table->string('asal_sekolah')->nullable();
-            $table->enum('status', ['Pending', 'Diverifikasi', 'Gagal Diverifikasi'])->nullable();
+            $table->enum('status', ['Pending', 'Diverifikasi', 'Blm Diverifikasi'])->nullable();
             $table->string('catatan')->nullable();
             $table->foreign('id_user')->references('id')->on('users')->restrictOnDelete;
             $table->foreign('id_asal_jurusan')->references('id')->on('asal_jurusans')->restrictOnDelete;

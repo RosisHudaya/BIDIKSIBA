@@ -40,6 +40,9 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'verif-admin.edit']);
         Permission::create(['name' => 'verif-admin.destroy']);
 
+        //akun ujian
+        Permission::create(['name' => 'akun-ujian.index']);
+
         //role
         Permission::create(['name' => 'role.index']);
         Permission::create(['name' => 'role.create']);
