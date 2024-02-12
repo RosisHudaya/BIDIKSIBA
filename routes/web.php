@@ -17,6 +17,7 @@ use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
 use App\Http\Controllers\TokenUjianController;
+use App\Http\Controllers\UjianController;
 use App\Http\Controllers\VerifikasiPendaftarController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -81,6 +82,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::resource('asal-jurusan', AsalJurusanController::class);
         Route::resource('jurusan', JurusanController::class);
         Route::resource('program-studi', ProdiController::class);
+    });
+
+    //menu ujian
+    Route::prefix('menu-ujian')->group(function () {
+        Route::resource('soal-ujian', UjianController::class);
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {

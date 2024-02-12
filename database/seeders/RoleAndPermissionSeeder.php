@@ -25,6 +25,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'user.management']);
         Permission::create(['name' => 'role.permission.management']);
         Permission::create(['name' => 'menu.pendidikan']);
+        Permission::create(['name' => 'menu.ujian']);
         Permission::create(['name' => 'menu.management']);
 
         //user
@@ -87,6 +88,12 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'prodi.create']);
         Permission::create(['name' => 'prodi.edit']);
         Permission::create(['name' => 'prodi.destroy']);
+
+        //soal ujian
+        Permission::create(['name' => 'ujian.index']);
+        Permission::create(['name' => 'ujian.create']);
+        Permission::create(['name' => 'ujian.edit']);
+        Permission::create(['name' => 'ujian.destroy']);
 
         //menu group 
         Permission::create(['name' => 'menu-group.index']);

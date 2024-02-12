@@ -39,6 +39,11 @@ class MenuGroupSeeder extends Seeder
                     'permisison_name' => 'menu.pendidikan',
                 ],
                 [
+                    'name' => 'Ujian',
+                    'icon' => 'fas fa-feather-alt',
+                    'permisison_name' => 'menu.ujian',
+                ],
+                [
                     'name' => 'Menu Management',
                     'icon' => 'fas fa-bars',
                     'permisison_name' => 'menu.management',

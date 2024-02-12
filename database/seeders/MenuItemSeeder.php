@@ -85,16 +85,22 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 4,
                 ],
                 [
+                    'name' => 'Soal Ujian',
+                    'route' => 'menu-ujian/soal-ujian',
+                    'permission_name' => 'ujian.index',
+                    'menu_group_id' => 5,
+                ],
+                [
                     'name' => 'Menu Group',
                     'route' => 'menu-management/menu-group',
                     'permission_name' => 'menu-group.index',
-                    'menu_group_id' => 5,
+                    'menu_group_id' => 6,
                 ],
                 [
                     'name' => 'Menu Item',
                     'route' => 'menu-management/menu-item',
                     'permission_name' => 'menu-item.index',
-                    'menu_group_id' => 5,
+                    'menu_group_id' => 6,
                 ],
             ]
         );
