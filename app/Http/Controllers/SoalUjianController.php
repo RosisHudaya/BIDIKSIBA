@@ -42,19 +42,22 @@ class SoalUjianController extends Controller
         //
     }
 
-    public function edit(SoalUjian $soalUjian)
+    public function edit(SoalUjian $soalUjian, Ujian $ujian)
     {
-        //
+        return view('soal-ujian.edit', compact('soalUjian', 'ujian'));
     }
 
-    public function update(UpdateSoalUjianRequest $request, SoalUjian $soalUjian)
+    public function update(UpdateSoalUjianRequest $request, SoalUjian $soalUjian, Ujian $ujian)
     {
-        //
+        $soalUjian->update($request->all());
+
+        return redirect()->route('soalUjian', ['ujian' => $ujian->id])->with('success', 'Soal ujian berhasil diperbarui');
     }
 
-    public function destroy(SoalUjian $soalUjian)
+    public function destroy(SoalUjian $soalUjian, Ujian $ujian)
     {
-        //
+        $soalUjian->delete();
+        return redirect()->route('soalUjian', ['ujian' => $ujian->id])->with('success', 'Soal ujian berhasil dihapus');
     }
 
     public function import(ImportSoalUjianRequest $request, Ujian $ujian)

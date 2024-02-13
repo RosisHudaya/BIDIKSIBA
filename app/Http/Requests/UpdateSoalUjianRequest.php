@@ -13,7 +13,7 @@ class UpdateSoalUjianRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,27 @@ class UpdateSoalUjianRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('soalUjian')->id;
         return [
-            //
+            'soal' => 'required|unique:soal_ujians,soal,' . $id,
+            'jawaban_a' => 'required|unique:soal_ujians,jawaban_a,' . $id,
+            'jawaban_b' => 'required',
+            'jawaban_c' => 'required',
+            'jawaban_d' => 'required',
+            'jawaban_benar' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'soal.required' => 'Form soal tidak boleh kosong',
+            'soal.unique' => 'Soal tersebut sudah digunakan sebelumnya',
+            'jawaban_a.required' => 'Form jawaban A tidak boleh kosong',
+            'jawaban_b.required' => 'Form jawaban B tidak boleh kosong',
+            'jawaban_c.required' => 'Form jawaban C tidak boleh kosong',
+            'jawaban_d.required' => 'Form jawaban D tidak boleh kosong',
+            'jawaban_benar.required' => 'Form jawaban benar tidak boleh kosong',
         ];
     }
 }

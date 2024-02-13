@@ -116,17 +116,18 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('ujian.edit', $soal_ujian->id) }}"
+                                                        <a href="{{ route('soal-ujian.edit', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
                                                             class="btn btn-sm btn-info btn-icon ml-2">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('ujian.destroy', $soal_ujian->id) }}"
-                                                            method="POST" class="ml-2" id="del-<?= $ujian->id ?>">
+                                                        <form
+                                                            action="{{ route('soal-ujian.destroy', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
+                                                            method="POST" class="ml-2" id="del-<?= $soal_ujian->id ?>">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus data ujian ini?"
+                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus soal ujian ini?"
                                                                 data-confirm-yes="submitDel(<?= $soal_ujian->id ?>)"
                                                                 data-id="del-{{ $soal_ujian->id }}">
                                                                 <i class="fas fa-times"></i> Delete

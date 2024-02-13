@@ -91,6 +91,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('ujian/{ujian}', [UjianController::class, 'soal_ujian'])->name('soalUjian');
         Route::get('soal-ujian/{ujian}/create', [SoalUjianController::class, 'create'])->name('soal-ujian.create');
         Route::post('soal-ujian/{ujian}', [SoalUjianController::class, 'store'])->name('soal-ujian.store');
+        Route::get('soal-ujian/{soalUjian}/{ujian}/edit', [SoalUjianController::class, 'edit'])->name('soal-ujian.edit');
+        Route::put('soal-ujian/{soalUjian}/{ujian}', [SoalUjianController::class, 'update'])->name('soal-ujian.update');
+        Route::delete('soal-ujian/{soalUjian}/{ujian}', [SoalUjianController::class, 'destroy'])->name('soal-ujian.destroy');
         Route::post('soal-ujian/import/{ujian}', [SoalUjianController::class, 'import'])->name('soal-ujian.import');
     });
 
