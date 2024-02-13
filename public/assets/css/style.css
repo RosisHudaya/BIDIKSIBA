@@ -93,6 +93,15 @@
     font-size: 11px;
 }
 
+.form-control.is-invalid {
+    border-color: #95a0f4;
+}
+
+.form-control.is-invalid:focus {
+    border-color: #95a0f4;
+    box-shadow: none;
+}
+
 a {
     color: #003c77;
     font-weight: 500;

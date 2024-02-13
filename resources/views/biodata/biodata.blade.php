@@ -89,7 +89,8 @@
                     <textarea name="catatan" id="catatan" cols="100" rows="5">{{ $biodata->catatan }}</textarea>
                     <br>
                     <p class="m-0 p-0 text-c">* Tambahkan pesan kesalahan biodata
-                        pendaftar(opsional)</p>
+                        pendaftar(opsional)
+                    </p>
                     <button type="submit" class="btn btn-sm btn-primary ml-2"
                         data-confirm="Verifikasi Biodata | Apakah data biodata belum bisa diverifikasi dan kirim pesan kesalahan ?"
                         data-confirm-yes="sumbitRej(<?= $biodata->id ?>)" data-id="rej-{{ $biodata->id }}">

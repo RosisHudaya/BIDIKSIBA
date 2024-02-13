@@ -13,7 +13,7 @@ class UpdateUjianRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,17 @@ class UpdateUjianRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('soal_ujian')->id;
         return [
-            //
+            'nama_ujian' => 'required|unique:ujians,nama_ujian,' . $id,
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nama_ujian.required' => 'Form nama ujian tidak boleh kosong',
+            'nama_ujian.unique' => 'Nama ujian sudah digunakan sebelumnya',
         ];
     }
 }
