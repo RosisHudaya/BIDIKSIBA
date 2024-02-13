@@ -5,80 +5,50 @@ namespace App\Http\Controllers;
 use App\Models\SoalUjian;
 use App\Http\Requests\StoreSoalUjianRequest;
 use App\Http\Requests\UpdateSoalUjianRequest;
+use App\Models\Ujian;
+use Illuminate\Support\Facades\DB;
 
 class SoalUjianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Ujian $ujian)
     {
-        //
+        return view('soal-ujian.create', compact('ujian'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreSoalUjianRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSoalUjianRequest $request)
+    public function store(StoreSoalUjianRequest $request, Ujian $ujian)
     {
-        //
+        SoalUjian::create([
+            'id_ujian' => $ujian->id,
+            'soal' => $request->soal,
+            'jawaban_a' => $request->jawaban_a,
+            'jawaban_b' => $request->jawaban_b,
+            'jawaban_c' => $request->jawaban_c,
+            'jawaban_d' => $request->jawaban_d,
+            'jawaban_benar' => $request->jawaban_benar,
+        ]);
+
+        return redirect()->route('soalUjian', ['ujian' => $ujian->id])->with('success', 'Soal ujian berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SoalUjian  $soalUjian
-     * @return \Illuminate\Http\Response
-     */
     public function show(SoalUjian $soalUjian)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SoalUjian  $soalUjian
-     * @return \Illuminate\Http\Response
-     */
     public function edit(SoalUjian $soalUjian)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateSoalUjianRequest  $request
-     * @param  \App\Models\SoalUjian  $soalUjian
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateSoalUjianRequest $request, SoalUjian $soalUjian)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SoalUjian  $soalUjian
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(SoalUjian $soalUjian)
     {
         //

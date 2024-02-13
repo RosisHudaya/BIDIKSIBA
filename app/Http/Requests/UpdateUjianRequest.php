@@ -23,7 +23,7 @@ class UpdateUjianRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route('soal_ujian')->id;
+        $id = $this->route('ujian')->id;
         return [
             'nama_ujian' => 'required|unique:ujians,nama_ujian,' . $id,
         ];

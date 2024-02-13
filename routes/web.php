@@ -16,6 +16,7 @@ use App\Http\Controllers\RoleAndPermission\ImportPermissionController;
 use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
+use App\Http\Controllers\SoalUjianController;
 use App\Http\Controllers\TokenUjianController;
 use App\Http\Controllers\UjianController;
 use App\Http\Controllers\VerifikasiPendaftarController;
@@ -86,7 +87,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     //menu ujian
     Route::prefix('menu-ujian')->group(function () {
-        Route::resource('soal-ujian', UjianController::class);
+        Route::resource('ujian', UjianController::class);
+        Route::get('ujian/{ujian}', [UjianController::class, 'soal_ujian'])->name('soalUjian');
+        Route::get('soal-ujian/{ujian}/create', [SoalUjianController::class, 'create'])->name('soal-ujian.create');
+        Route::post('soal-ujian/{ujian}', [SoalUjianController::class, 'store'])->name('soal-ujian.store');
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {

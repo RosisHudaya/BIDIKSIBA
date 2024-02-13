@@ -11,7 +11,7 @@
                     <h4>Validasi Tambah Data Ujian</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('soal-ujian.store') }}" method="post">
+                    <form action="{{ route('ujian.store') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="nama_ujian">Nama Ujian</label>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary">Submit</button>
-                            <a class="btn btn-secondary" href="{{ route('soal-ujian.index') }}">Cancel</a>
+                            <a class="btn btn-secondary" href="{{ route('ujian.index') }}">Cancel</a>
                         </div>
                     </form>
                 </div>

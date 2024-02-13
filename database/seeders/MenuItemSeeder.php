@@ -86,7 +86,7 @@ class MenuItemSeeder extends Seeder
                 ],
                 [
                     'name' => 'Soal Ujian',
-                    'route' => 'menu-ujian/soal-ujian',
+                    'route' => 'menu-ujian/ujian',
                     'permission_name' => 'ujian.index',
                     'menu_group_id' => 5,
                 ],

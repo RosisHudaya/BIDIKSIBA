@@ -12,7 +12,15 @@ class UjianController extends Controller
 {
     public function index()
     {
-        $ujians = DB::table('ujians')
+        $ujians = DB::table('ujians as u')
+            ->leftJoin('soal_ujians as su', 'u.id', '=', 'su.id_ujian')
+            ->select(
+                'u.id',
+                'u.nama_ujian',
+                'u.deskripsi',
+                DB::raw('COUNT(su.id) as jumlah_soal')
+            )
+            ->groupBy('u.id', 'u.nama_ujian', 'u.deskripsi')
             ->paginate(10);
         return view('ujian.index', compact('ujians'));
     }
@@ -29,7 +37,7 @@ class UjianController extends Controller
             'deskripsi' => $request->deskripsi,
         ]);
 
-        return redirect()->route('soal-ujian.index')->with('success', 'Ujian baru berhasil ditambahkan');
+        return redirect()->route('ujian.index')->with('success', 'Ujian baru berhasil ditambahkan');
     }
 
     public function show(Ujian $ujian)
@@ -37,21 +45,58 @@ class UjianController extends Controller
         //
     }
 
-    public function edit(Ujian $soal_ujian)
+    public function edit(Ujian $ujian)
     {
-        return view('ujian.edit', compact('soal_ujian'));
+        return view('ujian.edit', compact('ujian'));
     }
 
-    public function update(UpdateUjianRequest $request, Ujian $soal_ujian)
+    public function update(UpdateUjianRequest $request, Ujian $ujian)
     {
-        $soal_ujian->update($request->all());
+        $ujian->update($request->all());
 
-        return redirect()->route('soal-ujian.index')->with('success', 'Data ujian berhasil diperbarui');
+        return redirect()->route('ujian.index')->with('success', 'Data ujian berhasil diperbarui');
     }
 
-    public function destroy(Ujian $soal_ujian)
+    public function destroy(Ujian $ujian)
     {
-        $soal_ujian->delete();
-        return redirect()->route('soal-ujian.index')->with('success', 'Data ujian berhasil dihapus');
+        $ujian->delete();
+        return redirect()->route('ujian.index')->with('success', 'Data ujian berhasil dihapus');
+    }
+
+    public function soal_ujian(Ujian $ujian)
+    {
+        $soal_ujians = DB::table('soal_ujians as su')
+            ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
+            ->select(
+                'su.id',
+                'su.soal',
+                'su.jawaban_a',
+                'su.jawaban_b',
+                'su.jawaban_c',
+                'su.jawaban_d',
+                'su.jawaban_benar',
+                'u.nama_ujian',
+                'u.deskripsi',
+                DB::raw('COUNT(*) as jumlah_soal')
+            )
+            ->where('su.id_ujian', $ujian->id)
+            ->groupBy(
+                'su.id',
+                'su.soal',
+                'su.jawaban_a',
+                'su.jawaban_b',
+                'su.jawaban_c',
+                'su.jawaban_d',
+                'su.jawaban_benar',
+                'u.nama_ujian',
+                'u.deskripsi',
+            )
+            ->paginate(5);
+        $jumlah_soal_ujian = $soal_ujians->total();
+        return view('soal-ujian.index')->with([
+            'soal_ujians' => $soal_ujians,
+            'jumlah_soal_ujian' => $jumlah_soal_ujian,
+            'ujian' => $ujian,
+        ]);
     }
 }

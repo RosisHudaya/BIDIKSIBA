@@ -4,41 +4,44 @@
         <th>NIK</th>
         <th>NISN</th>
         <th>ASAL SEKOLAH</th>
-        <th></th>
+        <th class="text-center">FOTO</th>
     </tr>
     <tr>
         <td></td>
-        <td>{{ $biodata->nik }}</td>
-        <td>{{ $biodata->nisn }}</td>
-        <td>{{ $biodata->asal_sekolah }}</td>
-        <td></td>
+        <td>{{ $biodata->nik ?? '--' }}</td>
+        <td>{{ $biodata->nisn ?? '--' }}</td>
+        <td>{{ $biodata->asal_sekolah ?? '--' }}</td>
+        <th rowspan="5" class="text-center">
+            <img class="img-fluid" src="{{ asset('assets/img/logo.png') }}">
+        </th>
     </tr>
     <tr>
         <th></th>
         <th>KOTA LAHIR</th>
         <th>TANGGAL LAHIR</th>
         <th>JENIS KELAMIN</th>
-        <th></th>
     </tr>
     <tr>
         <td></td>
-        <td>{{ $biodata->kota_lahir }}</td>
-        <td>{{ \Carbon\Carbon::parse($biodata->tgl_lahir)->format('d F Y') }}
+        <td>{{ $biodata->kota_lahir ?? '--' }}</td>
+        <td>
+            @if ($biodata->tgl_lahir)
+                {{ \Carbon\Carbon::parse($biodata->tgl_lahir)->format('d F Y') }}
+            @else
+                --
+            @endif
         </td>
-        <td>{{ $biodata->gender }}</td>
-        <td></td>
+        <td>{{ $biodata->gender ?? '--' }}</td>
     </tr>
     <tr>
         <th></th>
         <th>NOMER TELEPON</th>
         <th></th>
         <th></th>
-        <th></th>
     </tr>
     <tr>
         <td></td>
-        <td> {{ $biodata->no_telp }} </td>
-        <td></td>
+        <td> {{ $biodata->no_telp ?? '--' }} </td>
         <td></td>
         <td></td>
     </tr>
@@ -51,9 +54,9 @@
     </tr>
     <tr>
         <td></td>
-        <td>{{ $biodata->asal_jurusan }}</td>
-        <td>{{ $biodata->jurusan }}</td>
-        <td>{{ $biodata->prodi }}</td>
+        <td>{{ $biodata->asal_jurusan ?? '--' }}</td>
+        <td>{{ $biodata->jurusan ?? '--' }}</td>
+        <td>{{ $biodata->prodi ?? '--' }}</td>
         <td></td>
     </tr>
     <tr>
@@ -86,7 +89,7 @@
                     id="rej-<?= $biodata->id ?>" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <textarea name="catatan" id="catatan" cols="100" rows="5">{{ $biodata->catatan }}</textarea>
+                    <textarea class="form-control" name="catatan" id="catatan" style="height: 150px;">{{ $biodata->catatan }}</textarea>
                     <br>
                     <p class="m-0 p-0 text-c">* Tambahkan pesan kesalahan biodata
                         pendaftar(opsional)

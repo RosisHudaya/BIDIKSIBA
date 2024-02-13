@@ -14,10 +14,10 @@ class VerifikasiPendaftarController extends Controller
     public function index()
     {
         $biodatas = DB::table('biodatas as b')
-            ->join('users as u', 'b.id_user', '=', 'u.id')
-            ->join('asal_jurusans as jp', 'b.id_asal_jurusan', '=', 'jp.id')
-            ->join('jurusans as j', 'b.id_jurusan', '=', 'j.id')
-            ->join('prodis as p', 'b.id_prodi', '=', 'p.id')
+            ->leftJoin('users as u', 'b.id_user', '=', 'u.id')
+            ->leftJoin('asal_jurusans as jp', 'b.id_asal_jurusan', '=', 'jp.id')
+            ->leftJoin('jurusans as j', 'b.id_jurusan', '=', 'j.id')
+            ->leftJoin('prodis as p', 'b.id_prodi', '=', 'p.id')
             ->select(
                 'b.*',
                 'jp.asal_jurusan',

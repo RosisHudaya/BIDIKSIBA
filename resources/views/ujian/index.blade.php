@@ -16,17 +16,17 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="header ml-4 mt-3">
-                            <a class="btn btn-primary" href="{{ route('soal-ujian.create') }}">
+                            <a class="btn btn-primary" href="{{ route('ujian.create') }}">
                                 <i class="fas fa-feather-alt"></i> Tambah Ujian
                             </a>
                         </div>
                         <div class="card-body">
-                            <form id="search" method="GET" action="{{ route('soal-ujian.index') }}">
+                            <form id="search" method="GET" action="{{ route('ujian.index') }}">
                                 <div class="d-flex mb-3">
                                     <input type="text" name="name" class="form-control mr-2" id="name"
                                         placeholder="cari nama ujian..." value="{{ app('request')->input('name') }}">
                                     <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
-                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('soal-ujian.index') }}">Reset</a>
+                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('ujian.index') }}">Reset</a>
                                 </div>
                             </form>
                             <div class="table-responsive">
@@ -35,7 +35,7 @@
                                         <tr>
                                             <th class="text-center" style="width: 50px;">#</th>
                                             <th style="width: 250px;">Nama Ujian</th>
-                                            <th class="text-center" style="width: 100px;">Jumlah Soal</th>
+                                            <th class="text-center" style="width: 150px;">Jumlah Soal</th>
                                             <th style="width: 450px;">Deskripsi</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
@@ -45,16 +45,21 @@
                                                     {{ ($ujians->currentPage() - 1) * $ujians->perPage() + $key + 1 }}
                                                 </td>
                                                 <td>{{ $ujian->nama_ujian }}</td>
-                                                <td class="text-center">--</td>
+                                                <td class="text-center">{{ $ujian->jumlah_soal }}</td>
                                                 <td class="text-justify">{{ $ujian->deskripsi ?? '--' }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('soal-ujian.edit', $ujian->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon ">
+                                                        <a href="{{ route('soalUjian', $ujian->id) }}"
+                                                            class="btn btn-sm btn-exam">
+                                                            <i class="fas fa-file-medical"></i>
+                                                            Soal
+                                                        </a>
+                                                        <a href="{{ route('ujian.edit', $ujian->id) }}"
+                                                            class="btn btn-sm btn-info btn-icon ml-2">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('soal-ujian.destroy', $ujian->id) }}"
+                                                        <form action="{{ route('ujian.destroy', $ujian->id) }}"
                                                             method="POST" class="ml-2" id="del-<?= $ujian->id ?>">
                                                             @csrf
                                                             @method('DELETE')
