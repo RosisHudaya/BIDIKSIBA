@@ -40,7 +40,7 @@ class MenuGroupSeeder extends Seeder
                 ],
                 [
                     'name' => 'Ujian',
-                    'icon' => 'fas fa-feather-alt',
+                    'icon' => 'fas fa-file-contract',
                     'permisison_name' => 'menu.ujian',
                 ],
                 [

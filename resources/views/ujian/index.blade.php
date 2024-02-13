@@ -17,7 +17,7 @@
                     <div class="card card-primary">
                         <div class="header ml-4 mt-3">
                             <a class="btn btn-primary" href="{{ route('ujian.create') }}">
-                                <i class="fas fa-feather-alt"></i> Tambah Ujian
+                                <i class="fas fa-edit"></i> Tambah Ujian
                             </a>
                         </div>
                         <div class="card-body">

@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <section class="section">
         <div class="section-container">
-            <h1><i class="fas fa-edit c-icon"></i> Detail Ujian</h1>
+            <h1><i class="fas fa-pen-square c-icon"></i> Detail Ujian</h1>
             <hr>
             <form action="{{ route('soalUjian', $ujian) }}">
                 <table class="table table-bordered table-md">
@@ -37,13 +37,25 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
-                        <form action="{{ route('soalUjian', $ujian) }}">
-                            <div class="header ml-4 mt-3">
+                        <div class="d-flex ml-4 mt-3 mr-2">
+                            <div class=" col-md-4 m-0 p-0">
                                 <a class="btn btn-primary" href="{{ route('soal-ujian.create', $ujian->id) }}">
                                     <i class="fas fa-edit"></i> Tambah Soal
                                 </a>
                             </div>
-                        </form>
+                            <form class="col-md-8 d-flex justify-content-end"
+                                action="{{ route('soal-ujian.import', $ujian->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
+                                <input class="form-input my-auto p-1 mx-1" type="file" name="import-file">
+                                <div class="mx-0 my-auto p-0">
+                                    <button class="btn btn-success">
+                                        <i class="fas fa-file-csv"></i> Import
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('ujian.index') }}">
                                 <div class="d-flex mb-3">

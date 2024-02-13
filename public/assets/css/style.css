@@ -93,6 +93,19 @@
     font-size: 11px;
 }
 
+.form-input {
+    background-color: #fdfdff;
+    border: 1px solid;
+    border-color: #e4e6fc !important;
+    border-radius: 5px;
+}
+
+.form-input:focus {
+    background-color: #fefeff;
+    border-color: #95a0f4;
+    box-shadow: none;
+}
+
 .form-control.is-invalid {
     border-color: #95a0f4;
 }
@@ -103,15 +116,15 @@
 }
 
 .btn-exam {
-    box-shadow: 0 2px 4px #7b95bb;
-    background-color: #27374d;
+    box-shadow: 0 2px 4px #558ef1;
+    background-color: #4477ce;
     color: white;
 }
 
 .btn-exam:active,
 .btn-exam:hover,
 .btn-exam:focus {
-    background-color: #344966 !important;
+    background-color: #6592e0 !important;
     color: white;
 }
 

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImportSoalUjianRequest;
+use App\Imports\SoalUjianImport;
 use App\Models\SoalUjian;
 use App\Http\Requests\StoreSoalUjianRequest;
 use App\Http\Requests\UpdateSoalUjianRequest;
 use App\Models\Ujian;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SoalUjianController extends Controller
 {
@@ -52,5 +55,16 @@ class SoalUjianController extends Controller
     public function destroy(SoalUjian $soalUjian)
     {
         //
+    }
+
+    public function import(ImportSoalUjianRequest $request, Ujian $ujian)
+    {
+        try {
+            $file = $request->file('import-file');
+            Excel::import(new SoalUjianImport, $file);
+            return redirect()->route('soalUjian', ['ujian' => $ujian->id])->with('success', 'File soal ujian berhasil diimport');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

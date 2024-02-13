@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('ujian/{ujian}', [UjianController::class, 'soal_ujian'])->name('soalUjian');
         Route::get('soal-ujian/{ujian}/create', [SoalUjianController::class, 'create'])->name('soal-ujian.create');
         Route::post('soal-ujian/{ujian}', [SoalUjianController::class, 'store'])->name('soal-ujian.store');
+        Route::post('soal-ujian/import/{ujian}', [SoalUjianController::class, 'import'])->name('soal-ujian.import');
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {
