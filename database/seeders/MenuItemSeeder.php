@@ -91,6 +91,12 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 5,
                 ],
                 [
+                    'name' => 'Sesi Ujian',
+                    'route' => 'menu-ujian/sesi-ujian',
+                    'permission_name' => 'sesi-ujian.index',
+                    'menu_group_id' => 5,
+                ],
+                [
                     'name' => 'Menu Group',
                     'route' => 'menu-management/menu-group',
                     'permission_name' => 'menu-group.index',

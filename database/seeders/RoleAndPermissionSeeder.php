@@ -95,6 +95,12 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'ujian.edit']);
         Permission::create(['name' => 'ujian.destroy']);
 
+        //sesi ujian
+        Permission::create(['name' => 'sesi-ujian.index']);
+        Permission::create(['name' => 'sesi-ujian.create']);
+        Permission::create(['name' => 'sesi-ujian.edit']);
+        Permission::create(['name' => 'sesi-ujian.destroy']);
+
         //menu group 
         Permission::create(['name' => 'menu-group.index']);
         Permission::create(['name' => 'menu-group.create']);
