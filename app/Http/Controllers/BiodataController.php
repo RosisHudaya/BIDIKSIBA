@@ -12,6 +12,8 @@ use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BiodataController extends Controller
 {
@@ -81,6 +83,7 @@ class BiodataController extends Controller
 
         $request->validate(
             [
+                'foto' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'nama' => 'nullable|regex:/^[a-zA-Z\s]+$/u',
                 'asal_sekolah' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/u',
                 'kota_lahir' => 'nullable|regex:/^[a-zA-Z\s]+$/u',
@@ -92,6 +95,9 @@ class BiodataController extends Controller
                 'prodi_id' => 'nullable',
             ],
             [
+                'foto.image' => 'File yang diunggah harus berupa gambar',
+                'foto.mimes' => 'Format gambar yang diunggah adalah PNG, JPG, atau JPEG',
+                'foto.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
                 'nama.regex' => 'Form nama tidak boleh mengandung angka dan simbol',
                 'asal_sekolah.regex' => 'Form asal sekolah tidak boleh mengandung simbol',
                 'kota_lahir' => 'Form kota lahir tidak boleh mengandung angka dan simbol',
@@ -104,7 +110,7 @@ class BiodataController extends Controller
         );
 
         if ($idUser == null) {
-            Biodata::create([
+            $biodata = Biodata::create([
                 'id_user' => $id,
                 'id_asal_jurusan' => $request->asal_jurusan_id,
                 'id_jurusan' => $request->jurusan_id,
@@ -120,6 +126,16 @@ class BiodataController extends Controller
                 'status' => 'Pending',
                 'catatan' => '',
             ]);
+
+            if ($request->hasFile('foto')) {
+                $extension = $request->file('foto')->extension();
+                $randomName = 'foto-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('foto')->storeAs('public/foto', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $biodata->update(['foto' => $fotoPath]);
+            }
         } else {
             $idUser->update([
                 'id_user' => $id,
@@ -137,9 +153,23 @@ class BiodataController extends Controller
                 'status' => 'Pending',
                 'catatan' => '',
             ]);
+
+            if ($request->hasFile('foto')) {
+                if ($idUser->foto) {
+                    Storage::delete('public/' . $idUser->foto);
+                }
+
+                $extension = $request->file('foto')->extension();
+                $randomName = 'foto-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('foto')->storeAs('public/foto', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $idUser->update(['foto' => $fotoPath]);
+            }
         }
 
-        return redirect()->route('biodata.index');
+        return redirect()->route('biodata.index')->with('success', 'success-biodata');
     }
 
     public function create()

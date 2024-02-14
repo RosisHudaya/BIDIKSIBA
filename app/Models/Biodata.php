@@ -14,6 +14,7 @@ class Biodata extends Model
         'id_asal_jurusan',
         'id_jurusan',
         'id_prodi',
+        'foto',
         'nik',
         'nama',
         'kota_lahir',

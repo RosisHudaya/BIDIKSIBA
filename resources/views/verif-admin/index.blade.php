@@ -75,7 +75,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            @include('biodata.biodata')
+                                            @include('verif-admin.biodata')
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -89,6 +89,23 @@
             </div>
         </div>
     </section>
+
+    <!-- modal foto -->
+    @foreach ($biodatas as $biodata)
+        <div class="modal fade" id="fotoModal-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoModalLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->foto)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->foto) }}" alt="foto">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 @push('customScript')
     <script>

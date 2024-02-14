@@ -57,13 +57,25 @@ select {
 
 .btn-save {
     color: white;
-    background-color: #004181;
+    background-color: #004181 !important;
     border-radius: 15px;
 }
 
 .btn-save:active {
     color: white;
     background-color: #004181;
+}
+
+.btn-alert {
+    color: white;
+    background-color: #004181 !important;
+    box-shadow: none !important;
+}
+
+.btn-alert:active {
+    color: white;
+    background-color: #004181 !important;
+    box-shadow: none !important;
 }
 
 .btn-save:hover {
@@ -92,4 +104,9 @@ select {
 .s-pre {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: normal;
+}
+
+.text-c {
+    color: red;
+    font-size: 11px;
 }

@@ -12,7 +12,14 @@
         <td>{{ $biodata->nisn ?? '--' }}</td>
         <td>{{ $biodata->asal_sekolah ?? '--' }}</td>
         <th rowspan="5" class="text-center">
-            <img class="img-fluid" src="{{ asset('assets/img/logo.png') }}">
+            @if ($biodata->foto)
+                <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->foto) }}" alt="foto"
+                    style="width: 200px; height: 300px; object-fit: cover;" data-toggle="modal"
+                    data-target="#fotoModal-{{ $biodata->id }}">
+            @else
+                <img class="mb-3 ml-3" src="{{ asset('assets/img/profile.jpg') }}" alt="foto-default"
+                    style="width: 200px; height: 300px; object-fit: cover;">
+            @endif
         </th>
     </tr>
     <tr>
@@ -83,18 +90,19 @@
         </td>
     </tr>
     <tr>
-        <td colspan="5">
-            <div class="show-tolak text-right" style="display: none;">
+        <td></td>
+        <td colspan="4">
+            <div class="show-tolak" style="display: none;">
                 <form action="{{ route('verifikasi-pendaftar.reject', $biodata->id) }}" method="POST"
                     id="rej-<?= $biodata->id ?>" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <label class="font-weight-bold ml-2">CATATAN</label>
                     <textarea class="form-control" name="catatan" id="catatan" style="height: 150px;">{{ $biodata->catatan }}</textarea>
-                    <br>
                     <p class="m-0 p-0 text-c">* Tambahkan pesan kesalahan biodata
                         pendaftar(opsional)
                     </p>
-                    <button type="submit" class="btn btn-sm btn-primary ml-2"
+                    <button type="submit" class="btn btn-sm btn-primary"
                         data-confirm="Verifikasi Biodata | Apakah data biodata belum bisa diverifikasi dan kirim pesan kesalahan ?"
                         data-confirm-yes="sumbitRej(<?= $biodata->id ?>)" data-id="rej-{{ $biodata->id }}">
                         <i class="fas fa-paper-plane"></i>
