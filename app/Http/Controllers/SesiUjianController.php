@@ -14,8 +14,20 @@ class SesiUjianController extends Controller
     {
         $sesiUjians = DB::table('sesi_ujians as su')
             ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
+            ->leftJoin('sesi_users as sj', 'su.id', '=', 'sj.id_sesi')
             ->select(
-                'su.*',
+                'su.id',
+                'su.nama_sesi',
+                'su.waktu_mulai',
+                'su.waktu_akhir',
+                'u.nama_ujian',
+                DB::raw('COUNT(sj.id) as jumlah_peserta')
+            )
+            ->groupBy(
+                'su.id',
+                'su.nama_sesi',
+                'su.waktu_mulai',
+                'su.waktu_akhir',
                 'u.nama_ujian',
             )
             ->paginate(10);
@@ -78,5 +90,39 @@ class SesiUjianController extends Controller
                 return redirect()->route('sesi-ujian.index')->with('success', 'Data sesi ujian berhasil dihapus');
             }
         }
+    }
+
+    public function sesi_user(SesiUjian $sesiUjian)
+    {
+        $ujian = DB::table('sesi_ujians as su')
+            ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
+            ->select(
+                'u.nama_ujian'
+            )
+            ->where('su.id', '=', $sesiUjian->id)
+            ->first();
+        $sesi_users = DB::table('sesi_users as su')
+            ->leftJoin('users as u', 'su.id_user', '=', 'u.id')
+            ->leftJoin('biodatas as b', 'u.id', '=', 'b.id_user')
+            ->select(
+                'su.id',
+                'b.nama',
+                'b.gender',
+                DB::raw('COUNT(*) as jumlah_peserta')
+            )
+            ->where('su.id_sesi', $sesiUjian->id)
+            ->groupBy(
+                'su.id',
+                'b.nama',
+                'b.gender',
+            )
+            ->paginate(25);
+        $jumlah_peserta_ujian = $sesi_users->total();
+        return view('sesi-user.index')->with([
+            'ujian' => $ujian,
+            'sesi_users' => $sesi_users,
+            'sesi_ujian' => $sesiUjian,
+            'jumlah_peserta_ujian' => $jumlah_peserta_ujian,
+        ]);
     }
 }

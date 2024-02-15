@@ -34,7 +34,7 @@
                                     <tbody>
                                         <tr>
                                             <th class="text-center align-middle" style="width: 75px;">#</th>
-                                            <th class="align-middle" style="width: 200px;">Sesi Ujian</th>
+                                            <th class="align-middle" style="width: 150px;">Sesi</th>
                                             <th class="align-middle" style="width: 200px;">Ujian</th>
                                             <th class="text-center align-middle" style="width: 100px;">Jumlah Peserta</th>
                                             <th class="text-center align-middle" style="width: 400px;">Waktu</th>
@@ -47,7 +47,7 @@
                                                 </td>
                                                 <td>{{ $sesiUjian->nama_sesi }}</td>
                                                 <td>{{ $sesiUjian->nama_ujian }}</td>
-                                                <td class="text-center">-</td>
+                                                <td class="text-center">{{ $sesiUjian->jumlah_peserta }}</td>
                                                 <td class="text-center">
                                                     {{ \Carbon\Carbon::parse($sesiUjian->waktu_mulai)->format('d F Y H:i:s') }}
                                                     -
@@ -55,6 +55,11 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
+                                                        <a href="{{ route('sesiUjian', $sesiUjian->id) }}"
+                                                            class="btn btn-sm btn-exam">
+                                                            <i class="fas fa-user-plus"></i>
+                                                            Peserta
+                                                        </a>
                                                         <a href="{{ route('sesi-ujian.edit', $sesiUjian->id) }}"
                                                             class="btn btn-sm btn-info btn-icon ml-2">
                                                             <i class="fas fa-edit"></i>

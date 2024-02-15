@@ -97,6 +97,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::delete('soal-ujian/{soalUjian}/{ujian}', [SoalUjianController::class, 'destroy'])->name('soal-ujian.destroy');
         Route::post('soal-ujian/import/{ujian}', [SoalUjianController::class, 'import'])->name('soal-ujian.import');
         Route::resource('sesi-ujian', SesiUjianController::class);
+        Route::get('sesi-ujian/{sesi_ujian}', [SesiUjianController::class, 'sesi_user'])->name('sesiUjian');
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {

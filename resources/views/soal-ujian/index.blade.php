@@ -4,26 +4,24 @@
     <!-- Main Content -->
     <section class="section">
         <div class="section-container">
-            <h1><i class="fas fa-pen-square c-icon"></i> Detail Ujian</h1>
+            <h1><i class="fas fa-pen-square c-icon"></i> UJIAN</h1>
             <hr>
-            <form action="{{ route('soalUjian', $ujian) }}">
-                <table class="table table-bordered table-md">
-                    <tbody>
-                        <tr>
-                            <th style="width: 300px;">Nama Ujian</th>
-                            <td>{{ $ujian->nama_ujian }}</td>
-                        </tr>
-                        <tr>
-                            <th style="width: 300px;">Jumlah Soal</th>
-                            <td>{{ $jumlah_soal_ujian }} Soal</td>
-                        </tr>
-                        <tr>
-                            <th style="width: 300px;">Deskripsi</th>
-                            <td>{{ $ujian->deskripsi ?? '--' }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+            <table class="table table-bordered table-md">
+                <tbody>
+                    <tr>
+                        <th style="width: 300px;">NAMA UJIAN</th>
+                        <td>{{ $ujian->nama_ujian }}</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 300px;">JUMLAH</th>
+                        <td>{{ $jumlah_soal_ujian }} Soal</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 300px;">DESKRIPSI</th>
+                        <td>{{ $ujian->deskripsi ?? '--' }}</td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="text-right">
                 <a class="btn btn-secondary" href="{{ route('ujian.index') }}">Kembali</a>
             </div>
