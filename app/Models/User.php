@@ -48,4 +48,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new CustomVerifyEmail());
     }
+
+    public function sesi_ujian()
+    {
+        return $this->belongsToMany(SesiUjian::class, 'sesi_users', 'id_user', 'id_sesi');
+    }
 }
