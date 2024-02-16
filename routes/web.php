@@ -17,6 +17,7 @@ use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
 use App\Http\Controllers\SesiUjianController;
+use App\Http\Controllers\SesiUserController;
 use App\Http\Controllers\SoalUjianController;
 use App\Http\Controllers\TokenUjianController;
 use App\Http\Controllers\UjianController;
@@ -97,7 +98,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::delete('soal-ujian/{soalUjian}/{ujian}', [SoalUjianController::class, 'destroy'])->name('soal-ujian.destroy');
         Route::post('soal-ujian/import/{ujian}', [SoalUjianController::class, 'import'])->name('soal-ujian.import');
         Route::resource('sesi-ujian', SesiUjianController::class);
-        Route::get('sesi-ujian/{sesi_ujian}', [SesiUjianController::class, 'sesi_user'])->name('sesiUjian');
+        Route::get('sesi-user/{sesi_ujian}', [SesiUjianController::class, 'sesi_user'])->name('sesiUjian');
+        Route::get('sesi-user/{sesi_ujian}/create', [SesiUserController::class, 'create'])->name('sesi-user.create');
+        Route::post('sesi-user/{sesi_ujian}', [SesiUserController::class, 'store'])->name('sesi-user.store');
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {

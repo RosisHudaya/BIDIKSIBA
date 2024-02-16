@@ -13,4 +13,14 @@ class SesiUser extends Model
         'id_sesi',
         'id_user',
     ];
+
+    public function sesi_ujian()
+    {
+        return $this->belongsTo(SesiUjian::class, 'id_sesi');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

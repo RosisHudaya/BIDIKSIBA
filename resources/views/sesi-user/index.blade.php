@@ -45,7 +45,7 @@
                     <div class="card card-primary">
                         <div class="d-flex ml-4 mt-3 mr-2">
                             <div class=" col-md-4 m-0 p-0">
-                                <a class="btn btn-primary" href="">
+                                <a class="btn btn-primary" href="{{ route('sesi-user.create', $sesi_ujian->id) }}">
                                     <i class="fas fa-user-plus"></i> Tambah Peserta Ujian
                                 </a>
                             </div>

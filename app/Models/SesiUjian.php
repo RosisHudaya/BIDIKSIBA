@@ -21,8 +21,8 @@ class SesiUjian extends Model
         return $this->belongsTo(Ujian::class);
     }
 
-    public function user()
+    public function sesi_user()
     {
-        return $this->belongsToMany(User::class, 'sesi_users', 'id_sesi', 'id_user');
+        return $this->hasMany(SesiUser::class, 'id_sesi');
     }
 }
