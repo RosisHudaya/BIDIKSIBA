@@ -37,7 +37,7 @@
                                             <th class="align-middle" style="width: 150px;">Sesi</th>
                                             <th class="align-middle" style="width: 200px;">Ujian</th>
                                             <th class="text-center align-middle" style="width: 100px;">Jumlah Peserta</th>
-                                            <th class="text-center align-middle" style="width: 400px;">Waktu</th>
+                                            <th class="text-center align-middle" style="width: 300px;">Waktu</th>
                                             <th class="text-center align-middle">Aksi</th>
                                         </tr>
                                         @foreach ($sesiUjians as $key => $sesiUjian)
@@ -49,8 +49,9 @@
                                                 <td>{{ $sesiUjian->nama_ujian }}</td>
                                                 <td class="text-center">{{ $sesiUjian->jumlah_peserta }}</td>
                                                 <td class="text-center">
-                                                    {{ \Carbon\Carbon::parse($sesiUjian->waktu_mulai)->format('d F Y H:i:s') }}
-                                                    -
+                                                    Mulai&nbsp;&nbsp; :
+                                                    {{ \Carbon\Carbon::parse($sesiUjian->waktu_mulai)->format('d F Y H:i:s') }}<br>
+                                                    Selesai :
                                                     {{ \Carbon\Carbon::parse($sesiUjian->waktu_akhir)->format('d F Y H:i:s') }}
                                                 </td>
                                                 <td class="text-right">

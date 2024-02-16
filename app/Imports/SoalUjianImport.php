@@ -18,21 +18,21 @@ class SoalUjianImport implements ToModel, WithHeadingRow, WithUpserts, SkipsOnEr
 
     public function model(array $row)
     {
-        if (isset($row['Nama Ujian']) && isset($row['Soal']) && isset($row['Jawaban A']) && isset($row['Jawaban B']) && isset($row['Jawaban C']) && isset($row['Jawaban D']) && isset($row['Jawaban Benar'])) {
-            $ujian = Ujian::where('nama_ujian', $row['Nama Ujian'])->first();
+        if (isset($row['nama_ujian']) && isset($row['soal']) && isset($row['jawaban_a']) && isset($row['jawaban_b']) && isset($row['jawaban_c']) && isset($row['jawaban_d']) && isset($row['jawaban_benar'])) {
+            $ujian = Ujian::where('nama_ujian', $row['nama_ujian'])->first();
             if (!$ujian) {
-                throw new \Exception("Ujian " . $row['Nama Ujian'] . " tidak ditemukan di database");
+                throw new \Exception("Ujian " . $row['nama_ujian'] . " tidak ditemukan di database");
             }
             $id_ujian = $ujian->id;
 
             return new SoalUjian([
                 'id_ujian' => $id_ujian,
-                'soal' => $row['Soal'],
-                'jawaban_a' => $row['Jawaban A'],
-                'jawaban_b' => $row['Jawaban B'],
-                'jawaban_c' => $row['Jawaban C'],
-                'jawaban_d' => $row['Jawaban D'],
-                'jawaban_benar' => $row['Jawaban Benar'],
+                'soal' => $row['soal'],
+                'jawaban_a' => $row['jawaban_a'],
+                'jawaban_b' => $row['jawaban_b'],
+                'jawaban_c' => $row['jawaban_c'],
+                'jawaban_d' => $row['jawaban_d'],
+                'jawaban_benar' => $row['jawaban_benar'],
             ]);
         }
     }

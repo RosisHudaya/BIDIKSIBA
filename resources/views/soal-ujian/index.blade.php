@@ -40,21 +40,51 @@
                                 <a class="btn btn-primary" href="{{ route('soal-ujian.create', $ujian->id) }}">
                                     <i class="fas fa-edit"></i> Tambah Soal
                                 </a>
+                                <a class="btn btn-success import" style="color: white">
+                                    <i class="fas fa-file-csv"></i> Import Soal
+                                </a>
                             </div>
-                            <form class="col-md-8 d-flex justify-content-end"
-                                action="{{ route('soal-ujian.import', $ujian->id) }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('POST')
-                                <input class="form-input my-auto p-1 mx-1" type="file" name="import-file">
-                                <div class="mx-0 my-auto p-0">
-                                    <button class="btn btn-success">
-                                        <i class="fas fa-file-csv"></i> Import
-                                    </button>
-                                </div>
-                            </form>
                         </div>
                         <div class="card-body">
+                            <div class="show-import"
+                                @if ($errors->has('import-file')) style="display: block;" @else style="display: none;" @endif>
+                                Unduh template <a href="{{ asset('assets/format-file/template-soal.xlsx') }}"
+                                    download>disini</a>
+                                <p class="m-0 p-0 text-c">
+                                    * Eksenti (.xlxc, .csv, atau .xls) | Ukuran file maksimal 10 MB
+                                </p>
+                                <form action="{{ route('soal-ujian.import', $ujian->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('POST')
+                                    <div class="custom-file">
+                                        <div class="d-flex m-0 p-0">
+                                            <div class="col-md-11 m-0 p-0">
+                                                <label
+                                                    class="custom-file-label @error('import-file', 'ImportSoalUjianRequest') is-invalid @enderror"
+                                                    for="file-upload">Pilih File
+                                                </label>
+                                                <input type="file" id="file-upload" class="custom-file-input"
+                                                    name="import-file" data-id="send-import">
+                                            </div>
+                                            <div class="col-md-1 p-0 ml-2">
+                                                <button class="btn btn-primary px-4 py-2"
+                                                    data-id="submit-import">Import</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    @error('import-file')
+                                        <div class="invalid-feedback d-flex" role="alert">
+                                            <div class="alert_alert-dange_mt-1_mb-1 mt-1 ml-1">
+                                                {{ $message }}
+                                            </div>
+                                        </div>
+                                    @enderror
+                                    <hr>
+                                    <br>
+                                </form>
+                            </div>
                             <form id="search" method="GET" action="{{ route('ujian.index') }}">
                                 <div class="d-flex mb-3">
                                     <input type="text" name="name" class="form-control mr-2" id="name"
@@ -149,6 +179,19 @@
     </section>
 @endsection
 @push('customScript')
+    <script>
+        $(document).ready(function() {
+            $('.import').click(function(event) {
+                event.stopPropagation();
+                $(".show-import").slideToggle("fast");
+            });
+            $('#file-upload').change(function() {
+                var i = $(this).prev('label').clone();
+                var file = $('#file-upload')[0].files[0].name;
+                $(this).prev('label').text(file);
+            });
+        })
+    </script>
 @endpush
 
 @push('customStyle')
