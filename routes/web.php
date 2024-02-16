@@ -101,6 +101,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('sesi-user/{sesi_ujian}', [SesiUjianController::class, 'sesi_user'])->name('sesiUjian');
         Route::get('sesi-user/{sesi_ujian}/create', [SesiUserController::class, 'create'])->name('sesi-user.create');
         Route::post('sesi-user/{sesi_ujian}', [SesiUserController::class, 'store'])->name('sesi-user.store');
+        Route::delete('sesi-user/{sesiUser}/{sesi_ujian}', [SesiUserController::class, 'destroy'])->name('sesi-user.destroy');
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {

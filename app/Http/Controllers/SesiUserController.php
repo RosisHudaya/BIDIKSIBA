@@ -44,4 +44,12 @@ class SesiUserController extends Controller
         return redirect()->route('sesiUjian', ['sesi_ujian' => $sesiUjian->id])
             ->with('success', 'Peserta berhasil ditambahkan ke sesi ujian');
     }
+
+    public function destroy(SesiUser $sesiUser, SesiUjian $sesiUjian)
+    {
+        $sesiUser->delete();
+
+        return redirect()->route('sesiUjian', ['sesi_ujian' => $sesiUjian->id])
+            ->with('success', 'Peserta ujian berhasil dihapus dari sesi ujian');
+    }
 }

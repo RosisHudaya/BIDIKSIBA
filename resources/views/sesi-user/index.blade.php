@@ -77,11 +77,15 @@
                                                 <td class="text-center">{{ $sesi_user->gender }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
-                                                        <form action="" method="POST" class="ml-2">
+                                                        <form
+                                                            action="{{ route('sesi-user.destroy', ['sesiUser' => $sesi_user->id, 'sesi_ujian' => $sesi_ujian->id]) }}"
+                                                            method="POST" class="ml-2" id="del-<?= $sesi_user->id ?>">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus soal ujian ini?">
+                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus peserta ini dari sesi ujian?"
+                                                                data-confirm-yes="submitDel(<?= $sesi_user->id ?>)"
+                                                                data-id="del-{{ $sesi_user->id }}">
                                                                 <i class="fas fa-times"></i> Delete
                                                             </button>
                                                         </form>
