@@ -5,6 +5,7 @@
 @endpush
 @section('main')
     <div class="col-md-11 mx-auto text-justify my-4">
+        @include('biodata.alert-biodata')
         <p class="p-main-title mb-0 py-1 px-3">BIODATA PENDAFTAR</p>
         <div class="p-main py-1 px-3">
             <form action="{{ route('biodata.storeOrUpdate') }}" method="post" enctype="multipart/form-data">
@@ -13,7 +14,9 @@
                     @include('biodata.data-diri')
                     @include('biodata.jurusan')
                     <div class="mr-4 text-right">
-                        <button class="btn btn-save px-5">Simpan</button>
+                        <button class="btn btn-save px-5" {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                            Simpan
+                        </button>
                     </div>
                 </div>
             </form>

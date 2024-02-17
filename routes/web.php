@@ -42,9 +42,11 @@ use App\Models\Category;
 //     return view('auth/login');
 // });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [BiodataController::class, 'index_dash'])->name('welcome');
 
 Route::get('/login', function () {
     if (auth()->check()) {

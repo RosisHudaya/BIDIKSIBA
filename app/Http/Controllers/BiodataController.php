@@ -34,6 +34,15 @@ class BiodataController extends Controller
         ]);
     }
 
+    public function index_dash()
+    {
+        $id = Auth::id();
+        $biodatas = Biodata::where('id_user', $id)->first();
+        return view('welcome')->with([
+            'biodatas' => $biodatas,
+        ]);
+    }
+
     public function loadFilterJurusan(Request $request)
     {
         $jurusans = DB::table('jurusans as j')

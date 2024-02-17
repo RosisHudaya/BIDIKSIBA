@@ -97,19 +97,28 @@
                     id="rej-<?= $biodata->id ?>" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <label class="font-weight-bold ml-2">CATATAN</label>
-                    <textarea class="form-control" name="catatan" id="catatan" style="height: 150px;">{{ $biodata->catatan }}</textarea>
-                    <p class="m-0 p-0 text-c">* Tambahkan pesan kesalahan biodata
-                        pendaftar(opsional)
+                    <label class="font-weight-bold ml-2 my-0">CATATAN</label>
+                    <p class="m-0 p-0 text-c">
+                        * Tambahkan pesan kesalahan biodata pendaftar(opsional)
                     </p>
-                    <button type="submit" class="btn btn-sm btn-primary"
-                        data-confirm="Verifikasi Biodata | Apakah data biodata belum bisa diverifikasi dan kirim pesan kesalahan ?"
-                        data-confirm-yes="sumbitRej(<?= $biodata->id ?>)" data-id="rej-{{ $biodata->id }}">
-                        <i class="fas fa-paper-plane"></i>
-                        Kirim
-                    </button>
+                    <textarea class="form-control summernote" name="catatan" id="catatan" style="height: 150px;">{{ $biodata->catatan }}</textarea>
+                    <div class="text-right m-0 p-0">
+                        <button type="submit" class="btn btn-sm btn-primary"
+                            data-confirm="Verifikasi Biodata | Apakah data biodata belum bisa diverifikasi dan kirim pesan kesalahan ?"
+                            data-confirm-yes="sumbitRej(<?= $biodata->id ?>)" data-id="rej-{{ $biodata->id }}">
+                            <i class="fas fa-paper-plane"></i>
+                            Kirim
+                        </button>
+                    </div>
                 </form>
             </div>
         </td>
     </tr>
 </tbody>
+@push('customStyle')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+@endpush
+
+@push('customScript')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+@endpush
