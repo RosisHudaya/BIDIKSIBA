@@ -155,6 +155,16 @@
                     confirmButton: 'btn btn-alert',
                 },
             });
+        @elseif ($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Menyimpan Data',
+                text: 'Ada kesalahan dalam pengisian form silahkan cek kembali !',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'btn btn-wrong',
+                },
+            });
         @endif
     </script>
 @endsection
