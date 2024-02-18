@@ -102,7 +102,7 @@
                         * Tambahkan pesan kesalahan biodata pendaftar(opsional)
                     </p>
                     <textarea class="form-control summernote" name="catatan" id="catatan" style="height: 150px;">{{ $biodata->catatan }}</textarea>
-                    <div class="text-right m-0 p-0">
+                    <div class="text-right mb-2 mt-0 p-0">
                         <button type="submit" class="btn btn-sm btn-primary"
                             data-confirm="Verifikasi Biodata | Apakah data biodata belum bisa diverifikasi dan kirim pesan kesalahan ?"
                             data-confirm-yes="sumbitRej(<?= $biodata->id ?>)" data-id="rej-{{ $biodata->id }}">

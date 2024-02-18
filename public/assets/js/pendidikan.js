@@ -35,7 +35,7 @@ $(document).ready(function () {
 });
 
 if (selectAsalJurusanId != null) {
-    if ($("#asal_jurusan_id").val() != null) {
+    if ($("#asal_jurusan_id").val() != null && status == true) {
         $("#asal_jurusan_id").removeAttr("disabled", true);
     }
     var idAsalJurusanSelected = $("#asal_jurusan_id").val();
@@ -102,7 +102,7 @@ $(document).ready(function () {
 });
 
 if (selectJurusanId != null) {
-    if ($("#jurusan_id").val() != null) {
+    if ($("#jurusan_id").val() != null && status == true) {
         $("#jurusan_id").removeAttr("disabled", true);
     }
     var idJurusanSelected = selectJurusan;
