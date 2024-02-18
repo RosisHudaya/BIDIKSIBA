@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('jawaban_b');
             $table->string('jawaban_c');
             $table->string('jawaban_d');
-            $table->string('jawaban_benar');
+            $table->enum('jawaban_benar', ['A', 'B', 'C', 'D']);
             $table->foreign('id_ujian')->references('id')->on('ujians')->restrictOnDelete;
             $table->timestamps();
         });

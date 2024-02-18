@@ -25,11 +25,10 @@
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
-                            <textarea class="form-control" name="deskripsi" id="deskripsi" style="height: 150px;"
-                                placeholder="Masukkan deskripsi ujian..."></textarea>
-                            <p class="text-c">* Tambahkan deskripsi ujian(opsional)</p>
+                            <p class="text-c m-0 p-0">* Tambahkan deskripsi ujian(opsional)</p>
+                            <textarea class="form-control summernote" name="deskripsi" id="deskripsi"></textarea>
                         </div>
-                        <div class="card-footer text-right">
+                        <div class="card-footer text-right m-0 p-0">
                             <button class="btn btn-primary">Submit</button>
                             <a class="btn btn-secondary" href="{{ route('ujian.index') }}">Cancel</a>
                         </div>
@@ -41,9 +40,11 @@
 
 @push('customStyle')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 @endpush
 
 @push('customScript')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {

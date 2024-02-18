@@ -65,9 +65,14 @@
                         </div>
                         <div class="form-group">
                             <label for="jawaban_benar">Jawaban Benar</label>
-                            <input type="text" class="form-control @error('jawaban_benar') is-invalid @enderror"
-                                id="jawaban_benar" name="jawaban_benar"
-                                placeholder="Masukkan jawaban pilihan yang benar...">
+                            <select name="jawaban_benar" id="jawaban_benar"
+                                class="form-control select2 @error('id_jurusan') is-invalid @enderror">
+                                <option value="">-- Pilih jawaban benar --</option>
+                                <option value="A" {{ old('jawaban_benar') === 'A' ? 'selected' : '' }}>A</option>
+                                <option value="B" {{ old('jawaban_benar') === 'B' ? 'selected' : '' }}>B</option>
+                                <option value="C" {{ old('jawaban_benar') === 'C' ? 'selected' : '' }}>C</option>
+                                <option value="D" {{ old('jawaban_benar') === 'D' ? 'selected' : '' }}>D</option>
+                            </select>
                             @error('jawaban_benar')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -78,10 +83,18 @@
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary">Submit</button>
-                            <a class="btn btn-secondary" href="{{ route('soalUjian', ['ujian' => $ujian->id]) }}">Cancel</a>
+                            <a class="btn btn-secondary"
+                                href="{{ route('soalUjian', ['ujian' => $ujian->id]) }}">Cancel</a>
                         </div>
                     </form>
                 </div>
             </div>
     </section>
 @endsection
+@push('customScript')
+    <script src="/assets/js/select2.min.js"></script>
+@endpush
+
+@push('customStyle')
+    <link rel="stylesheet" href="/assets/css/select2.min.css">
+@endpush

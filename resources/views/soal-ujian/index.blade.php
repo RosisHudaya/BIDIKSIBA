@@ -18,7 +18,7 @@
                     </tr>
                     <tr>
                         <th style="width: 300px;">DESKRIPSI</th>
-                        <td>{{ $ujian->deskripsi ?? '--' }}</td>
+                        <td>{!! $ujian->deskripsi ?? '--' !!}</td>
                     </tr>
                 </tbody>
             </table>
@@ -109,7 +109,7 @@
                                                 <td>
                                                     <strong>{{ $soal_ujian->soal }}</strong>
                                                     <hr>
-                                                    @if ($soal_ujian->jawaban_a == $soal_ujian->jawaban_benar)
+                                                    @if ($soal_ujian->jawaban_benar == 'A')
                                                         <span class="font-weight-bold" style="color: #3eac57;">A.
                                                             {{ $soal_ujian->jawaban_a }}
                                                         </span>
@@ -117,7 +117,7 @@
                                                         A. {{ $soal_ujian->jawaban_a }}
                                                     @endif
                                                     <br>
-                                                    @if ($soal_ujian->jawaban_b == $soal_ujian->jawaban_benar)
+                                                    @if ($soal_ujian->jawaban_benar == 'B')
                                                         <span class="font-weight-bold" style="color: #3eac57;">B.
                                                             {{ $soal_ujian->jawaban_b }}
                                                         </span>
@@ -125,7 +125,7 @@
                                                         B. {{ $soal_ujian->jawaban_b }}
                                                     @endif
                                                     <br>
-                                                    @if ($soal_ujian->jawaban_c == $soal_ujian->jawaban_benar)
+                                                    @if ($soal_ujian->jawaban_benar == 'C')
                                                         <span class="font-weight-bold" style="color: #3eac57;">C.
                                                             {{ $soal_ujian->jawaban_c }}
                                                         </span>
@@ -133,7 +133,7 @@
                                                         C. {{ $soal_ujian->jawaban_c }}
                                                     @endif
                                                     <br>
-                                                    @if ($soal_ujian->jawaban_d == $soal_ujian->jawaban_benar)
+                                                    @if ($soal_ujian->jawaban_benar == 'D')
                                                         <span class="font-weight-bold" style="color: #3eac57;">D.
                                                             {{ $soal_ujian->jawaban_d }}
                                                         </span>

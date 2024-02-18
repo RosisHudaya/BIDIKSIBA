@@ -36,7 +36,7 @@
                                             <th class="text-center" style="width: 50px;">#</th>
                                             <th style="width: 250px;">Nama Ujian</th>
                                             <th class="text-center" style="width: 150px;">Jumlah Soal</th>
-                                            <th style="width: 450px;">Deskripsi</th>
+                                            <th class="text-center" style="width: 450px;">Deskripsi</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                         @foreach ($ujians as $key => $ujian)
@@ -46,7 +46,7 @@
                                                 </td>
                                                 <td>{{ $ujian->nama_ujian }}</td>
                                                 <td class="text-center">{{ $ujian->jumlah_soal }}</td>
-                                                <td class="text-justify">{{ $ujian->deskripsi ?? '--' }}</td>
+                                                <td class="text-justify">{!! $ujian->deskripsi ?? '--' !!}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
                                                         <a href="{{ route('soalUjian', $ujian->id) }}"

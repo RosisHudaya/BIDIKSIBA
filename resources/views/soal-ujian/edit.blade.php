@@ -65,8 +65,14 @@
                         </div>
                         <div class="form-group">
                             <label for="jawaban_benar">Jawaban Benar</label>
-                            <input type="text" class="form-control @error('jawaban_benar') is-invalid @enderror"
-                                id="jawaban_benar" name="jawaban_benar" value="{{ $soalUjian->jawaban_benar }}">
+                            <select name="jawaban_benar" id="jawaban_benar"
+                                class="form-control select2 @error('id_jurusan') is-invalid @enderror">
+                                <option value="">-- Pilih jawaban benar --</option>
+                                <option value="A" {{ $soalUjian->jawaban_benar === 'A' ? 'selected' : '' }}>A</option>
+                                <option value="B" {{ $soalUjian->jawaban_benar === 'B' ? 'selected' : '' }}>B</option>
+                                <option value="C" {{ $soalUjian->jawaban_benar === 'C' ? 'selected' : '' }}>C</option>
+                                <option value="D" {{ $soalUjian->jawaban_benar === 'D' ? 'selected' : '' }}>D</option>
+                            </select>
                             @error('jawaban_benar')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -83,3 +89,10 @@
         </div>
     </section>
 @endsection
+@push('customScript')
+    <script src="/assets/js/select2.min.js"></script>
+@endpush
+
+@push('customStyle')
+    <link rel="stylesheet" href="/assets/css/select2.min.css">
+@endpush
