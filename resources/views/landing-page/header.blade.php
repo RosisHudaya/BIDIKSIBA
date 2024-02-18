@@ -43,7 +43,7 @@
                         <a href="{{ route('token-ujian.index') }}" class="a-nav">Lihat TOKEN</a>
                     </li>
                     <li class="nav-item mr-5">
-                        <a href="" class="a-nav">LOGIN Ujian</a>
+                        <a href="{{ route('login.ujian') }}" class="a-nav">LOGIN Ujian</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('logout') }}"
