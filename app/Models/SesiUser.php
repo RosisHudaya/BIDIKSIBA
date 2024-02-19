@@ -12,6 +12,7 @@ class SesiUser extends Model
     protected $fillable = [
         'id_sesi',
         'id_user',
+        'status',
     ];
 
     public function sesi_ujian()

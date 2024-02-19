@@ -16,20 +16,14 @@
                         <p id="p-error" class="text-c m-0 p-0">{{ session('error') }}</p>
                     @endif
                     <div class="d-flex form-group my-2">
-                        <i class="fas fa-user mr-3 my-auto f-icon"></i>
-                        <input type="text" name="token" value="{{ old('token') }}"
-                            class="form-control @error('token') is-invalid @enderror" placeholder="Token...">
-                        @error('token')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <i class="fas fa-user my-auto f-icon"></i>
+                        <input type="text" name="token" value="{{ old('token') }}" class="form-control form-login"
+                            placeholder="Token...">
                     </div>
                     <div class="d-flex form-group my-2">
-                        <i class="fas fa-key mr-3 my-auto f-icon"></i>
-                        <input type="password" name="password" value="{{ old('password') }}"
-                            class="form-control @error('password') is-invalid @enderror" placeholder="Password...">
-                        @error('password')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <i class="fas fa-key my-auto f-icon"></i>
+                        <input type="password" name="password" value="{{ old('password') }}" class="form-control form-login"
+                            placeholder="Password...">
                     </div>
                     <div class="form-group my-2 text-right">
                         <button type="submit" class="btn btn-save px-4">

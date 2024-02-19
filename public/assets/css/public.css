@@ -7,6 +7,11 @@
     border-radius: 15px 15px 0 0;
 }
 
+.p-t {
+    font-size: 16px;
+    font-weight: 800;
+}
+
 .p-main {
     background-color: white;
     border-radius: 0 0 15px 15px;
@@ -22,8 +27,21 @@ label {
 }
 
 .f-icon {
-    font-size: 20px;
     color: #004181;
+    border: 1px solid;
+    border-color: #e4e6fc;
+    background-color: #fdfdff;
+    border-radius: 15px 0 0 15px;
+    background-color: #fdfdff;
+    padding: 12px 10px;
+}
+
+.form-login {
+    border-radius: 0 20px 20px 0 !important;
+}
+
+.form-login:focus {
+    border-color: #e4e6fc !important;
 }
 
 .form-control {
@@ -127,4 +145,11 @@ select {
 .text-c {
     color: red;
     font-size: 11px;
+}
+
+.table.table-md th,
+.table.table-md td {
+    color: #666;
+    padding: 7px 15px;
+    font-size: 14px;
 }

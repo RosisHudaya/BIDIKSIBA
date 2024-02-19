@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('id_sesi');
             $table->unsignedBigInteger('id_user');
+            $table->enum('status', ['sudah', 'belum']);
             $table->foreign('id_sesi')->references('id')->on('sesi_ujians')->onDelete('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

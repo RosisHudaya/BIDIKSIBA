@@ -38,6 +38,7 @@ class SesiUserController extends Controller
             SesiUser::create([
                 'id_sesi' => $sesiUjian->id,
                 'id_user' => $id_user,
+                'status' => 'belum',
             ]);
         }
 

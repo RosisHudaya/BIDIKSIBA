@@ -252,3 +252,8 @@ main {
     background-color: #eb9481;
     border-color: #eb9481;
 }
+
+.p-sub-main {
+    background-color: #fba605;
+    padding: 2px;
+}
