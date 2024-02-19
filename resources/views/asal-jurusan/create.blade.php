@@ -16,7 +16,8 @@
                         <div class="form-group">
                             <label for="asal_jurusan">Jurusan SMA/SMK</label>
                             <input type="text" class="form-control @error('asal_jurusan') is-invalid @enderror"
-                                id="asal_jurusan" name="asal_jurusan" placeholder="Masukkan nama jurusan sma/smk...">
+                                id="asal_jurusan" name="asal_jurusan" placeholder="Masukkan nama jurusan sma/smk..."
+                                value="{{ old('asal_jurusan') }}">
                             @error('asal_jurusan')
                                 <div class="invalid-feedback">
                                     {{ $message }}

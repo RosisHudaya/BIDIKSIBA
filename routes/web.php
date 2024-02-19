@@ -147,6 +147,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('login-ujian', [LoginUjianController::class, 'login_ujian'])->name('login.ujian.post');
     Route::middleware(['loggedin.ujian'])->group(function () {
         Route::get('list-ujian', [LoginUjianController::class, 'list_ujian'])->name('list.ujian');
+        Route::get('detail-ujian/{sesiUser}', [LoginUjianController::class, 'show_ujian'])->name('detail.ujian');
     });
     Route::post('logout-ujian', [LoginUjianController::class, 'logout_ujian'])->name('logout.ujian');
 });

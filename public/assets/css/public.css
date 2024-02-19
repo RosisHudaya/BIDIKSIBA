@@ -79,15 +79,45 @@ select {
     box-shadow: none;
 }
 
+.btn-success:hover {
+    box-shadow: none !important;
+}
+
+.btn-secondary,
+.btn-secondary:active {
+    background-color: #cdd3d8;
+    border-color: #cdd3d8;
+    box-shadow: none !important;
+}
+
+.btn-secondary:hover {
+    background-color: #c2c6ca;
+    box-shadow: none !important;
+    border-color: #c2c6ca;
+}
+
+.btn-secondary:disabled {
+    background-color: #cdd3d8;
+    border-color: #cdd3d8;
+    box-shadow: none !important;
+}
+
 .btn-save {
     color: white;
     background-color: #004181 !important;
     border-radius: 15px;
+    box-shadow: none !important;
 }
 
 .btn-save:active {
     color: white;
+    box-shadow: none !important;
     background-color: #004181;
+}
+
+.btn-save:hover {
+    color: white;
+    background-color: #1469bd !important;
 }
 
 .btn-alert {
@@ -112,11 +142,6 @@ select {
     color: white;
     background-color: #eb2a2a !important;
     box-shadow: none !important;
-}
-
-.btn-save:hover {
-    color: white;
-    background-color: #0252a1;
 }
 
 .card {
@@ -152,4 +177,7 @@ select {
     color: #666;
     padding: 7px 15px;
     font-size: 14px;
+}
+.p-d {
+    font-size: 15px;
 }

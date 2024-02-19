@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="jurusan">Jurusan</label>
                             <input type="text" class="form-control @error('jurusan') is-invalid @enderror" id="jurusan"
-                                name="jurusan" placeholder="Masukkan nama jurusan...">
+                                name="jurusan" placeholder="Masukkan nama jurusan..." value="{{ old('jurusan') }}">
                             @error('jurusan')
                                 <div class="invalid-feedback">
                                     {{ $message }}

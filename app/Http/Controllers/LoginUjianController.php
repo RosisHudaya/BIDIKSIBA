@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AkunUjian;
+use App\Models\SesiUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -44,9 +45,48 @@ class LoginUjianController extends Controller
                 'sesi.waktu_mulai',
                 'sesi.waktu_akhir',
                 'user.status',
+                'user.id',
             )
             ->where('user.id_user', $id)
             ->paginate(10);
         return view('ujian-user.list-ujian', compact('list_ujians'));
+    }
+
+    public function show_ujian(SesiUser $sesiUser)
+    {
+        $id = Auth::id();
+        $detail_ujians = DB::table('sesi_users as pivot')
+            ->leftJoin('users as user', 'pivot.id_user', '=', 'user.id')
+            ->leftJoin('biodatas as biodata', 'user.id', '=', 'biodata.id_user')
+            ->leftJoin('sesi_ujians as sesi', 'pivot.id_sesi', '=', 'sesi.id')
+            ->leftJoin('ujians as ujian', 'sesi.id_ujian', '=', 'ujian.id')
+            ->leftJoin('soal_ujians as soal', 'ujian.id', '=', 'soal.id_ujian')
+            ->select(
+                'ujian.nama_ujian',
+                'biodata.nama',
+                'sesi.nama_sesi',
+                'sesi.waktu_mulai',
+                'sesi.waktu_akhir',
+                DB::raw('COUNT(*) as jumlah_soal'),
+                DB::raw("TIMESTAMPDIFF(MINUTE, sesi.waktu_mulai, sesi.waktu_akhir) as durasi_menit"),
+            )
+            ->where('pivot.id_user', $id)
+            ->groupBy(
+                'ujian.nama_ujian',
+                'biodata.nama',
+                'sesi.nama_sesi',
+                'sesi.waktu_mulai',
+                'sesi.waktu_akhir',
+            )
+            ->first();
+        $jumlah_soal_ujian = $detail_ujians->jumlah_soal;
+        $durasi_menit = $detail_ujians->durasi_menit;
+
+        return view('ujian-user.detail-ujian')->with([
+            'detail_ujians' => $detail_ujians,
+            'jumlah_soal_ujian' => $jumlah_soal_ujian,
+            'durasi_menit' => $durasi_menit,
+            'sesiUser' => $sesiUser,
+        ]);
     }
 }

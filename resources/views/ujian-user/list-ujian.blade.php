@@ -46,16 +46,24 @@
                                     Selesai :
                                     {{ \Carbon\Carbon::parse($list_ujian->waktu_akhir)->format('d F Y H:i:s') }}
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center align-middle">
                                     @if ($list_ujian->status == 'sudah')
-                                        <button class="btn btn-success" disabled>Sudah</button>
+                                        <button class="btn btn-sm btn-secondary px-3 font-weight-bold" disabled>
+                                            Selesai
+                                        </button>
                                     @elseif ($list_ujian->status == 'belum')
                                         @if ($waktu_now >= $list_ujian->waktu_mulai && $waktu_now <= $list_ujian->waktu_akhir)
-                                            <button class="btn btn-info">Mulai</button>
+                                            <a href="{{ route('detail.ujian', $list_ujian->id) }}"
+                                                class="btn btn-sm btn-success px-3 font-weight-bold">Mulai
+                                            </a>
                                         @elseif ($waktu_now < $list_ujian->waktu_mulai)
-                                            <button class="btn btn-info" disabled>Mulai</button>
+                                            <button class="btn btn-sm btn-info px-3 font-weight-bold" disabled>
+                                                Mulai
+                                            </button>
                                         @else
-                                            <button class="btn btn-danger" disabled>Tutup</button>
+                                            <button class="btn btn-sm btn-danger px-3 font-weight-bold" disabled>
+                                                Tutup
+                                            </button>
                                         @endif
                                     @endif
                                 </td>
