@@ -12,6 +12,11 @@
     font-weight: 800;
 }
 
+.p-ujian {
+    background-color: white;
+    border-radius: 15px;
+}
+
 .p-main {
     background-color: white;
     border-radius: 0 0 15px 15px;
@@ -179,5 +184,25 @@ select {
     font-size: 14px;
 }
 .p-d {
-    font-size: 15px;
+    font-size: 15px !important;
+}
+
+.p-choice {
+    font-size: 14px;
+}
+
+.btn-choice {
+    border: 1px solid;
+    border-color: #004181;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #004181;
+}
+
+.btn-choice:active,
+.btn-choice:focus {
+    color: white !important;
+    background-color: #004181 !important;
+    box-shadow: none !important;
 }
