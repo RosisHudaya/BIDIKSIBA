@@ -204,5 +204,19 @@ select {
 .btn-choice:focus {
     color: white !important;
     background-color: #004181 !important;
+    border-color: #004181 !important;
+    box-shadow: none !important;
+}
+
+.active {
+    color: white !important;
+    background-color: #004181 !important;
+    box-shadow: none !important;
+}
+
+.active-number {
+    color: white !important;
+    background-color: #3eac57 !important;
+    border-color: #2ca548 !important;
     box-shadow: none !important;
 }

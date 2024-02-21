@@ -121,8 +121,14 @@ class LoginUjianController extends Controller
             ->where('pivot.id_sesi', $sesiUjian->id)
             ->get();
 
+        $jawabans = DB::table('jawabans')
+            ->where('id_user', $id)
+            ->whereIn('id_soal', $soals->pluck('id'))
+            ->pluck('jawaban', 'id_soal');
+
         return view('ujian-user.soal')->with([
             'soals' => $soals,
+            'jawabans' => $jawabans,
         ]);
     }
 

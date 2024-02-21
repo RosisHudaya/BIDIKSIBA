@@ -14,7 +14,9 @@
                         @php
                             $number = str_pad($key + 1, 2, '0', STR_PAD_LEFT);
                         @endphp
-                        <button class="btn btn-choice mx-2 px-3 soal" data-id="{{ $soal->id }}">
+                        <button
+                            class="btn btn-choice mx-2 px-3 soal {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] ? 'active-number' : '' }}"
+                            data-id="{{ $soal->id }}">
                             {{ $number }}
                         </button>
                         @if (($key + 1) % 5 == 0)
@@ -35,25 +37,33 @@
                             <hr class="mt-3 mb-2 p-0">
                             <p class="mt-0 p-0">{{ $soal->soal }}</p>
                             <div class="d-flex my-2">
-                                <button type="submit" class="btn btn-choice mr-3 ml-4" value="A" name="jawab">
+                                <button type="submit"
+                                    class="btn btn-choice mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'A' ? 'active' : '' }}"
+                                    value="A" name="jawab">
                                     A
                                 </button>
                                 <p class="my-2 p-choice">{{ $soal->jawaban_a }}</p>
                             </div>
                             <div class="d-flex my-2">
-                                <button type="submit" class="btn btn-choice mr-3 ml-4" value="B" name="jawab">
+                                <button type="submit"
+                                    class="btn btn-choice mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'B' ? 'active' : '' }}"
+                                    value="B" name="jawab">
                                     B
                                 </button>
                                 <p class="my-2 p-choice">{{ $soal->jawaban_b }}</p>
                             </div>
                             <div class="d-flex my-2">
-                                <button type="submit" class="btn btn-choice mr-3 ml-4" value="C" name="jawab">
+                                <button type="submit"
+                                    class="btn btn-choice mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'C' ? 'active' : '' }}"
+                                    value="C" name="jawab">
                                     C
                                 </button>
                                 <p class="my-2 p-choice">{{ $soal->jawaban_c }}</p>
                             </div>
                             <div class="d-flex my-2">
-                                <button type="submit" class="btn btn-choice mr-3 ml-4" value="D" name="jawab">
+                                <button type="submit"
+                                    class="btn btn-choice mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'D' ? 'active' : '' }}"
+                                    value="D" name="jawab">
                                     D
                                 </button>
                                 <p class="my-2 p-choice">{{ $soal->jawaban_d }}</p>
