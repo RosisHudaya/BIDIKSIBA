@@ -59,8 +59,8 @@
                     <p class="m-1 p-d">: {{ $durasi_menit }} menit</p>
                 </div>
                 <hr class="mt-1 p-0">
-                <div class="text-right">
-                    <a href="{{ route('list.ujian') }}" class="px-4 btn btn-sm btn-secondary font-weight-bold">Back</a>
+                <div class="d-flex justify-content-end text-right">
+                    <a href="{{ route('list.ujian') }}" class="px-4 mr-1 btn btn-sm btn-secondary font-weight-bold">Back</a>
                     <a href="{{ route('ujian', $detail_ujians->id) }}"
                         class="px-4 btn btn-sm btn-success font-weight-bold">
                         Mulai

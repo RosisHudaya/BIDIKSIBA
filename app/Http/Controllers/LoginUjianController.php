@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\AkunUjian;
+use App\Models\Jawaban;
 use App\Models\SesiUjian;
 use App\Models\SesiUser;
+use App\Models\SoalUjian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -106,6 +108,7 @@ class LoginUjianController extends Controller
             ->leftJoin('ujians as ujian', 'sesi.id_ujian', '=', 'ujian.id')
             ->leftJoin('soal_ujians as soal', 'ujian.id', '=', 'soal.id_ujian')
             ->select(
+                'pivot.id_sesi',
                 'soal.id',
                 'soal.soal',
                 'soal.jawaban_a',
@@ -116,11 +119,40 @@ class LoginUjianController extends Controller
             )
             ->where('pivot.id_user', $id)
             ->where('pivot.id_sesi', $sesiUjian->id)
-            ->inRandomOrder()
             ->get();
 
         return view('ujian-user.soal')->with([
             'soals' => $soals,
         ]);
     }
+
+    public function jawab(Request $request, SoalUjian $soalUjian, SesiUjian $sesiUjian)
+    {
+        $id = Auth::id();
+        $jawaban = Jawaban::where('id_user', $id)
+            ->where('id_soal', $soalUjian->id)
+            ->first();
+
+        $soal = SoalUjian::where('id', $soalUjian->id)->first();
+        $jawabanBenar = $soal->jawaban_benar;
+
+        if ($jawaban == null) {
+            $skor = ($request->jawab == $jawabanBenar) ? 4 : -2;
+            $jawabans = Jawaban::create([
+                'id_user' => $id,
+                'id_soal' => $soalUjian->id,
+                'jawaban' => $request->jawab,
+                'skor' => $skor,
+            ]);
+        } else {
+            $skor = ($request->jawab == $jawabanBenar) ? 4 : -2;
+            $jawaban->update([
+                'jawaban' => $request->jawab,
+                'skor' => $skor,
+            ]);
+        }
+
+        return redirect()->route('ujian', ['sesiUjian' => $sesiUjian->id]);
+    }
+
 }
