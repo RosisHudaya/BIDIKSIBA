@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_sesi');
             $table->unsignedBigInteger('id_soal');
-            $table->string('jawaban');
-            $table->integer('skor');
+            $table->string('jawaban')->nullable();
+            $table->integer('skor')->nullable();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_sesi')->references('id')->on('sesi_ujians')->onDelete('cascade');
             $table->foreign('id_soal')->references('id')->on('soal_ujians')->onDelete('cascade');

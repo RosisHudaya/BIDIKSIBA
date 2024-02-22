@@ -68,6 +68,14 @@
                                 </button>
                                 <p class="my-2 p-choice">{{ $soal->jawaban_d }}</p>
                             </div>
+                            <div class="text-right m-0 p-0">
+                                <form action="{{ route('reset.jawaban', [$soal->id, $soal->id_sesi]) }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-sm btn-warning text-white font-weight-bold px-3">Reset
+                                        Jawaban
+                                    </button>
+                                </form>
+                            </div>
                             <hr class="mt-3 p-0">
                         </div>
                     </form>

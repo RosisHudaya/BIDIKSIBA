@@ -144,7 +144,7 @@ class LoginUjianController extends Controller
         $jawabanBenar = $soal->jawaban_benar;
 
         if ($jawaban == null) {
-            $skor = ($request->jawab == $jawabanBenar) ? 4 : -2;
+            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -2);
             $jawabans = Jawaban::create([
                 'id_user' => $id,
                 'id_sesi' => $sesiUjian->id,
@@ -153,7 +153,7 @@ class LoginUjianController extends Controller
                 'skor' => $skor,
             ]);
         } else {
-            $skor = ($request->jawab == $jawabanBenar) ? 4 : -2;
+            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -2);
             $jawaban->update([
                 'jawaban' => $request->jawab,
                 'skor' => $skor,
@@ -181,4 +181,32 @@ class LoginUjianController extends Controller
         return redirect()->route('ujian', ['sesiUjian' => $sesiUjian->id]);
     }
 
+    public function reset_jawaban(SoalUjian $soalUjian, SesiUjian $sesiUjian)
+    {
+        $id = Auth::id();
+        $jawaban = Jawaban::where('id_user', $id)
+            ->where('id_soal', $soalUjian->id)
+            ->first();
+
+        if ($jawaban != null) {
+            $jawaban->update([
+                'jawaban' => '',
+                'skor' => 0,
+            ]);
+        }
+
+        $nilai = Jawaban::where('id_user', $id)
+            ->where('id_sesi', $sesiUjian->id)
+            ->sum('skor');
+        $nilaiUjian = NilaiUjian::where('id_user', $id)
+            ->where('id_sesi', $sesiUjian->id)
+            ->first();
+        if ($nilaiUjian != null) {
+            $nilaiUjian->update([
+                'nilai' => $nilai,
+            ]);
+        }
+
+        return redirect()->route('ujian', ['sesiUjian' => $sesiUjian->id]);
+    }
 }
