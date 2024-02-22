@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AkunUjian;
 use App\Models\Jawaban;
+use App\Models\NilaiUjian;
 use App\Models\SesiUjian;
 use App\Models\SesiUser;
 use App\Models\SoalUjian;
@@ -146,6 +147,7 @@ class LoginUjianController extends Controller
             $skor = ($request->jawab == $jawabanBenar) ? 4 : -2;
             $jawabans = Jawaban::create([
                 'id_user' => $id,
+                'id_sesi' => $sesiUjian->id,
                 'id_soal' => $soalUjian->id,
                 'jawaban' => $request->jawab,
                 'skor' => $skor,
@@ -155,6 +157,24 @@ class LoginUjianController extends Controller
             $jawaban->update([
                 'jawaban' => $request->jawab,
                 'skor' => $skor,
+            ]);
+        }
+
+        $nilai = Jawaban::where('id_user', $id)
+            ->where('id_sesi', $sesiUjian->id)
+            ->sum('skor');
+        $nilaiUjian = NilaiUjian::where('id_user', $id)
+            ->where('id_sesi', $sesiUjian->id)
+            ->first();
+        if ($nilaiUjian == null) {
+            NilaiUjian::create([
+                'id_user' => $id,
+                'id_sesi' => $sesiUjian->id,
+                'nilai' => $nilai,
+            ]);
+        } else {
+            $nilaiUjian->update([
+                'nilai' => $nilai,
             ]);
         }
 
