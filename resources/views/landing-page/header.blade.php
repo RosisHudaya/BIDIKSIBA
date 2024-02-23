@@ -15,7 +15,7 @@
             <div class="d-flex justify-content-start">
                 <img class="img-fluid img-h my-2 mr-3" src="{{ asset('assets/img/logo.png') }}">
                 <div>
-                    <span class="s-b">BIDIKSIBA </span><span class="s-p">POLIJE</span>
+                    <span class="s-b">BIDIKSIBA </span><span class="s-p">POLINEMA</span>
                     <p class="p-header">Beasiswa Pendidikan Sekitar Bukit Asam Politeknik Negeri Malang
                     </p>
                 </div>
