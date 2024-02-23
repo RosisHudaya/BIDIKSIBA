@@ -17,6 +17,23 @@
     border-radius: 15px;
 }
 
+.p-ujian-n {
+    background-color: white;
+    border-radius: 15px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.p-ujian-b {
+    position: sticky;
+    bottom: 0;
+}
+
+.soal-n {
+    max-height: 70%;
+    overflow-y: auto;
+}
+
 .p-main {
     background-color: white;
     border-radius: 0 0 15px 15px;
@@ -139,13 +156,19 @@ select {
 
 .btn-wrong {
     color: white;
-    background-color: #eb2a2a !important;
+    background-color: #dc3545 !important;
     box-shadow: none !important;
 }
 
 .btn-wrong:active {
     color: white;
-    background-color: #eb2a2a !important;
+    background-color: #dc3545 !important;
+    box-shadow: none !important;
+}
+
+.btn-wrong:hover {
+    color: white;
+    background-color: #d12839 !important;
     box-shadow: none !important;
 }
 

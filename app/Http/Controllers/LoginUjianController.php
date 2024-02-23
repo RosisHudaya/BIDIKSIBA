@@ -223,4 +223,18 @@ class LoginUjianController extends Controller
 
         return redirect()->route('ujian', ['sesiUjian' => $sesiUjian->id]);
     }
+
+    public function selesai(SesiUjian $sesiUjian)
+    {
+        $id = Auth::id();
+        $status = SesiUser::where('id_user', $id)
+            ->where('id_sesi', $sesiUjian->id)
+            ->first();
+
+        $status->update([
+            'status' => 'sudah',
+        ]);
+
+        return redirect()->route('list.ujian');
+    }
 }

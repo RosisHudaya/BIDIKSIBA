@@ -6,7 +6,7 @@
 @section('main')
     <div class="col-md-11 d-flex mx-auto my-4">
         <div class="col-md-4">
-            <div class="p-ujian px-3 py-4">
+            <div class="p-ujian-n px-3 py-4">
                 <div class="d-flex">
                     <div class="col-md-6 m-0 p-0">
                         <p class="m-0 p-0 font-weight-bold">NOMER</p>
@@ -16,21 +16,33 @@
                     </div>
                 </div>
                 <hr class="mt-3 mb-2 p-0">
-                <div class="d-flex justify-content-start">
-                    @foreach ($soals as $key => $soal)
-                        @php
-                            $number = str_pad($key + 1, 2, '0', STR_PAD_LEFT);
-                        @endphp
-                        <button
-                            class="btn btn-choice mx-2 px-3 soal {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] ? 'active-number' : '' }}"
-                            data-id="{{ $soal->id }}">
-                            {{ $number }}
-                        </button>
-                        @if (($key + 1) % 5 == 0)
+                <div class="soal-n">
+                    <div class="d-flex justify-content-start">
+                        @foreach ($soals as $key => $soal)
+                            @php
+                                $number = str_pad($key + 1, 2, '0', STR_PAD_LEFT);
+                            @endphp
+                            <button
+                                class="btn btn-choice mx-2 px-3 soal {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] ? 'active-number' : '' }}"
+                                data-id="{{ $soal->id }}">
+                                {{ $number }}
+                            </button>
+                            @if (($key + 1) % 5 == 0)
+                    </div>
+                    <div class="d-flex justify-content-start mt-2">
+                        @endif
+                        @endforeach
+                    </div>
                 </div>
-                <div class="d-flex justify-content-start mt-2">
-                    @endif
-                    @endforeach
+                <div class="p-ujian-b">
+                    <hr class="mt-3 mb-2 p-0">
+                    <form id="selesaiForm" action="{{ route('selesai.ujian', $soal->id_sesi) }}" method="POST">
+                        @csrf
+                        <button type="button" class="btn btn-sm btn-wrong btn-block font-weight-bold"
+                            onclick="confirmSelesai()">
+                            Selesai
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -78,8 +90,8 @@
                             <div class="text-right m-0 p-0">
                                 <form action="{{ route('reset.jawaban', [$soal->id, $soal->id_sesi]) }}" method="post">
                                     @csrf
-                                    <button class="btn btn-sm btn-warning text-white font-weight-bold px-3">Reset
-                                        Jawaban
+                                    <button class="btn btn-sm btn-warning text-white font-weight-bold px-3">
+                                        Reset Jawaban
                                     </button>
                                 </form>
                             </div>
@@ -90,6 +102,48 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function confirmSelesai() {
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menyelesaikan ujian?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Selesai!',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    confirmButton: 'btn btn-alert',
+                    cancelButton: 'btn btn-wrong'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('selesaiForm').submit();
+                }
+            });
+        }
+    </script>
+    <script>
+        function showTimeUpAlert() {
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Waktu ujian telah habis, klik OK untuk keluar dari ujian?',
+                icon: 'warning',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'btn btn-alert',
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('selesaiForm').submit();
+                }
+            });
+        }
+    </script>
 @endsection
 @push('customScript')
     <script>
@@ -163,6 +217,8 @@
                 clearInterval(countdownInterval);
                 countdownElement.textContent = '00:00:00';
                 removeCountdown();
+
+                showTimeUpAlert();
             }
         }
 

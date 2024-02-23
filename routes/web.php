@@ -151,6 +151,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('ujian/{sesiUjian}', [LoginUjianController::class, 'soal'])->name('ujian');
         Route::post('ujian/jawab/{soalUjian}/{sesiUjian}', [LoginUjianController::class, 'jawab'])->name('ujian.soal');
         Route::post('ujian/reset/{soalUjian}/{sesiUjian}', [LoginUjianController::class, 'reset_jawaban'])->name('reset.jawaban');
+        Route::post('ujian/selesai/{sesiUjian}', [LoginUjianController::class, 'selesai'])->name('selesai.ujian');
     });
     Route::post('logout-ujian', [LoginUjianController::class, 'logout_ujian'])->name('logout.ujian');
 });
