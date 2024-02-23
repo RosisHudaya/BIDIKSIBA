@@ -117,11 +117,24 @@ class LoginUjianController extends Controller
                 'soal.jawaban_c',
                 'soal.jawaban_d',
                 'soal.jawaban_benar',
+                DB::raw("SEC_TO_TIME(TIME_TO_SEC(TIMEDIFF(sesi.waktu_akhir, NOW()))) AS durasi"),
             )
             ->where('pivot.id_user', $id)
             ->where('pivot.id_sesi', $sesiUjian->id)
+            ->groupBy(
+                'pivot.id_sesi',
+                'soal.id',
+                'soal.soal',
+                'soal.jawaban_a',
+                'soal.jawaban_b',
+                'soal.jawaban_c',
+                'soal.jawaban_d',
+                'soal.jawaban_benar',
+                'sesi.waktu_akhir',
+            )
             ->get();
 
+        $durasi = $soals->first()->durasi ?? '00:00:00';
         $jawabans = DB::table('jawabans')
             ->where('id_user', $id)
             ->whereIn('id_soal', $soals->pluck('id'))
@@ -130,6 +143,7 @@ class LoginUjianController extends Controller
         return view('ujian-user.soal')->with([
             'soals' => $soals,
             'jawabans' => $jawabans,
+            'durasi' => $durasi,
         ]);
     }
 
