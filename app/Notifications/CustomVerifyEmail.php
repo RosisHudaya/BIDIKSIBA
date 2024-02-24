@@ -45,9 +45,9 @@ class CustomVerifyEmail extends Notification
         $verificationUrl = $this->verificationUrl($notifiable);
 
         return (new MailMessage)
-            ->subject('Verifikasi Alamat Email Anda') // Mengatur subject email
+            ->subject('Verifikasi Alamat Email Anda')
             ->line('Klik tombol di bawah ini untuk memverifikasi alamat email Anda.')
-            ->action('Verifikasi', $verificationUrl) // Mengatur URL verifikasi
+            ->action('Verifikasi', $verificationUrl)
             ->line('Jika Anda melakukan verifikasi akun, tidak ada tindakan lebih lanjut yang bisa anda lakukan.');
     }
 
