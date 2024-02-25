@@ -21,13 +21,15 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <form id="search" method="GET" action="{{ route('jurusan.index') }}">
+                            <form id="search" method="GET" action="{{ route('asal-jurusan.index') }}">
                                 <div class="d-flex mb-3">
                                     <input type="text" name="name" class="form-control mr-2" id="name"
                                         placeholder="cari nama jurusan SMA/SMK..."
                                         value="{{ app('request')->input('name') }}">
                                     <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
-                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('jurusan.index') }}">Reset</a>
+                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('asal-jurusan.index') }}">
+                                        Reset
+                                    </a>
                                 </div>
                             </form>
                             <div class="table-responsive">

@@ -6,14 +6,18 @@ use App\Models\Ujian;
 use App\Http\Requests\StoreUjianRequest;
 use App\Http\Requests\UpdateUjianRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 
 class UjianController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $ujians = DB::table('ujians as u')
             ->leftJoin('soal_ujians as su', 'u.id', '=', 'su.id_ujian')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('u.nama_ujian', 'like', '%' . $name . '%');
+            })
             ->select(
                 'u.id',
                 'u.nama_ujian',
@@ -63,10 +67,13 @@ class UjianController extends Controller
         return redirect()->route('ujian.index')->with('success', 'Data ujian berhasil dihapus');
     }
 
-    public function soal_ujian(Ujian $ujian)
+    public function soal_ujian(Request $request, Ujian $ujian)
     {
         $soal_ujians = DB::table('soal_ujians as su')
             ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('su.soal', 'like', '%' . $name . '%');
+            })
             ->select(
                 'su.id',
                 'su.soal',

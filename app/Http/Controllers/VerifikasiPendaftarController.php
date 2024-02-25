@@ -8,16 +8,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Psy\Command\WhereamiCommand;
 
 class VerifikasiPendaftarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $statusSelected = $request->input('status');
         $biodatas = DB::table('biodatas as b')
             ->leftJoin('users as u', 'b.id_user', '=', 'u.id')
             ->leftJoin('asal_jurusans as jp', 'b.id_asal_jurusan', '=', 'jp.id')
             ->leftJoin('jurusans as j', 'b.id_jurusan', '=', 'j.id')
             ->leftJoin('prodis as p', 'b.id_prodi', '=', 'p.id')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('b.nama', 'like', '%' . $name . '%');
+            })
+            ->when($statusSelected, function ($query, $status) {
+                return $query->where('b.status', '=', $status);
+            })
             ->select(
                 'b.*',
                 'jp.asal_jurusan',
@@ -27,7 +35,7 @@ class VerifikasiPendaftarController extends Controller
             )
             ->orderBy('b.status', 'asc')
             ->paginate(10);
-        return view('verif-admin.index', compact('biodatas'));
+        return view('verif-admin.index', compact('biodatas', 'statusSelected'));
     }
 
     public function verif(Biodata $biodata)

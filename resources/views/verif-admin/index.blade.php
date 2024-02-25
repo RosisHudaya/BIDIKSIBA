@@ -16,12 +16,28 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-body">
-                            <form id="search" method="GET" action="{{ route('jurusan.index') }}">
+                            <form id="search" method="GET" action="{{ route('verifikasi-pendaftar.index') }}">
                                 <div class="d-flex mb-3">
                                     <input type="text" name="name" class="form-control mr-2" id="name"
                                         placeholder="cari nama pendaftar..." value="{{ app('request')->input('name') }}">
-                                    <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
-                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('jurusan.index') }}">Reset</a>
+                                    <select class="form-control select2" name="status" id="status">
+                                        <option value="" disabled selected>
+                                            filter status pendaftar...
+                                        </option>
+                                        <option value="Pending" @if ($statusSelected == 'Pending') selected @endif>
+                                            PENDING
+                                        </option>
+                                        <option value="Blm Diverifikasi" @if ($statusSelected == 'Blm Diverifikasi') selected @endif>
+                                            BLM DIVERIFIKASI
+                                        </option>
+                                        <option value="Diverifikasi" @if ($statusSelected == 'Diverifikasi') selected @endif>
+                                            DIVERIFIKASI
+                                        </option>
+                                    </select>
+                                    <button class="btn btn-primary mr-1 ml-2 py-0 px-4" type="submit">Submit</button>
+                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('verifikasi-pendaftar.index') }}">
+                                        Reset
+                                    </a>
                                 </div>
                             </form>
                             <div class="table-responsive">
@@ -143,9 +159,17 @@
             });
         });
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
 @endpush
 
 @push('customStyle')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <script>
         function submitDel(id) {
             $('#del-' + id).submit()

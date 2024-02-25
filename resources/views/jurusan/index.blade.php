@@ -25,7 +25,16 @@
                                 <div class="d-flex mb-3">
                                     <input type="text" name="name" class="form-control mr-2" id="name"
                                         placeholder="cari nama jurusan..." value="{{ app('request')->input('name') }}">
-                                    <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
+                                    <select class="form-control select2" name="asal_jurusan" id="asal_jurusan">
+                                        <option value="" disabled selected>cari nama asal jurusan SMA/SMK...</option>
+                                        @foreach ($asal_jurusans as $asal_jurusan)
+                                            <option value="{{ $asal_jurusan->id }}"
+                                                @if ($asal_jurusan->id == $asalJurusanSelected) selected @endif>
+                                                {{ $asal_jurusan->asal_jurusan }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <button class="btn btn-primary mr-1 ml-2 py-0 px-4" type="submit">Submit</button>
                                     <a class="btn btn-secondary py-2 px-4" href="{{ route('jurusan.index') }}">Reset</a>
                                 </div>
                             </form>
@@ -81,29 +90,16 @@
     </section>
 @endsection
 @push('customScript')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.import').click(function(event) {
-                event.stopPropagation();
-                $(".show-import").slideToggle("fast");
-                $(".show-search").hide();
-            });
-            $('.search').click(function(event) {
-                event.stopPropagation();
-                $(".show-search").slideToggle("fast");
-                $(".show-import").hide();
-            });
-            //ganti label berdasarkan nama file
-            $('#file-upload').change(function() {
-                var i = $(this).prev('label').clone();
-                var file = $('#file-upload')[0].files[0].name;
-                $(this).prev('label').text(file);
-            });
+            $('.select2').select2();
         });
     </script>
 @endpush
 
 @push('customStyle')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <script>
         function submitDel(id) {
             $('#del-' + id).submit()

@@ -30,23 +30,15 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        //index -> menampilkan tabel data
         Category::create([
             "name" => "Masuk User Page",
         ]);
 
-        // mengambil data
-        // $users = DB::table('users')
-        //     ->when($request->input('name'), function ($query, $name) {
-        //         return $query->where('name', 'like', '%' . $name . '%');
-        //     })
-        $users = User::with('roles') // Eager load the 'roles' relationship
+        $users = User::with('roles')
             ->when($request->input('name'), function ($query, $name) {
                 return $query->where('name', 'like', '%' . $name . '%');
             })
             ->when($request->input('roles'), function ($query, $roles) {
-                // The $roles parameter is an array of selected roles
-                // Filter users based on the selected roles
                 return $query->whereHas('roles', function (Builder $query) use ($roles) {
                     $query->whereIn('name', $roles);
                 });
@@ -54,7 +46,6 @@ class UserController extends Controller
             ->select('id', 'name', 'email', DB::raw("DATE_FORMAT(created_at, '%d %M %Y') as created_at"))
             ->select('id', 'name', 'email', DB::raw("DATE_FORMAT(users.email_verified_at, '%d %M %Y') as email_verified_at"))
             ->paginate(10);
-        // return view('users.index', compact('users'));
         $roles = Role::all();
 
         return view('users.index', compact('users', 'roles'));

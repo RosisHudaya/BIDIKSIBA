@@ -85,12 +85,14 @@
                                     <br>
                                 </form>
                             </div>
-                            <form id="search" method="GET" action="{{ route('ujian.index') }}">
+                            <form id="search" method="GET" action="{{ route('soalUjian', $ujian->id) }}">
                                 <div class="d-flex mb-3">
                                     <input type="text" name="name" class="form-control mr-2" id="name"
-                                        placeholder="cari nama ujian..." value="{{ app('request')->input('name') }}">
+                                        placeholder="cari soal..." value="{{ app('request')->input('name') }}">
                                     <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
-                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('ujian.index') }}">Reset</a>
+                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('soalUjian', $ujian->id) }}">
+                                        Reset
+                                    </a>
                                 </div>
                             </form>
                             <div class="table-responsive">

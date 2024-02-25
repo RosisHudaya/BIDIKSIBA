@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <section class="section">
         <div class="section-header">
-            <h1>User List</h1>
+            <h1>List</h1>
         </div>
         <div class="section-body">
             <div class="row">
@@ -87,14 +87,15 @@
                                                                 class="fas fa-edit"></i> Edit
                                                         </a>
                                                         <form action="{{ route('user.destroy', $user->id) }}"
-                                                            method="POST" class="ml-2">
-                                                            {{-- <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}"> --}}
+                                                            method="POST" class="ml-2" id="del-<?= $user->id ?>">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> Delete </button>
+                                                            <button class="btn btn-sm btn-danger btn-icon"
+                                                                data-confirm="Konfirmasi Hapus | Apakah anda yakin ingin menghapus user ini?"
+                                                                data-confirm-yes="submitDel(<?= $user->id ?>)"
+                                                                data-id="del-{{ $user->id }}">
+                                                                <i class="fas fa-times"></i> Delete
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </td>
@@ -114,26 +115,6 @@
     </section>
 @endsection
 @push('customScript')
-    <script>
-        $(document).ready(function() {
-            $('.import').click(function(event) {
-                event.stopPropagation();
-                $(".show-import").slideToggle("fast");
-                $(".show-search").hide();
-            });
-            $('.search').click(function(event) {
-                event.stopPropagation();
-                $(".show-search").slideToggle("fast");
-                $(".show-import").hide();
-            });
-            //ganti label berdasarkan nama file
-            $('#file-upload').change(function() {
-                var i = $(this).prev('label').clone();
-                var file = $('#file-upload')[0].files[0].name;
-                $(this).prev('label').text(file);
-            });
-        });
-    </script>
 @endpush
 
 @push('customStyle')

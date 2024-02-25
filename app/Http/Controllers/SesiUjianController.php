@@ -7,14 +7,18 @@ use App\Http\Requests\StoreSesiUjianRequest;
 use App\Http\Requests\UpdateSesiUjianRequest;
 use App\Models\Ujian;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class SesiUjianController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $sesiUjians = DB::table('sesi_ujians as su')
             ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
             ->leftJoin('sesi_users as sj', 'su.id', '=', 'sj.id_sesi')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('su.nama_sesi', 'like', '%' . $name . '%');
+            })
             ->select(
                 'su.id',
                 'su.nama_sesi',
@@ -92,7 +96,7 @@ class SesiUjianController extends Controller
         }
     }
 
-    public function sesi_user(SesiUjian $sesiUjian)
+    public function sesi_user(Request $request, SesiUjian $sesiUjian)
     {
         $ujian = DB::table('sesi_ujians as su')
             ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
@@ -104,6 +108,9 @@ class SesiUjianController extends Controller
         $sesi_users = DB::table('sesi_users as su')
             ->leftJoin('users as u', 'su.id_user', '=', 'u.id')
             ->leftJoin('biodatas as b', 'u.id', '=', 'b.id_user')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('b.nama', 'like', '%' . $name . '%');
+            })
             ->select(
                 'su.id',
                 'b.nama',
