@@ -16,7 +16,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="header ml-4 mt-3">
-                            <a class="btn btn-success" href="">
+                            <a class="btn btn-success" href="{{ route('laporan-nilai.export', request()->all()) }}">
                                 <i class="fas fa-file-csv"></i> Export Nilai
                             </a>
                         </div>
