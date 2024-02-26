@@ -5,6 +5,7 @@ use App\Http\Controllers\AsalJurusanController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\LaporanNilaiController;
 use App\Http\Controllers\LoginUjianController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
@@ -105,6 +106,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('sesi-user/{sesi_ujian}/create', [SesiUserController::class, 'create'])->name('sesi-user.create');
         Route::post('sesi-user/{sesi_ujian}', [SesiUserController::class, 'store'])->name('sesi-user.store');
         Route::delete('sesi-user/{sesiUser}/{sesi_ujian}', [SesiUserController::class, 'destroy'])->name('sesi-user.destroy');
+        Route::get('laporan-nilai', [LaporanNilaiController::class, 'index'])->name('laporan-nilai.index');
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {

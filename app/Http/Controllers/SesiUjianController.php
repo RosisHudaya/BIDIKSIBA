@@ -123,6 +123,7 @@ class SesiUjianController extends Controller
                 'b.nama',
                 'b.gender',
             )
+            ->orderBy('b.nama', 'asc')
             ->paginate(25);
         $jumlah_peserta_ujian = $sesi_users->total();
         return view('sesi-user.index')->with([

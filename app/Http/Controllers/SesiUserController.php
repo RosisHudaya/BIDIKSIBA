@@ -27,6 +27,7 @@ class SesiUserController extends Controller
                 'b.nama',
                 'b.gender',
             )
+            ->orderBy('b.nama', 'asc')
             ->paginate(25);
 
         return view('sesi-user.create', compact('sesiUjian', 'biodatas'));

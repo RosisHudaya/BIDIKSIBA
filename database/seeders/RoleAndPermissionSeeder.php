@@ -101,6 +101,9 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'sesi-ujian.edit']);
         Permission::create(['name' => 'sesi-ujian.destroy']);
 
+        //laporan nilai
+        Permission::create(['name' => 'laporan-nilai.index']);
+
         //menu group 
         Permission::create(['name' => 'menu-group.index']);
         Permission::create(['name' => 'menu-group.create']);
@@ -116,9 +119,6 @@ class RoleAndPermissionSeeder extends Seeder
         // create roles 
         $roleUser = Role::create(['name' => 'calon-mahasiswa']);
         $roleUser->givePermissionTo([
-            'dashboard',
-            // 'user.management',
-            // 'user.index',
         ]);
 
         // create Super Admin
