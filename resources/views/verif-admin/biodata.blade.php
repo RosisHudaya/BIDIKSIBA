@@ -54,6 +54,47 @@
     </tr>
     <tr>
         <th></th>
+        <th>KTP</th>
+        <th>KARTU KELUARGA</th>
+        <th>KARTU SISWA</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th></th>
+        <th class="text-center">
+            @if ($biodata->ktp)
+                <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->ktp) }}" alt="ktp"
+                    style="width: 170px; height: 100px; object-fit: contain;" data-toggle="modal"
+                    data-target="#fotoKtp-{{ $biodata->id }}">
+            @else
+                <img class="mb-3 ml-3" src="{{ asset('assets/img/default-img.jpg') }}" alt="foto-default"
+                    style="width: 170px; height: 100px; object-fit: contain;">
+            @endif
+        </th>
+        <th class="text-center">
+            @if ($biodata->kk)
+                <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->kk) }}" alt="kk"
+                    style="width: 170px; height: 100px; object-fit: contain;" data-toggle="modal"
+                    data-target="#fotoKk-{{ $biodata->id }}">
+            @else
+                <img class="mb-3 ml-3" src="{{ asset('assets/img/default-img.jpg') }}" alt="foto-default"
+                    style="width: 170px; height: 100px; object-fit: contain;">
+            @endif
+        </th>
+        <th class="text-center">
+            @if ($biodata->kartu_siswa)
+                <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->kartu_siswa) }}" alt="kartu_siswa"
+                    style="width: 170px; height: 100px; object-fit: contain;" data-toggle="modal"
+                    data-target="#fotoKartuSiswa-{{ $biodata->id }}">
+            @else
+                <img class="mb-3 ml-3" src="{{ asset('assets/img/default-img.jpg') }}" alt="foto-default"
+                    style="width: 170px; height: 100px; object-fit: contain;">
+            @endif
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <th></th>
         <th>JURUSAN SMA/SMK</th>
         <th>JURUSAN PILIHAN</th>
         <th>PRODI PILIHAN</th>

@@ -46,8 +46,8 @@
                                         <tr>
                                             <th class="text-center" style="width: 5%;">#</th>
                                             <th style="width: 20%;">NAMA</th>
-                                            <th style="width: 25%;">EMAIL</th>
-                                            <th style="width: 15%;">STATUS</th>
+                                            <th style="width: 20%;">EMAIL</th>
+                                            <th style="width: 20%;">STATUS</th>
                                             <th class="text-center" style="width: 25%;">AKSI</th>
                                         </tr>
                                         @foreach ($biodatas as $key => $biodata)
@@ -106,8 +106,8 @@
         </div>
     </section>
 
-    <!-- modal foto -->
     @foreach ($biodatas as $biodata)
+        <!-- modal foto -->
         <div class="modal fade" id="fotoModal-{{ $biodata->id }}" tabindex="-1" role="dialog"
             aria-labelledby="fotoModalLabel-{{ $biodata->id }}" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -115,6 +115,51 @@
                     <div class="modal-body">
                         @if ($biodata && $biodata->foto)
                             <img class="w-100" src="{{ asset('storage/' . $biodata->foto) }}" alt="foto">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal ktp -->
+        <div class="modal fade" id="fotoKtp-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoKtpModalLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->ktp)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->ktp) }}" alt="ktp">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal kk -->
+        <div class="modal fade" id="fotoKk-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoKkModalLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->kk)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->kk) }}" alt="kk">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal kartu siswa -->
+        <div class="modal fade" id="fotoKartuSiswa-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoKartuSiswaModalLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->kartu_siswa)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->kartu_siswa) }}" alt="kartu_siswa">
                         @else
                         @endif
                     </div>
