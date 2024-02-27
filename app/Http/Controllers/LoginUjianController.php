@@ -158,7 +158,7 @@ class LoginUjianController extends Controller
         $jawabanBenar = $soal->jawaban_benar;
 
         if ($jawaban == null) {
-            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -2);
+            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -1);
             $jawabans = Jawaban::create([
                 'id_user' => $id,
                 'id_sesi' => $sesiUjian->id,
@@ -167,7 +167,7 @@ class LoginUjianController extends Controller
                 'skor' => $skor,
             ]);
         } else {
-            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -2);
+            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -1);
             $jawaban->update([
                 'jawaban' => $request->jawab,
                 'skor' => $skor,

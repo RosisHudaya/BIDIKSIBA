@@ -34,6 +34,94 @@
 </div>
 <div class="form-group col-md-12 d-flex justify-content-start">
     <div class="col-md-6">
+        <label for="ktp">KTP (Kartu Tanda Penduduk)</label><br>
+        @if ($biodatas)
+            @if ($biodatas->ktp)
+                <img class="ml-3 mb-2" id="ktp-preview" src="{{ asset('storage/' . $biodatas->ktp) }}" alt="ktp"
+                    style="width: 350px; height: 150px; object-fit: contain;">
+                <p class="ml-4 m-0 p-0 text-b">* Ukuran file maksimal 2 MB (2048 KB)</p>
+                <p class="ml-4 mb-2 m-0 p-0 text-b">* Ekstensi (.png, .jpg, atau .jpeg)</p>
+            @else
+                <img class="ml-3 mb-2" id="ktp-preview" src="{{ asset('assets/img/default-img.jpg') }}"
+                    alt="ktp-default" style="width: 350px; height: 150px; object-fit: contain;">
+                <p class="ml-4 m-0 p-0 text-c">* Ukuran file maksimal 2 MB (2048 KB)</p>
+                <p class="ml-4 mb-2 m-0 p-0 text-c">* Ekstensi (.png, .jpg, atau .jpeg)</p>
+            @endif
+        @else
+            <img class="ml-3 mb-2" id="ktp-preview" src="{{ asset('assets/img/default-img.jpg') }}" alt="ktp-default"
+                style="width: 350px; height: 150px; object-fit: contain;">
+            <p class="ml-4 m-0 p-0 text-c">* Ukuran file maksimal 2 MB (2048 KB)</p>
+            <p class="ml-4 mb-2 m-0 p-0 text-c">* Ekstensi (.png, .jpg, atau .jpeg)</p>
+        @endif
+        <input type="file" id="ktp" class="form-control @error('ktp') is-invalid @enderror" name="ktp"
+            accept="image/*" {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+        @error('ktp')
+            <div class="invalid-feedback feed ml-3">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+    <div class="col-md-6">
+        <label for="kartu_siswa">Kartu Siswa</label><br>
+        @if ($biodatas)
+            @if ($biodatas->kartu_siswa)
+                <img class="ml-3 mb-2" id="kartu-siswa-preview" src="{{ asset('storage/' . $biodatas->kartu_siswa) }}"
+                    alt="kartu-siswa" style="width: 350px; height: 150px; object-fit: contain;">
+                <p class="ml-4 m-0 p-0 text-b">* Ukuran file maksimal 2 MB (2048 KB)</p>
+                <p class="ml-4 mb-2 m-0 p-0 text-b">* Ekstensi (.png, .jpg, atau .jpeg)</p>
+            @else
+                <img class="ml-3 mb-2" id="kartu-siswa-preview" src="{{ asset('assets/img/default-img.jpg') }}"
+                    alt="kartu-siswa-default" style="width: 350px; height: 150px; object-fit: contain;">
+                <p class="ml-4 m-0 p-0 text-c">* Ukuran file maksimal 2 MB (2048 KB)</p>
+                <p class="ml-4 mb-2 m-0 p-0 text-c">* Ekstensi (.png, .jpg, atau .jpeg)</p>
+            @endif
+        @else
+            <img class="ml-3 mb-2" id="kartu-siswa-preview" src="{{ asset('assets/img/default-img.jpg') }}"
+                alt="kartu-siswa-default" style="width: 350px; height: 150px; object-fit: contain;">
+            <p class="ml-4 m-0 p-0 text-c">* Ukuran file maksimal 2 MB (2048 KB)</p>
+            <p class="ml-4 mb-2 m-0 p-0 text-c">* Ekstensi (.png, .jpg, atau .jpeg)</p>
+        @endif
+        <input type="file" id="kartu_siswa" class="form-control @error('kartu_siswa') is-invalid @enderror"
+            name="kartu_siswa" accept="image/*" {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+        @error('kartu_siswa')
+            <div class="invalid-feedback feed ml-3">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+</div>
+<div class="form-group col-md-12 d-flex justify-content-start">
+    <div class="col-md-6">
+        <label for="kk">Kartu Keluarga</label><br>
+        @if ($biodatas)
+            @if ($biodatas->kk)
+                <img class="ml-3 mb-2" id="kk-preview" src="{{ asset('storage/' . $biodatas->kk) }}" alt="kk"
+                    style="width: 350px; height: 150px; object-fit: contain;">
+                <p class="ml-4 m-0 p-0 text-b">* Ukuran file maksimal 2 MB (2048 KB)</p>
+                <p class="ml-4 mb-2 m-0 p-0 text-b">* Ekstensi (.png, .jpg, atau .jpeg)</p>
+            @else
+                <img class="ml-3 mb-2" id="kk-preview" src="{{ asset('assets/img/default-img.jpg') }}"
+                    alt="kk-default" style="width: 350px; height: 150px; object-fit: contain;">
+                <p class="ml-4 m-0 p-0 text-c">* Ukuran file maksimal 2 MB (2048 KB)</p>
+                <p class="ml-4 mb-2 m-0 p-0 text-c">* Ekstensi (.png, .jpg, atau .jpeg)</p>
+            @endif
+        @else
+            <img class="ml-3 mb-2" id="kk-preview" src="{{ asset('assets/img/default-img.jpg') }}" alt="kk-default"
+                style="width: 350px; height: 150px; object-fit: contain;">
+            <p class="ml-4 m-0 p-0 text-c">* Ukuran file maksimal 2 MB (2048 KB)</p>
+            <p class="ml-4 mb-2 m-0 p-0 text-c">* Ekstensi (.png, .jpg, atau .jpeg)</p>
+        @endif
+        <input type="file" id="kk" class="form-control @error('kk') is-invalid @enderror" name="kk"
+            accept="image/*" {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+        @error('kk')
+            <div class="invalid-feedback feed ml-3">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+</div>
+<div class="form-group col-md-12 d-flex justify-content-start">
+    <div class="col-md-6">
         <label for="">Nama Lengkap Pendaftar</label>
         <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama"
             value="{{ $biodatas ? $biodatas->nama : '' }}" placeholder="masukkan nama lengkap anda"
@@ -102,9 +190,9 @@
 <div class="form-group col-md-12 d-flex">
     <div class="col-md-6">
         <label for="">No Telepon</label>
-        <input type="text" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp" name="no_telp"
-            value="{{ old('no_telp', $biodatas ? $biodatas->no_telp : '') }}" placeholder="masukan nomer telepon anda"
-            {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+        <input type="text" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp"
+            name="no_telp" value="{{ old('no_telp', $biodatas ? $biodatas->no_telp : '') }}"
+            placeholder="masukan nomer telepon anda" {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
         @error('no_telp')
             <div class="invalid-feedback feed ml-3">
                 {{ $message }}
@@ -137,6 +225,51 @@
 
                     reader.onload = function(e) {
                         $('#foto-preview').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('#ktp').change(function() {
+                var input = this;
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#ktp-preview').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('#kartu_siswa').change(function() {
+                var input = this;
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#kartu-siswa-preview').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('#kk').change(function() {
+                var input = this;
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#kk-preview').attr('src', e.target.result);
                     }
 
                     reader.readAsDataURL(input.files[0]);

@@ -34,7 +34,7 @@
                                     <input type="text" name="name" class="form-control mx-2" id="name"
                                         placeholder="cari nama peserta..." value="{{ app('request')->input('name') }}">
                                     <select class="form-control select2" name="ujian" id="ujian">
-                                        <option value="" disabled selected>fiter nama ujian...</option>
+                                        <option value="" disabled selected>filter nama ujian...</option>
                                         @foreach ($ujians as $ujian)
                                             <option value="{{ $ujian->id }}"
                                                 @if ($ujian->id == $ujianSelected) selected @endif>{{ $ujian->nama_ujian }}

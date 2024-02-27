@@ -93,6 +93,9 @@ class BiodataController extends Controller
         $request->validate(
             [
                 'foto' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'ktp' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'kartu_siswa' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'kk' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'nama' => 'nullable|regex:/^[a-zA-Z\s]+$/u',
                 'asal_sekolah' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/u',
                 'kota_lahir' => 'nullable|regex:/^[a-zA-Z\s]+$/u',
@@ -107,6 +110,15 @@ class BiodataController extends Controller
                 'foto.image' => 'File yang diunggah harus berupa gambar',
                 'foto.mimes' => 'Format gambar yang diunggah adalah PNG, JPG, atau JPEG',
                 'foto.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
+                'ktp.image' => 'File yang diunggah harus berupa gambar',
+                'ktp.mimes' => 'Format gambar yang diunggah adalah PNG, JPG, atau JPEG',
+                'ktp.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
+                'kartu_siswa.image' => 'File yang diunggah harus berupa gambar',
+                'kartu_siswa.mimes' => 'Format gambar yang diunggah adalah PNG, JPG, atau JPEG',
+                'kartu_siswa.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
+                'kk.image' => 'File yang diunggah harus berupa gambar',
+                'kk.mimes' => 'Format gambar yang diunggah adalah PNG, JPG, atau JPEG',
+                'kk.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
                 'nama.regex' => 'Form nama tidak boleh mengandung angka dan simbol',
                 'asal_sekolah.regex' => 'Form asal sekolah tidak boleh mengandung simbol',
                 'kota_lahir' => 'Form kota lahir tidak boleh mengandung angka dan simbol',
@@ -145,6 +157,36 @@ class BiodataController extends Controller
 
                 $biodata->update(['foto' => $fotoPath]);
             }
+
+            if ($request->hasFile('ktp')) {
+                $extension = $request->file('ktp')->extension();
+                $randomName = 'ktp-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('ktp')->storeAs('public/ktp', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $biodata->update(['ktp' => $fotoPath]);
+            }
+
+            if ($request->hasFile('kartu_siswa')) {
+                $extension = $request->file('kartu_siswa')->extension();
+                $randomName = 'kartu-siswa-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('kartu_siswa')->storeAs('public/kartu_siswa', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $biodata->update(['kartu_siswa' => $fotoPath]);
+            }
+
+            if ($request->hasFile('kk')) {
+                $extension = $request->file('kk')->extension();
+                $randomName = 'kk-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('kk')->storeAs('public/kk', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $biodata->update(['kk' => $fotoPath]);
+            }
         } else {
             $idUser->update([
                 'id_user' => $id,
@@ -175,6 +217,48 @@ class BiodataController extends Controller
                 $fotoPath = str_replace('public/', '', $fotoPath);
 
                 $idUser->update(['foto' => $fotoPath]);
+            }
+
+            if ($request->hasFile('ktp')) {
+                if ($idUser->ktp) {
+                    Storage::delete('public/' . $idUser->ktp);
+                }
+
+                $extension = $request->file('ktp')->extension();
+                $randomName = 'ktp-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('ktp')->storeAs('public/ktp', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $idUser->update(['ktp' => $fotoPath]);
+            }
+
+            if ($request->hasFile('kartu_siswa')) {
+                if ($idUser->kartu_siswa) {
+                    Storage::delete('public/' . $idUser->kartu_siswa);
+                }
+
+                $extension = $request->file('kartu_siswa')->extension();
+                $randomName = 'kartu-siwa-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('kartu_siswa')->storeAs('public/kartu_siswa', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $idUser->update(['kartu_siswa' => $fotoPath]);
+            }
+
+            if ($request->hasFile('kk')) {
+                if ($idUser->kk) {
+                    Storage::delete('public/' . $idUser->kk);
+                }
+
+                $extension = $request->file('kk')->extension();
+                $randomName = 'kk-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('kk')->storeAs('public/kk', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $idUser->update(['kk' => $fotoPath]);
             }
         }
 

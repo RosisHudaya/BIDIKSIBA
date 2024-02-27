@@ -17,6 +17,9 @@
             $biodatas?->id_jurusan != null &&
             $biodatas?->id_prodi != null &&
             $biodatas?->foto != null &&
+            $biodatas?->ktp != null &&
+            $biodatas?->kartu_siswa != null &&
+            $biodatas?->kk != null &&
             $biodatas?->nik != null &&
             $biodatas?->nama != null &&
             $biodatas?->kota_lahir != null &&

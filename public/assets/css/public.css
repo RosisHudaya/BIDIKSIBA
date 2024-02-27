@@ -200,6 +200,11 @@ select {
     font-size: 11px;
 }
 
+.text-b {
+    color: black;
+    font-size: 11px;
+}
+
 .table.table-md th,
 .table.table-md td {
     color: #666;
