@@ -25,6 +25,7 @@ class UpdateSoalUjianRequest extends FormRequest
     {
         $id = $this->route('soalUjian')->id;
         return [
+            'gambar' => 'nullable',
             'soal' => 'required|unique:soal_ujians,soal,' . $id,
             'jawaban_a' => 'required|unique:soal_ujians,jawaban_a,' . $id,
             'jawaban_b' => 'required',

@@ -95,6 +95,14 @@
                                     </a>
                                 </div>
                             </form>
+
+                            @php
+                                function isImageUrl($url)
+                                {
+                                    return strpos($url, 'thumbnail?id=') !== false;
+                                }
+                            @endphp
+
                             <div class="table-responsive">
                                 <table class="table table-bordered table-md">
                                     <tbody>
@@ -109,38 +117,91 @@
                                                     {{ ($soal_ujians->currentPage() - 1) * $soal_ujians->perPage() + $key + 1 }}
                                                 </td>
                                                 <td>
+                                                    @if ($soal_ujian->gambar)
+                                                        <img src="{{ $soal_ujian->gambar }}" alt="gambar-soal"
+                                                            style="width: 200px; height: 200px; object-fit: contain;"><br>
+                                                    @endif
                                                     <strong>{{ $soal_ujian->soal }}</strong>
                                                     <hr>
                                                     @if ($soal_ujian->jawaban_benar == 'A')
-                                                        <span class="font-weight-bold" style="color: #3eac57;">A.
-                                                            {{ $soal_ujian->jawaban_a }}
-                                                        </span>
+                                                        @if (isImageUrl($soal_ujian->jawaban_a))
+                                                            <span class="font-weight-bold" style="color: #3eac57;">A.</span>
+                                                            <img class="mb-2" src="{{ $soal_ujian->jawaban_a }}"
+                                                                alt="Jawaban A"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            <span class="font-weight-bold" style="color: #3eac57;">A.
+                                                                {{ $soal_ujian->jawaban_a }}</span>
+                                                        @endif
                                                     @else
-                                                        A. {{ $soal_ujian->jawaban_a }}
+                                                        @if (isImageUrl($soal_ujian->jawaban_a))
+                                                            A. <img class="mb-2" src="{{ $soal_ujian->jawaban_a }}"
+                                                                alt="Jawaban A"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            A. {{ $soal_ujian->jawaban_a }}
+                                                        @endif
                                                     @endif
                                                     <br>
                                                     @if ($soal_ujian->jawaban_benar == 'B')
-                                                        <span class="font-weight-bold" style="color: #3eac57;">B.
-                                                            {{ $soal_ujian->jawaban_b }}
-                                                        </span>
+                                                        @if (isImageUrl($soal_ujian->jawaban_b))
+                                                            <span class="font-weight-bold" style="color: #3eac57;">B.</span>
+                                                            <img class="mb-2" src="{{ $soal_ujian->jawaban_b }}"
+                                                                alt="Jawaban B"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            <span class="font-weight-bold" style="color: #3eac57;">B.
+                                                                {{ $soal_ujian->jawaban_b }}</span>
+                                                        @endif
                                                     @else
-                                                        B. {{ $soal_ujian->jawaban_b }}
+                                                        @if (isImageUrl($soal_ujian->jawaban_b))
+                                                            B. <img class="mb-2" src="{{ $soal_ujian->jawaban_b }}"
+                                                                alt="Jawaban B"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            B. {{ $soal_ujian->jawaban_b }}
+                                                        @endif
                                                     @endif
                                                     <br>
                                                     @if ($soal_ujian->jawaban_benar == 'C')
-                                                        <span class="font-weight-bold" style="color: #3eac57;">C.
-                                                            {{ $soal_ujian->jawaban_c }}
-                                                        </span>
+                                                        @if (isImageUrl($soal_ujian->jawaban_c))
+                                                            <span class="font-weight-bold" style="color: #3eac57;">C.</span>
+                                                            <img class="mb-2" src="{{ $soal_ujian->jawaban_b }}"
+                                                                alt="Jawaban C"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            <span class="font-weight-bold" style="color: #3eac57;">C.
+                                                                {{ $soal_ujian->jawaban_c }}</span>
+                                                        @endif
                                                     @else
-                                                        C. {{ $soal_ujian->jawaban_c }}
+                                                        @if (isImageUrl($soal_ujian->jawaban_c))
+                                                            C. <img class="mb-2" src="{{ $soal_ujian->jawaban_c }}"
+                                                                alt="Jawaban B"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            C. {{ $soal_ujian->jawaban_c }}
+                                                        @endif
                                                     @endif
                                                     <br>
                                                     @if ($soal_ujian->jawaban_benar == 'D')
-                                                        <span class="font-weight-bold" style="color: #3eac57;">D.
-                                                            {{ $soal_ujian->jawaban_d }}
-                                                        </span>
+                                                        @if (isImageUrl($soal_ujian->jawaban_d))
+                                                            <span class="font-weight-bold"
+                                                                style="color: #3eac57;">D.</span>
+                                                            <img class="mb-2" src="{{ $soal_ujian->jawaban_d }}"
+                                                                alt="Jawaban D"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            <span class="font-weight-bold" style="color: #3eac57;">D.
+                                                                {{ $soal_ujian->jawaban_d }}</span>
+                                                        @endif
                                                     @else
-                                                        D. {{ $soal_ujian->jawaban_d }}
+                                                        @if (isImageUrl($soal_ujian->jawaban_d))
+                                                            D. <img class="mb-2" src="{{ $soal_ujian->jawaban_d }}"
+                                                                alt="Jawaban D"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            D. {{ $soal_ujian->jawaban_d }}
+                                                        @endif
                                                     @endif
                                                     <br>
                                                 </td>
@@ -153,7 +214,8 @@
                                                         </a>
                                                         <form
                                                             action="{{ route('soal-ujian.destroy', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
-                                                            method="POST" class="ml-2" id="del-<?= $soal_ujian->id ?>">
+                                                            method="POST" class="ml-2"
+                                                            id="del-<?= $soal_ujian->id ?>">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-sm btn-danger btn-icon"

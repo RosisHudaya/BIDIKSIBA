@@ -11,6 +11,7 @@ class SoalUjian extends Model
 
     protected $fillable = [
         'id_ujian',
+        'gambar',
         'soal',
         'jawaban_a',
         'jawaban_b',

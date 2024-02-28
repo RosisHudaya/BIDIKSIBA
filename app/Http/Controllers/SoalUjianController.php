@@ -26,6 +26,7 @@ class SoalUjianController extends Controller
     {
         SoalUjian::create([
             'id_ujian' => $ujian->id,
+            'gambar' => $request->gambar,
             'soal' => $request->soal,
             'jawaban_a' => $request->jawaban_a,
             'jawaban_b' => $request->jawaban_b,

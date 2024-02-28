@@ -76,6 +76,7 @@ class UjianController extends Controller
             })
             ->select(
                 'su.id',
+                'su.gambar',
                 'su.soal',
                 'su.jawaban_a',
                 'su.jawaban_b',
@@ -89,6 +90,7 @@ class UjianController extends Controller
             ->where('su.id_ujian', $ujian->id)
             ->groupBy(
                 'su.id',
+                'su.gambar',
                 'su.soal',
                 'su.jawaban_a',
                 'su.jawaban_b',
