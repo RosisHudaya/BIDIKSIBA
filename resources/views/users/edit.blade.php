@@ -39,10 +39,10 @@
                                 </div>
                             @enderror
                         </div>
-                        <!-- Add role assignment form with select2 library -->
                         <div class="form-group">
                             <label for="roles">Assign Roles</label>
-                            <select name="roles[]" class="form-control select2" multiple>
+                            <select name="roles" class="form-control select2">
+                                <option value="" disabled>Pilih Role</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>
                                         {{ $role->name }}
