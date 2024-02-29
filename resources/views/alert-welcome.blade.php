@@ -26,11 +26,6 @@
                 $biodatas?->no_telp != null &&
                 $biodatas?->nisn != null &&
                 $biodatas?->asal_sekolah != null)
-            <div class="alert alert-warning" id="warning-alert">
-                <h6 class="m-0 p-0">
-                    "DATA SUDAH LENGKAP" | sedang menunggu proses verifikasi oleh admin...
-                </h6>
-            </div>
         @else
             <div class="alert alert-warning">
                 <h6 class="m-0 p-0">
@@ -39,11 +34,5 @@
             </div>
         @endif
     @else
-        <div class="alert alert-success" id="success-alert">
-            <h6 class="m-0 p-0">
-                Data BIODATA PENDAFTAR telah diverifikasi admin, silahkan cek token dan password ujian di menu
-                "lihat TOKEN" !!!
-            </h6>
-        </div>
     @endif
 @endif

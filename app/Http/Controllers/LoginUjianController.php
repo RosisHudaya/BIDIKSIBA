@@ -111,6 +111,7 @@ class LoginUjianController extends Controller
             ->select(
                 'pivot.id_sesi',
                 'soal.id',
+                'soal.gambar',
                 'soal.soal',
                 'soal.jawaban_a',
                 'soal.jawaban_b',
@@ -124,6 +125,7 @@ class LoginUjianController extends Controller
             ->groupBy(
                 'pivot.id_sesi',
                 'soal.id',
+                'soal.gambar',
                 'soal.soal',
                 'soal.jawaban_a',
                 'soal.jawaban_b',

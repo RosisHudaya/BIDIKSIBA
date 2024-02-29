@@ -6,7 +6,7 @@
 @section('main')
     <div class="col-md-11 d-flex mx-auto my-4">
         <div class="col-md-4">
-            <div class="p-ujian-n px-3 py-4">
+            <div class="p-ujian-n px-3 py-4 d-flex flex-column">
                 <div class="d-flex">
                     <div class="col-md-6 m-0 p-0">
                         <p class="m-0 p-0 font-weight-bold">NOMER</p>
@@ -15,8 +15,8 @@
                         <p id="countdown-timer" class="m-0 p-0 font-weight-bold"></p>
                     </div>
                 </div>
-                <hr class="mt-3 mb-2 p-0">
                 <div class="soal-n">
+                    <hr class="mt-3 mb-2 p-0">
                     <div class="d-flex justify-content-start">
                         @foreach ($soals as $key => $soal)
                             @php
@@ -46,6 +46,12 @@
                 </div>
             </div>
         </div>
+        @php
+            function isImageUrl($url)
+            {
+                return strpos($url, 'thumbnail?id=') !== false;
+            }
+        @endphp
         <div class="col-md-8">
             <div class="p-ujian px-3 py-4">
                 @foreach ($soals as $key => $soal)
@@ -54,6 +60,10 @@
                         <div class="m-0 p-0 show-soal-{{ $soal->id }}" style="display: none;">
                             <p class="m-0 p-0 font-weight-bold">SOAL NO. {{ $key + 1 }}</p>
                             <hr class="mt-3 mb-2 p-0">
+                            @if ($soal->gambar)
+                                <img class="mb-2" src="{{ $soal->gambar }}" alt="gambar-soal"
+                                    style="object-fit: contain;">
+                            @endif
                             <p class="mt-0 p-0">{{ $soal->soal }}</p>
                             <div class="d-flex my-2">
                                 <button type="submit"
@@ -61,7 +71,12 @@
                                     value="A" name="jawab">
                                     A
                                 </button>
-                                <p class="my-2 p-choice">{{ $soal->jawaban_a }}</p>
+                                @if (isImageUrl($soal->jawaban_a))
+                                    <img class="mb-2" src="{{ $soal->jawaban_a }}" alt="jawaban_a"
+                                        style="object-fit: contain;">
+                                @else
+                                    <p class="my-2 p-choice">{{ $soal->jawaban_a }}</p>
+                                @endif
                             </div>
                             <div class="d-flex my-2">
                                 <button type="submit"
@@ -69,7 +84,12 @@
                                     value="B" name="jawab">
                                     B
                                 </button>
-                                <p class="my-2 p-choice">{{ $soal->jawaban_b }}</p>
+                                @if (isImageUrl($soal->jawaban_b))
+                                    <img class="mb-2" src="{{ $soal->jawaban_b }}" alt="jawaban_b"
+                                        style="object-fit: contain;">
+                                @else
+                                    <p class="my-2 p-choice">{{ $soal->jawaban_b }}</p>
+                                @endif
                             </div>
                             <div class="d-flex my-2">
                                 <button type="submit"
@@ -77,7 +97,12 @@
                                     value="C" name="jawab">
                                     C
                                 </button>
-                                <p class="my-2 p-choice">{{ $soal->jawaban_c }}</p>
+                                @if (isImageUrl($soal->jawaban_c))
+                                    <img class="mb-2" src="{{ $soal->jawaban_c }}" alt="jawaban_c"
+                                        style="object-fit: contain;">
+                                @else
+                                    <p class="my-2 p-choice">{{ $soal->jawaban_c }}</p>
+                                @endif
                             </div>
                             <div class="d-flex my-2">
                                 <button type="submit"
@@ -85,7 +110,12 @@
                                     value="D" name="jawab">
                                     D
                                 </button>
-                                <p class="my-2 p-choice">{{ $soal->jawaban_d }}</p>
+                                @if (isImageUrl($soal->jawaban_d))
+                                    <img class="mb-2" src="{{ $soal->jawaban_d }}" alt="jawaban_d"
+                                        style="object-fit: contain;">
+                                @else
+                                    <p class="my-2 p-choice">{{ $soal->jawaban_d }}</p>
+                                @endif
                             </div>
                             <div class="text-right m-0 p-0">
                                 <form action="{{ route('reset.jawaban', [$soal->id, $soal->id_sesi]) }}" method="post">
@@ -115,6 +145,7 @@
                 cancelButtonColor: '#3085d6',
                 confirmButtonText: 'Ya, Selesai!',
                 cancelButtonText: 'Batal',
+                allowOutsideClick: false,
                 customClass: {
                     confirmButton: 'btn btn-alert',
                     cancelButton: 'btn btn-wrong'
@@ -134,6 +165,7 @@
                 icon: 'warning',
                 confirmButtonColor: '#d33',
                 confirmButtonText: 'OK',
+                allowOutsideClick: false,
                 customClass: {
                     confirmButton: 'btn btn-alert',
                 }
