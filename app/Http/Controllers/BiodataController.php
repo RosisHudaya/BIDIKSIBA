@@ -7,6 +7,7 @@ use App\Models\AsalJurusanPivot;
 use App\Models\Biodata;
 use App\Http\Requests\StoreBiodataRequest;
 use App\Http\Requests\UpdateBiodataRequest;
+use App\Models\BiodataSpk;
 use App\Models\Jurusan;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
@@ -25,12 +26,14 @@ class BiodataController extends Controller
         $prodis = Prodi::all();
         $asalJurusanPivots = AsalJurusanPivot::all();
         $biodatas = Biodata::where('id_user', $id)->first();
+        $biodata_spk = BiodataSpk::where('id_user', $id)->first();
         return view('biodata.index')->with([
             'asalJurusans' => $asalJurusans,
             'jurusans' => $jurusans,
             'prodis' => $prodis,
             'asalJurusanPivots' => $asalJurusanPivots,
             'biodatas' => $biodatas,
+            'biodata_spk' => $biodata_spk,
         ]);
     }
 

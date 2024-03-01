@@ -158,7 +158,6 @@ select {
     color: white;
     background-color: #dc3545 !important;
     box-shadow: none !important;
-    /* margin-top: auto; */
 }
 
 .btn-wrong:active {

@@ -22,8 +22,6 @@ class JurusanSeeder extends Seeder
             ['jurusan' => 'Teknik Sipil'],
             ['jurusan' => 'Akuntansi'],
             ['jurusan' => 'Administrasi Niaga'],
-            ['jurusan' => 'Teknologi Informasi'],
-            ['jurusan' => 'Bahasa'],
         ];
 
         Jurusan::insert($data);
