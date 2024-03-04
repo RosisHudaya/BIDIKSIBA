@@ -17,6 +17,7 @@ class VerifikasiPendaftarController extends Controller
         $statusSelected = $request->input('status');
         $biodatas = DB::table('biodatas as b')
             ->leftJoin('users as u', 'b.id_user', '=', 'u.id')
+            ->leftJoin('biodata_spks as bs', 'u.id', '=', 'bs.id_user')
             ->leftJoin('asal_jurusans as jp', 'b.id_asal_jurusan', '=', 'jp.id')
             ->leftJoin('jurusans as j', 'b.id_jurusan', '=', 'j.id')
             ->leftJoin('prodis as p', 'b.id_prodi', '=', 'p.id')
@@ -28,6 +29,25 @@ class VerifikasiPendaftarController extends Controller
             })
             ->select(
                 'b.*',
+                'bs.pekerjaan_ortu',
+                'bs.detail_pekerjaan',
+                'bs.gaji_ortu',
+                'bs.slip_gaji',
+                'bs.luas_tanah',
+                'bs.shm',
+                'bs.jml_kmr',
+                'bs.foto_kmr',
+                'bs.jml_kmr_mandi',
+                'bs.foto_kmr_mandi',
+                'bs.tagihan_listrik',
+                'bs.slip_tagihan',
+                'bs.pbb',
+                'bs.slip_pbb',
+                'bs.jml_hutang',
+                'bs.jml_sdr',
+                'bs.surat_ket_sdr',
+                'bs.status_ortu',
+                'bs.surat_ket_yatim',
                 'jp.asal_jurusan',
                 'j.jurusan',
                 'p.prodi',

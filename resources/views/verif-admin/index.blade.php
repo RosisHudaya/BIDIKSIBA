@@ -48,7 +48,7 @@
                                             <th style="width: 20%;">NAMA</th>
                                             <th style="width: 20%;">EMAIL</th>
                                             <th style="width: 20%;">STATUS</th>
-                                            <th class="text-center" style="width: 25%;">AKSI</th>
+                                            <th class="text-center" style="width: 20%;">AKSI</th>
                                         </tr>
                                         @foreach ($biodatas as $key => $biodata)
                                             <tr>
@@ -66,13 +66,12 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('asal-jurusan.edit', $biodata->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon "><i
+                                                        <a href="" class="btn btn-sm btn-info btn-icon "><i
                                                                 class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('asal-jurusan.destroy', $biodata->id) }}"
-                                                            method="POST" class="ml-2" id="del-<?= $biodata->id ?>">
+                                                        <form action="" method="POST" class="ml-2"
+                                                            id="del-<?= $biodata->id ?>">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-sm btn-danger btn-icon"
@@ -160,6 +159,129 @@
                     <div class="modal-body">
                         @if ($biodata && $biodata->kartu_siswa)
                             <img class="w-100" src="{{ asset('storage/' . $biodata->kartu_siswa) }}" alt="kartu_siswa">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal slip gaji -->
+        <div class="modal fade" id="fotoSlipGaji-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoSlipGajiModalLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->slip_gaji)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->slip_gaji) }}" alt="slip-gaji">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal shm -->
+        <div class="modal fade" id="fotoShm-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoShmLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->shm)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->shm) }}" alt="shm">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal foto kamar -->
+        <div class="modal fade" id="fotoKamar-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoKamarLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->foto_kmr)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->foto_kmr) }}" alt="foto-kamar">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal foto kamar mandi -->
+        <div class="modal fade" id="fotoKamarMandi-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoKamarMandiLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->foto_kmr_mandi)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->foto_kmr_mandi) }}"
+                                alt="foto-kamar-mandi">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal foto tagihan listrik -->
+        <div class="modal fade" id="fotoTagihanListrik-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoTagihanListrikLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->slip_tagihan)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->slip_tagihan) }}"
+                                alt="tagihan-listrik">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal foto slip pbb -->
+        <div class="modal fade" id="fotoSlipPbb-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoSlipPbbLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->slip_pbb)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->slip_pbb) }}" alt="slip-pbb">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal foto surat ket saudara -->
+        <div class="modal fade" id="fotoKetSdr-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoKetSdrLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->surat_ket_sdr)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->surat_ket_sdr) }}" alt="ket-sdr">
+                        @else
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal foto surat ket yatim -->
+        <div class="modal fade" id="fotoKetYatim-{{ $biodata->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fotoKetYatimLabel-{{ $biodata->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @if ($biodata && $biodata->surat_ket_yatim)
+                            <img class="w-100" src="{{ asset('storage/' . $biodata->surat_ket_yatim) }}"
+                                alt="ket-yatim">
                         @else
                         @endif
                     </div>

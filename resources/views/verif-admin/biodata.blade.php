@@ -14,11 +14,11 @@
         <th rowspan="5" class="text-center">
             @if ($biodata->foto)
                 <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->foto) }}" alt="foto"
-                    style="width: 200px; height: 300px; object-fit: cover;" data-toggle="modal"
+                    style="width: 150px; height: 200px; object-fit: cover;" data-toggle="modal"
                     data-target="#fotoModal-{{ $biodata->id }}">
             @else
                 <img class="mb-3 ml-3" src="{{ asset('assets/img/profile.jpg') }}" alt="foto-default"
-                    style="width: 200px; height: 300px; object-fit: cover;">
+                    style="width: 150px; height: 200px; object-fit: cover;">
             @endif
         </th>
     </tr>
@@ -107,6 +107,7 @@
         <td>{{ $biodata->prodi ?? '--' }}</td>
         <td></td>
     </tr>
+    @include('verif-admin.biodata-pendukung')
     <tr>
         <td colspan="4"></td>
         <td class="text-center">
