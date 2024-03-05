@@ -24,6 +24,16 @@ class DatabaseSeeder extends Seeder
             JurusanSeeder::class,
             AsalJurusanPivotSeeder::class,
             ProdiSeeder::class,
+            PekerjaanOrtuSeeder::class,
+            GajiOrtuSeeder::class,
+            LuasTanahSeeder::class,
+            JumlahKamarSeeder::class,
+            KamarMandiSeeder::class,
+            TagihanListrikSeeder::class,
+            PajakSeeder::class,
+            HutangSeeder::class,
+            SaudaraSeeder::class,
+            StatusOrtuSeeder::class
         ]);
     }
 }
