@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('biodata_spks', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_user');
-            $table->enum('pekerjaan_ortu', ['Tidak Bekerja', 'Honorer', 'Serabutan', 'Wiraswasta'])->nullable();
+            $table->enum('pekerjaan_ortu', ['Tidak Bekerja', 'Honorer', 'Serabutan', 'Outsourcing', 'Wiraswasta'])->nullable();
             $table->string('detail_pekerjaan')->nullable();
             $table->string('gaji_ortu')->nullable();
             $table->string('slip_gaji')->nullable();

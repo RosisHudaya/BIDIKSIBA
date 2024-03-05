@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AkunUjian;
 use App\Models\Biodata;
+use App\Models\BiodataSpk;
+use App\Models\DataSpk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -61,6 +63,36 @@ class VerifikasiPendaftarController extends Controller
     public function verif(Biodata $biodata)
     {
         $biodata->update(['status' => 'Diverifikasi']);
+
+        $biodata_spk = BiodataSpk::where('id_user', $biodata->id_user)->first();
+        $pekerjaan_ortu = ($biodata_spk->pekerjaan_ortu == 'Tidak Bekerja') ? 5 : (($biodata_spk->pekerjaan_ortu == 'Honorer') ? 4 : (($biodata_spk->pekerjaan_ortu == 'Serabutan') ? 3 : (($biodata_spk->pekerjaan_ortu == 'Outsourcing' ? 2 : 1))));
+        $int_gaji_ortu = (int) str_replace('.', '', $biodata_spk->gaji_ortu);
+        $gaji_ortu = ($int_gaji_ortu <= 1000000) ? 5 : (($int_gaji_ortu <= 2000000) ? 4 : (($int_gaji_ortu <= 3000000) ? 3 : (($int_gaji_ortu <= 4000000) ? 2 : 1)));
+        $int_luas_tanah = (int) str_replace('.', '', $biodata_spk->luas_tanah);
+        $luas_tanah = ($int_luas_tanah <= 50) ? 5 : (($int_luas_tanah <= 100) ? 4 : (($int_luas_tanah <= 150) ? 3 : (($int_luas_tanah <= 200) ? 2 : 1)));
+        $jumlah_kamar = ($biodata_spk->jml_kmr == 1) ? 5 : (($biodata_spk->jml_kmr == 2) ? 4 : (($biodata_spk->jml_kmr == 3) ? 3 : (($biodata_spk->jml_kmr == 4) ? 2 : 1)));
+        $kamar_mandi = ($biodata_spk->jml_kmr_mandi == 'Memiliki') ? 5 : 1;
+        $listrik = ($biodata_spk->tagihan_listrik == 'Tidak Memiliki') ? 5 : (($biodata_spk->tagihan_listrik == '450 Watt' || $biodata_spk->tagihan_listrik == '900 Watt') ? 3 : 1);
+        $int_pbb = (int) str_replace('.', '', $biodata_spk->pbb);
+        $pbb = ($int_pbb < 500000) ? 5 : (($int_pbb < 1000000) ? 3 : 1);
+        $int_hutang = (int) str_replace('.', '', $biodata_spk->jml_hutang);
+        $hutang = ($int_hutang < 1000000) ? 5 : (($int_hutang >= 1000000) ? 1 : 3);
+        $jml_sdr = ($biodata_spk->jml_sdr > 4) ? 5 : (($biodata_spk->jml_sdr > 0) ? 3 : 1);
+        $status_ortu = ($biodata_spk->status_ortu == 'Yatim Piatu') ? 5 : (($biodata_spk->status_ortu == 'Yatim') ? 4 : (($biodata_spk->status_ortu == 'Piatu') ? 3 : 1));
+
+        DataSpk::create([
+            'id_user' => $biodata->id_user,
+            'C1' => $pekerjaan_ortu,
+            'C2' => $gaji_ortu,
+            'C3' => $luas_tanah,
+            'C4' => $jumlah_kamar,
+            'C5' => $kamar_mandi,
+            'C6' => $listrik,
+            'C7' => $pbb,
+            'C8' => $hutang,
+            'C9' => $jml_sdr,
+            'C10' => $status_ortu,
+        ]);
 
         $token = Str::random(7);
         $password = Str::random(18);
