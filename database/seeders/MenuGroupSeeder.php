@@ -25,8 +25,18 @@ class MenuGroupSeeder extends Seeder
                 ],
                 [
                     'name' => 'Users Management',
-                    'icon' => 'fas fa-users',
+                    'icon' => 'fas fa-user',
                     'permission_name' => 'user.management',
+                ],
+                [
+                    'name' => 'Kriteria Pendaftar',
+                    'icon' => 'fas fa-user-tie',
+                    'permisison_name' => 'menu.kriteria.pendaftar',
+                ],
+                [
+                    'name' => 'Kriteria Ekonomi',
+                    'icon' => 'fas fa-home',
+                    'permisison_name' => 'menu.kriteria.ekonomi',
                 ],
                 [
                     'name' => 'Role Management',

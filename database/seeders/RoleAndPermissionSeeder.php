@@ -26,6 +26,8 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'role.permission.management']);
         Permission::create(['name' => 'menu.pendidikan']);
         Permission::create(['name' => 'menu.ujian']);
+        Permission::create(['name' => 'menu.kriteria.pendaftar']);
+        Permission::create(['name' => 'menu.kriteria.ekonomi']);
         Permission::create(['name' => 'menu.management']);
 
         //user
@@ -103,6 +105,66 @@ class RoleAndPermissionSeeder extends Seeder
 
         //laporan nilai
         Permission::create(['name' => 'laporan-nilai.index']);
+
+        //pekerjaan orang tua
+        Permission::create(['name' => 'pekerjaan-ortu.index']);
+        Permission::create(['name' => 'pekerjaan-ortu.create']);
+        Permission::create(['name' => 'pekerjaan-ortu.edit']);
+        Permission::create(['name' => 'pekerjaan-ortu.destroy']);
+
+        //penghasilan orang tua
+        Permission::create(['name' => 'penghasilan-ortu.index']);
+        Permission::create(['name' => 'penghasilan-ortu.create']);
+        Permission::create(['name' => 'penghasilan-ortu.edit']);
+        Permission::create(['name' => 'penghasilan-ortu.destroy']);
+
+        //luas tanah
+        Permission::create(['name' => 'luas-tanah.index']);
+        Permission::create(['name' => 'luas-tanah.create']);
+        Permission::create(['name' => 'luas-tanah.edit']);
+        Permission::create(['name' => 'luas-tanah.destroy']);
+
+        //kamar
+        Permission::create(['name' => 'kamar.index']);
+        Permission::create(['name' => 'kamar.create']);
+        Permission::create(['name' => 'kamar.edit']);
+        Permission::create(['name' => 'kamar.destroy']);
+
+        //kamar mandi
+        Permission::create(['name' => 'kamar-mandi.index']);
+        Permission::create(['name' => 'kamar-mandi.create']);
+        Permission::create(['name' => 'kamar-mandi.edit']);
+        Permission::create(['name' => 'kamar-mandi.destroy']);
+
+        //tagihan listrik
+        Permission::create(['name' => 'tagihan-listrik.index']);
+        Permission::create(['name' => 'tagihan-listrik.create']);
+        Permission::create(['name' => 'tagihan-listrik.edit']);
+        Permission::create(['name' => 'tagihan-listrik.destroy']);
+
+        //pbb
+        Permission::create(['name' => 'pajak.index']);
+        Permission::create(['name' => 'pajak.create']);
+        Permission::create(['name' => 'pajak.edit']);
+        Permission::create(['name' => 'pajak.destroy']);
+
+        //hutang
+        Permission::create(['name' => 'hutang.index']);
+        Permission::create(['name' => 'hutang.create']);
+        Permission::create(['name' => 'hutang.edit']);
+        Permission::create(['name' => 'hutang.destroy']);
+
+        //saudara
+        Permission::create(['name' => 'saudara.index']);
+        Permission::create(['name' => 'saudara.create']);
+        Permission::create(['name' => 'saudara.edit']);
+        Permission::create(['name' => 'saudara.destroy']);
+
+        //status orang tua
+        Permission::create(['name' => 'status-ortu.index']);
+        Permission::create(['name' => 'status-ortu.create']);
+        Permission::create(['name' => 'status-ortu.edit']);
+        Permission::create(['name' => 'status-ortu.destroy']);
 
         //menu group 
         Permission::create(['name' => 'menu-group.index']);

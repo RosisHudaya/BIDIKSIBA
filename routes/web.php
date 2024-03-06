@@ -5,11 +5,18 @@ use App\Http\Controllers\AsalJurusanController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\BiodataSpkController;
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\GajiOrtuController;
+use App\Http\Controllers\HutangController;
+use App\Http\Controllers\JumlahKamarController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\KamarMandiController;
 use App\Http\Controllers\LaporanNilaiController;
 use App\Http\Controllers\LoginUjianController;
+use App\Http\Controllers\LuasTanahController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
+use App\Http\Controllers\PajakController;
+use App\Http\Controllers\PekerjaanOrtuController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
 use App\Http\Controllers\RoleAndPermission\AssignUserToRoleController;
@@ -19,9 +26,12 @@ use App\Http\Controllers\RoleAndPermission\ImportPermissionController;
 use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
+use App\Http\Controllers\SaudaraController;
 use App\Http\Controllers\SesiUjianController;
 use App\Http\Controllers\SesiUserController;
 use App\Http\Controllers\SoalUjianController;
+use App\Http\Controllers\StatusOrtuController;
+use App\Http\Controllers\TagihanListrikController;
 use App\Http\Controllers\TokenUjianController;
 use App\Http\Controllers\UjianController;
 use App\Http\Controllers\VerifikasiPendaftarController;
@@ -83,6 +93,25 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::prefix('menu-management')->group(function () {
         Route::resource('menu-group', MenuGroupController::class);
         Route::resource('menu-item', MenuItemController::class);
+    });
+
+    //menu kriteria pendaftar
+    Route::prefix('menu-kriteria-pendaftar')->group(function () {
+        Route::resource('pekerjaan-ortu', PekerjaanOrtuController::class);
+        Route::resource('penghasilan-ortu', GajiOrtuController::class);
+        Route::resource('saudara', SaudaraController::class);
+        Route::resource('status-ortu', StatusOrtuController::class);
+    });
+
+    //menu kriteria ekonomi
+    Route::prefix('menu-kriteria-ekonomi')->group(function () {
+        Route::resource('luas-tanah', LuasTanahController::class);
+        Route::resource('kamar', JumlahKamarController::class);
+        Route::resource('kamar-mandi', KamarMandiController::class);
+        Route::resource('tagihan-listrik', TagihanListrikController::class);
+        Route::resource('pajak', PajakController::class);
+        Route::resource('hutang', HutangController::class);
+
     });
 
     //menu pendidikan
