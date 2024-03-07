@@ -8,8 +8,18 @@ use App\Models\Biodata;
 use App\Http\Requests\StoreBiodataRequest;
 use App\Http\Requests\UpdateBiodataRequest;
 use App\Models\BiodataSpk;
+use App\Models\GajiOrtu;
+use App\Models\Hutang;
+use App\Models\JumlahKamar;
 use App\Models\Jurusan;
+use App\Models\KamarMandi;
+use App\Models\LuasTanah;
+use App\Models\Pajak;
+use App\Models\PekerjaanOrtu;
 use App\Models\Prodi;
+use App\Models\Saudara;
+use App\Models\StatusOrtu;
+use App\Models\TagihanListrik;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -26,13 +36,33 @@ class BiodataController extends Controller
         $prodis = Prodi::all();
         $asalJurusanPivots = AsalJurusanPivot::all();
         $biodatas = Biodata::where('id_user', $id)->first();
-        $biodata_spk = BiodataSpk::where('id_user', $id)->first();
+        $pekerjaan_ortus = PekerjaanOrtu::all();
+        $gaji_ortus = GajiOrtu::all();
+        $luas_tanahs = LuasTanah::all();
+        $kamars = JumlahKamar::all();
+        $kamar_mandis = KamarMandi::all();
+        $tagihan_listriks = TagihanListrik::all();
+        $pajaks = Pajak::all();
+        $saudaras = Saudara::all();
+        $status_ortus = StatusOrtu::all();
+        $hutangs = Hutang::all();
+        $biodata_spk = BiodataSpk::where('user_id', $id)->first();
         return view('biodata.index')->with([
             'asalJurusans' => $asalJurusans,
             'jurusans' => $jurusans,
             'prodis' => $prodis,
             'asalJurusanPivots' => $asalJurusanPivots,
             'biodatas' => $biodatas,
+            'pekerjaan_ortus' => $pekerjaan_ortus,
+            'gaji_ortus' => $gaji_ortus,
+            'luas_tanahs' => $luas_tanahs,
+            'kamars' => $kamars,
+            'kamar_mandis' => $kamar_mandis,
+            'tagihan_listriks' => $tagihan_listriks,
+            'pajaks' => $pajaks,
+            'saudaras' => $saudaras,
+            'status_ortus' => $status_ortus,
+            'hutangs' => $hutangs,
             'biodata_spk' => $biodata_spk,
         ]);
     }

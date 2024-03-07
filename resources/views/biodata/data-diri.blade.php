@@ -203,7 +203,7 @@
         <label for="">Jenis Kelamin</label>
         <select class="form-control select2" name="gender" id="gender"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">-- Pilih jenis kelamin --</option>
+            <option value="">Jenis Kelamin</option>
             <option value="Laki-laki" {{ isset($biodatas) && $biodatas->gender === 'Laki-laki' ? 'selected' : '' }}>
                 Laki-laki
             </option>

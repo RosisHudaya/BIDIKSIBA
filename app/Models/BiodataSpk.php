@@ -10,30 +10,81 @@ class BiodataSpk extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_user',
-        'pekerjaan_ortu',
+        'user_id',
+        'pekerjaan_ortu_id',
         'detail_pekerjaan',
-        'gaji_ortu',
+        'gaji_ortu_id',
         'slip_gaji',
-        'luas_tanah',
+        'luas_tanah_id',
         'shm',
-        'jml_kmr',
+        'kamar_id',
         'foto_kmr',
-        'jml_kmr_mandi',
+        'kamar_mandi_id',
         'foto_kmr_mandi',
-        'tagihan_listrik',
+        'tagihan_listrik_id',
         'slip_tagihan',
-        'pbb',
+        'pajak_id',
         'slip_pbb',
-        'jml_hutang',
-        'jml_sdr',
+        'hutang_id',
+        'det_hutang',
+        'saudara_id',
         'surat_ket_sdr',
-        'status_ortu',
+        'status_ortu_id',
         'surat_ket_yatim',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function pekerjaan_ortu()
+    {
+        return $this->belongsTo(PekerjaanOrtu::class);
+    }
+
+    public function gaji_ortu()
+    {
+        return $this->belongsTo(GajiOrtu::class);
+    }
+
+    public function luas_tanah()
+    {
+        return $this->belongsTo(LuasTanah::class);
+    }
+
+    public function jumlah_kamar()
+    {
+        return $this->belongsTo(JumlahKamar::class);
+    }
+
+    public function kamar_mandi()
+    {
+        return $this->belongsTo(KamarMandi::class);
+    }
+
+    public function tagihan_listrik()
+    {
+        return $this->belongsTo(TagihanListrik::class);
+    }
+
+    public function pajak()
+    {
+        return $this->belongsTo(Pajak::class);
+    }
+
+    public function hutang()
+    {
+        return $this->belongsTo(Hutang::class);
+    }
+
+    public function saudara()
+    {
+        return $this->belongsTo(Saudara::class);
+    }
+
+    public function status_ortu()
+    {
+        return $this->belongsTo(StatusOrtu::class);
     }
 }

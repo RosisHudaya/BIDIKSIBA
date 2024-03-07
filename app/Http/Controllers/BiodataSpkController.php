@@ -21,39 +21,33 @@ class BiodataSpkController extends Controller
     public function storeOrUpdate(Request $request, BiodataSpk $biodataSpk)
     {
         $id = Auth::id();
-        $idBiodataSpk = BiodataSpk::where('id_user', $id)->first();
+        $idBiodataSpk = BiodataSpk::where('user_id', $id)->first();
         $idBiodata = Biodata::where('id_user', $id)->first();
 
         $request->validate(
             [
                 'detail_pekerjaan' => 'nullable|regex:/^[a-zA-Z\s]+$/u',
-                'gaji_ortu' => 'nullable',
-                'luas_tanah' => 'nullable',
-                'jml_kmr' => 'nullable|numeric',
-                'pbb' => 'nullable',
-                'jml_sdr' => 'nullable|numeric',
             ],
             [
                 'detail_pekerjaan.regex' => 'Form detail pekerjaan tidak boleh mengandung angka dan simbol',
-                'jml_kmr.numeric' => 'Form jumlah kamar harus berupa angka',
-                'jml_sdr.numeric' => 'Form jumlah saudara harus berupa angka',
             ]
         );
 
         if ($idBiodataSpk == null) {
             $biodata_spk = BiodataSpk::create([
-                'id_user' => $id,
-                'pekerjaan_ortu' => $request->pekerjaan_ortu,
+                'user_id' => $id,
+                'pekerjaan_ortu_id' => $request->pekerjaan_ortu,
                 'detail_pekerjaan' => $request->detail_pekerjaan,
-                'gaji_ortu' => $request->gaji_ortu,
-                'luas_tanah' => $request->luas_tanah,
-                'jml_kmr' => $request->jml_kmr,
-                'jml_kmr_mandi' => $request->jml_kmr_mandi,
-                'tagihan_listrik' => $request->tagihan_listrik,
-                'pbb' => $request->pbb,
-                'jml_hutang' => $request->jml_hutang,
-                'jml_sdr' => $request->jml_sdr,
-                'status_ortu' => $request->status_ortu,
+                'gaji_ortu_id' => $request->gaji_ortu,
+                'luas_tanah_id' => $request->luas_tanah,
+                'kamar_id' => $request->jml_kmr,
+                'kamar_mandi_id' => $request->jml_kmr_mandi,
+                'tagihan_listrik_id' => $request->tagihan_listrik,
+                'pajak_id' => $request->pbb,
+                'hutang_id' => $request->jml_hutang,
+                'saudara_id' => $request->jml_sdr,
+                'status_ortu_id' => $request->status_ortu,
+                'det_hutang' => $request->det_hutang,
             ]);
 
             if ($idBiodata == null) {
@@ -149,18 +143,19 @@ class BiodataSpkController extends Controller
             }
         } else {
             $idBiodataSpk->update([
-                'id_user' => $id,
-                'pekerjaan_ortu' => $request->pekerjaan_ortu,
+                'user_id' => $id,
+                'pekerjaan_ortu_id' => $request->pekerjaan_ortu,
                 'detail_pekerjaan' => $request->detail_pekerjaan,
-                'gaji_ortu' => $request->gaji_ortu,
-                'luas_tanah' => $request->luas_tanah,
-                'jml_kmr' => $request->jml_kmr,
-                'jml_kmr_mandi' => $request->jml_kmr_mandi,
-                'tagihan_listrik' => $request->tagihan_listrik,
-                'pbb' => $request->pbb,
-                'jml_hutang' => $request->jml_hutang,
-                'jml_sdr' => $request->jml_sdr,
-                'status_ortu' => $request->status_ortu,
+                'gaji_ortu_id' => $request->gaji_ortu,
+                'luas_tanah_id' => $request->luas_tanah,
+                'kamar_id' => $request->jml_kmr,
+                'kamar_mandi_id' => $request->jml_kmr_mandi,
+                'tagihan_listrik_id' => $request->tagihan_listrik,
+                'pajak_id' => $request->pbb,
+                'hutang_id' => $request->jml_hutang,
+                'saudara_id' => $request->jml_sdr,
+                'status_ortu_id' => $request->status_ortu,
+                'det_hutang' => $request->det_hutang,
             ]);
 
             $idBiodata->update([

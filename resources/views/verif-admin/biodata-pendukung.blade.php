@@ -14,7 +14,7 @@
     <td></td>
     <td>{{ $biodata->pekerjaan_ortu ?? '--' }}</td>
     <td>{{ $biodata->detail_pekerjaan ?? '--' }}</td>
-    <td>Rp {{ $biodata->gaji_ortu ?? '--' }}</td>
+    <td>{{ $biodata->gaji_ortu ?? '--' }}</td>
     <td>
         @if ($biodata->slip_gaji)
             <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->slip_gaji) }}" alt="slip_gaji"
@@ -35,7 +35,7 @@
 </tr>
 <tr>
     <td></td>
-    <td>{{ $biodata->luas_tanah ?? '--' }} m<sup>2</sup></td>
+    <td>{{ $biodata->luas_tanah ?? '--' }}<sup>2</sup></td>
     <td>
         @if ($biodata->shm)
             <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->shm) }}" alt="shm"
@@ -46,7 +46,7 @@
                 style="width: 170px; height: 100px; object-fit: contain;">
         @endif
     </td>
-    <td>{{ $biodata->jml_kmr ?? '--' }} Kamar</td>
+    <td>{{ $biodata->jumlah_kamar ?? '--' }}</td>
     <td>
         @if ($biodata->foto_kmr)
             <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->foto_kmr) }}" alt="foto-kamar"
@@ -67,7 +67,7 @@
 </tr>
 <tr>
     <td></td>
-    <td>{{ $biodata->jml_kmr_mandi ?? '--' }}</td>
+    <td>{{ $biodata->kamar_mandi ?? '--' }}</td>
     <td>
         @if ($biodata->foto_kmr_mandi)
             <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->foto_kmr_mandi) }}" alt="foto-kamar-mandi"
@@ -99,7 +99,7 @@
 </tr>
 <tr>
     <td></td>
-    <td>Rp {{ $biodata->pbb ?? '--' }}</td>
+    <td>{{ $biodata->pajak ?? '--' }}</td>
     <td>
         @if ($biodata->slip_pbb)
             <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->slip_pbb) }}" alt="slip-pbb"
@@ -110,7 +110,7 @@
                 style="width: 170px; height: 100px; object-fit: contain;">
         @endif
     </td>
-    <td>{{ $biodata->jml_sdr ?? '--' }} Bersaudara</td>
+    <td>{{ $biodata->saudara ?? '--' }}</td>
     <td>
         @if ($biodata->surat_ket_sdr)
             <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->surat_ket_sdr) }}" alt="ket-sdr"
@@ -127,7 +127,7 @@
     <th>STATUS ORANG TUA</th>
     <th>SURAT KET YATIM</th>
     <th>JUMLAH HUTANG</th>
-    <th></th>
+    <th>DETAIL JUMLAH HUTANG</th>
 </tr>
 <tr>
     <td></td>
@@ -142,6 +142,6 @@
                 style="width: 170px; height: 100px; object-fit: contain;">
         @endif
     </td>
-    <td>Rp {{ $biodata->jml_hutang ?? '--' }}</td>
-    <td></td>
+    <td>{{ $biodata->hutang ?? '--' }}</td>
+    <td>Rp {{ $biodata->det_hutang ?? '--' }}</td>
 </tr>

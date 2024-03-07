@@ -19,7 +19,17 @@ class VerifikasiPendaftarController extends Controller
         $statusSelected = $request->input('status');
         $biodatas = DB::table('biodatas as b')
             ->leftJoin('users as u', 'b.id_user', '=', 'u.id')
-            ->leftJoin('biodata_spks as bs', 'u.id', '=', 'bs.id_user')
+            ->leftJoin('biodata_spks as bs', 'u.id', '=', 'bs.user_id')
+            ->leftJoin('pekerjaan_ortus as po', 'bs.pekerjaan_ortu_id', '=', 'po.id')
+            ->leftJoin('gaji_ortus as go', 'bs.gaji_ortu_id', '=', 'go.id')
+            ->leftJoin('luas_tanahs as lt', 'bs.luas_tanah_id', '=', 'lt.id')
+            ->leftJoin('jumlah_kamars as jk', 'bs.kamar_id', '=', 'jk.id')
+            ->leftJoin('kamar_mandis as km', 'bs.kamar_mandi_id', '=', 'km.id')
+            ->leftJoin('tagihan_listriks as tl', 'bs.tagihan_listrik_id', '=', 'tl.id')
+            ->leftJoin('pajaks as pj', 'bs.pajak_id', '=', 'pj.id')
+            ->leftJoin('hutangs as h', 'bs.hutang_id', '=', 'h.id')
+            ->leftJoin('saudaras as s', 'bs.saudara_id', '=', 's.id')
+            ->leftJoin('status_ortus as so', 'bs.status_ortu_id', '=', 'so.id')
             ->leftJoin('asal_jurusans as jp', 'b.id_asal_jurusan', '=', 'jp.id')
             ->leftJoin('jurusans as j', 'b.id_jurusan', '=', 'j.id')
             ->leftJoin('prodis as p', 'b.id_prodi', '=', 'p.id')
@@ -31,25 +41,26 @@ class VerifikasiPendaftarController extends Controller
             })
             ->select(
                 'b.*',
-                'bs.pekerjaan_ortu',
                 'bs.detail_pekerjaan',
-                'bs.gaji_ortu',
                 'bs.slip_gaji',
-                'bs.luas_tanah',
                 'bs.shm',
-                'bs.jml_kmr',
                 'bs.foto_kmr',
-                'bs.jml_kmr_mandi',
                 'bs.foto_kmr_mandi',
-                'bs.tagihan_listrik',
                 'bs.slip_tagihan',
-                'bs.pbb',
                 'bs.slip_pbb',
-                'bs.jml_hutang',
-                'bs.jml_sdr',
+                'bs.det_hutang',
                 'bs.surat_ket_sdr',
-                'bs.status_ortu',
                 'bs.surat_ket_yatim',
+                'po.pekerjaan_ortu',
+                'go.gaji_ortu',
+                'lt.luas_tanah',
+                'jk.jumlah_kamar',
+                'km.kamar_mandi',
+                'tl.tagihan_listrik',
+                'pj.pajak',
+                'h.hutang',
+                's.saudara',
+                'so.status_ortu',
                 'jp.asal_jurusan',
                 'j.jurusan',
                 'p.prodi',
@@ -63,36 +74,6 @@ class VerifikasiPendaftarController extends Controller
     public function verif(Biodata $biodata)
     {
         $biodata->update(['status' => 'Diverifikasi']);
-
-        $biodata_spk = BiodataSpk::where('id_user', $biodata->id_user)->first();
-        $pekerjaan_ortu = ($biodata_spk->pekerjaan_ortu == 'Tidak Bekerja') ? 5 : (($biodata_spk->pekerjaan_ortu == 'Honorer') ? 4 : (($biodata_spk->pekerjaan_ortu == 'Serabutan') ? 3 : (($biodata_spk->pekerjaan_ortu == 'Outsourcing' ? 2 : 1))));
-        $int_gaji_ortu = (int) str_replace('.', '', $biodata_spk->gaji_ortu);
-        $gaji_ortu = ($int_gaji_ortu <= 1000000) ? 5 : (($int_gaji_ortu <= 2000000) ? 4 : (($int_gaji_ortu <= 3000000) ? 3 : (($int_gaji_ortu <= 4000000) ? 2 : 1)));
-        $int_luas_tanah = (int) str_replace('.', '', $biodata_spk->luas_tanah);
-        $luas_tanah = ($int_luas_tanah <= 50) ? 5 : (($int_luas_tanah <= 100) ? 4 : (($int_luas_tanah <= 150) ? 3 : (($int_luas_tanah <= 200) ? 2 : 1)));
-        $jumlah_kamar = ($biodata_spk->jml_kmr == 1) ? 5 : (($biodata_spk->jml_kmr == 2) ? 4 : (($biodata_spk->jml_kmr == 3) ? 3 : (($biodata_spk->jml_kmr == 4) ? 2 : 1)));
-        $kamar_mandi = ($biodata_spk->jml_kmr_mandi == 'Memiliki') ? 5 : 1;
-        $listrik = ($biodata_spk->tagihan_listrik == 'Tidak Memiliki') ? 5 : (($biodata_spk->tagihan_listrik == '450 Watt' || $biodata_spk->tagihan_listrik == '900 Watt') ? 3 : 1);
-        $int_pbb = (int) str_replace('.', '', $biodata_spk->pbb);
-        $pbb = ($int_pbb < 500000) ? 5 : (($int_pbb < 1000000) ? 3 : 1);
-        $int_hutang = (int) str_replace('.', '', $biodata_spk->jml_hutang);
-        $hutang = ($int_hutang < 1000000) ? 5 : (($int_hutang >= 1000000) ? 1 : 3);
-        $jml_sdr = ($biodata_spk->jml_sdr > 4) ? 5 : (($biodata_spk->jml_sdr > 0) ? 3 : 1);
-        $status_ortu = ($biodata_spk->status_ortu == 'Yatim Piatu') ? 5 : (($biodata_spk->status_ortu == 'Yatim') ? 4 : (($biodata_spk->status_ortu == 'Piatu') ? 3 : 1));
-
-        DataSpk::create([
-            'id_user' => $biodata->id_user,
-            'C1' => $pekerjaan_ortu,
-            'C2' => $gaji_ortu,
-            'C3' => $luas_tanah,
-            'C4' => $jumlah_kamar,
-            'C5' => $kamar_mandi,
-            'C6' => $listrik,
-            'C7' => $pbb,
-            'C8' => $hutang,
-            'C9' => $jml_sdr,
-            'C10' => $status_ortu,
-        ]);
 
         $token = Str::random(7);
         $password = Str::random(18);
