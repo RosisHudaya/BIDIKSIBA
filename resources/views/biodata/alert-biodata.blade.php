@@ -33,12 +33,11 @@
             $biodata_spk?->gaji_ortu_id != null &&
             $biodata_spk?->slip_gaji != null &&
             $biodata_spk?->luas_tanah_id != null &&
-            $biodata_spk?->luas_tanah_id != null &&
             $biodata_spk?->shm != null &&
             $biodata_spk?->kamar_id != null &&
             $biodata_spk?->foto_kmr != null &&
             $biodata_spk?->kamar_mandi_id != null &&
-            $biodata_spk?->foto_kmr_id != null &&
+            $biodata_spk?->foto_kmr_mandi != null &&
             $biodata_spk?->tagihan_listrik_id != null &&
             $biodata_spk?->slip_tagihan != null &&
             $biodata_spk?->pajak_id != null &&

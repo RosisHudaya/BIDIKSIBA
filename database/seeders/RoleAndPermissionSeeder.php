@@ -28,6 +28,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'menu.ujian']);
         Permission::create(['name' => 'menu.kriteria.pendaftar']);
         Permission::create(['name' => 'menu.kriteria.ekonomi']);
+        Permission::create(['name' => 'menu.ranking']);
         Permission::create(['name' => 'menu.management']);
 
         //user
@@ -72,6 +73,12 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'assign.user.index']);
         Permission::create(['name' => 'assign.user.create']);
         Permission::create(['name' => 'assign.user.edit']);
+
+        //bobot kriteria
+        Permission::create(['name' => 'bobot-kriteria.index']);
+        Permission::create(['name' => 'bobot-kriteria.create']);
+        Permission::create(['name' => 'bobot-kriteria.edit']);
+        Permission::create(['name' => 'bobot-kriteria.destroy']);
 
         //asal jurusan
         Permission::create(['name' => 'asal-jurusan.index']);

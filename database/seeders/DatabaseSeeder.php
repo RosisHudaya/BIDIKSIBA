@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             PajakSeeder::class,
             HutangSeeder::class,
             SaudaraSeeder::class,
-            StatusOrtuSeeder::class
+            StatusOrtuSeeder::class,
+            BobotSeeder::class,
         ]);
     }
 }

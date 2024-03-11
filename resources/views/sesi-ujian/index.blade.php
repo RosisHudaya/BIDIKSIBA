@@ -34,8 +34,8 @@
                                     <tbody>
                                         <tr>
                                             <th class="text-center align-middle" style="width: 75px;">#</th>
-                                            <th class="align-middle" style="width: 150px;">Sesi</th>
-                                            <th class="align-middle" style="width: 200px;">Ujian</th>
+                                            <th class="align-middle" style="width: 100px;">Sesi</th>
+                                            <th class="align-middle" style="width: 150px;">Ujian</th>
                                             <th class="text-center align-middle" style="width: 100px;">Jumlah Peserta</th>
                                             <th class="text-center align-middle" style="width: 300px;">Waktu</th>
                                             <th class="text-center align-middle">Aksi</th>

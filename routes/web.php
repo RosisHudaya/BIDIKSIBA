@@ -4,6 +4,7 @@ use App\Http\Controllers\AkunUjianController;
 use App\Http\Controllers\AsalJurusanController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\BiodataSpkController;
+use App\Http\Controllers\BobotController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\GajiOrtuController;
 use App\Http\Controllers\HutangController;
@@ -111,7 +112,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::resource('tagihan-listrik', TagihanListrikController::class);
         Route::resource('pajak', PajakController::class);
         Route::resource('hutang', HutangController::class);
+    });
 
+    //hasil ranking
+    Route::prefix('menu-ranking')->group(function () {
+        Route::resource('bobot-kriteria', BobotController::class);
     });
 
     //menu pendidikan
