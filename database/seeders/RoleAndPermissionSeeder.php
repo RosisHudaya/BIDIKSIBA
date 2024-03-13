@@ -80,6 +80,12 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'bobot-kriteria.edit']);
         Permission::create(['name' => 'bobot-kriteria.destroy']);
 
+        //data ranking bidiksiba
+        Permission::create(['name' => 'data-spk.index']);
+        Permission::create(['name' => 'data-spk.create']);
+        Permission::create(['name' => 'data-spk.edit']);
+        Permission::create(['name' => 'data-spk.destroy']);
+
         //asal jurusan
         Permission::create(['name' => 'asal-jurusan.index']);
         Permission::create(['name' => 'asal-jurusan.create']);

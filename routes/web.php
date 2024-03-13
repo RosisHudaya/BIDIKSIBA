@@ -5,6 +5,7 @@ use App\Http\Controllers\AsalJurusanController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\BiodataSpkController;
 use App\Http\Controllers\BobotController;
+use App\Http\Controllers\DataSpkController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\GajiOrtuController;
 use App\Http\Controllers\HutangController;
@@ -117,6 +118,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //hasil ranking
     Route::prefix('menu-ranking')->group(function () {
         Route::resource('bobot-kriteria', BobotController::class);
+        Route::resource('data-spk', DataSpkController::class);
     });
 
     //menu pendidikan

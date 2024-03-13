@@ -22,8 +22,8 @@ class KamarMandiSeeder extends Seeder
         ];
 
         $nilais = [
-            5,
             1,
+            5,
         ];
 
         foreach ($kamar_mandis as $index => $kamar_mandi) {
