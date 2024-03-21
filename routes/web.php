@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //hasil ranking
     Route::prefix('menu-ranking')->group(function () {
         Route::resource('bobot-kriteria', BobotController::class);
-        Route::resource('data-spk', DataSpkController::class);
+        Route::get('data-spk', [DataSpkController::class, 'index'])->name('menu-ranking.data-spk');
     });
 
     //menu pendidikan

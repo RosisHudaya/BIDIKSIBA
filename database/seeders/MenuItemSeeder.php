@@ -133,7 +133,7 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 6,
                 ],
                 [
-                    'name' => 'Data Ranking BIDIKSIBA',
+                    'name' => 'Ranking BIDIKSIBA',
                     'route' => 'menu-ranking/data-spk',
                     'permission_name' => 'data-spk.index',
                     'menu_group_id' => 6,

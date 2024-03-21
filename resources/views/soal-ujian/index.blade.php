@@ -68,7 +68,7 @@
                                                     name="import-file" data-id="send-import">
                                             </div>
                                             <div class="col-md-1 p-0 ml-2">
-                                                <button class="btn btn-primary px-4 py-2"
+                                                <button class="btn btn-primary px-3 py-2"
                                                     data-id="submit-import">Import</button>
                                             </div>
                                         </div>

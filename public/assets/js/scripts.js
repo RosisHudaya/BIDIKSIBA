@@ -1,9 +1,7 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
-    if (document.body.classList.contains("sidebar-mini")) {
-        document.body.classList.remove("sidebar-mini");
-    }
+    document.body.classList.remove("sidebar-mini");
 });
 
 // ChartJS

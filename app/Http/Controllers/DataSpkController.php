@@ -15,16 +15,14 @@ class DataSpkController extends Controller
     {
         $this->spkService = $spkService;
     }
+
     public function index()
     {
-        $datas = $this->spkService->getValues();
-        $bobots = $this->spkService->getWights();
-        $getNormalizedValues = $this->spkService->getNormalizedValues();
-        $getOptimizedValues = $this->spkService->getOptimizedValues();
         $getRankedAlternative = $this->spkService->getRankedAlternative();
-        dd($getRankedAlternative);
 
-        return view('hasil-ranking.data-spk.index');
+        return view('hasil-ranking.data-spk.index', [
+            'results' => $getRankedAlternative,
+        ]);
     }
 
     public function create()
