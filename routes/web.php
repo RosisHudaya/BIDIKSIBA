@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //user list
     Route::prefix('user-management')->group(function () {
         Route::resource('user', UserController::class);
-        Route::match(['get', 'post'], '/verify-email/{id}/{hash}', [UserController::class, 'verifyEmail'])
+        Route::match (['get', 'post'], '/verify-email/{id}/{hash}', [UserController::class, 'verifyEmail'])
             ->name('user.verify-email');
         Route::delete('/verify-email/{id}/{hash}', [UserController::class, 'verifyEmail'])
             ->name('user.delete-verify-email');
@@ -144,7 +144,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('sesi-user/{sesi_ujian}', [SesiUserController::class, 'store'])->name('sesi-user.store');
         Route::delete('sesi-user/{sesiUser}/{sesi_ujian}', [SesiUserController::class, 'destroy'])->name('sesi-user.destroy');
         Route::get('laporan-nilai', [LaporanNilaiController::class, 'index'])->name('laporan-nilai.index');
-        Route::get('laporan-nilai/export', [LaporanNilaiController::class, 'export'])->name('laporan-nilai.export');
+        Route::get('list-nilai/{nilaiUjian}', [LaporanNilaiController::class, 'show'])->name('list-nilai.show');
+        Route::get('laporan-nilai/export/{nilaiUjian}', [LaporanNilaiController::class, 'export'])->name('laporan-nilai.export');
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {

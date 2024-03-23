@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\LaporanNilaiExport;
+use App\Models\NilaiUjian;
 use App\Models\SesiUjian;
 use App\Models\Ujian;
 use Illuminate\Http\Request;
@@ -14,30 +15,18 @@ class LaporanNilaiController extends Controller
     public function index(Request $request)
     {
         $ujians = Ujian::all();
-        $sesiUjians = SesiUjian::all();
         $ujianSelected = $request->input('ujian');
-        $sesiSelected = $request->input('sesi');
-        $nilais = DB::table('nilai_ujians as nu')
-            ->leftJoin('sesi_ujians as su', 'nu.id_sesi', '=', 'su.id')
+        $nilais = DB::table('sesi_ujians as su')
             ->leftJoin('ujians as uj', 'su.id_ujian', '=', 'uj.id')
-            ->leftJoin('users as u', 'nu.id_user', '=', 'u.id')
-            ->leftJoin('biodatas as b', 'u.id', '=', 'b.id_user')
             ->when($ujianSelected, function ($query, $ujian) {
                 return $query->where('uj.id', '=', $ujian);
             })
-            ->when($request->input('name'), function ($query, $name) {
-                return $query->where('b.nama', 'like', '%' . $name . '%');
-            })
-            ->when($sesiSelected, function ($query, $sesi) {
-                return $query->where('su.id', '=', $sesi);
-            })
             ->select(
+                'su.id',
                 'su.nama_sesi',
-                'b.nama',
                 'uj.nama_ujian',
-                'nu.nilai',
             )
-            ->orderBy('uj.nama_ujian', 'asc')
+            ->orderBy('uj.created_at', 'asc')
             ->paginate(10);
         return view(
             'laporan-nilai.index',
@@ -45,35 +34,67 @@ class LaporanNilaiController extends Controller
                 'nilais',
                 'ujians',
                 'ujianSelected',
-                'sesiUjians',
-                'sesiSelected',
             )
         );
     }
 
-    public function export(Request $request)
+    public function show(NilaiUjian $nilaiUjian, Request $request)
     {
-        $ujianSelected = $request->input('ujian');
-        $sesiSelected = $request->input('sesi');
-
-        $query = DB::table('nilai_ujians as nu')
-            ->leftJoin('sesi_ujians as su', 'nu.id_sesi', '=', 'su.id')
-            ->leftJoin('ujians as uj', 'su.id_ujian', '=', 'uj.id')
-            ->leftJoin('users as u', 'nu.id_user', '=', 'u.id')
-            ->leftJoin('biodatas as b', 'u.id', '=', 'b.id_user')
-            ->when($ujianSelected, function ($query, $ujian) {
-                return $query->where('uj.id', '=', $ujian);
+        $ujian = DB::table('sesi_ujians as su')
+            ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
+            ->select(
+                'su.id',
+                'u.nama_ujian',
+                'su.nama_sesi',
+                'su.waktu_mulai',
+                'su.waktu_akhir',
+            )
+            ->where('su.id', $nilaiUjian->id)
+            ->first();
+        $nilai_ujians = DB::table('sesi_users as su')
+            ->leftJoin('nilai_ujians as nj', function ($join) {
+                $join->on('su.id_user', '=', 'nj.id_user')
+                    ->on('su.id_sesi', '=', 'nj.id_sesi');
             })
-            ->when($sesiSelected, function ($query, $sesi) {
-                return $query->where('su.id', '=', $sesi);
+            ->leftJoin('users as u', 'su.id_user', '=', 'u.id')
+            ->leftJoin('biodatas as b', 'u.id', '=', 'b.id_user')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('b.nama', 'like', '%' . $name . '%');
             })
             ->select(
-                'su.nama_sesi',
+                'b.nama',
+                'nj.nilai',
+                'su.status'
+            )
+            ->where('su.id_sesi', $nilaiUjian->id)
+            ->orderBy('b.nama')
+            ->paginate(25);
+        return view('laporan-nilai.detail')->with([
+            'ujian' => $ujian,
+            'nilai_ujians' => $nilai_ujians,
+        ]);
+    }
+
+    public function export(NilaiUjian $nilaiUjian)
+    {
+        $query = DB::table('sesi_users as su')
+            ->leftJoin('nilai_ujians as nu', function ($join) {
+                $join->on('su.id_user', '=', 'nu.id_user')
+                    ->on('su.id_sesi', '=', 'nu.id_sesi');
+            })
+            ->leftJoin('sesi_ujians as suj', 'su.id_sesi', '=', 'suj.id')
+            ->leftJoin('ujians as uj', 'suj.id_ujian', '=', 'uj.id')
+            ->leftJoin('users as u', 'su.id_user', '=', 'u.id')
+            ->leftJoin('biodatas as b', 'u.id', '=', 'b.id_user')
+            ->select(
+                'suj.nama_sesi',
                 'b.nama',
                 'uj.nama_ujian',
                 'nu.nilai',
+                'su.status'
             )
-            ->orderBy('uj.nama_ujian', 'asc');
+            ->where('su.id_sesi', $nilaiUjian->id)
+            ->orderBy('b.nama');
 
         $filename = 'laporan-nilai.xlsx';
 

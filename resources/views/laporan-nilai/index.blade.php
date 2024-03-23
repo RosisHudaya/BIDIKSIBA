@@ -15,24 +15,14 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
-                        <div class="header ml-4 mt-3">
+                        {{-- <div class="header ml-4 mt-3">
                             <a class="btn btn-success" href="{{ route('laporan-nilai.export', request()->all()) }}">
                                 <i class="fas fa-file-csv"></i> Export Nilai
                             </a>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('laporan-nilai.index') }}">
                                 <div class="d-flex mb-3">
-                                    <select class="form-control select2" name="sesi" id="sesi">
-                                        <option value="" disabled selected>filter sesi ujian...</option>
-                                        @foreach ($sesiUjians as $sesiUjian)
-                                            <option value="{{ $sesiUjian->id }}"
-                                                @if ($sesiUjian->id == $sesiSelected) selected @endif>
-                                                {{ $sesiUjian->nama_sesi }}</option>
-                                        @endforeach
-                                    </select>
-                                    <input type="text" name="name" class="form-control mx-2" id="name"
-                                        placeholder="cari nama peserta..." value="{{ app('request')->input('name') }}">
                                     <select class="form-control select2" name="ujian" id="ujian">
                                         <option value="" disabled selected>filter nama ujian...</option>
                                         @foreach ($ujians as $ujian)
@@ -51,22 +41,23 @@
                                 <table class="table table-bordered table-md">
                                     <tbody>
                                         <tr>
-                                            <th class="text-center" style="width: 50px;">#</th>
-                                            <th class="text-center" style="width: 150px;">Sesi</th>
-                                            <th style="width: 320px;">Nama</th>
-                                            <th class="text-center" style="width: 270px;">Ujian</th>
-                                            <th class="text-center" style="width: 70px;">Nilai</th>
+                                            <th class="text-center" style="width: 5%;">#</th>
+                                            <th class="text-center" style="width: 25%;">Ujian</th>
+                                            <th class="text-center" style="width: 25%;">Sesi</th>
+                                            <th class="text-center" style="width: 10%;">Aksi</th>
                                         </tr>
                                         @foreach ($nilais as $key => $nilai)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ ($nilais->currentPage() - 1) * $nilais->perPage() + $key + 1 }}
                                                 </td>
-                                                <td class="text-center">{{ $nilai->nama_sesi }}</td>
-                                                <td style="text-transform: uppercase;">{{ $nilai->nama }}</td>
                                                 <td class="text-center">{{ $nilai->nama_ujian }}</td>
-                                                <td class="text-right font-weight-bold">
-                                                    {{ $nilai->nilai }}
+                                                <td class="text-center">{{ $nilai->nama_sesi }}</td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('list-nilai.show', $nilai->id) }}"
+                                                        class="btn btn-sm btn-exam"><i class="fas fa-circle-notch"></i>
+                                                        Detail
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

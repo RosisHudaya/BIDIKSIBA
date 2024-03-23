@@ -17,7 +17,7 @@
                             <label for="id_ujian">Ujian</label>
                             <select class="form-control select2 @error('id_ujian') is-invalid @enderror" name="id_ujian"
                                 data-id="select-jurusan" id="id_ujian">
-                                <option value="">-- Pilih jurusan --</option>
+                                <option value="">-- Pilih ujian --</option>
                                 @foreach ($ujians as $ujian)
                                     <option value="{{ $ujian->id }}"
                                         {{ old('id_ujian') == $ujian->id ? 'selected' : '' }}>
@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label for="nama_sesi">Sesi Ujian</label>
                             <input type="text" class="form-control @error('nama_sesi') is-invalid @enderror"
-                                id="nama_sesi" name="nama_sesi" placeholder="Masukkan nama program studi..."
+                                id="nama_sesi" name="nama_sesi" placeholder="Masukkan nama sesi ujian..."
                                 value="{{ old('nama_sesi') }}">
                             @error('nama_sesi')
                                 <div class="invalid-feedback">

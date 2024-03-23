@@ -28,6 +28,7 @@ class LaporanNilaiExport implements FromQuery, WithHeadings, ShouldAutoSize
             'Nama',
             'Ujian',
             'Nilai',
+            'Status'
         ];
     }
 }
