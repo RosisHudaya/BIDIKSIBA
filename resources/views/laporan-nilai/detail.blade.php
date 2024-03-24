@@ -72,9 +72,9 @@
                                                 </td>
                                                 <td class="text-center">
                                                     @if ($nilai_ujian->status == 'sudah')
-                                                        <span class="btn btn-success">SELESAI</span>
+                                                        <span class="btn btn-sm btn-success px-3">SELESAI</span>
                                                     @else
-                                                        <span class="btn btn-danger">BELUM</span>
+                                                        <span class="btn btn-sm btn-danger px-3">BELUM</span>
                                                     @endif
                                                 </td>
                                             </tr>

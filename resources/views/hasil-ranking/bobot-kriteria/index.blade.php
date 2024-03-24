@@ -15,11 +15,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
-                        <div class="header ml-4 mt-3">
-                            <a class="btn btn-primary" href="">
-                                <i class="fas fa-medal"></i> Tambah Data
-                            </a>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-md">
@@ -27,6 +22,7 @@
                                         <tr>
                                             <th class="text-center">#</th>
                                             <th style="width: 350px;">Nama Kriteria</th>
+                                            <th class="text-center">Jenis Kriteria</th>
                                             <th class="text-center">Bobot Kriteria</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
@@ -36,6 +32,7 @@
                                                     {{ ($bobots->currentPage() - 1) * $bobots->perPage() + $key + 1 }}
                                                 </td>
                                                 <td>{{ $bobot->kriteria }}</td>
+                                                <td class="text-center">{{ $bobot->jenis }}</td>
                                                 <td class="text-center">{{ $bobot->bobot }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
@@ -43,17 +40,6 @@
                                                                 class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="" method="POST" class="ml-2"
-                                                            id="del-<?= $bobot->id ?>">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus jurusan ini?"
-                                                                data-confirm-yes="submitDel(<?= $bobot->id ?>)"
-                                                                data-id="del-{{ $bobot->id }}">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -75,10 +61,4 @@
 @endpush
 
 @push('customStyle')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <script>
-        function submitDel(id) {
-            $('#del-' + id).submit()
-        }
-    </script>
 @endpush

@@ -20,10 +20,10 @@
                     <div class="d-flex justify-content-start">
                         @foreach ($soals as $key => $soal)
                             @php
-                                $number = str_pad($key + 1, 2, '0', STR_PAD_LEFT);
+                                $number = str_pad($key + 1, 3, '0', STR_PAD_LEFT);
                             @endphp
                             <button
-                                class="btn btn-choice mx-2 px-3 soal {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] ? 'active-number' : '' }}"
+                                class="btn btn-choice mx-1 px-3 soal {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] ? 'active-number' : '' }}"
                                 data-id="{{ $soal->id }}">
                                 {{ $number }}
                             </button>

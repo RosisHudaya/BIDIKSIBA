@@ -133,6 +133,12 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 6,
                 ],
                 [
+                    'name' => 'Ranking Ekonomi',
+                    'route' => 'menu-ranking/data-ekonomi',
+                    'permission_name' => 'data-ekonomi.index',
+                    'menu_group_id' => 6,
+                ],
+                [
                     'name' => 'Ranking BIDIKSIBA',
                     'route' => 'menu-ranking/data-spk',
                     'permission_name' => 'data-spk.index',

@@ -18,9 +18,18 @@ class DataSpkController extends Controller
 
     public function index()
     {
-        $getRankedAlternative = $this->spkService->getRankedAlternative();
+        $getRankedAlternativeSpk = $this->spkService->getRankedAlternativeSpk();
 
         return view('hasil-ranking.data-spk.index', [
+            'results' => $getRankedAlternativeSpk,
+        ]);
+    }
+
+    public function indexEko()
+    {
+        $getRankedAlternative = $this->spkService->getRankedAlternative();
+
+        return view('hasil-ranking.data-ekonomi.index', [
             'results' => $getRankedAlternative,
         ]);
     }

@@ -17,6 +17,7 @@ class SpkService
         $datas = DB::table('biodata_spks')
             ->leftJoin('users', 'biodata_spks.user_id', '=', 'users.id')
             ->leftJoin('biodatas', 'users.id', '=', 'biodatas.id_user')
+            ->leftJoin('nilai_ujians', 'users.id', '=', 'nilai_ujians.id_user')
             ->leftJoin('pekerjaan_ortus', 'biodata_spks.pekerjaan_ortu_id', '=', 'pekerjaan_ortus.id')
             ->leftJoin('gaji_ortus', 'biodata_spks.gaji_ortu_id', '=', 'gaji_ortus.id')
             ->leftJoin('luas_tanahs', 'biodata_spks.luas_tanah_id', '=', 'luas_tanahs.id')
@@ -29,6 +30,7 @@ class SpkService
             ->leftJoin('status_ortus', 'biodata_spks.status_ortu_id', '=', 'status_ortus.id')
             ->select(
                 'biodata_spks.id',
+                'nilai_ujians.nilai as nilai',
                 'pekerjaan_ortus.nilai as pekerjaan_ortu',
                 'gaji_ortus.nilai as penghasilan_ortu',
                 'luas_tanahs.nilai as luas_tanah',
@@ -58,6 +60,7 @@ class SpkService
         $dataValues = $datas->map(function ($data) {
             return [
                 'id' => $data->id,
+                'nilai' => $data->nilai,
                 'nama' => $data->nama,
                 'sekolah' => $data->sekolah,
                 'pekerjaan_ortu' => $data->det_pekerjaan_ortu,
@@ -148,6 +151,69 @@ class SpkService
         return $optimizedValues;
     }
 
+    public function getRankedAlternativeSpk()
+    {
+        $optimizedValues = $this->getOptimizedValues();
+
+        $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
+            $max = collect($item['spk'])
+                ->only(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->sum();
+
+            $min = collect($item['spk'])
+                ->except(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->sum();
+
+            $difference = $min - $max;
+
+            $item['max_y'] = $max;
+            $item['min_y'] = $min;
+            $item['difference'] = $difference;
+
+            return $item;
+        });
+
+        $sortedAlternatives = $rankedAlternatives->filter(function ($item) {
+            return $item['nilai'] >= 100;
+        })->sortByDesc('difference')->sortByDesc('nilai')->values();
+
+        $rank = 1;
+        $rankedAlternatives = $sortedAlternatives->map(function ($item) use (&$rank) {
+            $item['rank'] = $rank++;
+
+            return $item;
+        });
+
+        $rankedAlternatives = $rankedAlternatives->map(function ($item) {
+            return [
+                'id' => $item['id'],
+                'nilai' => $item['nilai'],
+                'nama' => $item['nama'],
+                'sekolah' => $item['sekolah'],
+                'pekerjaan_ortu' => $item['pekerjaan_ortu'],
+                'gaji_ortu' => $item['gaji_ortu'],
+                'luas_tanah' => $item['luas_tanah'],
+                'kamar' => $item['kamar'],
+                'kamar_mandi' => $item['kamar_mandi'],
+                'tagihan_listrik' => $item['tagihan_listrik'],
+                'pajak' => $item['pajak'],
+                'hutang' => $item['hutang'],
+                'saudara' => $item['saudara'],
+                'status_ortu' => $item['status_ortu'],
+                'difference' => $item['difference'],
+                'rank' => $item['rank'],
+            ];
+        });
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 25;
+        $currentPageItems = $rankedAlternatives->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $rankedAlternatives = new LengthAwarePaginator($currentPageItems, count($rankedAlternatives), $perPage);
+        $rankedAlternatives->withPath('data-spk');
+
+        return $rankedAlternatives;
+    }
+
     public function getRankedAlternative()
     {
         $optimizedValues = $this->getOptimizedValues();
@@ -182,6 +248,7 @@ class SpkService
         $rankedAlternatives = $rankedAlternatives->map(function ($item) {
             return [
                 'id' => $item['id'],
+                'nilai' => $item['nilai'],
                 'nama' => $item['nama'],
                 'sekolah' => $item['sekolah'],
                 'pekerjaan_ortu' => $item['pekerjaan_ortu'],

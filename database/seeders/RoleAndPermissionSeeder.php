@@ -80,11 +80,11 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'bobot-kriteria.edit']);
         Permission::create(['name' => 'bobot-kriteria.destroy']);
 
+        //data ranking ekonomi
+        Permission::create(['name' => 'data-ekonomi.index']);
+
         //data ranking bidiksiba
         Permission::create(['name' => 'data-spk.index']);
-        Permission::create(['name' => 'data-spk.create']);
-        Permission::create(['name' => 'data-spk.edit']);
-        Permission::create(['name' => 'data-spk.destroy']);
 
         //asal jurusan
         Permission::create(['name' => 'asal-jurusan.index']);
@@ -208,6 +208,16 @@ class RoleAndPermissionSeeder extends Seeder
         $user = User::find(1);
         $user->assignRole('super-admin');
         $user = User::find(2);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(3);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(4);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(5);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(6);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(7);
         $user->assignRole('calon-mahasiswa');
     }
 }

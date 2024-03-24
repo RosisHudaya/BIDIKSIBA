@@ -12,5 +12,6 @@ class Bobot extends Model
     protected $fillable = [
         'kriteria',
         'bobot',
+        'jenis',
     ];
 }

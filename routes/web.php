@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //hasil ranking
     Route::prefix('menu-ranking')->group(function () {
         Route::resource('bobot-kriteria', BobotController::class);
+        Route::get('data-ekonomi', [DataSpkController::class, 'indexEko'])->name('menu-ranking.data-ekonomi');
         Route::get('data-spk', [DataSpkController::class, 'index'])->name('menu-ranking.data-spk');
     });
 

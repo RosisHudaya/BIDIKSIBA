@@ -36,7 +36,7 @@
                                             <th class="text-center" style="width: 50px;">#</th>
                                             <th style="width: 250px;">Nama Ujian</th>
                                             <th class="text-center" style="width: 150px;">Jumlah Soal</th>
-                                            <th class="text-center" style="width: 250px;">Deskripsi</th>
+                                            <th style="width: 250px;">Deskripsi</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                         @foreach ($ujians as $key => $ujian)

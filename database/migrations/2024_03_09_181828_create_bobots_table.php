@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('kriteria');
             $table->double('bobot');
+            $table->string('jenis');
             $table->timestamps();
         });
     }

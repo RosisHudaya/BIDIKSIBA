@@ -42,9 +42,23 @@ class BobotSeeder extends Seeder
             0.311,
         ];
 
+        $jenises = [
+            "COST",
+            "COST",
+            "COST",
+            "COST",
+            "COST",
+            "COST",
+            "BENEFIT",
+            "BENEFIT",
+            "BENEFIT",
+            "COST",
+        ];
+
         foreach ($kriterias as $index => $kriteria) {
             $records[] = [
                 'kriteria' => $kriteria,
+                'jenis' => $jenises[$index],
                 'bobot' => $bobots[$index],
             ];
         }
