@@ -28,7 +28,7 @@ class StoreUserRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'name' => 'required|string|max:50',
             'password' => 'required|min:8',
-            'user_type' => ['required', Rule::in(['calon-mahasiswa', 'admin-bidiksiba'])],
+            'user_type' => ['required', Rule::in(['calon-mahasiswa', 'admin-bidiksiba', 'pengawas'])],
         ];
 
     }
@@ -48,7 +48,7 @@ class StoreUserRequest extends FormRequest
             'password.required' => 'Form password harus diisi.',
             'password.min' => 'Password harus memiliki setidaknya 8 karakter.',
 
-            'user_type.required' => 'Pilih role (Calon Mahasiswa atau Admin BIDIKSIBA).',
+            'user_type.required' => 'Pilih role (Calon Mahasiswa, Admin BIDIKSIBA, atau Pengawas).',
             'user_type.in' => 'Role yang dipilih tidak valid.',
         ];
     }

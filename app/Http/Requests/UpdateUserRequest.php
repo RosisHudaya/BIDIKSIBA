@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'email' => 'required|email',
             'name' => 'required|string|max:50',
-            'user_type' => ['required', Rule::in(['calon-mahasiswa', 'admin-bidiksiba'])],
+            'user_type' => ['required', Rule::in(['calon-mahasiswa', 'admin-bidiksiba', 'pengawas'])],
         ];
     }
 
@@ -42,7 +42,7 @@ class UpdateUserRequest extends FormRequest
             'name.max' => 'Form nama tidak boleh lebih dari :max karakter.',
             'name.regex' => 'Form nama lengkap tidak boleh mengandung angka',
 
-            'user_type.required' => 'Pilih role (Calon Mahasiswa atau Admin BIDIKSIBA).',
+            'user_type.required' => 'Pilih role (Calon Mahasiswa, Admin BIDIKSIBA, atau Pengawas).',
             'user_type.in' => 'Role yang dipilih tidak valid.',
         ];
     }

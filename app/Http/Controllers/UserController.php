@@ -57,7 +57,16 @@ class UserController extends Controller
             'password' => Hash::make($request['password']),
         ]);
 
-        $roleName = ($request['user_type'] === 'calon-mahasiswa') ? 'calon-mahasiswa' : 'admin-bidiksiba';
+        $roleName = '';
+
+        if ($request['user_type'] === 'calon-mahasiswa') {
+            $roleName = 'calon-mahasiswa';
+        } elseif ($request['user_type'] === 'pengawas') {
+            $roleName = 'pengawas';
+        } else {
+            $roleName = 'admin-bidiksiba';
+        }
+
         $role = Role::where('name', $roleName)->first();
         $user->assignRole($role);
 
@@ -85,6 +94,7 @@ class UserController extends Controller
             $user->syncRoles($request->roles);
         }
 
+        dd($user);
         return redirect()->route('user.index')->with('success', 'Data user berhasil diperbarui');
     }
 

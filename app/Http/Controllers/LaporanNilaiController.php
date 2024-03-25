@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\LaporanNilaiExport;
 use App\Models\NilaiUjian;
 use App\Models\SesiUjian;
+use App\Models\SesiUser;
 use App\Models\Ujian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +39,7 @@ class LaporanNilaiController extends Controller
         );
     }
 
-    public function show(NilaiUjian $nilaiUjian, Request $request)
+    public function show(SesiUser $sesiUser, Request $request)
     {
         $ujian = DB::table('sesi_ujians as su')
             ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
@@ -49,7 +50,7 @@ class LaporanNilaiController extends Controller
                 'su.waktu_mulai',
                 'su.waktu_akhir',
             )
-            ->where('su.id', $nilaiUjian->id)
+            ->where('su.id', $sesiUser->id)
             ->first();
         $nilai_ujians = DB::table('sesi_users as su')
             ->leftJoin('nilai_ujians as nj', function ($join) {
@@ -66,7 +67,7 @@ class LaporanNilaiController extends Controller
                 'nj.nilai',
                 'su.status'
             )
-            ->where('su.id_sesi', $nilaiUjian->id)
+            ->where('su.id_sesi', $sesiUser->id)
             ->orderBy('b.nama')
             ->paginate(25);
         return view('laporan-nilai.detail')->with([
@@ -75,7 +76,7 @@ class LaporanNilaiController extends Controller
         ]);
     }
 
-    public function export(NilaiUjian $nilaiUjian)
+    public function export(SesiUser $sesiUser)
     {
         $query = DB::table('sesi_users as su')
             ->leftJoin('nilai_ujians as nu', function ($join) {
@@ -93,7 +94,7 @@ class LaporanNilaiController extends Controller
                 'nu.nilai',
                 'su.status'
             )
-            ->where('su.id_sesi', $nilaiUjian->id)
+            ->where('su.id_sesi', $sesiUser->id)
             ->orderBy('b.nama');
 
         $filename = 'laporan-nilai.xlsx';

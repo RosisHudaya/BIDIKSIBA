@@ -36,15 +36,25 @@
                         <a href="{{ route('login') }}" class="a-nav">LOGIN</a>
                     </li>
                 @else
-                    <li class="nav-item mr-5">
-                        <a href="{{ route('biodata.index') }}" class="a-nav">BIODATA Pendaftar</a>
-                    </li>
-                    <li class="nav-item mr-5">
-                        <a href="{{ route('token-ujian.index') }}" class="a-nav">Lihat TOKEN</a>
-                    </li>
-                    <li class="nav-item mr-5">
-                        <a href="{{ route('login.ujian') }}" class="a-nav">LOGIN Ujian</a>
-                    </li>
+                    @role('calon-mahasiswa')
+                        <li class="nav-item mr-5">
+                            <a href="{{ route('biodata.index') }}" class="a-nav">BIODATA Pendaftar</a>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a href="{{ route('token-ujian.index') }}" class="a-nav">Lihat TOKEN</a>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a href="{{ route('login.ujian') }}" class="a-nav">LOGIN Ujian</a>
+                        </li>
+                    @endrole
+                    @role('pengawas')
+                        <li class="nav-item mr-5">
+                            <a href="" class="a-nav">List Ujian</a>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a href="" class="a-nav">List Peserta Ujian</a>
+                        </li>
+                    @endrole
                     <li class="nav-item">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

@@ -51,10 +51,15 @@
                                 <option value="" disabled selected>Pilih Role</option>
                                 <option value="calon-mahasiswa"
                                     {{ old('user_type') === 'calon-mahasiswa' ? 'selected' : '' }}>
-                                    Calon Mahasiswa</option>
+                                    Calon Mahasiswa
+                                </option>
                                 <option value="admin-bidiksiba"
                                     {{ old('user_type') === 'admin-bidiksiba' ? 'selected' : '' }}>
-                                    Admin BIDIKSIBA</option>
+                                    Admin BIDIKSIBA
+                                </option>
+                                <option value="pengawas" {{ old('user_type') === 'pengawas' ? 'selected' : '' }}>
+                                    Pengawas
+                                </option>
                             </select>
                             @error('user_type')
                                 <div class="invalid-feedback">
