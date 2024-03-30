@@ -91,7 +91,7 @@ class LaporanNilaiController extends Controller
                 'suj.nama_sesi',
                 'b.nama',
                 'uj.nama_ujian',
-                'nu.nilai',
+                DB::raw("IFNULL(nu.nilai, '-') as nilai"),
                 'su.status'
             )
             ->where('su.id_sesi', $sesiUser->id)

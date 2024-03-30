@@ -15,6 +15,17 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
+                        <div class="header ml-4 mt-3">
+                            <a class="btn btn-success" href="{{ route('export.biodata') }}">
+                                <i class="fas fa-file-csv"></i> Biodata
+                            </a>
+                            <a class="btn btn-success" href="{{ route('export.spk') }}">
+                                <i class="fas fa-file-csv"></i> Data SPK
+                            </a>
+                            <a class="btn btn-success" href="{{ route('export.pendaftar') }}">
+                                <i class="fas fa-file-csv"></i> Data Pendaftar
+                            </a>
+                        </div>
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('verifikasi-pendaftar.index') }}">
                                 <div class="d-flex mb-3">

@@ -89,6 +89,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::resource('verifikasi-pendaftar', VerifikasiPendaftarController::class);
         Route::put('verifikasi-pendaftar/verifikasi/{biodata}', [VerifikasiPendaftarController::class, 'verif'])->name('verifikasi-pendaftar.verif');
         Route::put('verifikasi-pendaftar/reject/{biodata}', [VerifikasiPendaftarController::class, 'reject'])->name('verifikasi-pendaftar.reject');
+        Route::get('export-biodata', [VerifikasiPendaftarController::class, 'export_biodata'])->name('export.biodata');
+        Route::get('export-spk', [VerifikasiPendaftarController::class, 'export_spk'])->name('export.spk');
+        Route::get('export-pendaftar', [VerifikasiPendaftarController::class, 'export_pendaftar'])->name('export.pendaftar');
         Route::get('akun-ujian', [AkunUjianController::class, 'index'])->name('akun-ujian.index');
     });
 
