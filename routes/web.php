@@ -122,7 +122,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::prefix('menu-ranking')->group(function () {
         Route::resource('bobot-kriteria', BobotController::class);
         Route::get('data-ekonomi', [DataSpkController::class, 'indexEko'])->name('menu-ranking.data-ekonomi');
+        Route::get('export-ekonomi', [DataSpkController::class, 'export_alternative'])->name(('export.alternative'));
         Route::get('data-spk', [DataSpkController::class, 'index'])->name('menu-ranking.data-spk');
+        Route::get('export-bidiksiba', [DataSpkController::class, 'export_spk'])->name(('export.spk'));
     });
 
     //menu pendidikan

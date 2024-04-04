@@ -6,9 +6,12 @@ use App\Exports\AllPesertaExport;
 use App\Exports\PesertaExport;
 use App\Exports\SpkExport;
 use App\Models\AkunUjian;
+use App\Models\AsalJurusan;
 use App\Models\Biodata;
 use App\Models\BiodataSpk;
 use App\Models\DataSpk;
+use App\Models\Jurusan;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -71,9 +74,29 @@ class VerifikasiPendaftarController extends Controller
                 'u.email',
             )
             ->orderBy('b.status', 'asc')
-            ->orderBy('b.updated_at', 'asc')
+            ->orderBy('b.updated_at', 'desc')
+            ->orderBy('bs.updated_at', 'desc')
             ->paginate(10);
         return view('verif-admin.index', compact('biodatas', 'statusSelected'));
+    }
+
+    public function edit(Biodata $verifikasi_pendaftar)
+    {
+        $asal_jurusans = AsalJurusan::all();
+        $jurusans = Jurusan::all();
+        $prodis = Prodi::all();
+    }
+
+    public function destroy(Biodata $verifikasi_pendaftar)
+    {
+        $verifikasi_pendaftar->delete();
+
+        $deleteAkunUjian = AkunUjian::where('id_user', $verifikasi_pendaftar->id_user)->first();
+        if ($deleteAkunUjian) {
+            $deleteAkunUjian->delete();
+        }
+
+        return redirect()->route('verifikasi-pendaftar.index')->with('success', 'Biodata pendaftar berhasil dihapus');
     }
 
     public function verif(Biodata $biodata)

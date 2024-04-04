@@ -274,4 +274,103 @@ class SpkService
 
         return $rankedAlternatives;
     }
+
+    public function getRankedAlternativeExport()
+    {
+        $optimizedValues = $this->getOptimizedValues();
+
+        $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
+            $max = collect($item['spk'])
+                ->only(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->sum();
+
+            $min = collect($item['spk'])
+                ->except(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->sum();
+
+            $difference = $min - $max;
+
+            $item['max_y'] = $max;
+            $item['min_y'] = $min;
+            $item['difference'] = $difference;
+
+            return $item;
+        });
+
+        $sortedAlternatives = $rankedAlternatives->sortByDesc('difference')->values();
+
+        $rank = 1;
+        $rankedAlternatives = $sortedAlternatives->map(function ($item) use (&$rank) {
+            $item['rank'] = $rank++;
+
+            return $item;
+        });
+
+        $rankedAlternatives = $rankedAlternatives->map(function ($item) {
+            return [
+                'rank' => $item['rank'],
+                'nama' => $item['nama'],
+                'sekolah' => $item['sekolah'],
+                'pekerjaan_ortu' => $item['pekerjaan_ortu'],
+                'gaji_ortu' => $item['gaji_ortu'],
+                'luas_tanah' => $item['luas_tanah'],
+                'kamar' => $item['kamar'],
+                'kamar_mandi' => $item['kamar_mandi'],
+                'tagihan_listrik' => $item['tagihan_listrik'],
+                'pajak' => $item['pajak'],
+                'hutang' => $item['hutang'],
+                'saudara' => $item['saudara'],
+                'status_ortu' => $item['status_ortu'],
+                'difference' => $item['difference'],
+            ];
+        });
+
+        return $rankedAlternatives;
+    }
+
+    public function getRankedAlternativeSpkExport()
+    {
+        $optimizedValues = $this->getOptimizedValues();
+
+        $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
+            $max = collect($item['spk'])
+                ->only(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->sum();
+
+            $min = collect($item['spk'])
+                ->except(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->sum();
+
+            $difference = $min - $max;
+
+            $item['max_y'] = $max;
+            $item['min_y'] = $min;
+            $item['difference'] = $difference;
+
+            return $item;
+        });
+
+        $sortedAlternatives = $rankedAlternatives->filter(function ($item) {
+            return $item['nilai'] >= 100;
+        })->sortByDesc('difference')->sortByDesc('nilai')->values();
+
+        $rank = 1;
+        $rankedAlternatives = $sortedAlternatives->map(function ($item) use (&$rank) {
+            $item['rank'] = $rank++;
+
+            return $item;
+        });
+
+        $rankedAlternatives = $rankedAlternatives->map(function ($item) {
+            return [
+                'rank' => $item['rank'],
+                'nama' => $item['nama'],
+                'sekolah' => $item['sekolah'],
+                'nilai' => $item['nilai'],
+                'difference' => $item['difference'],
+            ];
+        });
+
+        return $rankedAlternatives;
+    }
 }

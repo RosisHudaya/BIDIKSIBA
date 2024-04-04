@@ -81,12 +81,13 @@
                                                                 class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="" method="POST" class="ml-2"
-                                                            id="del-<?= $biodata->id ?>">
+                                                        <form
+                                                            action="{{ route('verifikasi-pendaftar.destroy', $biodata->id) }}"
+                                                            method="POST" class="ml-2" id="del-<?= $biodata->id ?>">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus jurusan SMA/SMK ini?"
+                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus biodata pendaftar ini?"
                                                                 data-confirm-yes="submitDel(<?= $biodata->id ?>)"
                                                                 data-id="del-{{ $biodata->id }}">
                                                                 <i class="fas fa-times"></i> Delete

@@ -3,7 +3,7 @@
         <label for="">Pekerjaan Orang Tua</label>
         <select class="form-control select2" name="pekerjaan_ortu" id="pekerjaan_ortu"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Pekerjaan Orang Tua</option>
+            <option value="" selected disabled>Pekerjaan Orang Tua</option>
             @foreach ($pekerjaan_ortus as $pekerjaan_ortu)
                 @if (!empty($biodata_spk->pekerjaan_ortu_id))
                     <option @selected($biodata_spk->pekerjaan_ortu_id == $pekerjaan_ortu->id) value="{{ $pekerjaan_ortu->id }}">
@@ -35,7 +35,7 @@
         <label for="">Penghasilan Orang Tua</label>
         <select class="form-control select2" name="gaji_ortu" id="gaji_ortu"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Penghasilan Orang Tua</option>
+            <option value="" selected disabled>Penghasilan Orang Tua</option>
             @foreach ($gaji_ortus as $gaji_ortu)
                 @if (!empty($biodata_spk->gaji_ortu_id))
                     <option @selected($biodata_spk->gaji_ortu_id == $gaji_ortu->id) value="{{ $gaji_ortu->id }}">
@@ -53,7 +53,7 @@
         <label for="">Luas Tanah (satuan meter)</label>
         <select class="form-control select2" name="luas_tanah" id="luas_tanah"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Luas Tanah</option>
+            <option value="" selected disabled>Luas Tanah</option>
             @foreach ($luas_tanahs as $luas_tanah)
                 @if (!empty($biodata_spk->luas_tanah_id))
                     <option @selected($biodata_spk->luas_tanah_id == $luas_tanah->id) value="{{ $luas_tanah->id }}">
@@ -127,7 +127,7 @@
         <label for="">Jumlah Kamar</label>
         <select class="form-control select2" name="jml_kmr" id="jml_kmr"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Jumlah Kamar</option>
+            <option value="" selected disabled>Jumlah Kamar</option>
             @foreach ($kamars as $kamar)
                 @if (!empty($biodata_spk->kamar_id))
                     <option @selected($biodata_spk->kamar_id == $kamar->id) value="{{ $kamar->id }}">
@@ -145,7 +145,7 @@
         <label for="">Kepemilikan Kamar Mandi</label>
         <select class="form-control select2" name="jml_kmr_mandi" id="jml_kmr_mandi"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Kepemilikan Kamar Mandi</option>
+            <option value="" selected disabled>Kepemilikan Kamar Mandi</option>
             @foreach ($kamar_mandis as $kamar_mandi)
                 @if (!empty($biodata_spk->kamar_mandi_id))
                     <option @selected($biodata_spk->kamar_mandi_id == $kamar_mandi->id) value="{{ $kamar_mandi->id }}">
@@ -220,7 +220,7 @@
         <label for="">Listrik yang digunakan</label>
         <select class="form-control select2" name="tagihan_listrik" id="tagihan_listrik"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Listrik yang digunakan</option>
+            <option value="" selected disabled>Listrik yang digunakan</option>
             @foreach ($tagihan_listriks as $tagihan_listrik)
                 @if (!empty($biodata_spk->tagihan_listrik_id))
                     <option @selected($biodata_spk->tagihan_listrik_id == $tagihan_listrik->id) value="{{ $tagihan_listrik->id }}">
@@ -238,7 +238,7 @@
         <label for="">Pajak Bumi dan Bangunan</label>
         <select class="form-control select2" name="pbb" id="pbb"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Pajak Bumi dan Bangunan</option>
+            <option value="" selected disabled>Pajak Bumi dan Bangunan</option>
             @foreach ($pajaks as $pajak)
                 @if (!empty($biodata_spk->pajak_id))
                     <option @selected($biodata_spk->pajak_id == $pajak->id) value="{{ $pajak->id }}">
@@ -313,7 +313,7 @@
         <label for="">Jumlah Saudara</label>
         <select class="form-control select2" name="jml_sdr" id="jml_sdr"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Jumlah Saudara</option>
+            <option value="" selected disabled>Jumlah Saudara</option>
             @foreach ($saudaras as $saudara)
                 @if (!empty($biodata_spk->saudara_id))
                     <option @selected($biodata_spk->saudara_id == $saudara->id) value="{{ $saudara->id }}">
@@ -331,7 +331,7 @@
         <label for="">Status Orang Tua</label>
         <select class="form-control select2" name="status_ortu" id="status_ortu"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Status Orang Tua</option>
+            <option value="" selected disabled>Status Orang Tua</option>
             @foreach ($status_ortus as $status_ortu)
                 @if (!empty($biodata_spk->status_ortu_id))
                     <option @selected($biodata_spk->status_ortu_id == $status_ortu->id) value="{{ $status_ortu->id }}">
@@ -406,7 +406,7 @@
         <label for="">Jumlah Hutang</label>
         <select class="form-control select2" name="jml_hutang" id="jml_hutang"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="">Jumlah Hutang</option>
+            <option value="" selected disabled>Jumlah Hutang</option>
             @foreach ($hutangs as $hutang)
                 @if (!empty($biodata_spk->hutang_id))
                     <option @selected($biodata_spk->hutang_id == $hutang->id) value="{{ $hutang->id }}">

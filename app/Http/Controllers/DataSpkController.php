@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RankingEkoExport;
+use App\Exports\RankingSpkExport;
 use App\Models\DataSpk;
 use App\Http\Requests\StoreDataSpkRequest;
 use App\Http\Requests\UpdateDataSpkRequest;
 use App\Services\SpkService;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataSpkController extends Controller
 {
@@ -34,33 +37,21 @@ class DataSpkController extends Controller
         ]);
     }
 
-    public function create()
+    public function export_alternative()
     {
-        //
+        $query = $this->spkService->getRankedAlternativeExport();
+
+        $filename = 'ranking spk.xlsx';
+
+        return Excel::download(new RankingEkoExport($query), $filename);
     }
 
-    public function store(StoreDataSpkRequest $request)
+    public function export_spk()
     {
-        //
-    }
+        $query = $this->spkService->getRankedAlternativeSpkExport();
 
-    public function show(DataSpk $dataSpk)
-    {
-        //
-    }
+        $filename = 'ranking bidiksiba.xlsx';
 
-    public function edit(DataSpk $dataSpk)
-    {
-        //
-    }
-
-    public function update(UpdateDataSpkRequest $request, DataSpk $dataSpk)
-    {
-        //
-    }
-
-    public function destroy(DataSpk $dataSpk)
-    {
-        //
+        return Excel::download(new RankingSpkExport($query), $filename);
     }
 }
