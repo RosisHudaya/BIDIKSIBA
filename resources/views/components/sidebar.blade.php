@@ -1,9 +1,22 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="index.html">{{ $title }}</a>
+        <a>
+            <div class="d-flex justify-content-center">
+                <img class="img-fluid my-3 mr-3" style="width: 46px; height: 46px;"
+                    src="{{ asset('assets/img/logo.png') }}">
+                <div>
+                    <p class="mb-0 mt-3" style="color:#78828a; font-size: 20px; font-weight: 800;">BIDIKSIBA</p>
+                    <p class="mx-0 mt-0" style="color:#78828a; font-size: 7px; font-weight: 800;">
+                        Politenik Negeri Malang
+                    </p>
+                </div>
+            </div>
+        </a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-        <a href="index.html">St</a>
+        <a>
+            <img class="img-fluid" style="width: 26px;" src="{{ asset('assets/img/logo.png') }}">
+        </a>
     </div>
     <ul class="sidebar-menu">
         @foreach ($menuGroups as $item)
