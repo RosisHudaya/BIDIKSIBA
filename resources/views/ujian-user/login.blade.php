@@ -38,8 +38,13 @@
 
 @push('customScript')
     <script>
-        setTimeout(function() {
-            document.getElementById('p-error').style.display = 'none';
-        }, 3000);
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var pError = document.getElementById('p-error');
+                if (pError) {
+                    pError.style.display = 'none';
+                }
+            }, 10000);
+        });
     </script>
 @endpush
