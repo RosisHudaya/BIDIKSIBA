@@ -55,6 +55,11 @@
                             <a href="" class="a-nav">List Peserta Ujian</a>
                         </li>
                     @endrole
+                    @role('super-admin|admin-bidiksiba')
+                        <li class="nav-item mr-5">
+                            <a href="{{ route('dashboard') }}" class="a-nav">Dashboard</a>
+                        </li>
+                    @endrole
                     <li class="nav-item">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

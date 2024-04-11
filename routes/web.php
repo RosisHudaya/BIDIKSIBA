@@ -53,19 +53,16 @@ use App\Models\Category;
 |
 */
 
-// Route::get('/', function () {
-//     return view('auth/login');
-// });
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [BiodataController::class, 'index_dash'])->name('welcome');
 
 Route::get('/login', function () {
     if (auth()->check()) {
-        return redirect('/dashboard');
+        $user = auth()->user();
+        if ($user->hasRole('super-admin') || $user->hasRole('admin-bidiksiba')) {
+            return redirect('/dashboard');
+        } elseif ($user->hasRole('calon-mahasiswa') || $user->hasRole('pengawas')) {
+            return redirect('/welcome');
+        }
     } else {
         return view('auth/login');
     }
@@ -74,7 +71,9 @@ Route::get('/login', function () {
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', function () {
         return view('home', ['users' => User::get(),]);
-    });
+    })->name('dashboard');
+    Route::get('/welcome', [BiodataController::class, 'index_dash']);
+
     //user list
     Route::prefix('user-management')->group(function () {
         Route::resource('user', UserController::class);
