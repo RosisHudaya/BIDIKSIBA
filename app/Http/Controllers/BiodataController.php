@@ -10,11 +10,8 @@ use App\Http\Requests\UpdateBiodataRequest;
 use App\Models\BiodataSpk;
 use App\Models\GajiOrtu;
 use App\Models\Hutang;
-use App\Models\JumlahKamar;
 use App\Models\Jurusan;
 use App\Models\KamarMandi;
-use App\Models\LuasTanah;
-use App\Models\Pajak;
 use App\Models\PekerjaanOrtu;
 use App\Models\Prodi;
 use App\Models\Saudara;
@@ -38,11 +35,8 @@ class BiodataController extends Controller
         $biodatas = Biodata::where('id_user', $id)->first();
         $pekerjaan_ortus = PekerjaanOrtu::all();
         $gaji_ortus = GajiOrtu::all();
-        $luas_tanahs = LuasTanah::all();
-        $kamars = JumlahKamar::all();
         $kamar_mandis = KamarMandi::all();
         $tagihan_listriks = TagihanListrik::all();
-        $pajaks = Pajak::all();
         $saudaras = Saudara::all();
         $status_ortus = StatusOrtu::all();
         $hutangs = Hutang::all();
@@ -55,11 +49,8 @@ class BiodataController extends Controller
             'biodatas' => $biodatas,
             'pekerjaan_ortus' => $pekerjaan_ortus,
             'gaji_ortus' => $gaji_ortus,
-            'luas_tanahs' => $luas_tanahs,
-            'kamars' => $kamars,
             'kamar_mandis' => $kamar_mandis,
             'tagihan_listriks' => $tagihan_listriks,
-            'pajaks' => $pajaks,
             'saudaras' => $saudaras,
             'status_ortus' => $status_ortus,
             'hutangs' => $hutangs,
@@ -296,35 +287,5 @@ class BiodataController extends Controller
         }
 
         return redirect()->route('biodata.index')->with('success', 'success-biodata');
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(StoreBiodataRequest $request)
-    {
-        //
-    }
-
-    public function show(Biodata $biodata)
-    {
-        //
-    }
-
-    public function edit(Biodata $biodata)
-    {
-        //
-    }
-
-    public function update(UpdateBiodataRequest $request, Biodata $biodata)
-    {
-        //
-    }
-
-    public function destroy(Biodata $biodata)
-    {
-        //
     }
 }

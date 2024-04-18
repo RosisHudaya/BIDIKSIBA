@@ -20,11 +20,8 @@ class SpkService
             ->leftJoin('nilai_ujians', 'users.id', '=', 'nilai_ujians.id_user')
             ->leftJoin('pekerjaan_ortus', 'biodata_spks.pekerjaan_ortu_id', '=', 'pekerjaan_ortus.id')
             ->leftJoin('gaji_ortus', 'biodata_spks.gaji_ortu_id', '=', 'gaji_ortus.id')
-            ->leftJoin('luas_tanahs', 'biodata_spks.luas_tanah_id', '=', 'luas_tanahs.id')
-            ->leftJoin('jumlah_kamars', 'biodata_spks.kamar_id', '=', 'jumlah_kamars.id')
             ->leftJoin('kamar_mandis', 'biodata_spks.kamar_mandi_id', '=', 'kamar_mandis.id')
             ->leftJoin('tagihan_listriks', 'biodata_spks.tagihan_listrik_id', '=', 'tagihan_listriks.id')
-            ->leftJoin('pajaks', 'biodata_spks.pajak_id', '=', 'pajaks.id')
             ->leftJoin('hutangs', 'biodata_spks.hutang_id', '=', 'hutangs.id')
             ->leftJoin('saudaras', 'biodata_spks.saudara_id', '=', 'saudaras.id')
             ->leftJoin('status_ortus', 'biodata_spks.status_ortu_id', '=', 'status_ortus.id')
@@ -33,11 +30,11 @@ class SpkService
                 'nilai_ujians.nilai as nilai',
                 'pekerjaan_ortus.nilai as pekerjaan_ortu',
                 'gaji_ortus.nilai as penghasilan_ortu',
-                'luas_tanahs.nilai as luas_tanah',
-                'jumlah_kamars.nilai as kamar',
+                'biodata_spks.luas_tanah as luas_tanah',
+                'biodata_spks.kamar as kamar',
                 'kamar_mandis.nilai as kamar_mandi',
                 'tagihan_listriks.nilai as tagihan_listrik',
-                'pajaks.nilai as pajak',
+                'biodata_spks.pajak as pajak',
                 'hutangs.nilai as hutang',
                 'saudaras.nilai as saudara',
                 'status_ortus.nilai as status_ortu',
@@ -45,11 +42,8 @@ class SpkService
                 'biodatas.asal_sekolah as sekolah',
                 'pekerjaan_ortus.pekerjaan_ortu as det_pekerjaan_ortu',
                 'gaji_ortus.gaji_ortu as det_gaji_ortu',
-                'luas_tanahs.luas_tanah as det_luas_tanah',
-                'jumlah_kamars.jumlah_kamar as det_kamar',
                 'kamar_mandis.kamar_mandi as det_kamar_mandi',
                 'tagihan_listriks.tagihan_listrik as det_tagihan_listrik',
-                'pajaks.pajak as det_pajak',
                 'biodata_spks.det_hutang as det_hutang',
                 'saudaras.saudara as det_saudara',
                 'status_ortus.status_ortu as det_status_ortu',
@@ -65,11 +59,11 @@ class SpkService
                 'sekolah' => $data->sekolah,
                 'pekerjaan_ortu' => $data->det_pekerjaan_ortu,
                 'gaji_ortu' => $data->det_gaji_ortu,
-                'luas_tanah' => $data->det_luas_tanah,
-                'kamar' => $data->det_kamar,
+                'luas_tanah' => $data->luas_tanah,
+                'kamar' => $data->kamar,
                 'kamar_mandi' => $data->det_kamar_mandi,
                 'tagihan_listrik' => $data->det_tagihan_listrik,
-                'pajak' => $data->det_pajak,
+                'pajak' => $data->pajak,
                 'hutang' => $data->det_hutang,
                 'saudara' => $data->det_saudara,
                 'status_ortu' => $data->det_status_ortu,
@@ -156,15 +150,15 @@ class SpkService
         $optimizedValues = $this->getOptimizedValues();
 
         $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
-            $max = collect($item['spk'])
-                ->only(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
-                ->sum();
-
             $min = collect($item['spk'])
-                ->except(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->only(['Luas Tanah', 'Jumlah Kamar', 'Pajak Bumi dan Bangunan'])
                 ->sum();
 
-            $difference = $min - $max;
+            $max = collect($item['spk'])
+                ->except(['Luas Tanah', 'Jumlah Kamar', 'Pajak Bumi dan Bangunan'])
+                ->sum();
+
+            $difference = $max - $min;
 
             $item['max_y'] = $max;
             $item['min_y'] = $min;
@@ -219,15 +213,15 @@ class SpkService
         $optimizedValues = $this->getOptimizedValues();
 
         $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
-            $max = collect($item['spk'])
-                ->only(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
-                ->sum();
-
             $min = collect($item['spk'])
-                ->except(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->only(['Luas Tanah', 'Jumlah Kamar', 'Pajak Bumi dan Bangunan'])
                 ->sum();
 
-            $difference = $min - $max;
+            $max = collect($item['spk'])
+                ->except(['Luas Tanah', 'Jumlah Kamar', 'Pajak Bumi dan Bangunan'])
+                ->sum();
+
+            $difference = $max - $min;
 
             $item['max_y'] = $max;
             $item['min_y'] = $min;
@@ -280,15 +274,15 @@ class SpkService
         $optimizedValues = $this->getOptimizedValues();
 
         $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
-            $max = collect($item['spk'])
-                ->only(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
-                ->sum();
-
             $min = collect($item['spk'])
-                ->except(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->only(['Luas Tanah', 'Jumlah Kamar', 'Pajak Bumi dan Bangunan'])
                 ->sum();
 
-            $difference = $min - $max;
+            $max = collect($item['spk'])
+                ->except(['Luas Tanah', 'Jumlah Kamar', 'Pajak Bumi dan Bangunan'])
+                ->sum();
+
+            $difference = $max - $min;
 
             $item['max_y'] = $max;
             $item['min_y'] = $min;
@@ -333,15 +327,15 @@ class SpkService
         $optimizedValues = $this->getOptimizedValues();
 
         $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
-            $max = collect($item['spk'])
-                ->only(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
-                ->sum();
-
             $min = collect($item['spk'])
-                ->except(['Pajak Bumi dan Bangunan', 'Jumlah Hutang', 'Jumlah Saudara'])
+                ->only(['Luas Tanah', 'Jumlah Kamar', 'Pajak Bumi dan Bangunan'])
                 ->sum();
 
-            $difference = $min - $max;
+            $max = collect($item['spk'])
+                ->except(['Luas Tanah', 'Jumlah Kamar', 'Pajak Bumi dan Bangunan'])
+                ->sum();
+
+            $difference = $max - $min;
 
             $item['max_y'] = $max;
             $item['min_y'] = $min;

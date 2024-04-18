@@ -29,11 +29,11 @@ class VerifikasiPendaftarController extends Controller
             ->leftJoin('biodata_spks as bs', 'u.id', '=', 'bs.user_id')
             ->leftJoin('pekerjaan_ortus as po', 'bs.pekerjaan_ortu_id', '=', 'po.id')
             ->leftJoin('gaji_ortus as go', 'bs.gaji_ortu_id', '=', 'go.id')
-            ->leftJoin('luas_tanahs as lt', 'bs.luas_tanah_id', '=', 'lt.id')
-            ->leftJoin('jumlah_kamars as jk', 'bs.kamar_id', '=', 'jk.id')
+            // ->leftJoin('luas_tanahs as lt', 'bs.luas_tanah_id', '=', 'lt.id')
+            // ->leftJoin('jumlah_kamars as jk', 'bs.kamar_id', '=', 'jk.id')
             ->leftJoin('kamar_mandis as km', 'bs.kamar_mandi_id', '=', 'km.id')
             ->leftJoin('tagihan_listriks as tl', 'bs.tagihan_listrik_id', '=', 'tl.id')
-            ->leftJoin('pajaks as pj', 'bs.pajak_id', '=', 'pj.id')
+            // ->leftJoin('pajaks as pj', 'bs.pajak_id', '=', 'pj.id')
             ->leftJoin('hutangs as h', 'bs.hutang_id', '=', 'h.id')
             ->leftJoin('saudaras as s', 'bs.saudara_id', '=', 's.id')
             ->leftJoin('status_ortus as so', 'bs.status_ortu_id', '=', 'so.id')
@@ -50,21 +50,24 @@ class VerifikasiPendaftarController extends Controller
                 'b.*',
                 'bs.detail_pekerjaan',
                 'bs.slip_gaji',
+                'bs.luas_tanah',
                 'bs.shm',
+                'bs.kamar',
                 'bs.foto_kmr',
                 'bs.foto_kmr_mandi',
                 'bs.slip_tagihan',
+                'bs.pajak',
                 'bs.slip_pbb',
                 'bs.det_hutang',
                 'bs.surat_ket_sdr',
                 'bs.surat_ket_yatim',
                 'po.pekerjaan_ortu',
                 'go.gaji_ortu',
-                'lt.luas_tanah',
-                'jk.jumlah_kamar',
+                // 'lt.luas_tanah',
+                // 'jk.jumlah_kamar',
                 'km.kamar_mandi',
                 'tl.tagihan_listrik',
-                'pj.pajak',
+                // 'pj.pajak',
                 'h.hutang',
                 's.saudara',
                 'so.status_ortu',

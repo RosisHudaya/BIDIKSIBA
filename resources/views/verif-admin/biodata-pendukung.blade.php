@@ -35,7 +35,7 @@
 </tr>
 <tr>
     <td></td>
-    <td>{{ $biodata->luas_tanah ?? '--' }}<sup>2</sup></td>
+    <td>{{ number_format($biodata->luas_tanah, 0, ',', '.') ?? '--' }} m<sup>2</sup></td>
     <td>
         @if ($biodata->shm)
             <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->shm) }}" alt="shm"
@@ -46,7 +46,7 @@
                 style="width: 170px; height: 100px; object-fit: contain;">
         @endif
     </td>
-    <td>{{ $biodata->jumlah_kamar ?? '--' }}</td>
+    <td>{{ $biodata->kamar ?? '--' }} Kamar</td>
     <td>
         @if ($biodata->foto_kmr)
             <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->foto_kmr) }}" alt="foto-kamar"
@@ -99,7 +99,7 @@
 </tr>
 <tr>
     <td></td>
-    <td>{{ $biodata->pajak ?? '--' }}</td>
+    <td>Rp {{ number_format($biodata->pajak, 0, ',', '.') ?? '--' }}</td>
     <td>
         @if ($biodata->slip_pbb)
             <img class="mb-3 ml-3" src="{{ asset('storage/' . $biodata->slip_pbb) }}" alt="slip-pbb"

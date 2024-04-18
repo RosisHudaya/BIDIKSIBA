@@ -66,18 +66,18 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'status-ortu.index',
                     'menu_group_id' => 3,
                 ],
-                [
-                    'name' => 'Luas Tanah',
-                    'route' => 'menu-kriteria-ekonomi/luas-tanah',
-                    'permission_name' => 'luas-tanah.index',
-                    'menu_group_id' => 4,
-                ],
-                [
-                    'name' => 'Kamar',
-                    'route' => 'menu-kriteria-ekonomi/kamar',
-                    'permission_name' => 'kamar.index',
-                    'menu_group_id' => 4,
-                ],
+                // [
+                //     'name' => 'Luas Tanah',
+                //     'route' => 'menu-kriteria-ekonomi/luas-tanah',
+                //     'permission_name' => 'luas-tanah.index',
+                //     'menu_group_id' => 4,
+                // ],
+                // [
+                //     'name' => 'Kamar',
+                //     'route' => 'menu-kriteria-ekonomi/kamar',
+                //     'permission_name' => 'kamar.index',
+                //     'menu_group_id' => 4,
+                // ],
                 [
                     'name' => 'Kamar Mandi',
                     'route' => 'menu-kriteria-ekonomi/kamar-mandi',
@@ -90,12 +90,12 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'tagihan-listrik.index',
                     'menu_group_id' => 4,
                 ],
-                [
-                    'name' => 'Pajak Bumi dan Bangunan',
-                    'route' => 'menu-kriteria-ekonomi/pajak',
-                    'permission_name' => 'pajak.index',
-                    'menu_group_id' => 4,
-                ],
+                // [
+                //     'name' => 'Pajak Bumi dan Bangunan',
+                //     'route' => 'menu-kriteria-ekonomi/pajak',
+                //     'permission_name' => 'pajak.index',
+                //     'menu_group_id' => 4,
+                // ],
                 [
                     'name' => 'Hutang',
                     'route' => 'menu-kriteria-ekonomi/hutang',

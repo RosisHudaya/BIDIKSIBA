@@ -44,21 +44,21 @@ class BiodataSpkSeeder extends Seeder
         ];
 
         $luas_tanahs = [
-            2,
-            2,
-            2,
-            3,
-            4,
-            3,
+            50,
+            72,
+            55,
+            50,
+            83,
+            52,
         ];
 
         $kamars = [
-            3,
-            3,
+            1,
             2,
             2,
-            3,
             2,
+            1,
+            3,
         ];
 
         $kamar_mandis = [
@@ -80,12 +80,12 @@ class BiodataSpkSeeder extends Seeder
         ];
 
         $pajaks = [
-            1,
-            2,
-            2,
-            1,
-            1,
-            1,
+            450000,
+            750000,
+            320000,
+            400000,
+            420000,
+            500000,
         ];
 
         $hutangs = [
@@ -120,11 +120,11 @@ class BiodataSpkSeeder extends Seeder
                 'user_id' => $user_id,
                 'pekerjaan_ortu_id' => $pekerjaan_ortus[$index],
                 'gaji_ortu_id' => $gaji_ortus[$index],
-                'luas_tanah_id' => $luas_tanahs[$index],
-                'kamar_id' => $kamars[$index],
+                'luas_tanah' => $luas_tanahs[$index],
+                'kamar' => $kamars[$index],
                 'kamar_mandi_id' => $kamar_mandis[$index],
                 'tagihan_listrik_id' => $tagihan_listriks[$index],
-                'pajak_id' => $pajaks[$index],
+                'pajak' => $pajaks[$index],
                 'hutang_id' => $hutangs[$index],
                 'saudara_id' => $saudaras[$index],
                 'status_ortu_id' => $status_ortus[$index],

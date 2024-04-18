@@ -9,15 +9,12 @@ use App\Http\Controllers\DataSpkController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\GajiOrtuController;
 use App\Http\Controllers\HutangController;
-use App\Http\Controllers\JumlahKamarController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KamarMandiController;
 use App\Http\Controllers\LaporanNilaiController;
 use App\Http\Controllers\LoginUjianController;
-use App\Http\Controllers\LuasTanahController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
-use App\Http\Controllers\PajakController;
 use App\Http\Controllers\PekerjaanOrtuController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
@@ -109,11 +106,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     //menu kriteria ekonomi
     Route::prefix('menu-kriteria-ekonomi')->group(function () {
-        Route::resource('luas-tanah', LuasTanahController::class);
-        Route::resource('kamar', JumlahKamarController::class);
         Route::resource('kamar-mandi', KamarMandiController::class);
         Route::resource('tagihan-listrik', TagihanListrikController::class);
-        Route::resource('pajak', PajakController::class);
         Route::resource('hutang', HutangController::class);
     });
 

@@ -21,7 +21,7 @@
         <label for="">Detail Pekerjaan</label>
         <input type="text" value="{{ old('detail_pekerjaan', $biodata_spk ? $biodata_spk->detail_pekerjaan : '') }}"
             class="form-control @error('detail_pekerjaan') is-invalid @enderror" name="detail_pekerjaan"
-            id="detail_pekerjaan" placeholder="e.g. pemilik toko"
+            id="detail_pekerjaan" placeholder="Ex. pemilik toko"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
         @error('detail_pekerjaan')
             <div class="invalid-feedback feed ml-3">
@@ -50,22 +50,11 @@
         </select>
     </div>
     <div class="form-group col-md-6">
-        <label for="">Luas Tanah (satuan meter)</label>
-        <select class="form-control select2" name="luas_tanah" id="luas_tanah"
+        <label for="">Luas Tanah (satuan m<sup>2</sup>)</label>
+        <input type="text"
+            value="{{ old('luas_tanah', $biodata_spk ? number_format($biodata_spk->luas_tanah, 0, ',', '.') : '') }}"
+            class="form-control" name="luas_tanah" id="luas_tanah" placeholder="masukkan luas tanah anda"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="" selected disabled>Luas Tanah</option>
-            @foreach ($luas_tanahs as $luas_tanah)
-                @if (!empty($biodata_spk->luas_tanah_id))
-                    <option @selected($biodata_spk->luas_tanah_id == $luas_tanah->id) value="{{ $luas_tanah->id }}">
-                        {{ $luas_tanah->luas_tanah }}
-                    </option>
-                @else
-                    <option value="{{ $luas_tanah->id }}">
-                        {{ $luas_tanah->luas_tanah }}
-                    </option>
-                @endif
-            @endforeach
-        </select>
     </div>
 </div>
 <div class="col-md-12 d-flex">
@@ -125,21 +114,9 @@
 <div class="col-md-12 d-flex">
     <div class="form-group col-md-6">
         <label for="">Jumlah Kamar</label>
-        <select class="form-control select2" name="jml_kmr" id="jml_kmr"
+        <input type="number" value="{{ old('kamar', $biodata_spk ? $biodata_spk->kamar : '') }}" class="form-control"
+            name="jml_kmr" id="jml_kmr" placeholder="masukkan jumlah kamar anda"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="" selected disabled>Jumlah Kamar</option>
-            @foreach ($kamars as $kamar)
-                @if (!empty($biodata_spk->kamar_id))
-                    <option @selected($biodata_spk->kamar_id == $kamar->id) value="{{ $kamar->id }}">
-                        {{ $kamar->jumlah_kamar }}
-                    </option>
-                @else
-                    <option value="{{ $kamar->id }}">
-                        {{ $kamar->jumlah_kamar }}
-                    </option>
-                @endif
-            @endforeach
-        </select>
     </div>
     <div class="form-group col-md-6">
         <label for="">Kepemilikan Kamar Mandi</label>
@@ -236,21 +213,11 @@
     </div>
     <div class="form-group col-md-6">
         <label for="">Pajak Bumi dan Bangunan</label>
-        <select class="form-control select2" name="pbb" id="pbb"
+        <input type="text"
+            value="{{ old('pajak', $biodata_spk ? number_format($biodata_spk->pajak, 0, ',', '.') : '') }}"
+            class="form-control" name="pbb" id="pbb"
+            placeholder="masukkan jumlah tagihan pajak bumi dan bangunan anda"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-            <option value="" selected disabled>Pajak Bumi dan Bangunan</option>
-            @foreach ($pajaks as $pajak)
-                @if (!empty($biodata_spk->pajak_id))
-                    <option @selected($biodata_spk->pajak_id == $pajak->id) value="{{ $pajak->id }}">
-                        {{ $pajak->pajak }}
-                    </option>
-                @else
-                    <option value="{{ $pajak->id }}">
-                        {{ $pajak->pajak }}
-                    </option>
-                @endif
-            @endforeach
-        </select>
     </div>
 </div>
 <div class="col-md-12 d-flex">
@@ -423,7 +390,7 @@
     <div class="form-group col-md-6">
         <label for="">Detail Jumlah Hutang</label>
         <input type="text" value="{{ old('det_hutang', $biodata_spk ? $biodata_spk->det_hutang : '') }}"
-            class="form-control" name="det_hutang" id="det_hutang" placeholder="e.g. 1.000.000"
+            class="form-control" name="det_hutang" id="det_hutang" placeholder="Ex. 1.000.000"
             {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
     </div>
 </div>
@@ -566,6 +533,16 @@
             formatted = formatted.replace("Rp", "");
             return formatted;
         }
+
+        document.getElementById('luas_tanah').addEventListener('input', function() {
+            var value = this.value.replace(/[^0-9]/g, '');
+            this.value = formatRupiah(value);
+        });
+
+        document.getElementById('pbb').addEventListener('input', function() {
+            var value = this.value.replace(/[^0-9]/g, '');
+            this.value = formatRupiah(value);
+        });
 
         document.getElementById('det_hutang').addEventListener('input', function() {
             var value = this.value.replace(/[^0-9]/g, '');

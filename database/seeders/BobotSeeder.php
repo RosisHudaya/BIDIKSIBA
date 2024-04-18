@@ -43,16 +43,16 @@ class BobotSeeder extends Seeder
         ];
 
         $jenises = [
-            "COST",
-            "COST",
-            "COST",
-            "COST",
+            "BENEFIT",
+            "BENEFIT",
             "COST",
             "COST",
             "BENEFIT",
             "BENEFIT",
-            "BENEFIT",
             "COST",
+            "BENEFIT",
+            "BENEFIT",
+            "BENEFIT",
         ];
 
         foreach ($kriterias as $index => $kriteria) {

@@ -39,11 +39,11 @@ class BiodataSpkController extends Controller
                 'pekerjaan_ortu_id' => $request->pekerjaan_ortu,
                 'detail_pekerjaan' => $request->detail_pekerjaan,
                 'gaji_ortu_id' => $request->gaji_ortu,
-                'luas_tanah_id' => $request->luas_tanah,
-                'kamar_id' => $request->jml_kmr,
+                'luas_tanah' => $request->luas_tanah,
+                'kamar' => $request->jml_kmr,
                 'kamar_mandi_id' => $request->jml_kmr_mandi,
                 'tagihan_listrik_id' => $request->tagihan_listrik,
-                'pajak_id' => $request->pbb,
+                'pajak' => $request->pbb,
                 'hutang_id' => $request->jml_hutang,
                 'saudara_id' => $request->jml_sdr,
                 'status_ortu_id' => $request->status_ortu,
@@ -142,16 +142,19 @@ class BiodataSpkController extends Controller
                 $biodata_spk->update(['surat_ket_yatim' => $fotoPath]);
             }
         } else {
+            $luas_tanah_int = str_replace('.', '', $request->luas_tanah);
+            $pajak_int = str_replace('.', '', $request->pbb);
+
             $idBiodataSpk->update([
                 'user_id' => $id,
                 'pekerjaan_ortu_id' => $request->pekerjaan_ortu,
                 'detail_pekerjaan' => $request->detail_pekerjaan,
                 'gaji_ortu_id' => $request->gaji_ortu,
-                'luas_tanah_id' => $request->luas_tanah,
-                'kamar_id' => $request->jml_kmr,
+                'luas_tanah' => (int) $luas_tanah_int,
+                'kamar' => $request->jml_kmr,
                 'kamar_mandi_id' => $request->jml_kmr_mandi,
                 'tagihan_listrik_id' => $request->tagihan_listrik,
-                'pajak_id' => $request->pbb,
+                'pajak' => (int) $pajak_int,
                 'hutang_id' => $request->jml_hutang,
                 'saudara_id' => $request->jml_sdr,
                 'status_ortu_id' => $request->status_ortu,
@@ -276,35 +279,5 @@ class BiodataSpkController extends Controller
         }
 
         return redirect()->route('biodata.index')->with('success', 'success-biodata-spk');
-    }
-
-    public function create()
-    {
-
-    }
-
-    public function store(StoreBiodataSpkRequest $request)
-    {
-
-    }
-
-    public function show(BiodataSpk $biodataSpk)
-    {
-
-    }
-
-    public function edit(BiodataSpk $biodataSpk)
-    {
-
-    }
-
-    public function update(UpdateBiodataSpkRequest $request, BiodataSpk $biodataSpk)
-    {
-
-    }
-
-    public function destroy(BiodataSpk $biodataSpk)
-    {
-
     }
 }
