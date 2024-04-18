@@ -131,18 +131,6 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'penghasilan-ortu.edit']);
         Permission::create(['name' => 'penghasilan-ortu.destroy']);
 
-        //luas tanah
-        // Permission::create(['name' => 'luas-tanah.index']);
-        // Permission::create(['name' => 'luas-tanah.create']);
-        // Permission::create(['name' => 'luas-tanah.edit']);
-        // Permission::create(['name' => 'luas-tanah.destroy']);
-
-        //kamar
-        // Permission::create(['name' => 'kamar.index']);
-        // Permission::create(['name' => 'kamar.create']);
-        // Permission::create(['name' => 'kamar.edit']);
-        // Permission::create(['name' => 'kamar.destroy']);
-
         //kamar mandi
         Permission::create(['name' => 'kamar-mandi.index']);
         Permission::create(['name' => 'kamar-mandi.create']);
@@ -154,12 +142,6 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'tagihan-listrik.create']);
         Permission::create(['name' => 'tagihan-listrik.edit']);
         Permission::create(['name' => 'tagihan-listrik.destroy']);
-
-        //pbb
-        // Permission::create(['name' => 'pajak.index']);
-        // Permission::create(['name' => 'pajak.create']);
-        // Permission::create(['name' => 'pajak.edit']);
-        // Permission::create(['name' => 'pajak.destroy']);
 
         //hutang
         Permission::create(['name' => 'hutang.index']);
