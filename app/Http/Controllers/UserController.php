@@ -82,19 +82,13 @@ class UserController extends Controller
     {
         $user->load('roles');
 
-        $roles = Role::all();
-        return view('users.edit', compact('user', 'roles'));
+        return view('users.edit', compact('user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->all());
 
-        if ($request->has('roles')) {
-            $user->syncRoles($request->roles);
-        }
-
-        dd($user);
         return redirect()->route('user.index')->with('success', 'Data user berhasil diperbarui');
     }
 

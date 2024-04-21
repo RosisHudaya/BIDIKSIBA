@@ -1,27 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-
     <section class="section">
         <div class="section-header">
             <h1>Roles and Permission</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Table</div>
-            </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Sync User To Role</h2>
-
             <div class="card">
                 <div class="card-header">
-                    <h4>Sync User to Role Form</h4>
+                    <h4>Validasi Edit User to Role</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('assign.user.update', $user) }}" method="post">
                         @csrf
-                        @method("PUT")
+                        @method('PUT')
                         <div class="form-group">
                             <label>User</label>
                             <select name="user" class="form-control select2">

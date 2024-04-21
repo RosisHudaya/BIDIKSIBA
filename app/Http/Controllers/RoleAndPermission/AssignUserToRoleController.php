@@ -23,7 +23,7 @@ class AssignUserToRoleController extends Controller
     {
         //
         // $users = User::with('roles')->paginate(5);
-        $users = User::with('roles')->paginate(5);
+        $users = User::with('roles')->paginate(10);
         return view('permissions.user.index', compact('users'));
     }
 
@@ -55,6 +55,6 @@ class AssignUserToRoleController extends Controller
     {
         //
         $user->syncRoles($request->roles);
-        return redirect()->route('assign.user.index')->with('success', 'User Assigned To Role Successfully');
+        return redirect()->route('assign.user.index')->with('success', 'Data User Assigned To Role berhasil diperbarui');
     }
 }

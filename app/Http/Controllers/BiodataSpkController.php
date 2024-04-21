@@ -33,17 +33,20 @@ class BiodataSpkController extends Controller
             ]
         );
 
+        $luas_tanah_int = str_replace('.', '', $request->luas_tanah);
+        $pajak_int = str_replace('.', '', $request->pbb);
+
         if ($idBiodataSpk == null) {
             $biodata_spk = BiodataSpk::create([
                 'user_id' => $id,
                 'pekerjaan_ortu_id' => $request->pekerjaan_ortu,
                 'detail_pekerjaan' => $request->detail_pekerjaan,
                 'gaji_ortu_id' => $request->gaji_ortu,
-                'luas_tanah' => $request->luas_tanah,
+                'luas_tanah' => (int) $luas_tanah_int,
                 'kamar' => $request->jml_kmr,
                 'kamar_mandi_id' => $request->jml_kmr_mandi,
                 'tagihan_listrik_id' => $request->tagihan_listrik,
-                'pajak' => $request->pbb,
+                'pajak' => (int) $pajak_int,
                 'hutang_id' => $request->jml_hutang,
                 'saudara_id' => $request->jml_sdr,
                 'status_ortu_id' => $request->status_ortu,

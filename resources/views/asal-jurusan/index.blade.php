@@ -83,26 +83,6 @@
     </section>
 @endsection
 @push('customScript')
-    <script>
-        $(document).ready(function() {
-            $('.import').click(function(event) {
-                event.stopPropagation();
-                $(".show-import").slideToggle("fast");
-                $(".show-search").hide();
-            });
-            $('.search').click(function(event) {
-                event.stopPropagation();
-                $(".show-search").slideToggle("fast");
-                $(".show-import").hide();
-            });
-            //ganti label berdasarkan nama file
-            $('#file-upload').change(function() {
-                var i = $(this).prev('label').clone();
-                var file = $('#file-upload')[0].files[0].name;
-                $(this).prev('label').text(file);
-            });
-        });
-    </script>
 @endpush
 
 @push('customStyle')
