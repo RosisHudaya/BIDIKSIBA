@@ -5,6 +5,7 @@ use App\Http\Controllers\AsalJurusanController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\BiodataSpkController;
 use App\Http\Controllers\BobotController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataSpkController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\GajiOrtuController;
@@ -66,10 +67,15 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', function () {
-        return view('home', ['users' => User::get(),]);
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('home', ['users' => User::get(),]);
+    // })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/welcome', [BiodataController::class, 'index_dash']);
+
+    Route::post('/file', [DashboardController::class, 'upload_file'])->name('upload.file');
+    Route::delete('/file/{berkas}', [DashboardController::class, 'delete'])->name('delete-file');
+    Route::post('/jadwal', [DashboardController::class, 'jadwal'])->name('jadwal');
 
     //user list
     Route::prefix('user-management')->group(function () {
