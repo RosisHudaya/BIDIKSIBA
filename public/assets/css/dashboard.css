@@ -49,8 +49,37 @@
     font-size: 14px;
 }
 
-.p-sub {
+.i-not {
+    font-size: 25px;
+}
+
+/* .grayscale {
+    filter: grayscale(100%);
+} */
+
+.list-berkas {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.list-berkas::-webkit-scrollbar {
+    display: none;
+}
+
+.p-sub,
+.p-sub a {
+    color: black !important;
     background-color: white;
     border-radius: 15px;
     font-size: 14px;
+    text-align: start;
+}
+
+.p-sub a:hover {
+    color: #004181 !important;
+    text-decoration: none;
+}
+
+.p-det {
+    font-size: 12px;
 }

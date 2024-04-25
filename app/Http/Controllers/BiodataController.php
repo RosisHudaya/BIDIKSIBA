@@ -21,10 +21,47 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
+
 use Illuminate\Support\Str;
 
 class BiodataController extends Controller
 {
+    public function index_dash()
+    {
+        App::setLocale('id');
+
+        $id = Auth::id();
+        $biodatas = Biodata::where('id_user', $id)->first();
+
+        $berkass = DB::table('berkas')
+            ->select('berkas.*')
+            ->get();
+
+        $jadwal = DB::table('jadwals')
+            ->select('jadwals.*')
+            ->first();
+
+        $jadwalSId = null;
+        $jadwalEId = null;
+        if ($jadwal) {
+            $start = Carbon::parse($jadwal->start);
+            $jadwalSId = $start->translatedFormat('l, d F Y H:i');
+
+            $end = Carbon::parse($jadwal->end);
+            $jadwalEId = $end->translatedFormat('l, d F Y H:i');
+        }
+
+        return view('welcome')->with([
+            'biodatas' => $biodatas,
+            'berkass' => $berkass,
+            'jadwal' => $jadwal,
+            'jadwalSId' => $jadwalSId,
+            'jadwalEId' => $jadwalEId,
+        ]);
+    }
+
     public function index()
     {
         $id = Auth::id();
@@ -55,15 +92,6 @@ class BiodataController extends Controller
             'status_ortus' => $status_ortus,
             'hutangs' => $hutangs,
             'biodata_spk' => $biodata_spk,
-        ]);
-    }
-
-    public function index_dash()
-    {
-        $id = Auth::id();
-        $biodatas = Biodata::where('id_user', $id)->first();
-        return view('welcome')->with([
-            'biodatas' => $biodatas,
         ]);
     }
 

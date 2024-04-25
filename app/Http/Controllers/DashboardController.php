@@ -50,7 +50,6 @@ class DashboardController extends Controller
         $mY_end = null;
         $y_end = null;
         $t_end = null;
-
         if ($jadwal) {
             $start = Carbon::parse($jadwal->start);
             $end = Carbon::parse($jadwal->end);

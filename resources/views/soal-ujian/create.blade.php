@@ -19,7 +19,7 @@
                                 alt="gambar" style="width: 200px; height: 200px; object-fit: contain;"
                                 onerror="this.onerror=null;this.src='{{ asset('assets/img/default-img.jpg') }}';"><br>
                             <input type="text" class="form-control @error('soal') is-invalid @enderror" id="gambar"
-                                name="gambar" placeholder="e.g https://acesse.one/LRP2X" value="{{ old('gambar') }}"
+                                name="gambar" placeholder="ex. https://acesse.one/LRP2X" value="{{ old('gambar') }}"
                                 oninput="previewGambar()">
                             @error('gambar')
                                 <div class="invalid-feedback">

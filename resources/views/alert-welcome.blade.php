@@ -2,13 +2,13 @@
     @role('calon-mahasiswa')
         @if ($biodatas?->id_user == null)
             <div class="alert alert-info">
-                <h6 class="m-0 p-0">
+                <p class="m-0 p-0">
                     !!! Silahkan mengisi biodata anda di menu "BIODATA Pendaftar" !!!
-                </h6>
+                </p>
             </div>
         @elseif ($biodatas->status == 'Blm Diverifikasi')
             <div class="alert alert-danger">
-                <h6 class="m-0 p-0">"!!! ADA KESALAHAN DALAM PENGISIAN BIODATA !!!"</h6>
+                <p class="m-0 p-0">"!!! ADA KESALAHAN DALAM PENGISIAN BIODATA !!!"</p>
             </div>
         @elseif ($biodatas?->id_user != null && $biodatas?->status != 'Diverifikasi')
             @if (
@@ -29,9 +29,9 @@
                     $biodatas?->asal_sekolah != null)
             @else
                 <div class="alert alert-warning">
-                    <h6 class="m-0 p-0">
+                    <p class="m-0 p-0">
                         !!! Silahkan melengkapi keseluruhan data pada formulir yang ada di menu "BIODATA Pendaftar" !!!
-                    </h6>
+                    </p>
                 </div>
             @endif
         @else
