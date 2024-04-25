@@ -174,6 +174,15 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
     margin-left: 4px;
 }
 
+.list-info {
+    max-height: 330px;
+    overflow-y: scroll;
+}
+
+.list-info::-webkit-scrollbar {
+    display: none;
+}
+
 .bg-start {
     background-color: #003c77;
     border-radius: 10px;

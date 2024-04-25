@@ -42,8 +42,14 @@
                         @enderror
                     </div>
                     <div class="form-group my-1 py-1">
-                        <input type="text" class="form-control" placeholder="masukkan judul berkas..." id="judul"
-                            name="judul" value="{{ old('judul') }}">
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror"
+                            placeholder="masukkan judul berkas..." id="judul" name="judul"
+                            value="{{ old('judul') }}">
+                        @error('judul')
+                            <div class="invalid-feedback feed ml-3">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <textarea class="form-control summernote" name="deskripsi" id="deskripsi">{{ old('deskripsi') }}</textarea>
@@ -111,32 +117,35 @@
         <div class="d-flex">
             <div class="col-md-6 pb-3">
                 <h2 class="section-title">List Informasi</h2>
-                @foreach ($files as $key => $file)
-                    <div class="bg-informasi mb-2">
-                        <div class="d-flex col-md-12 p-2">
-                            <div class="d-flex col-md-10">
-                                <i class="fas fa-file-pdf icon-info mr-4"></i>
-                                <div class="my-auto">
-                                    <a href="{{ asset('storage/' . $file->file) }}"
-                                        class="a-prev text-justify">{{ $file->judul }}
-                                    </a>
+                <div class="list-info">
+                    @foreach ($files as $key => $file)
+                        <div class="bg-informasi mb-2">
+                            <div class="d-flex col-md-12 p-2">
+                                <div class="d-flex col-md-10">
+                                    <i class="fas fa-file-pdf icon-info mr-4"></i>
+                                    <div class="my-auto">
+                                        <a href="{{ asset('storage/' . $file->file) }}"
+                                            class="a-prev text-justify">{{ $file->judul }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <form action="{{ route('delete-file', $file->id) }}" method="POST"
+                                        id="del-<?= $file->id ?>">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger"
+                                            data-confirm="Konfirmasi Hapus | Apakah anda yakin menghapus file ini?"
+                                            data-confirm-yes="submitDel(<?= $file->id ?>)"
+                                            data-id="del-{{ $file->id }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="col-md-2 text-right">
-                                <form action="{{ route('delete-file', $file->id) }}" method="POST"
-                                    id="del-<?= $file->id ?>">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger"
-                                        data-confirm="Konfirmasi Hapus | Apakah anda yakin menghapus file ini?"
-                                        data-confirm-yes="submitDel(<?= $file->id ?>)" data-id="del-{{ $file->id }}">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
             <div class="col-md-6 pb-4">
                 <h2 class="section-title">Jadwal Pendaftaran</h2>
@@ -144,9 +153,9 @@
                     <div class="d-flex py-3">
                         <p class="i-date my-auto mx-3">{{ $d_start ? $d_start : '00' }}</p>
                         <div class="my-2">
-                            <p class="p-date">{{ $t_start ? $t_start : '00:00:00' }}</p>
+                            <p class="p-start">{{ $mY_start ? $mY_start : '-- 0000' }}</p>
                             <hr class="bg-white">
-                            <p class="p-start">{{ $m_start ? $m_start : '--' }} {{ $y_start ? $y_start : '0000' }}</p>
+                            <p class="p-date">{{ $t_start ? $t_start : '00:00:00' }}</p>
                         </div>
                     </div>
                 </div>
@@ -155,9 +164,9 @@
                     <div class="d-flex py-3">
                         <p class="i-date my-auto mx-3">{{ $d_end ? $d_end : '00' }}</p>
                         <div class="my-2">
-                            <p class="p-date">{{ $t_end ? $t_end : '00:00:00' }}</p>
+                            <p class="p-start">{{ $mY_end ? $mY_end : '-- 0000' }}</p>
                             <hr class="bg-white">
-                            <p class="p-start">{{ $m_end ? $m_end : '--' }} {{ $y_end ? $y_end : '0000' }}</p>
+                            <p class="p-date">{{ $t_end ? $t_end : '00:00:00' }}</p>
                         </div>
                     </div>
                 </div>

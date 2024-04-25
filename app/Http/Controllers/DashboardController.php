@@ -44,11 +44,10 @@ class DashboardController extends Controller
             ->first();
 
         $d_start = null;
-        $m_start = null;
-        $y_start = null;
+        $mY_start = null;
         $t_start = null;
         $d_end = null;
-        $m_end = null;
+        $mY_end = null;
         $y_end = null;
         $t_end = null;
 
@@ -57,13 +56,11 @@ class DashboardController extends Controller
             $end = Carbon::parse($jadwal->end);
 
             $d_start = $start->format('d');
-            $m_start = $start->formatLocalized('%B');
-            $y_start = $start->format('Y');
+            $mY_start = $start->formatLocalized('%B %Y');
             $t_start = $start->format('H:i:s');
 
             $d_end = $end->format('d');
-            $m_end = $end->formatLocalized('%B');
-            $y_end = $end->format('Y');
+            $mY_end = $end->formatLocalized('%B %Y');
             $t_end = $end->format('H:i:s');
         }
 
@@ -76,12 +73,10 @@ class DashboardController extends Controller
                 'files',
                 'jadwal',
                 'd_start',
-                'm_start',
-                'y_start',
+                'mY_start',
                 't_start',
                 'd_end',
-                'm_end',
-                'y_end',
+                'mY_end',
                 't_end',
             )
         );
@@ -110,10 +105,12 @@ class DashboardController extends Controller
     {
         $request->validate(
             [
+                'judul' => 'required',
                 'file' => 'required|file|mimes:pdf|max:2048',
                 'foto' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             ],
             [
+                'judul.required' => 'Form harus diisi',
                 'file.required' => 'Form harus diisi',
                 'file.mimes' => 'Format file yang diunggah harus PDF',
                 'file.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
