@@ -90,18 +90,18 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'role.index',
                     'menu_group_id' => 5,
                 ],
-                [
-                    'name' => 'Permission List',
-                    'route' => 'role-and-permission/permission',
-                    'permission_name' => 'permission.index',
-                    'menu_group_id' => 5,
-                ],
-                [
-                    'name' => 'Permission To Role',
-                    'route' => 'role-and-permission/assign',
-                    'permission_name' => 'assign.index',
-                    'menu_group_id' => 5,
-                ],
+                // [
+                //     'name' => 'Permission List',
+                //     'route' => 'role-and-permission/permission',
+                //     'permission_name' => 'permission.index',
+                //     'menu_group_id' => 5,
+                // ],
+                // [
+                //     'name' => 'Permission To Role',
+                //     'route' => 'role-and-permission/assign',
+                //     'permission_name' => 'assign.index',
+                //     'menu_group_id' => 5,
+                // ],
                 [
                     'name' => 'User To Role',
                     'route' => 'role-and-permission/assign-user',
@@ -162,18 +162,18 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'laporan-nilai.index',
                     'menu_group_id' => 8,
                 ],
-                [
-                    'name' => 'Menu Group',
-                    'route' => 'menu-management/menu-group',
-                    'permission_name' => 'menu-group.index',
-                    'menu_group_id' => 9,
-                ],
-                [
-                    'name' => 'Menu Item',
-                    'route' => 'menu-management/menu-item',
-                    'permission_name' => 'menu-item.index',
-                    'menu_group_id' => 9,
-                ],
+                // [
+                //     'name' => 'Menu Group',
+                //     'route' => 'menu-management/menu-group',
+                //     'permission_name' => 'menu-group.index',
+                //     'menu_group_id' => 9,
+                // ],
+                // [
+                //     'name' => 'Menu Item',
+                //     'route' => 'menu-management/menu-item',
+                //     'permission_name' => 'menu-item.index',
+                //     'menu_group_id' => 9,
+                // ],
             ]
         );
     }

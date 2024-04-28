@@ -58,11 +58,11 @@ class MenuGroupSeeder extends Seeder
                     'icon' => 'fas fa-file-contract',
                     'permisison_name' => 'menu.ujian',
                 ],
-                [
-                    'name' => 'Menu Management',
-                    'icon' => 'fas fa-bars',
-                    'permisison_name' => 'menu.management',
-                ]
+                // [
+                //     'name' => 'Menu Management',
+                //     'icon' => 'fas fa-bars',
+                //     'permisison_name' => 'menu.management',
+                // ]
             ]
         );
     }

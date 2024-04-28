@@ -98,10 +98,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('akun-ujian', [AkunUjianController::class, 'index'])->name('akun-ujian.index');
     });
 
-    Route::prefix('menu-management')->group(function () {
-        Route::resource('menu-group', MenuGroupController::class);
-        Route::resource('menu-item', MenuItemController::class);
-    });
+    // Route::prefix('menu-management')->group(function () {
+    //     Route::resource('menu-group', MenuGroupController::class);
+    //     Route::resource('menu-item', MenuItemController::class);
+    // });
 
     //menu kriteria pendaftar
     Route::prefix('menu-kriteria-pendaftar')->group(function () {
@@ -161,16 +161,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('role/import', ImportRoleController::class)->name('role.import');
 
         //permission
-        Route::resource('permission', PermissionController::class);
-        Route::get('permission/export', ExportPermissionController::class)->name('permission.export');
-        Route::post('permission/import', ImportPermissionController::class)->name('permission.import');
+        // Route::resource('permission', PermissionController::class);
+        // Route::get('permission/export', ExportPermissionController::class)->name('permission.export');
+        // Route::post('permission/import', ImportPermissionController::class)->name('permission.import');
 
         //assign permission
-        Route::get('assign', [AssignPermissionController::class, 'index'])->name('assign.index');
-        Route::get('assign/create', [AssignPermissionController::class, 'create'])->name('assign.create');
-        Route::get('assign/{role}/edit', [AssignPermissionController::class, 'edit'])->name('assign.edit');
-        Route::put('assign/{role}', [AssignPermissionController::class, 'update'])->name('assign.update');
-        Route::post('assign', [AssignPermissionController::class, 'store'])->name('assign.store');
+        // Route::get('assign', [AssignPermissionController::class, 'index'])->name('assign.index');
+        // Route::get('assign/create', [AssignPermissionController::class, 'create'])->name('assign.create');
+        // Route::get('assign/{role}/edit', [AssignPermissionController::class, 'edit'])->name('assign.edit');
+        // Route::put('assign/{role}', [AssignPermissionController::class, 'update'])->name('assign.update');
+        // Route::post('assign', [AssignPermissionController::class, 'store'])->name('assign.store');
 
         //assign user to role
         Route::get('assign-user', [AssignUserToRoleController::class, 'index'])->name('assign.user.index');
