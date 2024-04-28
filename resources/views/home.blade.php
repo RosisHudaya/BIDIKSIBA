@@ -51,9 +51,9 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <textarea class="form-control summernote" name="deskripsi" id="deskripsi">{{ old('deskripsi') }}</textarea>
-                    </div>
+                    </div> --}}
                     <button class="btn btn-block btn-primary"><i class="fas fa-paper-plane"></i> Upload</button>
                 </form>
                 <hr>
@@ -175,9 +175,9 @@
     </section>
 @endsection
 
-@push('customStyle')
+{{-- @push('customStyle')
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-@endpush
+@endpush --}}
 
 @push('customScript')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
@@ -200,7 +200,7 @@
             });
         })
     </script>
-    <script>
+    {{-- <script>
         $(".summernote").summernote({
             styleWithSpan: false,
             height: 200,
@@ -213,5 +213,5 @@
                 ['para', ['ul', 'ol', 'paragraph']],
             ],
         });
-    </script>
+    </script> --}}
 @endpush

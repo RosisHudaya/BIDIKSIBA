@@ -17,6 +17,7 @@ use App\Http\Controllers\LoginUjianController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
 use App\Http\Controllers\PekerjaanOrtuController;
+use App\Http\Controllers\PengawasController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
 use App\Http\Controllers\RoleAndPermission\AssignUserToRoleController;
@@ -186,6 +187,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('get-prodi', [BiodataController::class, 'getProdis'])->name('getProdis');
     Route::post('load-filter-jurusan', [BiodataController::class, 'loadFilterJurusan'])->name('loadFilterJurusan');
     Route::get('get-jurusan', [BiodataController::class, 'getJurusans'])->name('getJurusans');
+
+    Route::get('ujian-pengawas', [PengawasController::class, 'index'])->name('ujian.pengawas');
+    Route::get('ujian-pengawas/detail/{sesiUjian}', [PengawasController::class, 'detail'])->name('pengawas.detail');
 
     Route::get('token-ujian', [TokenUjianController::class, 'index'])->name('token-ujian.index');
     Route::get('login-ujian', function () {

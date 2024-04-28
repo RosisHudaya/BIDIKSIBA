@@ -130,7 +130,6 @@ class DashboardController extends Controller
 
         $berkas = Berkas::create([
             'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
             'file' => $filePath,
         ]);
 

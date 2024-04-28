@@ -47,10 +47,10 @@ class BiodataController extends Controller
         $jadwalEId = null;
         if ($jadwal) {
             $start = Carbon::parse($jadwal->start);
-            $jadwalSId = $start->translatedFormat('l, d F Y H:i');
+            $jadwalSId = $start->translatedFormat('l, d F Y H:i:s');
 
             $end = Carbon::parse($jadwal->end);
-            $jadwalEId = $end->translatedFormat('l, d F Y H:i');
+            $jadwalEId = $end->translatedFormat('l, d F Y H:i:s');
         }
 
         return view('welcome')->with([

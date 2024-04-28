@@ -11,7 +11,6 @@ class Berkas extends Model
 
     protected $fillable = [
         'judul',
-        'deskripsi',
         'foto',
         'file',
     ];

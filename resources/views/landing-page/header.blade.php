@@ -49,10 +49,7 @@
                     @endrole
                     @role('pengawas')
                         <li class="nav-item mr-5">
-                            <a href="" class="a-nav">List Ujian</a>
-                        </li>
-                        <li class="nav-item mr-5">
-                            <a href="" class="a-nav">List Peserta Ujian</a>
+                            <a href="{{ route('ujian.pengawas') }}" class="a-nav">List Ujian</a>
                         </li>
                     @endrole
                     @role('super-admin|admin-bidiksiba')
