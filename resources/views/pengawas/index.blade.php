@@ -13,42 +13,47 @@
         <div class="p-main pt-1 pb-4 px-3">
             <div class="col-md-9 p-0 my-2 mx-auto">
                 <p class="mb-2 p-0 p-t">LIST UJIAN</p>
-                <table class="table table-bordered table-md">
-                    <tbody>
-                        <tr>
-                            <th class="text-center" style="width: 50px;">#</th>
-                            <th style="width: 300px;">Sesi</th>
-                            <th style="width: 300px;">Ujian</th>
-                            <th style="width: 400px;">Waktu</th>
-                            <th class="text-center" style="width: 150px;">Aksi</th>
-                        </tr>
-                        @foreach ($list_ujians as $key => $list_ujian)
+                <div class="table-responsive">
+                    <table class="table table-bordered table-md">
+                        <tbody>
                             <tr>
-                                <td class="text-center">
-                                    {{ ($list_ujians->currentPage() - 1) * $list_ujians->perPage() + $key + 1 }}
-                                </td>
-                                <td>{{ $list_ujian->nama_sesi }}</td>
-                                <td>{{ $list_ujian->nama_ujian }}</td>
-                                <td>
-                                    Mulai&nbsp;&nbsp; :
-                                    {{ \Carbon\Carbon::parse($list_ujian->waktu_mulai)->format('d F Y H:i:s') }}<br>
-                                    Selesai :
-                                    {{ \Carbon\Carbon::parse($list_ujian->waktu_akhir)->format('d F Y H:i:s') }}
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('pengawas.detail', $list_ujian->id) }}"
-                                        class="btn btn-sm btn-success px-3 font-weight-bold">
-                                        Detail
-                                    </a>
-                                </td>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th style="width: 300px;">Sesi</th>
+                                <th style="width: 300px;">Ujian</th>
+                                <th style="width: 400px;">Waktu</th>
+                                <th class="text-center" style="width: 150px;">Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="d-flex justify-content-center">
+                            @foreach ($list_ujians as $key => $list_ujian)
+                                <tr>
+                                    <td class="text-center">
+                                        {{ ($list_ujians->currentPage() - 1) * $list_ujians->perPage() + $key + 1 }}
+                                    </td>
+                                    <td>{{ $list_ujian->nama_sesi }}</td>
+                                    <td>{{ $list_ujian->nama_ujian }}</td>
+                                    <td>
+                                        Mulai&nbsp;&nbsp; :
+                                        {{ \Carbon\Carbon::parse($list_ujian->waktu_mulai)->format('d F Y H:i:s') }}<br>
+                                        Selesai :
+                                        {{ \Carbon\Carbon::parse($list_ujian->waktu_akhir)->format('d F Y H:i:s') }}
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ route('pengawas.detail', $list_ujian->id) }}"
+                                            class="btn btn-sm btn-success px-3 font-weight-bold">
+                                            Detail
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center d-pag">
                     {{ $list_ujians->withQueryString()->links() }}
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('customScript')
+    <script src="/assets/js/pagination.js"></script>
+@endpush

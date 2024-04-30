@@ -15,14 +15,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
-                        {{-- <div class="header ml-4 mt-3">
-                            <a class="btn btn-success" href="{{ route('laporan-nilai.export', request()->all()) }}">
-                                <i class="fas fa-file-csv"></i> Export Nilai
-                            </a>
-                        </div> --}}
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('laporan-nilai.index') }}">
-                                <div class="d-flex mb-3">
+                                <div class="d-flex mb-3 v-search">
                                     <select class="form-control select2" name="ujian" id="ujian">
                                         <option value="" disabled selected>filter nama ujian...</option>
                                         @foreach ($ujians as $ujian)
@@ -31,10 +26,15 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <button class="btn btn-primary mr-1 ml-2 py-0 px-4" type="submit">Submit</button>
-                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('laporan-nilai.index') }}">
-                                        Reset
-                                    </a>
+                                    <div class="d-flex text-right v-btn">
+                                        <button class="btn btn-primary mr-1 ml-2 py-0 px-4 v-submit" type="submit">
+                                            Submit
+                                        </button>
+                                        <a class="btn btn-secondary py-2 px-4 v-reset"
+                                            href="{{ route('laporan-nilai.index') }}">
+                                            Reset
+                                        </a>
+                                    </div>
                                 </div>
                             </form>
                             <div class="table-responsive">
@@ -55,7 +55,8 @@
                                                 <td class="text-center">{{ $nilai->nama_sesi }}</td>
                                                 <td class="text-center">
                                                     <a href="{{ route('list-nilai.show', $nilai->id) }}"
-                                                        class="btn btn-sm btn-exam"><i class="fas fa-circle-notch"></i>
+                                                        class="btn btn-sm btn-exam">
+                                                        <i class="fas fa-circle-notch i-all"></i>
                                                         Detail
                                                     </a>
                                                 </td>
@@ -63,9 +64,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $nilais->withQueryString()->links() }}
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center d-pag">
+                                {{ $nilais->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
@@ -81,6 +82,7 @@
             $('.select2').select2();
         });
     </script>
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

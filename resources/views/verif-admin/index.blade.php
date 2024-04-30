@@ -16,20 +16,20 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="header ml-4 mt-3">
-                            <a class="btn btn-success" href="{{ route('export.biodata') }}">
+                            <a class="btn btn-success btn-spk" href="{{ route('export.biodata') }}">
                                 <i class="fas fa-file-csv"></i> Biodata
                             </a>
-                            <a class="btn btn-success" href="{{ route('export.spk') }}">
+                            <a class="btn btn-success btn-spk" href="{{ route('export.spk') }}">
                                 <i class="fas fa-file-csv"></i> Data SPK
                             </a>
-                            <a class="btn btn-success" href="{{ route('export.pendaftar') }}">
+                            <a class="btn btn-success btn-spk" href="{{ route('export.pendaftar') }}">
                                 <i class="fas fa-file-csv"></i> Data Pendaftar
                             </a>
                         </div>
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('verifikasi-pendaftar.index') }}">
-                                <div class="d-flex mb-3">
-                                    <input type="text" name="name" class="form-control mr-2" id="name"
+                                <div class="d-flex mb-3 v-search">
+                                    <input type="text" name="name" class="form-control mr-2 d-input" id="name"
                                         placeholder="cari nama pendaftar..." value="{{ app('request')->input('name') }}">
                                     <select class="form-control select2" name="status" id="status">
                                         <option value="" disabled selected>
@@ -45,10 +45,15 @@
                                             DIVERIFIKASI
                                         </option>
                                     </select>
-                                    <button class="btn btn-primary mr-1 ml-2 py-0 px-4" type="submit">Submit</button>
-                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('verifikasi-pendaftar.index') }}">
-                                        Reset
-                                    </a>
+                                    <div class="d-flex text-right v-btn">
+                                        <button class="btn btn-primary mr-1 ml-2 py-0 px-4 v-submit" type="submit">
+                                            Submit
+                                        </button>
+                                        <a class="btn btn-secondary py-2 px-4 v-reset"
+                                            href="{{ route('verifikasi-pendaftar.index') }}">
+                                            Reset
+                                        </a>
+                                    </div>
                                 </div>
                             </form>
                             <div class="table-responsive">
@@ -78,7 +83,7 @@
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
                                                         <a href="" class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
+                                                                class="fas fa-edit i-all"></i>
                                                             Edit
                                                         </a>
                                                         <form
@@ -90,7 +95,7 @@
                                                                 data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus biodata pendaftar ini?"
                                                                 data-confirm-yes="submitDel(<?= $biodata->id ?>)"
                                                                 data-id="del-{{ $biodata->id }}">
-                                                                <i class="fas fa-times"></i> Delete
+                                                                <i class="fas fa-times i-all"></i> Delete
                                                             </button>
                                                         </form>
                                                         <a class="btn btn-sm btn-secondary ml-2 detail"
@@ -106,7 +111,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center d-pag">
                                     {{ $biodatas->withQueryString()->links() }}
                                 </div>
                             </div>
@@ -345,6 +350,7 @@
             $('.select2').select2();
         });
     </script>
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

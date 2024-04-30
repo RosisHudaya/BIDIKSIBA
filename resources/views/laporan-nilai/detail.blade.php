@@ -9,19 +9,19 @@
             <table class="table table-bordered table-md">
                 <tbody>
                     <tr>
-                        <th style="width: 300px;">NAMA UJIAN</th>
+                        <th class="th-test" style="width: 300px;">NAMA UJIAN</th>
                         <td>{{ $ujian->nama_ujian }}</td>
                     </tr>
                     <tr>
-                        <th style="width: 300px;">SESI</th>
+                        <th class="th-test" style="width: 300px;">SESI</th>
                         <td>{{ $ujian->nama_sesi }}</td>
                     </tr>
                     <tr>
-                        <th style="width: 300px;">MULAI</th>
+                        <th class="th-test" style="width: 300px;">MULAI</th>
                         <td>{{ \Carbon\Carbon::parse($ujian->waktu_mulai)->format('d F Y H:i:s') }}</td>
                     </tr>
                     <tr>
-                        <th style="width: 300px;">SELESAI</th>
+                        <th class="th-test" style="width: 300px;">SELESAI</th>
                         <td>{{ \Carbon\Carbon::parse($ujian->waktu_akhir)->format('d F Y H:i:s') }}</td>
                     </tr>
                 </tbody>
@@ -41,11 +41,11 @@
                         </div>
                         <div class="card-body">
                             <form id="search" method="GET" action="">
-                                <div class="d-flex mb-3">
-                                    <input type="text" name="name" class="form-control mr-2" id="name"
+                                <div class="d-flex mb-3 d-search">
+                                    <input type="text" name="name" class="form-control mr-2 d-input" id="name"
                                         placeholder="cari nama peserta ujian..."
                                         value="{{ app('request')->input('name') }}">
-                                    <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
+                                    <button class="btn btn-primary mr-1 py-0 px-4 d-submit" type="submit">Submit</button>
                                     <a class="btn btn-secondary py-2 px-4"
                                         href="{{ route('list-nilai.show', $ujian->id) }}">
                                         Reset

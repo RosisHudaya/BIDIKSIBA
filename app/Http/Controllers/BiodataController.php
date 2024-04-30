@@ -95,6 +95,39 @@ class BiodataController extends Controller
         ]);
     }
 
+    public function index_pendukung()
+    {
+        $id = Auth::id();
+        $asalJurusans = AsalJurusan::all();
+        $jurusans = Jurusan::all();
+        $prodis = Prodi::all();
+        $asalJurusanPivots = AsalJurusanPivot::all();
+        $biodatas = Biodata::where('id_user', $id)->first();
+        $pekerjaan_ortus = PekerjaanOrtu::all();
+        $gaji_ortus = GajiOrtu::all();
+        $kamar_mandis = KamarMandi::all();
+        $tagihan_listriks = TagihanListrik::all();
+        $saudaras = Saudara::all();
+        $status_ortus = StatusOrtu::all();
+        $hutangs = Hutang::all();
+        $biodata_spk = BiodataSpk::where('user_id', $id)->first();
+        return view('biodata.index-pendukung')->with([
+            'asalJurusans' => $asalJurusans,
+            'jurusans' => $jurusans,
+            'prodis' => $prodis,
+            'asalJurusanPivots' => $asalJurusanPivots,
+            'biodatas' => $biodatas,
+            'pekerjaan_ortus' => $pekerjaan_ortus,
+            'gaji_ortus' => $gaji_ortus,
+            'kamar_mandis' => $kamar_mandis,
+            'tagihan_listriks' => $tagihan_listriks,
+            'saudaras' => $saudaras,
+            'status_ortus' => $status_ortus,
+            'hutangs' => $hutangs,
+            'biodata_spk' => $biodata_spk,
+        ]);
+    }
+
     public function loadFilterJurusan(Request $request)
     {
         $jurusans = DB::table('jurusans as j')

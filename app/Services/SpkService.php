@@ -168,7 +168,7 @@ class SpkService
         });
 
         $sortedAlternatives = $rankedAlternatives->filter(function ($item) {
-            return $item['nilai'] >= 100;
+            return $item['nilai'] >= 0;
         })->sortByDesc('difference')->sortByDesc('nilai')->values();
 
         $rank = 1;

@@ -37,7 +37,7 @@
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
                                                         <a href="" class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
+                                                                class="fas fa-edit i-all"></i>
                                                             Edit
                                                         </a>
                                                     </div>
@@ -46,9 +46,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $bobots->withQueryString()->links() }}
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center d-pag">
+                                {{ $bobots->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
@@ -58,6 +58,7 @@
     </section>
 @endsection
 @push('customScript')
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

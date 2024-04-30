@@ -1,14 +1,14 @@
 @if ($biodatas?->id_user == null)
     <div class="alert alert-info">
-        <p class="m-0 p-0">
+        <p class="m-0 p-0 p-alert">
             !!! Isi formulir BIODATA PENDAFTAR dibawah untuk mendapatkan TOKEN dan PASSWORD ujian !!!
         </p>
     </div>
 @elseif ($biodatas->status == 'Blm Diverifikasi')
     <div class="alert alert-danger">
-        <p class="m-0 p-0">"!!! ADA KESALAHAN DATA !!!"</p>
+        <p class="m-0 p-0 p-alert">"!!! ADA KESALAHAN DATA !!!"</p>
         <hr class="my-2">
-        <small class="m-0 p-0" style="font-size: 14px;">{!! $biodatas->catatan ?? '' !!}</small>
+        <small class="m-0 p-0 s-alert" style="font-size: 14px;">{!! $biodatas->catatan ?? '' !!}</small>
         <hr class="m-0">
     </div>
 @elseif ($biodatas?->id_user != null && $biodatas?->status != 'Diverifikasi')
@@ -49,14 +49,14 @@
             $biodata_spk?->status_ortu_id != null &&
             $biodata_spk?->surat_ket_yatim != null)
         <div class="alert alert-warning">
-            <p class="m-0 p-0">
+            <p class="m-0 p-0 p-alert">
                 Data PENDAFTAR dibawah sedang menunggu proses verifikasi oleh admin...
             </p>
         </div>
     @else
         <div class="alert alert-warning">
-            <p class="m-0 p-0">
-                !!! Lengkapi seluruh formulir BIODATA PENDAFTAR dibawah untuk mendapatkan TOKEN dan PASSWORD ujian !!!
+            <p class="m-0 p-0 p-alert">
+                !!! Lengkapi seluruh formulir BIODATA PENDAFTAR untuk mendapatkan TOKEN dan PASSWORD ujian !!!
             </p>
         </div>
     @endif

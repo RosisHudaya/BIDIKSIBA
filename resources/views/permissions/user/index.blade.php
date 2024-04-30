@@ -41,7 +41,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Roles</th>
-                                            <th class="text-right">Action</th>
+                                            <th class="text-right">Aksi</th>
                                         </tr>
                                         @foreach ($users as $key => $user)
                                             <tr>
@@ -53,7 +53,7 @@
                                                     <div class="d-flex justify-content-end">
                                                         <a href="{{ route('assign.user.edit', $user->id) }}"
                                                             class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
+                                                                class="fas fa-edit i-all"></i>
                                                             Edit</a>
                                                     </div>
                                                 </td>
@@ -61,7 +61,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center d-pag">
                                     {{ $users->withQueryString()->links() }}
                                 </div>
                             </div>
@@ -93,6 +93,7 @@
             });
         });
     </script>
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

@@ -14,7 +14,7 @@
         <div class="col-md-8">
             <div class="d-flex justify-content-start">
                 <img class="img-fluid img-h my-2 mr-3" src="{{ asset('assets/img/logo.png') }}">
-                <div>
+                <div class="t-header">
                     <span class="s-b">BIDIKSIBA </span><span class="s-p">POLINEMA</span>
                     <p class="p-header">Beasiswa Pendidikan Sekitar Bukit Asam Politeknik Negeri Malang
                     </p>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <p id="realtime-clock" class="p-header text-right"></p>
+            <p id="realtime-clock" class="p-header p-time text-right"></p>
         </div>
     </div>
     <div class="p-sub-main"></div>

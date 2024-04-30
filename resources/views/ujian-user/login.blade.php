@@ -9,18 +9,19 @@
         </p>
         <div class="p-main pt-1 pb-4 px-3">
             <div class="card col-md-7 mx-auto my-4 px-5 py-3">
-                <h6 class="mx-auto my-3">!!! Masukkan token dan password ujian !!!</h6>
+                <h6 class="mx-auto my-3 h-login">!!! Masukkan token dan password ujian !!!</h6>
+                <p class="p-login m-0 p-0">Masukkan token dan password ujian</p>
                 <form method="POST" action="{{ route('login.ujian.post') }}">
                     @csrf
                     @if (session('error'))
                         <p id="p-error" class="text-c m-0 p-0">{{ session('error') }}</p>
                     @endif
-                    <div class="d-flex form-group my-2">
+                    <div class="d-flex form-group my-2 login-test">
                         <i class="fas fa-user my-auto f-icon"></i>
                         <input type="text" name="token" value="{{ old('token') }}" class="form-control form-login"
                             placeholder="Token...">
                     </div>
-                    <div class="d-flex form-group my-2">
+                    <div class="d-flex form-group my-2 login-test">
                         <i class="fas fa-key my-auto f-icon"></i>
                         <input type="password" name="password" value="{{ old('password') }}" class="form-control form-login"
                             placeholder="Password...">

@@ -26,7 +26,7 @@
     <tr>
         <td></td>
         <td>{{ $result['tagihan_listrik'] }}</td>
-        <td>{{ $result['pajak'] }}</td>
+        <td>Rp {{ number_format($result['pajak'], 0, ',', '.') }}</td>
         <td>Rp {{ $result['hutang'] !== null ? $result['hutang'] : '0' }}</td>
         <td class="text-center">{{ $result['saudara'] }}</td>
         <td class="text-center">{{ $result['status_ortu'] }}</td>

@@ -22,8 +22,8 @@
                         </div>
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('jurusan.index') }}">
-                                <div class="d-flex mb-3">
-                                    <input type="text" name="name" class="form-control mr-2" id="name"
+                                <div class="d-flex mb-3 v-search">
+                                    <input type="text" name="name" class="form-control mr-2 d-input" id="name"
                                         placeholder="cari nama jurusan..." value="{{ app('request')->input('name') }}">
                                     <select class="form-control select2" name="asal_jurusan" id="asal_jurusan">
                                         <option value="" disabled selected>cari nama asal jurusan SMA/SMK...</option>
@@ -34,8 +34,14 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <button class="btn btn-primary mr-1 ml-2 py-0 px-4" type="submit">Submit</button>
-                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('jurusan.index') }}">Reset</a>
+                                    <div class="d-flex text-right v-btn">
+                                        <button class="btn btn-primary mr-1 ml-2 py-0 px-4 v-submit" type="submit">
+                                            Submit
+                                        </button>
+                                        <a class="btn btn-secondary py-2 px-4 v-reset" href="{{ route('jurusan.index') }}">
+                                            Reset
+                                        </a>
+                                    </div>
                                 </div>
                             </form>
                             <div class="table-responsive">
@@ -58,7 +64,7 @@
                                                     <div class="d-flex justify-content-center">
                                                         <a href="{{ route('jurusan.edit', $jurusan->id) }}"
                                                             class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
+                                                                class="fas fa-edit i-all"></i>
                                                             Edit
                                                         </a>
                                                         <form action="{{ route('jurusan.destroy', $jurusan->id) }}"
@@ -69,7 +75,7 @@
                                                                 data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus jurusan ini?"
                                                                 data-confirm-yes="submitDel(<?= $jurusan->id ?>)"
                                                                 data-id="del-{{ $jurusan->id }}">
-                                                                <i class="fas fa-times"></i> Delete
+                                                                <i class="fas fa-times i-all"></i> Delete
                                                             </button>
                                                         </form>
                                                     </div>
@@ -78,9 +84,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $jurusans->withQueryString()->links() }}
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center d-pag">
+                                {{ $jurusans->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
@@ -96,6 +102,7 @@
             $('.select2').select2();
         });
     </script>
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

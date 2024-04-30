@@ -10,23 +10,23 @@
         <div class="p-main py-3 px-3">
             <ul class="nav nav-tabs">
                 <li class="nav-bio">
-                    <a class="nav-link active" aria-current="page" href="{{ route('biodata.index') }}">DATA DIRI</a>
+                    <a class="nav-link" aria-current="page" href="{{ route('biodata.index') }}">DATA DIRI</a>
                 </li>
                 <li class="nav-bio">
-                    <a class="nav-link" aria-current="page" href="{{ route('biodata.index_p') }}">DATA PENDUKUNG</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('biodata.index_p') }}">DATA PENDUKUNG</a>
                 </li>
             </ul>
-            @include('biodata.data-diri')
+            @include('biodata.data-pendukung')
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
     <script>
-        @if (session('success') === 'success-biodata')
+        @if (session('success') === 'success-biodata-spk')
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
-                text: 'Biodata pendaftar berhasil disimpan.',
+                text: 'Data pendukung berhasil disimpan.',
                 confirmButtonText: 'OK',
                 customClass: {
                     confirmButton: 'btn btn-alert',

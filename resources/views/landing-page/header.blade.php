@@ -14,7 +14,7 @@
         <div class="col-md-8">
             <div class="d-flex justify-content-start">
                 <img class="img-fluid img-h my-2 mr-3" src="{{ asset('assets/img/logo.png') }}">
-                <div>
+                <div class="t-header">
                     <span class="s-b">BIDIKSIBA </span><span class="s-p">POLINEMA</span>
                     <p class="p-header">Beasiswa Pendidikan Sekitar Bukit Asam Politeknik Negeri Malang
                     </p>
@@ -22,11 +22,15 @@
             </div>
         </div>
         <div class="col-md-4">
-            <p id="realtime-clock" class="p-header text-right"></p>
+            <p id="realtime-clock" class="p-header p-time text-right"></p>
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary-nav sticky-top p-2">
-        <div class="collapse navbar-collapse">
+        <button class="navbar nav-hea btn btn-sm p-0 m-0 mx-2" type="button" data-toggle="collapse"
+            data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars n-icon"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-5 py-1">
                 <li class="nav-item mr-5">
                     <a href="{{ url('/') }}"><i class="fas fa-home a-nav"></i></a>

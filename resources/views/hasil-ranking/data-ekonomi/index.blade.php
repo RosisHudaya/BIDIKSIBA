@@ -22,10 +22,12 @@
                         </div>
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('menu-ranking.data-ekonomi') }}">
-                                <div class="d-flex mb-3">
-                                    <input type="text" name="name" class="form-control mr-2" id="name"
+                                <div class="d-flex mb-3 d-search">
+                                    <input type="text" name="name" class="form-control mr-2 d-input" id="name"
                                         placeholder="cari nama siswa" value="{{ app('request')->input('name') }}">
-                                    <button class="btn btn-primary mr-1 ml-2 py-0 px-4" type="submit">Submit</button>
+                                    <button class="btn btn-primary mr-1 ml-2 py-0 px-4 d-submit" type="submit">
+                                        Submit
+                                    </button>
                                     <a class="btn btn-secondary py-2 px-4" href="{{ route('menu-ranking.data-ekonomi') }}">
                                         Reset
                                     </a>
@@ -67,9 +69,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $results->links() }}
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center d-pag">
+                                {{ $results->links() }}
                             </div>
                         </div>
                     </div>
@@ -108,4 +110,5 @@
             });
         });
     </script>
+    <script src="/assets/js/pagination.js"></script>
 @endpush

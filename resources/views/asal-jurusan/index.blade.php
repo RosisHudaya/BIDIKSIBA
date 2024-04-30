@@ -22,11 +22,11 @@
                         </div>
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('asal-jurusan.index') }}">
-                                <div class="d-flex mb-3">
-                                    <input type="text" name="name" class="form-control mr-2" id="name"
+                                <div class="d-flex mb-3 d-search">
+                                    <input type="text" name="name" class="form-control mr-2 d-input" id="name"
                                         placeholder="cari nama jurusan SMA/SMK..."
                                         value="{{ app('request')->input('name') }}">
-                                    <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
+                                    <button class="btn btn-primary mr-1 py-0 px-4 d-submit" type="submit">Submit</button>
                                     <a class="btn btn-secondary py-2 px-4" href="{{ route('asal-jurusan.index') }}">
                                         Reset
                                     </a>
@@ -50,7 +50,7 @@
                                                     <div class="d-flex justify-content-center">
                                                         <a href="{{ route('asal-jurusan.edit', $asal_jurusan->id) }}"
                                                             class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
+                                                                class="fas fa-edit i-all"></i>
                                                             Edit
                                                         </a>
                                                         <form
@@ -62,7 +62,7 @@
                                                                 data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus jurusan SMA/SMK ini?"
                                                                 data-confirm-yes="submitDel(<?= $asal_jurusan->id ?>)"
                                                                 data-id="del-{{ $asal_jurusan->id }}">
-                                                                <i class="fas fa-times"></i> Delete
+                                                                <i class="fas fa-times i-all"></i> Delete
                                                             </button>
                                                         </form>
                                                     </div>
@@ -71,9 +71,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $asal_jurusans->withQueryString()->links() }}
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center d-pag">
+                                {{ $asal_jurusans->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
@@ -83,6 +83,7 @@
     </section>
 @endsection
 @push('customScript')
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

@@ -27,7 +27,7 @@ class LoginUjianController extends Controller
             $request->session()->put('login_ujian', true);
             return redirect()->route('list.ujian');
         } else {
-            return back()->with('error', 'Token atau password salah. Silakan coba lagi.');
+            return back()->with('error', 'Token atau password salah.');
         }
     }
 

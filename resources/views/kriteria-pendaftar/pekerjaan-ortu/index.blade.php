@@ -15,11 +15,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
-                        <div class="header ml-4 mt-3">
-                            <a class="btn btn-primary" href="">
-                                <i class="fas fa-user-plus"></i> Tambah Data
-                            </a>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-md">
@@ -40,29 +35,18 @@
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
                                                         <a href="" class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
+                                                                class="fas fa-edit i-all"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="" method="POST" class="ml-2"
-                                                            id="del-<?= $pekerjaan_ortu->id ?>">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus jurusan ini?"
-                                                                data-confirm-yes="submitDel(<?= $pekerjaan_ortu->id ?>)"
-                                                                data-id="del-{{ $pekerjaan_ortu->id }}">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $pekerjaan_ortus->withQueryString()->links() }}
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center d-pag">
+                                {{ $pekerjaan_ortus->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
@@ -72,6 +56,7 @@
     </section>
 @endsection
 @push('customScript')
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

@@ -13,6 +13,10 @@ main {
     flex: 1;
 }
 
+.nav-hea {
+    display: none;
+}
+
 .header {
     background-color: #003c77;
 }
@@ -84,6 +88,7 @@ main {
 
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -256,4 +261,71 @@ main {
 .p-sub-main {
     background-color: #fba605;
     padding: 2px;
+}
+
+/* mobile view */
+@media screen and (max-width: 767px) {
+    /* navigation */
+    .navbar {
+        display: block;
+        box-shadow: none !important;
+    }
+
+    .n-icon {
+        color: white !important;
+        font-size: 26px !important;
+    }
+
+    .navbar-nav {
+        margin-left: 10px !important;
+    }
+
+    .nav-item,
+    .nav-item a,
+    .nav-item a i {
+        margin-top: 8px !important;
+        padding: 0px !important;
+        font-size: 14px !important;
+    }
+
+    .header {
+        display: block !important;
+    }
+
+    .img-h {
+        width: 35px;
+        height: 35px;
+        margin-top: 10px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .t-header {
+        margin-top: 10px !important;
+    }
+
+    .s-b,
+    .s-p,
+    .p-header {
+        font-size: 18px;
+        margin-bottom: 0px !important;
+        padding-top: 0px !important;
+    }
+
+    .p-header {
+        font-size: 8px;
+    }
+
+    .p-time {
+        text-align: center !important;
+        font-size: 10px;
+        padding-top: 8px !important;
+        padding-bottom: 10px;
+    }
+
+    /* footer */
+    .f-c,
+    .f-b,
+    .f-m {
+        font-size: 10px !important;
+    }
 }

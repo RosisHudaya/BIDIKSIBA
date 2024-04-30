@@ -22,10 +22,10 @@
                         </div>
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('ujian.index') }}">
-                                <div class="d-flex mb-3">
-                                    <input type="text" name="name" class="form-control mr-2" id="name"
+                                <div class="d-flex mb-3 d-search">
+                                    <input type="text" name="name" class="form-control mr-2 d-input" id="name"
                                         placeholder="cari nama ujian..." value="{{ app('request')->input('name') }}">
-                                    <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
+                                    <button class="btn btn-primary mr-1 py-0 px-4 d-submit" type="submit">Submit</button>
                                     <a class="btn btn-secondary py-2 px-4" href="{{ route('ujian.index') }}">Reset</a>
                                 </div>
                             </form>
@@ -51,12 +51,12 @@
                                                     <div class="d-flex justify-content-center">
                                                         <a href="{{ route('soalUjian', $ujian->id) }}"
                                                             class="btn btn-sm btn-exam">
-                                                            <i class="fas fa-file-medical"></i>
+                                                            <i class="fas fa-file-medical i-all"></i>
                                                             Soal
                                                         </a>
                                                         <a href="{{ route('ujian.edit', $ujian->id) }}"
                                                             class="btn btn-sm btn-info btn-icon ml-2">
-                                                            <i class="fas fa-edit"></i>
+                                                            <i class="fas fa-edit i-all"></i>
                                                             Edit
                                                         </a>
                                                         <form action="{{ route('ujian.destroy', $ujian->id) }}"
@@ -67,7 +67,7 @@
                                                                 data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus data ujian ini?"
                                                                 data-confirm-yes="submitDel(<?= $ujian->id ?>)"
                                                                 data-id="del-{{ $ujian->id }}">
-                                                                <i class="fas fa-times"></i> Delete
+                                                                <i class="fas fa-times i-all"></i> Delete
                                                             </button>
                                                         </form>
                                                     </div>
@@ -76,9 +76,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $ujians->withQueryString()->links() }}
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center d-pag">
+                                {{ $ujians->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
@@ -88,6 +88,7 @@
     </section>
 @endsection
 @push('customScript')
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/assets/css/dashboard.css">
 @endpush
 @section('main')
-    <div class="col-md-11 mx-auto mt-4">
+    <div class="col-md-11 mx-auto mt-4 w-alert">
         @include('alert-welcome')
     </div>
     <div class="col-md-11 d-flex mx-auto info mb-4">
@@ -22,7 +22,7 @@
             @endif
         </marquee>
     </div>
-    <div class="d-flex col-md-11 mx-auto text-justify">
+    <div class="d-flex col-md-11 mx-auto text-justify c-main">
         <div class="col-md-8 p-0">
             <p class="p-main-title mb-0 py-1 px-3">TINJAUAN SINGKAT</p>
             <p class="p-main pt-2 pb-4 px-3">
@@ -67,14 +67,14 @@
                 </span>
             </p>
         </div>
-        <div class="col-md-4 pr-0">
+        <div class="col-md-4 pr-0 c-submain">
             <p class="p-sub-title mb-0 py-1 px-3 text-center">INFORMASI</p>
             <div class="list-berkas">
                 @if ($berkass->isEmpty())
                     <div class="d-flex p-sub py-3 px-3 my-2">
                         <div class="d-flex mx-auto">
                             <i class="far fa-file-excel i-not mr-3"></i>
-                            <p class="my-auto p-0">!! Belum Tersedia Informasi !!</p>
+                            <p class="my-auto p-0 p-not">!! Belum Tersedia Informasi !!</p>
                             <i class="far fa-file-excel i-not ml-3"></i>
                         </div>
                     </div>
@@ -82,25 +82,27 @@
                     @foreach ($berkass as $berkas)
                         <div class="p-sub py-3 px-3 my-2">
                             <hr class="m-0 p-0">
-                            <div class="d-flex py-2">
-                                <div class="col-md-3 p-0">
+                            <div class="d-flex py-2 d-berkas">
+                                <div class="col-md-3 p-0 b-first">
                                     @if ($berkas->foto)
-                                        <img class="img-fluid img-h p-1"
+                                        <img class="img-fluid img-h img-b p-1"
                                             style="width: 100px; height: 60px; object-fit: contain; border: solid 1px #e5e5e5;"
                                             src="{{ asset('storage/' . $berkas->foto) }}">
                                     @else
-                                        <img class="img-fluid img-h p-1"
+                                        <img class="img-fluid img-h img-b p-1"
                                             style="width: 100px; height: 60px; object-fit: contain; border: solid 1px #e5e5e5;"
                                             src="{{ asset('assets/img/polinema.png') }}">
                                     @endif
                                 </div>
-                                <div class="col-md-9">
-                                    <a href="{{ asset('storage/' . $berkas->file) }}">{{ $berkas->judul }}</a>
-                                    <div class="d-flex justify-content-between mt-3">
+                                <div class="col-md-9 b-sec">
+                                    <a href="{{ asset('storage/' . $berkas->file) }}">
+                                        <p class="t-berkas">{{ $berkas->judul }}</p>
+                                    </a>
+                                    <div class="d-flex justify-content-between mt-3 t-berkas">
                                         <p class="text-secondary m-0 p-0 p-det">
                                             <i class="far fa-clock"></i> {{ $berkas->created_at }}
                                         </p>
-                                        <a class="m-0 p-0" href="{{ asset('storage/' . $berkas->file) }}"
+                                        <a class="m-0 p-0 i-det" href="{{ asset('storage/' . $berkas->file) }}"
                                             download="{{ $berkas->judul }}">
                                             <i class="fas fa-download text-secondary"></i>
                                         </a>

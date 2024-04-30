@@ -281,6 +281,6 @@ class BiodataSpkController extends Controller
             }
         }
 
-        return redirect()->route('biodata.index')->with('success', 'success-biodata-spk');
+        return redirect()->route('biodata.index_p')->with('success', 'success-biodata-spk');
     }
 }

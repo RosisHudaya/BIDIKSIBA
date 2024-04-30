@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/assets/css/public.css">
 @endpush
 @section('main')
-    <div class="col-md-11 d-flex mx-auto my-4">
+    <div class="col-soal-ujian col-md-11 d-flex mx-auto my-4">
         <div class="col-md-4">
             <div class="p-ujian-n px-3 py-4 d-flex flex-column">
                 <div class="d-flex">

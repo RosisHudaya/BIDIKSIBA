@@ -1,7 +1,7 @@
 <div class="py-3">
     <p class="my-0 p-title">JURUSAN PILIHAN</p>
     <hr>
-    <div class="col-md-12 d-flex">
+    <div class="form-group col-md-12 d-flex">
         <div class="form-group col-md-6">
             <label for="">Jurusan SMA/SMK</label>
             <select class="form-control select2" name="asal_jurusan_id" data-id="select-asal-jurusan" id="asal_jurusan_id"
@@ -21,7 +21,7 @@
             </select>
         </div>
     </div>
-    <div class="col-md-12 d-flex">
+    <div class="form-group col-md-12 d-flex">
         <div class="form-group col-md-6">
             <label for="">Jurusan Pilihan</label>
             <select class="form-control select2" name="jurusan_id" data-id="select-jurusan" id="jurusan_id"

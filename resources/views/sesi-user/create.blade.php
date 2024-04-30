@@ -32,18 +32,21 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="card-footer text-right">
-                                <button class="btn btn-primary" type="submit">Submit</button>
-                                <a class="btn btn-secondary"
-                                    href="{{ route('sesiUjian', ['sesi_ujian' => $sesiUjian->id]) }}">Cancel
-                                </a>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                {{ $biodatas->withQueryString()->links() }}
-                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <a class="btn btn-secondary"
+                                href="{{ route('sesiUjian', ['sesi_ujian' => $sesiUjian->id]) }}">Cancel
+                            </a>
+                        </div>
+                        <div class="d-flex justify-content-center d-pag">
+                            {{ $biodatas->withQueryString()->links() }}
                         </div>
                     </form>
                 </div>
             </div>
     </section>
 @endsection
+@push('customScript')
+    <script src="/assets/js/pagination.js"></script>
+@endpush

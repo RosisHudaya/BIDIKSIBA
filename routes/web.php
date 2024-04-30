@@ -181,6 +181,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 
     Route::get('biodata', [BiodataController::class, 'index'])->name('biodata.index');
+    Route::get('biodata-pendukung', [BiodataController::class, 'index_pendukung'])->name('biodata.index_p');
     Route::post('biodata/store-or-update', [BiodataController::class, 'storeOrUpdate'])->name('biodata.storeOrUpdate');
     Route::post('biodata/store-or-update-spk', [BiodataSpkController::class, 'storeOrUpdate'])->name('biodata.storeOrUpdateSpk');
     Route::post('load-filter-prodi', [BiodataController::class, 'loadFilterProdi'])->name('loadFilterProdi');

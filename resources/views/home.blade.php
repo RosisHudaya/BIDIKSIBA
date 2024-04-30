@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex">
+        <div class="h-dash d-flex">
             <div class="col-md-6 pb-3">
                 <h2 class="section-title">List Informasi</h2>
                 <div class="list-info">
@@ -119,14 +119,14 @@
                         <div class="bg-informasi mb-2">
                             <div class="d-flex col-md-12 p-2">
                                 <div class="d-flex col-md-10">
-                                    <i class="fas fa-file-pdf icon-info mr-4"></i>
-                                    <div class="my-auto">
+                                    <i class="col-md-1 fas fa-file-pdf icon-info p-0 m-0"></i>
+                                    <div class="my-auto col-md-11">
                                         <a href="{{ asset('storage/' . $file->file) }}"
                                             class="a-prev text-justify">{{ $file->judul }}
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-2 text-right">
+                                <div class="col-md-2 text-right h-delete">
                                     <form action="{{ route('delete-file', $file->id) }}" method="POST"
                                         id="del-<?= $file->id ?>">
                                         @csrf
