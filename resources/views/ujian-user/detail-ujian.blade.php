@@ -5,7 +5,7 @@
 @endpush
 @section('main')
     <div class="col-det col-md-11 d-flex mx-auto my-4">
-        <div class="col-md-6 mb-4">
+        <div class="col-md-6 mb-4 card-desc">
             <div class="col-md-12 d-flex p-main-title mb-0 py-1 px-3">
                 <div class="col-md-6 p-0">
                     <p class="m-0 p-0"><i class="fas fa-folder-open"></i> DESKRIPSI UJIAN</p>
@@ -19,7 +19,7 @@
                 <p class="m-0 p-0 p-d">{!! $detail_ujians->deskripsi !!}</p>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 card-det">
             <div class="col-md-12 d-flex p-main-title mb-0 py-1 px-3">
                 <div class="col-md-6 p-0">
                     <p class="m-0 p-0"><i class="fas fa-bars"></i> DETAIL UJIAN</p>

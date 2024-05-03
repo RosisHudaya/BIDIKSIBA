@@ -301,6 +301,82 @@ li.page-item.active {
     box-shadow: none;
 }
 
+/* tablet view */
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    /* biodata pendaftar */
+    .p-alert {
+        font-size: 12px !important;
+        text-align: center;
+    }
+
+    .form-group {
+        max-width: 100% !important;
+        display: block !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .btn-bio {
+        margin-right: 0px !important;
+    }
+
+    .btn-save {
+        width: 100%;
+    }
+
+    /* token ujian */
+    .c-token {
+        max-width: 85% !important;
+    }
+
+    /* login ujian */
+    .card-test {
+        max-width: 95% !important;
+    }
+
+    .login-test {
+        display: flex !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* list ujian */
+    .col-list {
+        max-width: 95% !important;
+    }
+
+    /* detail ujian */
+    .col-det {
+        display: block !important;
+    }
+
+    .card-desc,
+    .card-det {
+        max-width: 100% !important;
+    }
+
+    /* ujian */
+    .col-soal-ujian {
+        display: block !important;
+    }
+
+    .col-numb {
+        max-width: 75% !important;
+        margin-bottom: 20px !important;
+    }
+
+    .col-ques {
+        max-width: 100% !important;
+    }
+
+    /* pengawas */
+    .col-peng {
+        max-width: 95% !important;
+    }
+}
+
 /* mobile view */
 @media screen and (max-width: 767px) {
     /* biodata pendaftar */

@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="p-main pt-1 pb-4 px-3">
-            <div class="col-md-9 p-0 my-2 mx-auto">
+            <div class="col-md-9 p-0 my-2 mx-auto col-list">
                 <p class="mb-2 p-0 p-t">LIST UJIAN</p>
                 <div class="table-responsive">
                     <table class="table table-bordered table-md">

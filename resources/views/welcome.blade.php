@@ -23,7 +23,7 @@
         </marquee>
     </div>
     <div class="d-flex col-md-11 mx-auto text-justify c-main">
-        <div class="col-md-8 p-0">
+        <div class="col-md-8 p-0 c-summary">
             <p class="p-main-title mb-0 py-1 px-3">TINJAUAN SINGKAT</p>
             <p class="p-main pt-2 pb-4 px-3">
                 <img class="img-fluid img-h p-1 mr-3 mb-3 grayscale"

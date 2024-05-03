@@ -35,15 +35,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
-                        <div class="d-flex ml-4 mt-3 mr-2">
-                            <div class=" col-md-4 m-0 p-0">
-                                <a class="btn btn-primary" href="{{ route('soal-ujian.create', $ujian->id) }}">
-                                    <i class="fas fa-edit"></i> Tambah Soal
-                                </a>
-                                <a class="btn btn-success import" style="color: white">
-                                    <i class="fas fa-file-csv"></i> Import Soal
-                                </a>
-                            </div>
+                        <div class="d-flex ml-4 mt-3 mr-2 d-test">
+                            <a class="btn btn-primary mr-1" href="{{ route('soal-ujian.create', $ujian->id) }}">
+                                <i class="fas fa-edit"></i> Tambah Soal
+                            </a>
+                            <a class="btn btn-success import" style="color: white">
+                                <i class="fas fa-file-csv"></i> Import Soal
+                            </a>
                         </div>
                         <div class="card-body">
                             <div class="show-import"

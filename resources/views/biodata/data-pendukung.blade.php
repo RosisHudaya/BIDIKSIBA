@@ -256,7 +256,7 @@
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
             </div>
             <div class="form-group col-md-6">
-                <label for="">Bukti Slip Pajak Bumi dan Bangunan</label>
+                <label for="">Bukti Slip Pajak Bumi dan Bangunan</label><br>
                 @if ($biodata_spk)
                     @if ($biodata_spk->slip_pbb)
                         <img class="ml-3 mb-2" id="slip-pbb-preview"

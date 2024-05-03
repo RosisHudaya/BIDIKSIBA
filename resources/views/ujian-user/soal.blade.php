@@ -5,7 +5,7 @@
 @endpush
 @section('main')
     <div class="col-soal-ujian col-md-11 d-flex mx-auto my-4">
-        <div class="col-md-4">
+        <div class="col-md-4 col-numb">
             <div class="p-ujian-n px-3 py-4 d-flex flex-column">
                 <div class="d-flex">
                     <div class="col-md-6 m-0 p-0">
@@ -52,7 +52,7 @@
                 return strpos($url, 'thumbnail?id=') !== false;
             }
         @endphp
-        <div class="col-md-8">
+        <div class="col-md-8 col-ques">
             <div class="p-ujian px-3 py-4">
                 @foreach ($soals as $key => $soal)
                     <form action="{{ route('ujian.soal', [$soal->id, $soal->id_sesi]) }}" method="post">

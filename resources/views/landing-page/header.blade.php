@@ -26,12 +26,14 @@
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary-nav sticky-top p-2">
-        <button class="navbar nav-hea btn btn-sm p-0 m-0 mx-2" type="button" data-toggle="collapse"
-            data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button id="navbar-toggle" class="navbar-toggler" type="button">
             <i class="fas fa-bars n-icon"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-collapse" id="navbar">
             <ul class="navbar-nav ml-5 py-1">
+                <li class="nav-item nav-main">
+                    <p class="text-white m-0 p-0">MENU</p>
+                </li>
                 <li class="nav-item mr-5">
                     <a href="{{ url('/') }}"><i class="fas fa-home a-nav"></i></a>
                 </li>
@@ -99,6 +101,18 @@
         updateRealTimeClock();
 
         setInterval(updateRealTimeClock, 1000);
+    </script>
+
+    <script>
+        document.getElementById('navbar-toggle').addEventListener('click', function() {
+            document.getElementById('navbar').classList.toggle('open');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#navbar') && !event.target.closest('#navbar-toggle')) {
+                document.getElementById('navbar').classList.remove('open');
+            }
+        });
     </script>
 </body>
 

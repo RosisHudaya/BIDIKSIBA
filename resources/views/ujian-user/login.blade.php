@@ -8,7 +8,7 @@
         <p class="p-main-title mb-0 py-1 px-3">LOGIN UJIAN
         </p>
         <div class="p-main pt-1 pb-4 px-3">
-            <div class="card col-md-7 mx-auto my-4 px-5 py-3">
+            <div class="card card-test col-md-7 mx-auto my-4 px-5 py-3">
                 <h6 class="mx-auto my-3 h-login">!!! Masukkan token dan password ujian !!!</h6>
                 <p class="p-login m-0 p-0">Masukkan token dan password ujian</p>
                 <form method="POST" action="{{ route('login.ujian.post') }}">

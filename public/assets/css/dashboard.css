@@ -83,6 +83,42 @@
     font-size: 12px;
 }
 
+/* tablet view */
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    /* dashboard */
+    .p-alert {
+        font-size: 12px !important;
+    }
+
+    .c-main {
+        display: block !important;
+    }
+
+    .c-summary,
+    .c-submain {
+        max-width: 100% !important;
+    }
+
+    .c-submain {
+        padding-left: 0px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .list-berkas {
+        max-height: 420px;
+        overflow-y: scroll;
+        margin-bottom: 10px !important;
+    }
+
+    .b-first {
+        max-width: 20% !important;
+    }
+
+    .b-sec {
+        max-width: 80% !important;
+    }
+}
+
 /* mobile view */
 @media screen and (max-width: 767px) {
     /* dashborad */
