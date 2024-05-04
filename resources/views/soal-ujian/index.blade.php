@@ -36,12 +36,14 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="d-flex ml-4 mt-3 mr-2 d-test">
-                            <a class="btn btn-primary mr-1" href="{{ route('soal-ujian.create', $ujian->id) }}">
-                                <i class="fas fa-edit"></i> Tambah Soal
-                            </a>
-                            <a class="btn btn-success import" style="color: white">
-                                <i class="fas fa-file-csv"></i> Import Soal
-                            </a>
+                            @role('super-admin')
+                                <a class="btn btn-primary mr-1" href="{{ route('soal-ujian.create', $ujian->id) }}">
+                                    <i class="fas fa-edit"></i> Tambah Soal
+                                </a>
+                                <a class="btn btn-success import" style="color: white">
+                                    <i class="fas fa-file-csv"></i> Import Soal
+                                </a>
+                            @endrole
                         </div>
                         <div class="card-body">
                             <div class="show-import"
@@ -107,7 +109,9 @@
                                         <tr>
                                             <th class="text-center" style="width: 100px;">NO</th>
                                             <th>SOAL</th>
-                                            <th class="text-center" style="width: 300px;">AKSI</th>
+                                            @role('super-admin')
+                                                <th class="text-center" style="width: 300px;">AKSI</th>
+                                            @endrole
                                         </tr>
                                         @foreach ($soal_ujians as $key => $soal_ujian)
                                             <tr>
@@ -203,28 +207,30 @@
                                                     @endif
                                                     <br>
                                                 </td>
-                                                <td class="text-right">
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('soal-ujian.edit', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
-                                                            class="btn btn-sm btn-info btn-icon ml-2">
-                                                            <i class="fas fa-edit i-all"></i>
-                                                            Edit
-                                                        </a>
-                                                        <form
-                                                            action="{{ route('soal-ujian.destroy', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
-                                                            method="POST" class="ml-2"
-                                                            id="del-<?= $soal_ujian->id ?>">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus soal ujian ini?"
-                                                                data-confirm-yes="submitDel(<?= $soal_ujian->id ?>)"
-                                                                data-id="del-{{ $soal_ujian->id }}">
-                                                                <i class="fas fa-times i-all"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                @role('super-admin')
+                                                    <td class="text-right">
+                                                        <div class="d-flex justify-content-center">
+                                                            <a href="{{ route('soal-ujian.edit', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
+                                                                class="btn btn-sm btn-info btn-icon ml-2">
+                                                                <i class="fas fa-edit i-all"></i>
+                                                                Edit
+                                                            </a>
+                                                            <form
+                                                                action="{{ route('soal-ujian.destroy', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
+                                                                method="POST" class="ml-2"
+                                                                id="del-<?= $soal_ujian->id ?>">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-sm btn-danger btn-icon"
+                                                                    data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus soal ujian ini?"
+                                                                    data-confirm-yes="submitDel(<?= $soal_ujian->id ?>)"
+                                                                    data-id="del-{{ $soal_ujian->id }}">
+                                                                    <i class="fas fa-times i-all"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                @endrole
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class GajiOrtuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:penghasilan-ortu.index')->only('index');
+    }
+
     public function index()
     {
         $gaji_ortus = DB::table('gaji_ortus')

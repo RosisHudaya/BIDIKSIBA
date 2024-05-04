@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class BobotController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:bobot-kriteria.index')->only('index');
+    }
+
     public function index()
     {
         $bobots = DB::table('bobots')

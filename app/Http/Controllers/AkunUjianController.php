@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class AkunUjianController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:akun-ujian.index')->only('index');
+    }
+
     public function index(Request $request)
     {
         $akunUjians = DB::table('akun_ujians as aj')

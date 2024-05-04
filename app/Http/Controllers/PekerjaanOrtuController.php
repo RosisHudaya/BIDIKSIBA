@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class PekerjaanOrtuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:pekerjaan-ortu.index')->only('index');
+    }
+
     public function index()
     {
         $pekerjaan_ortus = DB::table('pekerjaan_ortus')

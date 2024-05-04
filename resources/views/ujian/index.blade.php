@@ -16,9 +16,11 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="header ml-4 mt-3">
-                            <a class="btn btn-primary" href="{{ route('ujian.create') }}">
-                                <i class="fas fa-edit"></i> Tambah Ujian
-                            </a>
+                            @role('super-admin')
+                                <a class="btn btn-primary" href="{{ route('ujian.create') }}">
+                                    <i class="fas fa-edit"></i> Tambah Ujian
+                                </a>
+                            @endrole
                         </div>
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('ujian.index') }}">
@@ -54,22 +56,24 @@
                                                             <i class="fas fa-file-medical i-all"></i>
                                                             Soal
                                                         </a>
-                                                        <a href="{{ route('ujian.edit', $ujian->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon ml-2">
-                                                            <i class="fas fa-edit i-all"></i>
-                                                            Edit
-                                                        </a>
-                                                        <form action="{{ route('ujian.destroy', $ujian->id) }}"
-                                                            method="POST" class="ml-2" id="del-<?= $ujian->id ?>">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus data ujian ini?"
-                                                                data-confirm-yes="submitDel(<?= $ujian->id ?>)"
-                                                                data-id="del-{{ $ujian->id }}">
-                                                                <i class="fas fa-times i-all"></i> Delete
-                                                            </button>
-                                                        </form>
+                                                        @role('super-admin')
+                                                            <a href="{{ route('ujian.edit', $ujian->id) }}"
+                                                                class="btn btn-sm btn-info btn-icon ml-2">
+                                                                <i class="fas fa-edit i-all"></i>
+                                                                Edit
+                                                            </a>
+                                                            <form action="{{ route('ujian.destroy', $ujian->id) }}"
+                                                                method="POST" class="ml-2" id="del-<?= $ujian->id ?>">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-sm btn-danger btn-icon"
+                                                                    data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus data ujian ini?"
+                                                                    data-confirm-yes="submitDel(<?= $ujian->id ?>)"
+                                                                    data-id="del-{{ $ujian->id }}">
+                                                                    <i class="fas fa-times i-all"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                        @endrole
                                                     </div>
                                                 </td>
                                             </tr>

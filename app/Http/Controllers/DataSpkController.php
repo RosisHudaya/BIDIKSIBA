@@ -17,6 +17,11 @@ class DataSpkController extends Controller
     public function __construct(SpkService $spkService)
     {
         $this->spkService = $spkService;
+        $this->middleware('auth');
+        $this->middleware('permission:data-ekonomi.index')->only('indexEko');
+        $this->middleware('permission:data-ekonomi.export.alternative')->only('export_alternative');
+        $this->middleware('permission:data-spk.index')->only('index');
+        $this->middleware('permission:data-spk.export.hasil-spk')->only('export_spk');
     }
 
     public function index()

@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class TagihanListrikController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:tagihan-listrik.index')->only('index');
+    }
+
     public function index()
     {
         $tagihan_listriks = DB::table('tagihan_listriks')

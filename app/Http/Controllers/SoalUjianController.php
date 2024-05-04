@@ -13,6 +13,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SoalUjianController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:soal-ujian.create')->only('create', 'store');
+        $this->middleware('permission:soal-ujian.edit')->only('edit', 'update');
+        $this->middleware('permission:soal-ujian.destroy')->only('destroy');
+        $this->middleware('permission:soal-ujian.import')->only('import');
+    }
+
     public function index()
     {
     }

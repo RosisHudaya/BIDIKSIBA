@@ -21,6 +21,19 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class VerifikasiPendaftarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:verif-admin.index')->only('index');
+        $this->middleware('permission:verif-admin.edit')->only('edit', 'update');
+        $this->middleware('permission:verif-admin.destroy')->only('destroy');
+        $this->middleware('permission:verif-admin.export.biodata')->only('export_biodata');
+        $this->middleware('permission:verif-admin.export.ekonomi')->only('export_ekonomi');
+        $this->middleware('permission:verif-admin.export.pendaftar')->only('export_pendaftar');
+        $this->middleware('permission:verif-admin.verifikasi-pendaftar.verif')->only('verif');
+        $this->middleware('permission:verif-admin.verifikasi-pendaftar.reject')->only('reject');
+    }
+
     public function index(Request $request)
     {
         $statusSelected = $request->input('status');
@@ -29,11 +42,8 @@ class VerifikasiPendaftarController extends Controller
             ->leftJoin('biodata_spks as bs', 'u.id', '=', 'bs.user_id')
             ->leftJoin('pekerjaan_ortus as po', 'bs.pekerjaan_ortu_id', '=', 'po.id')
             ->leftJoin('gaji_ortus as go', 'bs.gaji_ortu_id', '=', 'go.id')
-            // ->leftJoin('luas_tanahs as lt', 'bs.luas_tanah_id', '=', 'lt.id')
-            // ->leftJoin('jumlah_kamars as jk', 'bs.kamar_id', '=', 'jk.id')
             ->leftJoin('kamar_mandis as km', 'bs.kamar_mandi_id', '=', 'km.id')
             ->leftJoin('tagihan_listriks as tl', 'bs.tagihan_listrik_id', '=', 'tl.id')
-            // ->leftJoin('pajaks as pj', 'bs.pajak_id', '=', 'pj.id')
             ->leftJoin('hutangs as h', 'bs.hutang_id', '=', 'h.id')
             ->leftJoin('saudaras as s', 'bs.saudara_id', '=', 's.id')
             ->leftJoin('status_ortus as so', 'bs.status_ortu_id', '=', 'so.id')
@@ -63,11 +73,8 @@ class VerifikasiPendaftarController extends Controller
                 'bs.surat_ket_yatim',
                 'po.pekerjaan_ortu',
                 'go.gaji_ortu',
-                // 'lt.luas_tanah',
-                // 'jk.jumlah_kamar',
                 'km.kamar_mandi',
                 'tl.tagihan_listrik',
-                // 'pj.pajak',
                 'h.hutang',
                 's.saudara',
                 'so.status_ortu',
@@ -171,7 +178,7 @@ class VerifikasiPendaftarController extends Controller
         return Excel::download(new PesertaExport($query), $filename);
     }
 
-    public function export_spk()
+    public function export_ekonomi()
     {
         $baseURL = url('/');
         $query = DB::table('biodatas as b')
@@ -179,11 +186,8 @@ class VerifikasiPendaftarController extends Controller
             ->leftJoin('biodata_spks as bs', 'u.id', '=', 'bs.user_id')
             ->leftJoin('pekerjaan_ortus as po', 'bs.pekerjaan_ortu_id', '=', 'po.id')
             ->leftJoin('gaji_ortus as go', 'bs.gaji_ortu_id', '=', 'go.id')
-            ->leftJoin('luas_tanahs as lt', 'bs.luas_tanah_id', '=', 'lt.id')
-            ->leftJoin('jumlah_kamars as jk', 'bs.kamar_id', '=', 'jk.id')
             ->leftJoin('kamar_mandis as km', 'bs.kamar_mandi_id', '=', 'km.id')
             ->leftJoin('tagihan_listriks as tl', 'bs.tagihan_listrik_id', '=', 'tl.id')
-            ->leftJoin('pajaks as pj', 'bs.pajak_id', '=', 'pj.id')
             ->leftJoin('hutangs as h', 'bs.hutang_id', '=', 'h.id')
             ->leftJoin('saudaras as s', 'bs.saudara_id', '=', 's.id')
             ->leftJoin('status_ortus as so', 'bs.status_ortu_id', '=', 'so.id')
@@ -196,15 +200,15 @@ class VerifikasiPendaftarController extends Controller
                 DB::raw("IFNULL(bs.detail_pekerjaan, '-') as detail_pekerjaan"),
                 'go.gaji_ortu',
                 DB::raw("IF(bs.slip_gaji IS NULL OR bs.slip_gaji = '', '-', CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.slip_gaji , '\")')) AS slip_gaji"),
-                'lt.luas_tanah',
+                'bs.luas_tanah',
                 DB::raw("CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.shm, '\")') AS shm"),
-                'jk.jumlah_kamar',
+                'bs.kamar',
                 DB::raw("CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.foto_kmr, '\")') AS foto_kmr"),
                 'km.kamar_mandi',
                 DB::raw("IF(bs.foto_kmr_mandi IS NULL OR bs.foto_kmr_mandi = '', '-', CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.foto_kmr_mandi, '\")')) AS foto_kmr_mandi"),
                 'tl.tagihan_listrik',
                 DB::raw("IF(bs.slip_tagihan IS NULL OR bs.slip_tagihan = '', '-', CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.slip_tagihan, '\")')) AS slip_tagihan"),
-                'pj.pajak',
+                'bs.pajak',
                 DB::raw("CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.slip_pbb, '\")') AS slip_pbb"),
                 'h.hutang',
                 DB::raw("IFNULL(bs.det_hutang, '-') as det_hutang"),
@@ -229,11 +233,8 @@ class VerifikasiPendaftarController extends Controller
             ->leftJoin('biodata_spks as bs', 'u.id', '=', 'bs.user_id')
             ->leftJoin('pekerjaan_ortus as po', 'bs.pekerjaan_ortu_id', '=', 'po.id')
             ->leftJoin('gaji_ortus as go', 'bs.gaji_ortu_id', '=', 'go.id')
-            ->leftJoin('luas_tanahs as lt', 'bs.luas_tanah_id', '=', 'lt.id')
-            ->leftJoin('jumlah_kamars as jk', 'bs.kamar_id', '=', 'jk.id')
             ->leftJoin('kamar_mandis as km', 'bs.kamar_mandi_id', '=', 'km.id')
             ->leftJoin('tagihan_listriks as tl', 'bs.tagihan_listrik_id', '=', 'tl.id')
-            ->leftJoin('pajaks as pj', 'bs.pajak_id', '=', 'pj.id')
             ->leftJoin('hutangs as h', 'bs.hutang_id', '=', 'h.id')
             ->leftJoin('saudaras as s', 'bs.saudara_id', '=', 's.id')
             ->leftJoin('status_ortus as so', 'bs.status_ortu_id', '=', 'so.id')
@@ -265,15 +266,15 @@ class VerifikasiPendaftarController extends Controller
                 DB::raw("IFNULL(bs.detail_pekerjaan, '-') as detail_pekerjaan"),
                 'go.gaji_ortu',
                 DB::raw("IF(bs.slip_gaji IS NULL OR bs.slip_gaji = '', '-', CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.slip_gaji , '\")')) AS slip_gaji"),
-                'lt.luas_tanah',
+                'bs.luas_tanah',
                 DB::raw("CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.shm, '\")') AS shm"),
-                'jk.jumlah_kamar',
+                'bs.kamar',
                 DB::raw("CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.foto_kmr, '\")') AS foto_kmr"),
                 'km.kamar_mandi',
                 DB::raw("IF(bs.foto_kmr_mandi IS NULL OR bs.foto_kmr_mandi = '', '-', CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.foto_kmr_mandi, '\")')) AS foto_kmr_mandi"),
                 'tl.tagihan_listrik',
                 DB::raw("IF(bs.slip_tagihan IS NULL OR bs.slip_tagihan = '', '-', CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.slip_tagihan, '\")')) AS slip_tagihan"),
-                'pj.pajak',
+                'bs.pajak',
                 DB::raw("CONCAT('=HYPERLINK(\"$baseURL/storage/', bs.slip_pbb, '\")') AS slip_pbb"),
                 'h.hutang',
                 DB::raw("IFNULL(bs.det_hutang, '-') as det_hutang"),

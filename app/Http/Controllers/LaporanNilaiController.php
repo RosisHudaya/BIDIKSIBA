@@ -13,6 +13,14 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanNilaiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:laporan-nilai.index')->only('index');
+        $this->middleware('permission:laporan-nilai.export')->only('export');
+        $this->middleware('permission:list-nilai.show')->only('show');
+    }
+
     public function index(Request $request)
     {
         $ujians = Ujian::all();

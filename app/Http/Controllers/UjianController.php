@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 
 class UjianController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:ujian.index')->only('index');
+        $this->middleware('permission:ujian.create')->only('create', 'store');
+        $this->middleware('permission:ujian.edit')->only('edit', 'update');
+        $this->middleware('permission:ujian.destroy')->only('destroy');
+        $this->middleware('permission:ujian.soalUjian')->only('soal_ujian');
+    }
+
     public function index(Request $request)
     {
         $ujians = DB::table('ujians as u')

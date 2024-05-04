@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class KamarMandiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:kamar-mandi.index')->only('index');
+    }
+
     public function index()
     {
         $kamar_mandis = DB::table('kamar_mandis')

@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class StatusOrtuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:status-ortu.index')->only('index');
+    }
+
     public function index()
     {
         $status_ortus = DB::table('status_ortus')

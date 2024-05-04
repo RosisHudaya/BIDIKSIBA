@@ -93,7 +93,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::put('verifikasi-pendaftar/verifikasi/{biodata}', [VerifikasiPendaftarController::class, 'verif'])->name('verifikasi-pendaftar.verif');
         Route::put('verifikasi-pendaftar/reject/{biodata}', [VerifikasiPendaftarController::class, 'reject'])->name('verifikasi-pendaftar.reject');
         Route::get('export-biodata', [VerifikasiPendaftarController::class, 'export_biodata'])->name('export.biodata');
-        Route::get('export-spk', [VerifikasiPendaftarController::class, 'export_spk'])->name('export.spk');
+        Route::get('export-ekonomi', [VerifikasiPendaftarController::class, 'export_ekonomi'])->name('export.ekonomi');
         Route::get('export-pendaftar', [VerifikasiPendaftarController::class, 'export_pendaftar'])->name('export.pendaftar');
         Route::get('akun-ujian', [AkunUjianController::class, 'index'])->name('akun-ujian.index');
     });
@@ -124,7 +124,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('data-ekonomi', [DataSpkController::class, 'indexEko'])->name('menu-ranking.data-ekonomi');
         Route::get('export-ekonomi', [DataSpkController::class, 'export_alternative'])->name(('export.alternative'));
         Route::get('data-spk', [DataSpkController::class, 'index'])->name('menu-ranking.data-spk');
-        Route::get('export-bidiksiba', [DataSpkController::class, 'export_spk'])->name(('export.spk'));
+        Route::get('export-bidiksiba', [DataSpkController::class, 'export_spk'])->name(('export.hasil-spk'));
     });
 
     //menu pendidikan

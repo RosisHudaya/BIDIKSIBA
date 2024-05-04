@@ -108,54 +108,56 @@
         <td></td>
     </tr>
     @include('verif-admin.biodata-pendukung')
-    <tr>
-        <td colspan="4"></td>
-        <td class="text-center">
-            <div class="d-flex justify-content-center">
-                <form action="{{ route('verifikasi-pendaftar.verif', $biodata->id) }}" method="POST"
-                    id="ver-<?= $biodata->id ?>">
-                    @csrf
-                    @method('PUT')
-                    <button type="submit" class="btn btn-sm btn-success"
-                        data-confirm="Verifikasi Biodata | Apakah data biodata sudah benar dan akan diverifikasi ?"
-                        data-confirm-yes="submitVer(<?= $biodata->id ?>)" data-id="ver-{{ $biodata->id }}"
-                        {{ $biodata->status == 'Diverifikasi' ? 'disabled' : '' }}>
-                        <i class="fas fa-check-circle"></i>
-                        Verifikasi
-                    </button>
-                </form>
-                <a class="btn btn-sm btn-danger ml-2 tolak" style="color: white;">
-                    <i class="fas fa-times-circle"></i>
-                    Tolak
-                </a>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td colspan="4">
-            <div class="show-tolak" style="display: none;">
-                <form action="{{ route('verifikasi-pendaftar.reject', $biodata->id) }}" method="POST"
-                    id="rej-<?= $biodata->id ?>" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <label class="font-weight-bold ml-2 my-0">CATATAN</label>
-                    <p class="m-0 p-0 text-c">
-                        * Tambahkan pesan kesalahan biodata pendaftar(opsional)
-                    </p>
-                    <textarea class="form-control summernote" name="catatan" id="catatan" style="height: 150px;">{{ $biodata->catatan }}</textarea>
-                    <div class="text-right mb-2 mt-0 p-0">
-                        <button type="submit" class="btn btn-sm btn-primary"
-                            data-confirm="Verifikasi Biodata | Apakah data biodata belum bisa diverifikasi dan kirim pesan kesalahan ?"
-                            data-confirm-yes="sumbitRej(<?= $biodata->id ?>)" data-id="rej-{{ $biodata->id }}">
-                            <i class="fas fa-paper-plane"></i>
-                            Kirim
+    @role('super-admin')
+        <tr>
+            <td colspan="4"></td>
+            <td class="text-center">
+                <div class="d-flex justify-content-center">
+                    <form action="{{ route('verifikasi-pendaftar.verif', $biodata->id) }}" method="POST"
+                        id="ver-<?= $biodata->id ?>">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-sm btn-success"
+                            data-confirm="Verifikasi Biodata | Apakah data biodata sudah benar dan akan diverifikasi ?"
+                            data-confirm-yes="submitVer(<?= $biodata->id ?>)" data-id="ver-{{ $biodata->id }}"
+                            {{ $biodata->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                            <i class="fas fa-check-circle"></i>
+                            Verifikasi
                         </button>
-                    </div>
-                </form>
-            </div>
-        </td>
-    </tr>
+                    </form>
+                    <a class="btn btn-sm btn-danger ml-2 tolak" style="color: white;">
+                        <i class="fas fa-times-circle"></i>
+                        Tolak
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="4">
+                <div class="show-tolak" style="display: none;">
+                    <form action="{{ route('verifikasi-pendaftar.reject', $biodata->id) }}" method="POST"
+                        id="rej-<?= $biodata->id ?>" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <label class="font-weight-bold ml-2 my-0">CATATAN</label>
+                        <p class="m-0 p-0 text-c">
+                            * Tambahkan pesan kesalahan biodata pendaftar(opsional)
+                        </p>
+                        <textarea class="form-control summernote" name="catatan" id="catatan" style="height: 150px;">{{ $biodata->catatan }}</textarea>
+                        <div class="text-right mb-2 mt-0 p-0">
+                            <button type="submit" class="btn btn-sm btn-primary"
+                                data-confirm="Verifikasi Biodata | Apakah data biodata belum bisa diverifikasi dan kirim pesan kesalahan ?"
+                                data-confirm-yes="sumbitRej(<?= $biodata->id ?>)" data-id="rej-{{ $biodata->id }}">
+                                <i class="fas fa-paper-plane"></i>
+                                Kirim
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    @endrole
 </tbody>
 
 @push('customStyle')

@@ -4,14 +4,16 @@
         <div class="section-header d-block">
             <div class="d-flex col-md-12">
                 <h1 class="col-md-6 m-0 p-0">Dashboard</h1>
-                <div class="col-md-6 text-right m-0 p-0">
-                    <a class="btn btn-danger import" style="color: white">
-                        <i class="fas fa-file-pdf"></i>
-                    </a>
-                    <a class="btn btn-primary calender" style="color: white">
-                        <i class="fas fa-calendar-plus"></i>
-                    </a>
-                </div>
+                @role('super-admin')
+                    <div class="col-md-6 text-right m-0 p-0">
+                        <a class="btn btn-danger import" style="color: white">
+                            <i class="fas fa-file-pdf"></i>
+                        </a>
+                        <a class="btn btn-primary calender" style="color: white">
+                            <i class="fas fa-calendar-plus"></i>
+                        </a>
+                    </div>
+                @endrole
             </div>
             <div class="show-import"
                 @if ($errors->has('foto') || $errors->has('file') || $errors->has('judul')) style="display: block;" @else style="display: none;" @endif>
@@ -126,19 +128,21 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-2 text-right h-delete">
-                                    <form action="{{ route('delete-file', $file->id) }}" method="POST"
-                                        id="del-<?= $file->id ?>">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger"
-                                            data-confirm="Konfirmasi Hapus | Apakah anda yakin menghapus file ini?"
-                                            data-confirm-yes="submitDel(<?= $file->id ?>)"
-                                            data-id="del-{{ $file->id }}">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                                @role('super-admin')
+                                    <div class="col-md-2 text-right h-delete">
+                                        <form action="{{ route('delete-file', $file->id) }}" method="POST"
+                                            id="del-<?= $file->id ?>">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger"
+                                                data-confirm="Konfirmasi Hapus | Apakah anda yakin menghapus file ini?"
+                                                data-confirm-yes="submitDel(<?= $file->id ?>)"
+                                                data-id="del-{{ $file->id }}">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endrole
                             </div>
                         </div>
                     @endforeach

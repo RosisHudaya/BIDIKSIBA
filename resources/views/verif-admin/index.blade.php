@@ -19,7 +19,7 @@
                             <a class="btn btn-success btn-spk" href="{{ route('export.biodata') }}">
                                 <i class="fas fa-file-csv"></i> Biodata
                             </a>
-                            <a class="btn btn-success btn-spk" href="{{ route('export.spk') }}">
+                            <a class="btn btn-success btn-spk" href="{{ route('export.ekonomi') }}">
                                 <i class="fas fa-file-csv"></i> Data SPK
                             </a>
                             <a class="btn btn-success btn-spk" href="{{ route('export.pendaftar') }}">
@@ -64,7 +64,12 @@
                                             <th style="width: 20%;">NAMA</th>
                                             <th style="width: 20%;">EMAIL</th>
                                             <th style="width: 20%;">STATUS</th>
-                                            <th class="text-center" style="width: 20%;">AKSI</th>
+                                            @role('super-admin')
+                                                <th class="text-center" style="width: 20%;">AKSI</th>
+                                            @endrole
+                                            @role('admin-bidiksiba')
+                                                <th class="text-left" style="width: 20%;">AKSI</th>
+                                            @endrole
                                         </tr>
                                         @foreach ($biodatas as $key => $biodata)
                                             <tr>
@@ -81,30 +86,42 @@
                                                     {{ $biodata->status }}
                                                 </td>
                                                 <td class="text-right">
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href="" class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit i-all"></i>
-                                                            Edit
-                                                        </a>
-                                                        <form
-                                                            action="{{ route('verifikasi-pendaftar.destroy', $biodata->id) }}"
-                                                            method="POST" class="ml-2" id="del-<?= $biodata->id ?>">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus biodata pendaftar ini?"
-                                                                data-confirm-yes="submitDel(<?= $biodata->id ?>)"
-                                                                data-id="del-{{ $biodata->id }}">
-                                                                <i class="fas fa-times i-all"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                        <a class="btn btn-sm btn-secondary ml-2 detail"
-                                                            data-id="{{ $biodata->id }}">
-                                                            <i class="fas fa-angle-double-down"
-                                                                id="toggle-icon-{{ $biodata->id }}">
-                                                            </i>
-                                                        </a>
-                                                    </div>
+                                                    @role('super-admin')
+                                                        <div class="d-flex justify-content-center">
+                                                            <a href="" class="btn btn-sm btn-info btn-icon "><i
+                                                                    class="fas fa-edit i-all"></i>
+                                                                Edit
+                                                            </a>
+                                                            <form
+                                                                action="{{ route('verifikasi-pendaftar.destroy', $biodata->id) }}"
+                                                                method="POST" class="ml-2" id="del-<?= $biodata->id ?>">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-sm btn-danger btn-icon"
+                                                                    data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus biodata pendaftar ini?"
+                                                                    data-confirm-yes="submitDel(<?= $biodata->id ?>)"
+                                                                    data-id="del-{{ $biodata->id }}">
+                                                                    <i class="fas fa-times i-all"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                            <a class="btn btn-sm btn-secondary ml-2 detail"
+                                                                data-id="{{ $biodata->id }}">
+                                                                <i class="fas fa-angle-double-down"
+                                                                    id="toggle-icon-{{ $biodata->id }}">
+                                                                </i>
+                                                            </a>
+                                                        </div>
+                                                    @endrole
+                                                    @role('admin-bidiksiba')
+                                                        <div class="d-flex justify-content-start">
+                                                            <a class="btn btn-sm btn-secondary ml-2 detail"
+                                                                data-id="{{ $biodata->id }}">
+                                                                <i class="fas fa-angle-double-down"
+                                                                    id="toggle-icon-{{ $biodata->id }}">
+                                                                </i>
+                                                            </a>
+                                                        </div>
+                                                    @endrole
                                                 </td>
                                             </tr>
                                             @include('verif-admin.biodata')

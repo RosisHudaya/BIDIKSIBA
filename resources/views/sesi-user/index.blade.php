@@ -45,9 +45,11 @@
                     <div class="card card-primary">
                         <div class="d-flex ml-4 mt-3 mr-2">
                             <div class=" col-md-4 m-0 p-0">
-                                <a class="btn btn-primary" href="{{ route('sesi-user.create', $sesi_ujian->id) }}">
-                                    <i class="fas fa-user-plus"></i> Tambah Peserta Ujian
-                                </a>
+                                @role('super-admin')
+                                    <a class="btn btn-primary" href="{{ route('sesi-user.create', $sesi_ujian->id) }}">
+                                        <i class="fas fa-user-plus"></i> Tambah Peserta Ujian
+                                    </a>
+                                @endrole
                             </div>
                         </div>
                         <div class="card-body">
@@ -69,7 +71,9 @@
                                             <th class="text-center" style="width: 100px;">NO</th>
                                             <th>NAMA</th>
                                             <th class="text-center" style="width: 300px;">JENIS KELAMIN</th>
-                                            <th class="text-center" style="width: 300px;">AKSI</th>
+                                            @role('super-admin')
+                                                <th class="text-center" style="width: 300px;">AKSI</th>
+                                            @endrole
                                         </tr>
                                         @foreach ($sesi_users as $key => $sesi_user)
                                             <tr>
@@ -78,22 +82,24 @@
                                                 </td>
                                                 <td style="text-transform: uppercase;">{{ $sesi_user->nama }}</td>
                                                 <td class="text-center">{{ $sesi_user->gender }}</td>
-                                                <td class="text-right">
-                                                    <div class="d-flex justify-content-center">
-                                                        <form
-                                                            action="{{ route('sesi-user.destroy', ['sesiUser' => $sesi_user->id, 'sesi_ujian' => $sesi_ujian->id]) }}"
-                                                            method="POST" class="ml-2" id="del-<?= $sesi_user->id ?>">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus peserta ini dari sesi ujian?"
-                                                                data-confirm-yes="submitDel(<?= $sesi_user->id ?>)"
-                                                                data-id="del-{{ $sesi_user->id }}">
-                                                                <i class="fas fa-times i-all"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                @role('super-admin')
+                                                    <td class="text-right">
+                                                        <div class="d-flex justify-content-center">
+                                                            <form
+                                                                action="{{ route('sesi-user.destroy', ['sesiUser' => $sesi_user->id, 'sesi_ujian' => $sesi_ujian->id]) }}"
+                                                                method="POST" class="ml-2" id="del-<?= $sesi_user->id ?>">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-sm btn-danger btn-icon"
+                                                                    data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus peserta ini dari sesi ujian?"
+                                                                    data-confirm-yes="submitDel(<?= $sesi_user->id ?>)"
+                                                                    data-id="del-{{ $sesi_user->id }}">
+                                                                    <i class="fas fa-times i-all"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                @endrole
                                             </tr>
                                         @endforeach
                                     </tbody>
