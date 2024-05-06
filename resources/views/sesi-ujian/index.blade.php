@@ -16,17 +16,19 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="header ml-4 mt-3">
-                            <a class="btn btn-primary" href="{{ route('sesi-ujian.create') }}">
-                                <i class="fas fa-edit"></i> Tambah Sesi Ujian
-                            </a>
+                            @role('super-admin')
+                                <a class="btn btn-primary" href="{{ route('sesi-ujian.create') }}">
+                                    <i class="fas fa-edit"></i> Tambah Sesi Ujian
+                                </a>
+                            @endrole
                         </div>
                         <div class="card-body">
-                            <form id="search" method="GET" action="{{ route('ujian.index') }}">
-                                <div class="d-flex mb-3">
-                                    <input type="text" name="name" class="form-control mr-2" id="name"
+                            <form id="search" method="GET" action="{{ route('sesi-ujian.index') }}">
+                                <div class="d-flex mb-3 d-search">
+                                    <input type="text" name="name" class="form-control mr-2 d-input" id="name"
                                         placeholder="cari sesi ujian..." value="{{ app('request')->input('name') }}">
-                                    <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
-                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('ujian.index') }}">Reset</a>
+                                    <button class="btn btn-primary mr-1 py-0 px-4 d-submit" type="submit">Submit</button>
+                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('sesi-ujian.index') }}">Reset</a>
                                 </div>
                             </form>
                             <div class="table-responsive">
@@ -34,8 +36,8 @@
                                     <tbody>
                                         <tr>
                                             <th class="text-center align-middle" style="width: 75px;">#</th>
-                                            <th class="align-middle" style="width: 150px;">Sesi</th>
-                                            <th class="align-middle" style="width: 200px;">Ujian</th>
+                                            <th class="align-middle" style="width: 100px;">Sesi</th>
+                                            <th class="align-middle" style="width: 150px;">Ujian</th>
                                             <th class="text-center align-middle" style="width: 100px;">Jumlah Peserta</th>
                                             <th class="text-center align-middle" style="width: 300px;">Waktu</th>
                                             <th class="text-center align-middle">Aksi</th>
@@ -58,25 +60,27 @@
                                                     <div class="d-flex justify-content-center">
                                                         <a href="{{ route('sesiUjian', $sesiUjian->id) }}"
                                                             class="btn btn-sm btn-exam">
-                                                            <i class="fas fa-user-plus"></i>
+                                                            <i class="fas fa-user-plus i-all"></i>
                                                             Peserta
                                                         </a>
-                                                        <a href="{{ route('sesi-ujian.edit', $sesiUjian->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon ml-2">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
-                                                        <form action="{{ route('sesi-ujian.destroy', $sesiUjian->id) }}"
-                                                            method="POST" class="ml-2" id="del-<?= $sesiUjian->id ?>">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus data sesi ujian ini?"
-                                                                data-confirm-yes="submitDel(<?= $sesiUjian->id ?>)"
-                                                                data-id="del-{{ $sesiUjian->id }}">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form>
+                                                        @role('super-admin')
+                                                            <a href="{{ route('sesi-ujian.edit', $sesiUjian->id) }}"
+                                                                class="btn btn-sm btn-info btn-icon ml-2">
+                                                                <i class="fas fa-edit i-all"></i>
+                                                                Edit
+                                                            </a>
+                                                            <form action="{{ route('sesi-ujian.destroy', $sesiUjian->id) }}"
+                                                                method="POST" class="ml-2" id="del-<?= $sesiUjian->id ?>">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-sm btn-danger btn-icon"
+                                                                    data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus data sesi ujian ini?"
+                                                                    data-confirm-yes="submitDel(<?= $sesiUjian->id ?>)"
+                                                                    data-id="del-{{ $sesiUjian->id }}">
+                                                                    <i class="fas fa-times i-all"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                        @endrole
                                                     </div>
                                                 </td>
                                             </tr>
@@ -95,6 +99,7 @@
     </section>
 @endsection
 @push('customScript')
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

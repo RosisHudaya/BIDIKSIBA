@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            BiodataSeeder::class,
             RoleAndPermissionSeeder::class,
             MenuGroupSeeder::class,
             MenuItemSeeder::class,
@@ -24,6 +25,15 @@ class DatabaseSeeder extends Seeder
             JurusanSeeder::class,
             AsalJurusanPivotSeeder::class,
             ProdiSeeder::class,
+            PekerjaanOrtuSeeder::class,
+            GajiOrtuSeeder::class,
+            KamarMandiSeeder::class,
+            TagihanListrikSeeder::class,
+            HutangSeeder::class,
+            SaudaraSeeder::class,
+            StatusOrtuSeeder::class,
+            BobotSeeder::class,
+            BiodataSpkSeeder::class,
         ]);
     }
 }

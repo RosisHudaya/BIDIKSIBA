@@ -26,6 +26,9 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'role.permission.management']);
         Permission::create(['name' => 'menu.pendidikan']);
         Permission::create(['name' => 'menu.ujian']);
+        Permission::create(['name' => 'menu.kriteria.pendaftar']);
+        Permission::create(['name' => 'menu.kriteria.ekonomi']);
+        Permission::create(['name' => 'menu.ranking']);
         Permission::create(['name' => 'menu.management']);
 
         //user
@@ -33,13 +36,16 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'user.create']);
         Permission::create(['name' => 'user.edit']);
         Permission::create(['name' => 'user.destroy']);
-        Permission::create(['name' => 'user.import']);
-        Permission::create(['name' => 'user.export']);
 
         //biodata admin
         Permission::create(['name' => 'verif-admin.index']);
         Permission::create(['name' => 'verif-admin.edit']);
         Permission::create(['name' => 'verif-admin.destroy']);
+        Permission::create(['name' => 'verif-admin.export.biodata']);
+        Permission::create(['name' => 'verif-admin.export.ekonomi']);
+        Permission::create(['name' => 'verif-admin.export.pendaftar']);
+        Permission::create(['name' => 'verif-admin.verifikasi-pendaftar.verif']);
+        Permission::create(['name' => 'verif-admin.verifikasi-pendaftar.reject']);
 
         //akun ujian
         Permission::create(['name' => 'akun-ujian.index']);
@@ -71,6 +77,18 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'assign.user.create']);
         Permission::create(['name' => 'assign.user.edit']);
 
+        //bobot kriteria
+        Permission::create(['name' => 'bobot-kriteria.index']);
+        Permission::create(['name' => 'bobot-kriteria.edit']);
+
+        //data ranking ekonomi
+        Permission::create(['name' => 'data-ekonomi.index']);
+        Permission::create(['name' => 'data-ekonomi.export.alternative']);
+
+        //data ranking bidiksiba
+        Permission::create(['name' => 'data-spk.index']);
+        Permission::create(['name' => 'data-spk.export.hasil-spk']);
+
         //asal jurusan
         Permission::create(['name' => 'asal-jurusan.index']);
         Permission::create(['name' => 'asal-jurusan.create']);
@@ -94,12 +112,53 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'ujian.create']);
         Permission::create(['name' => 'ujian.edit']);
         Permission::create(['name' => 'ujian.destroy']);
+        Permission::create(['name' => 'ujian.soalUjian']);
+        Permission::create(['name' => 'soal-ujian.create']);
+        Permission::create(['name' => 'soal-ujian.edit']);
+        Permission::create(['name' => 'soal-ujian.destroy']);
+        Permission::create(['name' => 'soal-ujian.import']);
 
         //sesi ujian
         Permission::create(['name' => 'sesi-ujian.index']);
         Permission::create(['name' => 'sesi-ujian.create']);
         Permission::create(['name' => 'sesi-ujian.edit']);
         Permission::create(['name' => 'sesi-ujian.destroy']);
+        Permission::create(['name' => 'sesi-ujian.sesiUjian']);
+        Permission::create(['name' => 'sesi-user.create']);
+        Permission::create(['name' => 'sesi-user.destroy']);
+
+        //laporan nilai
+        Permission::create(['name' => 'laporan-nilai.index']);
+        Permission::create(['name' => 'laporan-nilai.export']);
+        Permission::create(['name' => 'list-nilai.show']);
+
+        //pekerjaan orang tua
+        Permission::create(['name' => 'pekerjaan-ortu.index']);
+        Permission::create(['name' => 'pekerjaan-ortu.edit']);
+
+        //penghasilan orang tua
+        Permission::create(['name' => 'penghasilan-ortu.index']);
+        Permission::create(['name' => 'penghasilan-ortu.edit']);
+
+        //kamar mandi
+        Permission::create(['name' => 'kamar-mandi.index']);
+        Permission::create(['name' => 'kamar-mandi.edit']);
+
+        //tagihan listrik
+        Permission::create(['name' => 'tagihan-listrik.index']);
+        Permission::create(['name' => 'tagihan-listrik.edit']);
+
+        //hutang
+        Permission::create(['name' => 'hutang.index']);
+        Permission::create(['name' => 'hutang.edit']);
+
+        //saudara
+        Permission::create(['name' => 'saudara.index']);
+        Permission::create(['name' => 'saudara.edit']);
+
+        //status orang tua
+        Permission::create(['name' => 'status-ortu.index']);
+        Permission::create(['name' => 'status-ortu.edit']);
 
         //menu group 
         Permission::create(['name' => 'menu-group.index']);
@@ -116,9 +175,40 @@ class RoleAndPermissionSeeder extends Seeder
         // create roles 
         $roleUser = Role::create(['name' => 'calon-mahasiswa']);
         $roleUser->givePermissionTo([
+        ]);
+
+        $roleUser = Role::create(['name' => 'admin-bidiksiba']);
+        $roleUser->givePermissionTo([
             'dashboard',
-            // 'user.management',
-            // 'user.index',
+            'user.management',
+            'verif-admin.index',
+            'menu.kriteria.pendaftar',
+            'pekerjaan-ortu.index',
+            'penghasilan-ortu.index',
+            'saudara.index',
+            'status-ortu.index',
+            'menu.kriteria.ekonomi',
+            'kamar-mandi.index',
+            'tagihan-listrik.index',
+            'hutang.index',
+            'menu.ranking',
+            'bobot-kriteria.index',
+            'data-ekonomi.index',
+            'data-ekonomi.export.alternative',
+            'data-spk.index',
+            'data-spk.export.hasil-spk',
+            'menu.ujian',
+            'ujian.index',
+            'ujian.soalUjian',
+            'sesi-ujian.index',
+            'sesi-ujian.sesiUjian',
+            'laporan-nilai.index',
+            'laporan-nilai.export',
+            'list-nilai.show'
+        ]);
+
+        $roleUser = Role::create(['name' => 'pengawas']);
+        $roleUser->givePermissionTo([
         ]);
 
         // create Super Admin
@@ -129,6 +219,18 @@ class RoleAndPermissionSeeder extends Seeder
         $user = User::find(1);
         $user->assignRole('super-admin');
         $user = User::find(2);
+        $user->assignRole('admin-bidiksiba');
+        $user = User::find(3);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(4);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(5);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(6);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(7);
+        $user->assignRole('calon-mahasiswa');
+        $user = User::find(8);
         $user->assignRole('calon-mahasiswa');
     }
 }

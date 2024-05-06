@@ -17,10 +17,10 @@
                     <div class="card card-primary">
                         <div class="card-body">
                             <form id="search" method="GET" action="{{ route('akun-ujian.index') }}">
-                                <div class="d-flex mb-3">
-                                    <input type="text" name="name" class="form-control mr-2" id="name"
+                                <div class="d-flex mb-3 d-search">
+                                    <input type="text" name="name" class="form-control mr-2 d-input" id="name"
                                         placeholder="cari nama pendaftar..." value="{{ app('request')->input('name') }}">
-                                    <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
+                                    <button class="btn btn-primary mr-1 py-0 px-4 d-submit" type="submit">Submit</button>
                                     <a class="btn btn-secondary py-2 px-4" href="{{ route('akun-ujian.index') }}">Reset</a>
                                 </div>
                             </form>
@@ -45,9 +45,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $akunUjians->withQueryString()->links() }}
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center d-pag">
+                                {{ $akunUjians->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
@@ -77,6 +77,7 @@
             });
         });
     </script>
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

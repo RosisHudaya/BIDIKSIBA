@@ -14,7 +14,7 @@
         <div class="col-md-8">
             <div class="d-flex justify-content-start">
                 <img class="img-fluid img-h my-2 mr-3" src="{{ asset('assets/img/logo.png') }}">
-                <div>
+                <div class="t-header">
                     <span class="s-b">BIDIKSIBA </span><span class="s-p">POLINEMA</span>
                     <p class="p-header">Beasiswa Pendidikan Sekitar Bukit Asam Politeknik Negeri Malang
                     </p>
@@ -22,12 +22,18 @@
             </div>
         </div>
         <div class="col-md-4">
-            <p id="realtime-clock" class="p-header text-right"></p>
+            <p id="realtime-clock" class="p-header p-time text-right"></p>
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary-nav sticky-top p-2">
-        <div class="collapse navbar-collapse">
+        <button id="navbar-toggle" class="navbar-toggler" type="button">
+            <i class="fas fa-bars n-icon"></i>
+        </button>
+        <div class="navbar-collapse" id="navbar">
             <ul class="navbar-nav ml-5 py-1">
+                <li class="nav-item nav-main">
+                    <p class="text-white m-0 p-0">MENU</p>
+                </li>
                 <li class="nav-item mr-5">
                     <a href="{{ url('/') }}"><i class="fas fa-home a-nav"></i></a>
                 </li>
@@ -36,15 +42,27 @@
                         <a href="{{ route('login') }}" class="a-nav">LOGIN</a>
                     </li>
                 @else
-                    <li class="nav-item mr-5">
-                        <a href="{{ route('biodata.index') }}" class="a-nav">BIODATA Pendaftar</a>
-                    </li>
-                    <li class="nav-item mr-5">
-                        <a href="{{ route('token-ujian.index') }}" class="a-nav">Lihat TOKEN</a>
-                    </li>
-                    <li class="nav-item mr-5">
-                        <a href="{{ route('login.ujian') }}" class="a-nav">LOGIN Ujian</a>
-                    </li>
+                    @role('calon-mahasiswa')
+                        <li class="nav-item mr-5">
+                            <a href="{{ route('biodata.index') }}" class="a-nav">BIODATA Pendaftar</a>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a href="{{ route('token-ujian.index') }}" class="a-nav">Lihat TOKEN</a>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a href="{{ route('login.ujian') }}" class="a-nav">LOGIN Ujian</a>
+                        </li>
+                    @endrole
+                    @role('pengawas')
+                        <li class="nav-item mr-5">
+                            <a href="{{ route('ujian.pengawas') }}" class="a-nav">List Ujian</a>
+                        </li>
+                    @endrole
+                    @role('super-admin|admin-bidiksiba')
+                        <li class="nav-item mr-5">
+                            <a href="{{ route('dashboard') }}" class="a-nav">Dashboard</a>
+                        </li>
+                    @endrole
                     <li class="nav-item">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
@@ -83,6 +101,18 @@
         updateRealTimeClock();
 
         setInterval(updateRealTimeClock, 1000);
+    </script>
+
+    <script>
+        document.getElementById('navbar-toggle').addEventListener('click', function() {
+            document.getElementById('navbar').classList.toggle('open');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#navbar') && !event.target.closest('#navbar-toggle')) {
+                document.getElementById('navbar').classList.remove('open');
+            }
+        });
     </script>
 </body>
 

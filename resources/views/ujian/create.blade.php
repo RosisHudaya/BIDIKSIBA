@@ -50,5 +50,16 @@
         $(document).ready(function() {
             $('.select2').select2();
         });
+        $(".summernote").summernote({
+            styleWithSpan: false,
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ],
+        });
     </script>
 @endpush

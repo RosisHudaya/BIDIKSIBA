@@ -24,6 +24,7 @@ class StoreSoalUjianRequest extends FormRequest
     public function rules()
     {
         return [
+            'gambar' => 'nullable',
             'soal' => 'required',
             'jawaban_a' => 'required',
             'jawaban_b' => 'required',

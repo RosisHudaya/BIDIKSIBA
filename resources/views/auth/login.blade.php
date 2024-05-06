@@ -6,16 +6,13 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>BIDIKSIBA POLINEMA | Login</title>
 
-    <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <!-- CSS Libraries -->
     <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
 
-    <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/auth.css">
     <link rel="stylesheet" href="../assets/css/components.css">
@@ -32,11 +29,6 @@
                         <a href="/" class="s-b">BIDIKSIBA </a><span class="s-p">POLINEMA</span>
                     </div>
                 </div>
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
                 <div class="col-md-10 mx-auto mt-4">
                     <form action="{{ route('login') }}" method="POST" class="needs-validation" novalidate="">
                         @csrf
@@ -56,7 +48,7 @@
                             @enderror
                             <div class="text-right">
                                 <a href="/forgot-password" class="text-small a-f">
-                                    Forgot Password?
+                                    Lupa password?
                                 </a>
                             </div>
                         </div>

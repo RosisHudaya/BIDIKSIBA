@@ -84,6 +84,29 @@ body {
     font-weight: 700;
 }
 
+.p-alert {
+    color: #3eac57;
+}
+
+.p-forgot {
+    color: #2d3250;
+    font-size: 12px;
+}
+
+.p-forgot-2 {
+    color: #2d3250;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* tablet view */
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    .auth-page {
+        max-width: 75% !important;
+    }
+}
+
+/* mobile view */
 @media only screen and (max-width: 767px) {
     body {
         padding: 100px 20px;

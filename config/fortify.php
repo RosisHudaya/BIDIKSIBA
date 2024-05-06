@@ -62,6 +62,9 @@ return [
     */
 
     'home' => RouteServiceProvider::HOME,
+    'home-bidiksiba' => RouteServiceProvider::HOME_BIDIKSIBA,
+    'home-mahasiswa' => RouteServiceProvider::HOME_MAHASISWA,
+    'home-pengawas' => RouteServiceProvider::HOME_PENGAWAS,
 
     /*
     |--------------------------------------------------------------------------

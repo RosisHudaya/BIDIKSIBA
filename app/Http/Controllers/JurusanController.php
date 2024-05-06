@@ -22,9 +22,17 @@ class JurusanController extends Controller
 
     public function index(Request $request)
     {
+        $asal_jurusans = AsalJurusan::all();
+        $asalJurusanSelected = $request->input('asal_jurusan');
         $jurusans = DB::table('jurusans as j')
             ->join('asal_jurusan_pivots as jp', 'j.id', '=', 'jp.id_jurusan')
             ->join('asal_jurusans as aj', 'jp.id_asal_jurusan', '=', 'aj.id')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('j.jurusan', 'like', '%' . $name . '%');
+            })
+            ->when($asalJurusanSelected, function ($query, $name) {
+                return $query->where('jp.id_asal_jurusan', 'like', '%' . $name . '%');
+            })
             ->select(
                 'j.id',
                 'j.jurusan',
@@ -32,7 +40,7 @@ class JurusanController extends Controller
             )
             ->groupBy('j.id', 'j.jurusan')
             ->paginate(10);
-        return view('jurusan.index', compact('jurusans'));
+        return view('jurusan.index', compact('jurusans', 'asal_jurusans', 'asalJurusanSelected'));
     }
 
     public function create()

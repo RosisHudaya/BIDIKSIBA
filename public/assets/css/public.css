@@ -7,6 +7,10 @@
     border-radius: 15px 15px 0 0;
 }
 
+.p-login {
+    display: none;
+}
+
 .p-t {
     font-size: 16px;
     font-weight: 800;
@@ -20,8 +24,7 @@
 .p-ujian-n {
     background-color: white;
     border-radius: 15px;
-    height: 400px;
-    overflow: hidden;
+    height: 380px;
 }
 
 .p-ujian-b {
@@ -30,7 +33,8 @@
 }
 
 .soal-n {
-    max-height: 70%;
+    flex: 1;
+    max-height: 100%;
     overflow-y: auto;
 }
 
@@ -200,6 +204,11 @@ select {
     font-size: 11px;
 }
 
+.text-b {
+    color: black;
+    font-size: 11px;
+}
+
 .table.table-md th,
 .table.table-md td {
     color: #666;
@@ -215,6 +224,7 @@ select {
 }
 
 .btn-choice {
+    height: fit-content;
     border: 1px solid;
     border-color: #004181;
     border-radius: 12px;
@@ -242,4 +252,289 @@ select {
     background-color: #3eac57 !important;
     border-color: #2ca548 !important;
     box-shadow: none !important;
+}
+
+.i-peng {
+    display: none;
+}
+
+.a-back,
+.a-back:hover {
+    color: white;
+    font-size: 25px;
+}
+
+.page-item .page-link {
+    font-size: 14px;
+    color: #003c77;
+    border-radius: 3px;
+    margin: 0 3px;
+}
+
+li.page-item.active {
+    background-color: transparent !important;
+}
+
+.page-item.active .page-link {
+    background-color: #003c77;
+    border-color: #003c77;
+}
+
+.page-item.disabled .page-link {
+    border-color: transparent;
+    background-color: #f9fafe;
+    color: #003c77;
+    opacity: 0.6;
+}
+
+.page-link {
+    border-color: transparent;
+    background-color: #f9fafe;
+    font-weight: 600;
+}
+.page-link:hover {
+    background-color: #003c77;
+    color: #fff;
+    border-color: transparent;
+}
+.page-link:focus {
+    box-shadow: none;
+}
+
+/* tablet view */
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    /* biodata pendaftar */
+    .p-alert {
+        font-size: 12px !important;
+        text-align: center;
+    }
+
+    .form-group {
+        max-width: 100% !important;
+        display: block !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .btn-bio {
+        margin-right: 0px !important;
+    }
+
+    .btn-save {
+        width: 100%;
+    }
+
+    /* token ujian */
+    .c-token {
+        max-width: 85% !important;
+    }
+
+    /* login ujian */
+    .card-test {
+        max-width: 95% !important;
+    }
+
+    .login-test {
+        display: flex !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* list ujian */
+    .col-list {
+        max-width: 95% !important;
+    }
+
+    /* detail ujian */
+    .col-det {
+        display: block !important;
+    }
+
+    .card-desc,
+    .card-det {
+        max-width: 100% !important;
+    }
+
+    /* ujian */
+    .col-soal-ujian {
+        display: block !important;
+    }
+
+    .col-numb {
+        max-width: 75% !important;
+        margin-bottom: 20px !important;
+    }
+
+    .col-ques {
+        max-width: 100% !important;
+    }
+
+    /* pengawas */
+    .col-peng {
+        max-width: 95% !important;
+    }
+}
+
+/* mobile view */
+@media screen and (max-width: 767px) {
+    /* biodata pendaftar */
+    .p-alert {
+        font-size: 10px !important;
+        text-align: center;
+    }
+
+    .s-alert {
+        font-size: 10px !important;
+    }
+
+    .p-main {
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+    }
+
+    .nav-bio a {
+        margin-top: 8px !important;
+        font-size: 12px !important;
+    }
+
+    .form-group {
+        display: block !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    #foto-preview,
+    #sdr-preview,
+    #ket-yatim-preview {
+        width: 155px !important;
+        height: 200px !important;
+        margin-left: 0px !important;
+    }
+
+    #ktp-preview,
+    #kartu-siswa-preview,
+    #kk-preview,
+    #slip-gaji-preview,
+    #shm-preview,
+    #foto-kmr-preview,
+    #kmr-mandi-preview,
+    #listrik-preview,
+    #slip-pbb-preview {
+        width: 200px !important;
+        height: 150px !important;
+        margin-left: 0px !important;
+    }
+
+    .text-b,
+    .text-c {
+        margin-left: 0px !important;
+    }
+
+    .btn-bio {
+        margin-right: 0px !important;
+    }
+
+    /* token ujian */
+    .p-main-title {
+        font-size: 16px;
+    }
+
+    .c-token {
+        overflow-x: scroll;
+    }
+
+    .c-token::-webkit-scrollbar {
+        display: none;
+    }
+
+    .col-token {
+        width: 250px;
+    }
+
+    .text-pre {
+        font-size: 14px;
+    }
+
+    .s-pre-n,
+    .s-pre {
+        font-size: 12px;
+    }
+
+    /* login ujian */
+    .h-login {
+        display: none;
+    }
+
+    .p-login {
+        display: block;
+        font-size: 12px;
+    }
+
+    .login-test {
+        display: flex !important;
+    }
+
+    .btn-save {
+        width: 100%;
+    }
+
+    /* list ujian */
+    .t-ujian {
+        display: none;
+    }
+
+    .table-responsive table {
+        min-width: 800px;
+    }
+
+    /* detail ujian */
+    .col-det {
+        display: block !important;
+    }
+
+    .p-det {
+        width: 100px !important;
+    }
+
+    .btn-det {
+        margin-bottom: 10px !important;
+    }
+
+    /* ujian */
+    .col-soal-ujian {
+        display: block !important;
+    }
+
+    .p-ujian-n {
+        margin-bottom: 10px !important;
+    }
+
+    .soal {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .btn-choice {
+        margin-left: 0px !important;
+    }
+
+    /* detail pengawas */
+    .det-peng {
+        display: none !important;
+    }
+
+    .i-peng {
+        color: white;
+        font-size: 25px;
+        display: block !important;
+        margin-top: 6px !important;
+    }
+
+    .d-pag {
+        margin-top: 15px !important;
+    }
 }

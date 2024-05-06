@@ -1,22 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
     <section class="section">
         <div class="section-header">
             <h1>Roles and Permission</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Table</div>
-            </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Manage Role and Permission</h2>
-
             <div class="card">
                 <div class="card-header">
-                    <h4>Roles and Permission</h4>
+                    <h4>Validasi Edit Data Assign to Permission</h4>
                 </div>
                 <form action="{{ route('assign.update', $role->id) }}" method="POST">
                     @csrf

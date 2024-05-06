@@ -25,13 +25,28 @@ class MenuGroupSeeder extends Seeder
                 ],
                 [
                     'name' => 'Users Management',
-                    'icon' => 'fas fa-users',
+                    'icon' => 'fas fa-user',
                     'permission_name' => 'user.management',
+                ],
+                [
+                    'name' => 'Kriteria Pendaftar',
+                    'icon' => 'fas fa-user-tie',
+                    'permisison_name' => 'menu.kriteria.pendaftar',
+                ],
+                [
+                    'name' => 'Kriteria Ekonomi',
+                    'icon' => 'fas fa-home',
+                    'permisison_name' => 'menu.kriteria.ekonomi',
                 ],
                 [
                     'name' => 'Role Management',
                     'icon' => 'fas fa-user-tag',
                     'permisison_name' => 'role.permission.management',
+                ],
+                [
+                    'name' => 'Hasil Ranking',
+                    'icon' => 'fas fa-medal',
+                    'permisison_name' => 'menu.ranking',
                 ],
                 [
                     'name' => 'Pendidikan',
@@ -43,11 +58,11 @@ class MenuGroupSeeder extends Seeder
                     'icon' => 'fas fa-file-contract',
                     'permisison_name' => 'menu.ujian',
                 ],
-                [
-                    'name' => 'Menu Management',
-                    'icon' => 'fas fa-bars',
-                    'permisison_name' => 'menu.management',
-                ]
+                // [
+                //     'name' => 'Menu Management',
+                //     'icon' => 'fas fa-bars',
+                //     'permisison_name' => 'menu.management',
+                // ]
             ]
         );
     }

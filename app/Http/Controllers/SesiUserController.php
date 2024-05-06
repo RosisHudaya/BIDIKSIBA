@@ -10,6 +10,13 @@ use Illuminate\Database\QueryException;
 
 class SesiUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:sesi-user.create')->only('create', 'store');
+        $this->middleware('permission:sesi-user.destroy')->only('destroy');
+    }
+
     public function create(SesiUjian $sesiUjian)
     {
         $biodatas = DB::table('biodatas as b')
@@ -27,6 +34,7 @@ class SesiUserController extends Controller
                 'b.nama',
                 'b.gender',
             )
+            ->orderBy('b.nama', 'asc')
             ->paginate(25);
 
         return view('sesi-user.create', compact('sesiUjian', 'biodatas'));

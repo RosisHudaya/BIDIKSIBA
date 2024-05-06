@@ -2,98 +2,83 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    {{-- <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>{{ config('app.name') }} - Reset Password</title>
 
-    <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <!-- CSS Libraries -->
-
-    <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/components.css"> --}}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ config('app.name') }} - Reset Password</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/assets/css/landing-page.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/auth.css">
     <link rel="stylesheet" href="../assets/css/components.css">
 </head>
 
 <body>
     <div id="app">
-        <section class="section">
-            <div class="container mt-5">
-                <div class="row">
-                    <div
-                        class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                        <div class="login-brand">
-                            <img src="../assets/img/stisla-fill.svg" alt="logo" width="100"
-                                class="shadow-light rounded-circle">
-                        </div>
-
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h4>Reset Password</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <p class="text-muted">We will send a link to reset your password</p>
-                                @if (session('status'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-
-                                <form method="POST" action="{{ route('password.update') }}">
-                                    @csrf
-
-                                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input id="email" type="email" class="form-control" name="email" tabindex="1"
-                                            type="email" class="form-control @error('email') is-invalid @enderror"
-                                            value="{{ $request->email ?? old('email') }}" required
-                                            autocomplete="email" autofocus placeholder="Masukkan Alamat Elamil">
-                                        @error('email')
-                                            <div class="alert alert-danger mt-2">
-                                                <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="password">New Password</label>
-                                        <input id="password" type="password"
-                                            class="form-control pwstrength @error('password') is-invalid @enderror"
-                                            data-indicator="pwindicator" name="password" required
-                                            autocomplete="new-password" placeholder="Masukkan Password Baru">
-                                        @error('password')
-                                            <div class="alert alert-danger mt-2">
-                                                <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="password-confirm">Confirm Password</label>
-                                        <input id="password-confirm" type="password" class="form-control"
-                                            name="password_confirmation" tabindex="4" required
-                                            autocomplete="new-password" placeholder="Masukkan Konfirmasi Password Baru">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Reset Password
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="simple-footer">
-                            Copyright &copy; Stisla 2018
-                        </div>
+        <section>
+            <div class="col-md-4 auth-page py-5 px-0 mx-auto my-5">
+                <div class="d-flex justify-content-center">
+                    <img class="img-fluid img-auth mr-3" src="{{ asset('assets/img/graduation.svg') }}">
+                    <div>
+                        <p class="mb-0 mt-2 p-w">Welcome</p>
+                        <a href="/" class="s-b">BIDIKSIBA </a><span class="s-p">POLINEMA</span>
                     </div>
+                </div>
+                <div class="col-md-10 mx-auto mt-4">
+                    <form method="POST" action="{{ route('password.update') }}">
+                        @csrf
+                        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                        <div class="form-group">
+                            <input id="email" type="email" class="form-control form-auth" name="email"
+                                tabindex="1" type="email" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ $request->email ?? old('email') }}" required autocomplete="email" autofocus
+                                placeholder="Masukkan Alamat Elamil">
+                            @error('email')
+                                <div class="alert alert-danger mt-2">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input id="password" type="password"
+                                class="form-control form-auth pwstrength @error('password') is-invalid @enderror"
+                                data-indicator="pwindicator" name="password" required autocomplete="new-password"
+                                placeholder="Password baru">
+                            @error('password')
+                                <div class="alert alert-danger mt-2">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input id="password-confirm" type="password" class="form-control form-auth"
+                                name="password_confirmation" tabindex="4" required autocomplete="new-password"
+                                placeholder="Konfirmasi password baru">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-lg btn-block btn-auth" tabindex="4">
+                                Reset Password
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>

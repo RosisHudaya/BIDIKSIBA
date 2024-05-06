@@ -4,16 +4,9 @@
     <!-- Main Content -->
     <section class="section">
         <div class="section-header">
-            <h1>Roles and Permission</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Table</div>
-            </div>
+            <h1>User To Role</h1>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Assign User To Role</h2>
-
             <div class="row">
                 <div class="col-12">
                     @include('layouts.alert')
@@ -22,13 +15,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
-                        <div class="card-header">
-                            <h4>List User Assigned To Role</h4>
-                            <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary"
-                                    href="{{ route('assign.user.create') }}">Assign
-                                    User To Role</a>
-                            </div>
+                        <div class="header ml-4 mt-3">
                         </div>
                         <div class="card-body">
                             <div class="show-search mb-3" style="display: none">
@@ -54,7 +41,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Roles</th>
-                                            <th class="text-right">Action</th>
+                                            <th class="text-right">Aksi</th>
                                         </tr>
                                         @foreach ($users as $key => $user)
                                             <tr>
@@ -66,7 +53,7 @@
                                                     <div class="d-flex justify-content-end">
                                                         <a href="{{ route('assign.user.edit', $user->id) }}"
                                                             class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
+                                                                class="fas fa-edit i-all"></i>
                                                             Edit</a>
                                                     </div>
                                                 </td>
@@ -74,7 +61,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center d-pag">
                                     {{ $users->withQueryString()->links() }}
                                 </div>
                             </div>
@@ -106,6 +93,7 @@
             });
         });
     </script>
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

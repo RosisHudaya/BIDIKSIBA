@@ -7,16 +7,61 @@ use App\Models\AsalJurusanPivot;
 use App\Models\Biodata;
 use App\Http\Requests\StoreBiodataRequest;
 use App\Http\Requests\UpdateBiodataRequest;
+use App\Models\BiodataSpk;
+use App\Models\GajiOrtu;
+use App\Models\Hutang;
 use App\Models\Jurusan;
+use App\Models\KamarMandi;
+use App\Models\PekerjaanOrtu;
 use App\Models\Prodi;
+use App\Models\Saudara;
+use App\Models\StatusOrtu;
+use App\Models\TagihanListrik;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
+
 use Illuminate\Support\Str;
 
 class BiodataController extends Controller
 {
+    public function index_dash()
+    {
+        App::setLocale('id');
+
+        $id = Auth::id();
+        $biodatas = Biodata::where('id_user', $id)->first();
+
+        $berkass = DB::table('berkas')
+            ->select('berkas.*')
+            ->get();
+
+        $jadwal = DB::table('jadwals')
+            ->select('jadwals.*')
+            ->first();
+
+        $jadwalSId = null;
+        $jadwalEId = null;
+        if ($jadwal) {
+            $start = Carbon::parse($jadwal->start);
+            $jadwalSId = $start->translatedFormat('l, d F Y H:i:s');
+
+            $end = Carbon::parse($jadwal->end);
+            $jadwalEId = $end->translatedFormat('l, d F Y H:i:s');
+        }
+
+        return view('welcome')->with([
+            'biodatas' => $biodatas,
+            'berkass' => $berkass,
+            'jadwal' => $jadwal,
+            'jadwalSId' => $jadwalSId,
+            'jadwalEId' => $jadwalEId,
+        ]);
+    }
+
     public function index()
     {
         $id = Auth::id();
@@ -25,21 +70,61 @@ class BiodataController extends Controller
         $prodis = Prodi::all();
         $asalJurusanPivots = AsalJurusanPivot::all();
         $biodatas = Biodata::where('id_user', $id)->first();
+        $pekerjaan_ortus = PekerjaanOrtu::all();
+        $gaji_ortus = GajiOrtu::all();
+        $kamar_mandis = KamarMandi::all();
+        $tagihan_listriks = TagihanListrik::all();
+        $saudaras = Saudara::all();
+        $status_ortus = StatusOrtu::all();
+        $hutangs = Hutang::all();
+        $biodata_spk = BiodataSpk::where('user_id', $id)->first();
         return view('biodata.index')->with([
             'asalJurusans' => $asalJurusans,
             'jurusans' => $jurusans,
             'prodis' => $prodis,
             'asalJurusanPivots' => $asalJurusanPivots,
             'biodatas' => $biodatas,
+            'pekerjaan_ortus' => $pekerjaan_ortus,
+            'gaji_ortus' => $gaji_ortus,
+            'kamar_mandis' => $kamar_mandis,
+            'tagihan_listriks' => $tagihan_listriks,
+            'saudaras' => $saudaras,
+            'status_ortus' => $status_ortus,
+            'hutangs' => $hutangs,
+            'biodata_spk' => $biodata_spk,
         ]);
     }
 
-    public function index_dash()
+    public function index_pendukung()
     {
         $id = Auth::id();
+        $asalJurusans = AsalJurusan::all();
+        $jurusans = Jurusan::all();
+        $prodis = Prodi::all();
+        $asalJurusanPivots = AsalJurusanPivot::all();
         $biodatas = Biodata::where('id_user', $id)->first();
-        return view('welcome')->with([
+        $pekerjaan_ortus = PekerjaanOrtu::all();
+        $gaji_ortus = GajiOrtu::all();
+        $kamar_mandis = KamarMandi::all();
+        $tagihan_listriks = TagihanListrik::all();
+        $saudaras = Saudara::all();
+        $status_ortus = StatusOrtu::all();
+        $hutangs = Hutang::all();
+        $biodata_spk = BiodataSpk::where('user_id', $id)->first();
+        return view('biodata.index-pendukung')->with([
+            'asalJurusans' => $asalJurusans,
+            'jurusans' => $jurusans,
+            'prodis' => $prodis,
+            'asalJurusanPivots' => $asalJurusanPivots,
             'biodatas' => $biodatas,
+            'pekerjaan_ortus' => $pekerjaan_ortus,
+            'gaji_ortus' => $gaji_ortus,
+            'kamar_mandis' => $kamar_mandis,
+            'tagihan_listriks' => $tagihan_listriks,
+            'saudaras' => $saudaras,
+            'status_ortus' => $status_ortus,
+            'hutangs' => $hutangs,
+            'biodata_spk' => $biodata_spk,
         ]);
     }
 
@@ -93,6 +178,9 @@ class BiodataController extends Controller
         $request->validate(
             [
                 'foto' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'ktp' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'kartu_siswa' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'kk' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'nama' => 'nullable|regex:/^[a-zA-Z\s]+$/u',
                 'asal_sekolah' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/u',
                 'kota_lahir' => 'nullable|regex:/^[a-zA-Z\s]+$/u',
@@ -107,6 +195,15 @@ class BiodataController extends Controller
                 'foto.image' => 'File yang diunggah harus berupa gambar',
                 'foto.mimes' => 'Format gambar yang diunggah adalah PNG, JPG, atau JPEG',
                 'foto.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
+                'ktp.image' => 'File yang diunggah harus berupa gambar',
+                'ktp.mimes' => 'Format gambar yang diunggah adalah PNG, JPG, atau JPEG',
+                'ktp.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
+                'kartu_siswa.image' => 'File yang diunggah harus berupa gambar',
+                'kartu_siswa.mimes' => 'Format gambar yang diunggah adalah PNG, JPG, atau JPEG',
+                'kartu_siswa.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
+                'kk.image' => 'File yang diunggah harus berupa gambar',
+                'kk.mimes' => 'Format gambar yang diunggah adalah PNG, JPG, atau JPEG',
+                'kk.max' => 'Ukuran file tidak boleh melebihi 2048 KB (2 MB)',
                 'nama.regex' => 'Form nama tidak boleh mengandung angka dan simbol',
                 'asal_sekolah.regex' => 'Form asal sekolah tidak boleh mengandung simbol',
                 'kota_lahir' => 'Form kota lahir tidak boleh mengandung angka dan simbol',
@@ -145,6 +242,36 @@ class BiodataController extends Controller
 
                 $biodata->update(['foto' => $fotoPath]);
             }
+
+            if ($request->hasFile('ktp')) {
+                $extension = $request->file('ktp')->extension();
+                $randomName = 'ktp-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('ktp')->storeAs('public/ktp', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $biodata->update(['ktp' => $fotoPath]);
+            }
+
+            if ($request->hasFile('kartu_siswa')) {
+                $extension = $request->file('kartu_siswa')->extension();
+                $randomName = 'kartu-siswa-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('kartu_siswa')->storeAs('public/kartu_siswa', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $biodata->update(['kartu_siswa' => $fotoPath]);
+            }
+
+            if ($request->hasFile('kk')) {
+                $extension = $request->file('kk')->extension();
+                $randomName = 'kk-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('kk')->storeAs('public/kk', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $biodata->update(['kk' => $fotoPath]);
+            }
         } else {
             $idUser->update([
                 'id_user' => $id,
@@ -176,38 +303,50 @@ class BiodataController extends Controller
 
                 $idUser->update(['foto' => $fotoPath]);
             }
+
+            if ($request->hasFile('ktp')) {
+                if ($idUser->ktp) {
+                    Storage::delete('public/' . $idUser->ktp);
+                }
+
+                $extension = $request->file('ktp')->extension();
+                $randomName = 'ktp-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('ktp')->storeAs('public/ktp', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $idUser->update(['ktp' => $fotoPath]);
+            }
+
+            if ($request->hasFile('kartu_siswa')) {
+                if ($idUser->kartu_siswa) {
+                    Storage::delete('public/' . $idUser->kartu_siswa);
+                }
+
+                $extension = $request->file('kartu_siswa')->extension();
+                $randomName = 'kartu-siwa-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('kartu_siswa')->storeAs('public/kartu_siswa', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $idUser->update(['kartu_siswa' => $fotoPath]);
+            }
+
+            if ($request->hasFile('kk')) {
+                if ($idUser->kk) {
+                    Storage::delete('public/' . $idUser->kk);
+                }
+
+                $extension = $request->file('kk')->extension();
+                $randomName = 'kk-' . Str::random(9) . '.' . $extension;
+
+                $fotoPath = $request->file('kk')->storeAs('public/kk', $randomName);
+                $fotoPath = str_replace('public/', '', $fotoPath);
+
+                $idUser->update(['kk' => $fotoPath]);
+            }
         }
 
         return redirect()->route('biodata.index')->with('success', 'success-biodata');
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(StoreBiodataRequest $request)
-    {
-        //
-    }
-
-    public function show(Biodata $biodata)
-    {
-        //
-    }
-
-    public function edit(Biodata $biodata)
-    {
-        //
-    }
-
-    public function update(UpdateBiodataRequest $request, Biodata $biodata)
-    {
-        //
-    }
-
-    public function destroy(Biodata $biodata)
-    {
-        //
     }
 }

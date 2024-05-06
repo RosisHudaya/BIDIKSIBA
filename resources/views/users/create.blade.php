@@ -11,9 +11,9 @@
                 <div class="card-header">
                     <h4>Validasi Tambah Data</h4>
                 </div>
-                <div class="card-body">
-                    <form action="{{ route('user.store') }}" method="post">
-                        @csrf
+                <form action="{{ route('user.store') }}" method="post">
+                    @csrf
+                    <div class="card-body">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
@@ -45,16 +45,48 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="role">Role</label>
-                            <input type="text" class="form-control" name="role" value="calon-mahasiswa" readonly>
+                            <label for="user_type">Role</label>
+                            <select class="select2 form-control @error('user_type') is-invalid @enderror" id="user_type"
+                                name="user_type">
+                                <option value="" disabled selected>Pilih Role</option>
+                                <option value="calon-mahasiswa"
+                                    {{ old('user_type') === 'calon-mahasiswa' ? 'selected' : '' }}>
+                                    Calon Mahasiswa
+                                </option>
+                                <option value="admin-bidiksiba"
+                                    {{ old('user_type') === 'admin-bidiksiba' ? 'selected' : '' }}>
+                                    Admin BIDIKSIBA
+                                </option>
+                                <option value="pengawas" {{ old('user_type') === 'pengawas' ? 'selected' : '' }}>
+                                    Pengawas
+                                </option>
+                            </select>
+                            @error('user_type')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                </div>
-                <div class="card-footer text-right">
-                    <button class="btn btn-primary">Submit</button>
-                    <a class="btn btn-secondary" href="{{ route('user.index') }}">Cancel</a>
-                </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button class="btn btn-primary">Submit</button>
+                        <a class="btn btn-secondary" href="{{ route('user.index') }}">Cancel</a>
+                    </div>
                 </form>
             </div>
         </div>
     </section>
 @endsection
+
+@push('customStyle')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+@endpush
+
+@push('customScript')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
+@endpush

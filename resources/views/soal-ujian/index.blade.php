@@ -9,15 +9,15 @@
             <table class="table table-bordered table-md">
                 <tbody>
                     <tr>
-                        <th style="width: 300px;">NAMA UJIAN</th>
+                        <th class="th-test" style="width: 300px;">NAMA UJIAN</th>
                         <td>{{ $ujian->nama_ujian }}</td>
                     </tr>
                     <tr>
-                        <th style="width: 300px;">JUMLAH</th>
+                        <th class="th-test" style="width: 300px;">JUMLAH</th>
                         <td>{{ $jumlah_soal_ujian }} Soal</td>
                     </tr>
                     <tr>
-                        <th style="width: 300px;">DESKRIPSI</th>
+                        <th class="th-test" style="width: 300px;">DESKRIPSI</th>
                         <td>{!! $ujian->deskripsi ?? '--' !!}</td>
                     </tr>
                 </tbody>
@@ -35,15 +35,15 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary">
-                        <div class="d-flex ml-4 mt-3 mr-2">
-                            <div class=" col-md-4 m-0 p-0">
-                                <a class="btn btn-primary" href="{{ route('soal-ujian.create', $ujian->id) }}">
+                        <div class="d-flex ml-4 mt-3 mr-2 d-test">
+                            @role('super-admin')
+                                <a class="btn btn-primary mr-1" href="{{ route('soal-ujian.create', $ujian->id) }}">
                                     <i class="fas fa-edit"></i> Tambah Soal
                                 </a>
                                 <a class="btn btn-success import" style="color: white">
                                     <i class="fas fa-file-csv"></i> Import Soal
                                 </a>
-                            </div>
+                            @endrole
                         </div>
                         <div class="card-body">
                             <div class="show-import"
@@ -68,7 +68,7 @@
                                                     name="import-file" data-id="send-import">
                                             </div>
                                             <div class="col-md-1 p-0 ml-2">
-                                                <button class="btn btn-primary px-4 py-2"
+                                                <button class="btn btn-primary px-3 py-2"
                                                     data-id="submit-import">Import</button>
                                             </div>
                                         </div>
@@ -85,21 +85,33 @@
                                     <br>
                                 </form>
                             </div>
-                            <form id="search" method="GET" action="{{ route('ujian.index') }}">
-                                <div class="d-flex mb-3">
-                                    <input type="text" name="name" class="form-control mr-2" id="name"
-                                        placeholder="cari nama ujian..." value="{{ app('request')->input('name') }}">
-                                    <button class="btn btn-primary mr-1 py-0 px-4" type="submit">Submit</button>
-                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('ujian.index') }}">Reset</a>
+                            <form id="search" method="GET" action="{{ route('soalUjian', $ujian->id) }}">
+                                <div class="d-flex mb-3 d-search">
+                                    <input type="text" name="name" class="form-control mr-2 d-input" id="name"
+                                        placeholder="cari soal..." value="{{ app('request')->input('name') }}">
+                                    <button class="btn btn-primary mr-1 py-0 px-4 d-submit" type="submit">Submit</button>
+                                    <a class="btn btn-secondary py-2 px-4" href="{{ route('soalUjian', $ujian->id) }}">
+                                        Reset
+                                    </a>
                                 </div>
                             </form>
+
+                            @php
+                                function isImageUrl($url)
+                                {
+                                    return strpos($url, 'thumbnail?id=') !== false;
+                                }
+                            @endphp
+
                             <div class="table-responsive">
                                 <table class="table table-bordered table-md">
                                     <tbody>
                                         <tr>
                                             <th class="text-center" style="width: 100px;">NO</th>
                                             <th>SOAL</th>
-                                            <th class="text-center" style="width: 300px;">AKSI</th>
+                                            @role('super-admin')
+                                                <th class="text-center" style="width: 300px;">AKSI</th>
+                                            @endrole
                                         </tr>
                                         @foreach ($soal_ujians as $key => $soal_ujian)
                                             <tr>
@@ -107,69 +119,125 @@
                                                     {{ ($soal_ujians->currentPage() - 1) * $soal_ujians->perPage() + $key + 1 }}
                                                 </td>
                                                 <td>
+                                                    @if ($soal_ujian->gambar)
+                                                        <img src="{{ $soal_ujian->gambar }}" alt="gambar-soal"
+                                                            style="width: 200px; height: 200px; object-fit: contain;"><br>
+                                                    @endif
                                                     <strong>{{ $soal_ujian->soal }}</strong>
                                                     <hr>
                                                     @if ($soal_ujian->jawaban_benar == 'A')
-                                                        <span class="font-weight-bold" style="color: #3eac57;">A.
-                                                            {{ $soal_ujian->jawaban_a }}
-                                                        </span>
+                                                        @if (isImageUrl($soal_ujian->jawaban_a))
+                                                            <span class="font-weight-bold" style="color: #3eac57;">A.</span>
+                                                            <img class="mb-2" src="{{ $soal_ujian->jawaban_a }}"
+                                                                alt="Jawaban A"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            <span class="font-weight-bold" style="color: #3eac57;">A.
+                                                                {{ $soal_ujian->jawaban_a }}</span>
+                                                        @endif
                                                     @else
-                                                        A. {{ $soal_ujian->jawaban_a }}
+                                                        @if (isImageUrl($soal_ujian->jawaban_a))
+                                                            A. <img class="mb-2" src="{{ $soal_ujian->jawaban_a }}"
+                                                                alt="Jawaban A"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            A. {{ $soal_ujian->jawaban_a }}
+                                                        @endif
                                                     @endif
                                                     <br>
                                                     @if ($soal_ujian->jawaban_benar == 'B')
-                                                        <span class="font-weight-bold" style="color: #3eac57;">B.
-                                                            {{ $soal_ujian->jawaban_b }}
-                                                        </span>
+                                                        @if (isImageUrl($soal_ujian->jawaban_b))
+                                                            <span class="font-weight-bold" style="color: #3eac57;">B.</span>
+                                                            <img class="mb-2" src="{{ $soal_ujian->jawaban_b }}"
+                                                                alt="Jawaban B"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            <span class="font-weight-bold" style="color: #3eac57;">B.
+                                                                {{ $soal_ujian->jawaban_b }}</span>
+                                                        @endif
                                                     @else
-                                                        B. {{ $soal_ujian->jawaban_b }}
+                                                        @if (isImageUrl($soal_ujian->jawaban_b))
+                                                            B. <img class="mb-2" src="{{ $soal_ujian->jawaban_b }}"
+                                                                alt="Jawaban B"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            B. {{ $soal_ujian->jawaban_b }}
+                                                        @endif
                                                     @endif
                                                     <br>
                                                     @if ($soal_ujian->jawaban_benar == 'C')
-                                                        <span class="font-weight-bold" style="color: #3eac57;">C.
-                                                            {{ $soal_ujian->jawaban_c }}
-                                                        </span>
+                                                        @if (isImageUrl($soal_ujian->jawaban_c))
+                                                            <span class="font-weight-bold" style="color: #3eac57;">C.</span>
+                                                            <img class="mb-2" src="{{ $soal_ujian->jawaban_b }}"
+                                                                alt="Jawaban C"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            <span class="font-weight-bold" style="color: #3eac57;">C.
+                                                                {{ $soal_ujian->jawaban_c }}</span>
+                                                        @endif
                                                     @else
-                                                        C. {{ $soal_ujian->jawaban_c }}
+                                                        @if (isImageUrl($soal_ujian->jawaban_c))
+                                                            C. <img class="mb-2" src="{{ $soal_ujian->jawaban_c }}"
+                                                                alt="Jawaban B"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            C. {{ $soal_ujian->jawaban_c }}
+                                                        @endif
                                                     @endif
                                                     <br>
                                                     @if ($soal_ujian->jawaban_benar == 'D')
-                                                        <span class="font-weight-bold" style="color: #3eac57;">D.
-                                                            {{ $soal_ujian->jawaban_d }}
-                                                        </span>
+                                                        @if (isImageUrl($soal_ujian->jawaban_d))
+                                                            <span class="font-weight-bold"
+                                                                style="color: #3eac57;">D.</span>
+                                                            <img class="mb-2" src="{{ $soal_ujian->jawaban_d }}"
+                                                                alt="Jawaban D"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            <span class="font-weight-bold" style="color: #3eac57;">D.
+                                                                {{ $soal_ujian->jawaban_d }}</span>
+                                                        @endif
                                                     @else
-                                                        D. {{ $soal_ujian->jawaban_d }}
+                                                        @if (isImageUrl($soal_ujian->jawaban_d))
+                                                            D. <img class="mb-2" src="{{ $soal_ujian->jawaban_d }}"
+                                                                alt="Jawaban D"
+                                                                style="max-width: 200px; max-height: 200px; object-fit: contain;">
+                                                        @else
+                                                            D. {{ $soal_ujian->jawaban_d }}
+                                                        @endif
                                                     @endif
                                                     <br>
                                                 </td>
-                                                <td class="text-right">
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('soal-ujian.edit', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
-                                                            class="btn btn-sm btn-info btn-icon ml-2">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
-                                                        <form
-                                                            action="{{ route('soal-ujian.destroy', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
-                                                            method="POST" class="ml-2" id="del-<?= $soal_ujian->id ?>">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger btn-icon"
-                                                                data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus soal ujian ini?"
-                                                                data-confirm-yes="submitDel(<?= $soal_ujian->id ?>)"
-                                                                data-id="del-{{ $soal_ujian->id }}">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                @role('super-admin')
+                                                    <td class="text-right">
+                                                        <div class="d-flex justify-content-center">
+                                                            <a href="{{ route('soal-ujian.edit', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
+                                                                class="btn btn-sm btn-info btn-icon ml-2">
+                                                                <i class="fas fa-edit i-all"></i>
+                                                                Edit
+                                                            </a>
+                                                            <form
+                                                                action="{{ route('soal-ujian.destroy', ['soalUjian' => $soal_ujian->id, 'ujian' => $ujian->id]) }}"
+                                                                method="POST" class="ml-2"
+                                                                id="del-<?= $soal_ujian->id ?>">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-sm btn-danger btn-icon"
+                                                                    data-confirm="Konfirmasi Hapus | Apakah Anda yakin ingin menghapus soal ujian ini?"
+                                                                    data-confirm-yes="submitDel(<?= $soal_ujian->id ?>)"
+                                                                    data-id="del-{{ $soal_ujian->id }}">
+                                                                    <i class="fas fa-times i-all"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                @endrole
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $soal_ujians->withQueryString()->links() }}
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center d-pag">
+                                {{ $soal_ujians->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
@@ -192,6 +260,7 @@
             });
         })
     </script>
+    <script src="/assets/js/pagination.js"></script>
 @endpush
 
 @push('customStyle')

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -25,7 +26,20 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'name' => 'required|string|max:50'
+            'name' => 'required|string|max:50',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'Form email harus diisi.',
+            'email.email' => 'Format email tidak valid.',
+
+            'name.required' => 'Form nama harus diisi.',
+            'name.string' => 'Format nama tidak valid.',
+            'name.max' => 'Form nama tidak boleh lebih dari :max karakter.',
+            'name.regex' => 'Form nama lengkap tidak boleh mengandung angka',
         ];
     }
 }

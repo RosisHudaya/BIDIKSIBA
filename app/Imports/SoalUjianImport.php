@@ -27,6 +27,7 @@ class SoalUjianImport implements ToModel, WithHeadingRow, WithUpserts, SkipsOnEr
 
             return new SoalUjian([
                 'id_ujian' => $id_ujian,
+                'gambar' => $row['gambar'],
                 'soal' => $row['soal'],
                 'jawaban_a' => $row['jawaban_a'],
                 'jawaban_b' => $row['jawaban_b'],

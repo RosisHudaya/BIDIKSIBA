@@ -27,7 +27,7 @@ class LoginUjianController extends Controller
             $request->session()->put('login_ujian', true);
             return redirect()->route('list.ujian');
         } else {
-            return back()->with('error', 'Token atau password salah. Silakan coba lagi.');
+            return back()->with('error', 'Token atau password salah.');
         }
     }
 
@@ -111,6 +111,7 @@ class LoginUjianController extends Controller
             ->select(
                 'pivot.id_sesi',
                 'soal.id',
+                'soal.gambar',
                 'soal.soal',
                 'soal.jawaban_a',
                 'soal.jawaban_b',
@@ -124,6 +125,7 @@ class LoginUjianController extends Controller
             ->groupBy(
                 'pivot.id_sesi',
                 'soal.id',
+                'soal.gambar',
                 'soal.soal',
                 'soal.jawaban_a',
                 'soal.jawaban_b',
@@ -158,7 +160,7 @@ class LoginUjianController extends Controller
         $jawabanBenar = $soal->jawaban_benar;
 
         if ($jawaban == null) {
-            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -2);
+            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -1);
             $jawabans = Jawaban::create([
                 'id_user' => $id,
                 'id_sesi' => $sesiUjian->id,
@@ -167,7 +169,7 @@ class LoginUjianController extends Controller
                 'skor' => $skor,
             ]);
         } else {
-            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -2);
+            $skor = ($request->jawab == $jawabanBenar) ? 4 : ($request->jawab === null ? 0 : -1);
             $jawaban->update([
                 'jawaban' => $request->jawab,
                 'skor' => $skor,

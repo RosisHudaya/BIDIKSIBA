@@ -6,18 +6,37 @@ use App\Models\Jurusan;
 use App\Models\Prodi;
 use App\Http\Requests\StoreProdiRequest;
 use App\Http\Requests\UpdateProdiRequest;
+use Illuminate\Http\Request;
 
 class ProdiController extends Controller
 {
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:prodi.index')->only('index');
+        $this->middleware('permission:prodi.create')->only('create', 'store');
+        $this->middleware('permission:prodi.edit')->only('edit', 'update');
+        $this->middleware('permission:prodi.destroy')->only('destroy');
+    }
+
+    public function index(Request $request)
     {
         $jurusans = Jurusan::all();
+        $jurusanSelected = $request->input('jurusan');
         $query = Prodi::select('prodis.id', 'prodis.id_jurusan', 'prodis.prodi', 'jurusans.jurusan')
             ->join('jurusans', 'prodis.id_jurusan', '=', 'jurusans.id')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('prodis.prodi', 'like', '%' . $name . '%');
+            })
+            ->when($jurusanSelected, function ($query, $name) {
+                return $query->where('prodis.id_jurusan', 'like', '%' . $name . '%');
+            })
             ->orderBy('jurusans.jurusan', 'asc')
             ->paginate(10);
         return view('prodi.index')->with([
             'prodis' => $query,
+            'jurusans' => $jurusans,
+            'jurusanSelected' => $jurusanSelected,
         ]);
     }
 

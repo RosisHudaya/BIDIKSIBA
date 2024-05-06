@@ -10,9 +10,21 @@ use Illuminate\Http\Request;
 
 class AsalJurusanController extends Controller
 {
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:asal-jurusan.index')->only('index');
+        $this->middleware('permission:asal-jurusan.create')->only('create', 'store');
+        $this->middleware('permission:asal-jurusan.edit')->only('edit', 'update');
+        $this->middleware('permission:asal-jurusan.destroy')->only('destroy');
+    }
+
+    public function index(Request $request)
     {
         $asal_jurusans = DB::table('asal_jurusans')
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('asal_jurusan', 'like', '%' . $name . '%');
+            })
             ->paginate(10);
         return view('asal-jurusan.index', compact('asal_jurusans'));
     }
