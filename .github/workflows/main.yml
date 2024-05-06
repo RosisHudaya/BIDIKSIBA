@@ -18,4 +18,6 @@ jobs:
             cd /var/www/bidiksiba/
             git pull
             composer install --no-interaction --prefer-dist --optimize-autoloader
+            php artisan migrate:fresh --seed
             php artisan optimize
+            php artisan cache:clear
