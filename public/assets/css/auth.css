@@ -101,6 +101,10 @@ body {
 
 /* tablet view */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+    body {
+        overflow: scroll !important;
+    }
+
     .auth-page {
         max-width: 75% !important;
     }

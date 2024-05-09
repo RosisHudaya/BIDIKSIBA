@@ -115,6 +115,10 @@
     box-shadow: none;
 }
 
+.p-main {
+    background-color: white;
+}
+
 .btn-exam {
     box-shadow: 0 2px 4px #558ef1;
     background-color: #4477ce;
