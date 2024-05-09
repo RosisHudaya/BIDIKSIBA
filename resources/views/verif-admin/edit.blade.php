@@ -11,10 +11,10 @@
                     <div class="card-header">
                         <h4>Validasi Edit Data Biodata Pendaftar</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body m-0 p-0">
                         @csrf
                         @method('PUT')
-                        <div class="form-group">
+                        <div class="form-group col-md-12 justify-content-start">
                             <label for="">Foto</label><br>
                             @if ($biodata)
                                 @if ($biodata->foto)
@@ -37,8 +37,8 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">KTP</label><br>
                                 @if ($biodata)
                                     @if ($biodata->ktp)
@@ -61,7 +61,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Kartu Siswa</label><br>
                                 @if ($biodata)
                                     @if ($biodata->ktp)
@@ -88,7 +88,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-6">
                             <label for="">Kartu Keluarga</label><br>
                             @if ($biodata)
                                 @if ($biodata->kk)
@@ -111,8 +111,8 @@
                                 </div>
                             @enderror
                         </div><br>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Nama Lengkap Pendaftar</label><br>
                                 <input class="form-control @error('nama') is-invalid @enderror" type="text"
                                     name="nama" value="{{ $biodata ? $biodata->nama : '' }}"
@@ -123,7 +123,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Asal Sekolah</label><br>
                                 <input class="form-control @error('asal_sekolah') is-invalid @enderror" type="text"
                                     name="asal_sekolah" value="{{ $biodata ? $biodata->asal_sekolah : '' }}"
@@ -135,8 +135,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Kota Lahir</label><br>
                                 <input class="form-control @error('kota_lahir') is-invalid @enderror" type="text"
                                     name="kota_lahir" value="{{ $biodata ? $biodata->kota_lahir : '' }}"
@@ -147,14 +147,14 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Tanggal Lahir</label><br>
                                 <input class="form-control" type="date" name="tgl_lahir"
                                     value="{{ $biodata ? $biodata->tgl_lahir : '' }}">
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">NIK</label><br>
                                 <input class="form-control @error('nik') is-invalid @enderror" type="text"
                                     name="nik" value="{{ $biodata ? $biodata->nik : '' }}"
@@ -165,7 +165,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">NISN</label><br>
                                 <input class="form-control @error('nisn') is-invalid @enderror" type="text"
                                     name="nisn" value="{{ $biodata ? $biodata->nisn : '' }}"
@@ -177,8 +177,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">No Telepon</label><br>
                                 <input class="form-control @error('no_telp') is-invalid @enderror" type="text"
                                     name="no_telp" value="{{ $biodata ? $biodata->no_telp : '' }}"
@@ -189,7 +189,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Jenis Kelamin</label><br>
                                 <select class="form-control select2" name="gender">
                                     <option value="">Jenis Kelamin</option>
@@ -205,8 +205,8 @@
                             </div>
                         </div>
                         <hr class="mt-0 p-0">
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Pekerjaan Orang Tua</label><br>
                                 <select class="form-control select2" name="pekerjaan_ortu">
                                     <option value="" selected disabled>Pekerjaan Orang Tua</option>
@@ -223,7 +223,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Detail Pekerjaan</label><br>
                                 <input class="form-control @error('detail_pekerjaan') is-invalid @enderror"
                                     type="text" name="detail_pekerjaan"
@@ -236,8 +236,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Penghasilan Orang Tua</label><br>
                                 <select class="form-control select2" name="gaji_ortu">
                                     <option value="" selected disabled>Penghasilan Orang Tua</option>
@@ -254,15 +254,15 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Luas Tanah</label><br>
                                 <input class="form-control" type="text" name="luas_tanah" id="luas_tanah"
                                     value="{{ $biodata_spk ? number_format($biodata_spk->luas_tanah, 0, ',', '.') : '' }}"
                                     placeholder="masukkan luas tanah peserta">
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Bukti Slip Gaji</label><br>
                                 @if ($biodata_spk)
                                     @if ($biodata_spk->slip_gaji)
@@ -288,7 +288,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Bukti SHM</label><br>
                                 @if ($biodata_spk)
                                     @if ($biodata_spk->shm)
@@ -314,8 +314,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Jumlah Kamar</label><br>
                                 <input class="form-control" type="number" name="jml_kmr"
                                     value="{{ $biodata_spk ? $biodata_spk->kamar : '' }}"
@@ -339,8 +339,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Bukti Foto Kamar</label><br>
                                 @if ($biodata_spk)
                                     @if ($biodata_spk->foto_kmr)
@@ -366,7 +366,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Bukti Foto Kamar Mandi</label><br>
                                 @if ($biodata_spk)
                                     @if ($biodata_spk->foto_kmr_mandi)
@@ -393,8 +393,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Listrik yang digunakan</label><br>
                                 <select class="form-control select2" name="tagihan_listrik">
                                     <option value="" selected disabled>Listrik yang digunakan</option>
@@ -411,15 +411,15 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Pajak Bumi dan Bangunan</label><br>
                                 <input class="form-control" type="text" name="pbb" id="pbb"
                                     value="{{ $biodata_spk ? number_format($biodata_spk->pajak, 0, ',', '.') : '' }}"
                                     placeholder="masukkan jumlah tagihan pajak bumi dan bangunan peserta">
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Bukti Tagihan Listrik</label><br>
                                 @if ($biodata_spk)
                                     @if ($biodata_spk->slip_tagihan)
@@ -445,7 +445,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Bukti Slip Pajak Bumi dan Bangunan</label><br>
                                 @if ($biodata_spk)
                                     @if ($biodata_spk->slip_pbb)
@@ -472,8 +472,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Jumlah Saudara</label><br>
                                 <select class="form-control select2" name="jml_sdr">
                                     <option value="" selected disabled>Jumlah Saudara</option>
@@ -490,7 +490,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Status Orang Tua</label><br>
                                 <select class="form-control select2" name="status_ortu">
                                     <option value="" selected disabled>Status Orang Tua</option>
@@ -508,8 +508,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Bukti Surat Ket Saudara</label><br>
                                 @if ($biodata_spk)
                                     @if ($biodata_spk->surat_ket_sdr)
@@ -535,7 +535,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Bukti Surat Ket Yatim</label><br>
                                 @if ($biodata_spk)
                                     @if ($biodata_spk->surat_ket_yatim)
@@ -562,8 +562,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group col-md-12 d-flex justify-content-start m-0 p-0">
-                            <div class="form-group col-md-6 m-0 p-0">
+                        <div class="form-group col-md-12 d-flex justify-content-start">
+                            <div class="form-group col-md-6">
                                 <label for="">Jumlah Hutang</label><br>
                                 <select class="form-control select2" name="jml_hutang">
                                     <option value="" selected disabled>Jumlah Hutang</option>
@@ -580,7 +580,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-6 mr-0 pr-0">
+                            <div class="form-group col-md-6">
                                 <label for="">Detail Jumlah Hutang</label><br>
                                 <input class="form-control" type="text" name="det_hutang" id="det_hutang"
                                     value="{{ $biodata_spk ? $biodata_spk->det_hutang : '' }}"
