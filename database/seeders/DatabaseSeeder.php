@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            BiodataSeeder::class,
             RoleAndPermissionSeeder::class,
             MenuGroupSeeder::class,
             MenuItemSeeder::class,
@@ -33,7 +32,8 @@ class DatabaseSeeder extends Seeder
             SaudaraSeeder::class,
             StatusOrtuSeeder::class,
             BobotSeeder::class,
-            BiodataSpkSeeder::class,
+            // BiodataSeeder::class,
+            // BiodataSpkSeeder::class,
         ]);
     }
 }

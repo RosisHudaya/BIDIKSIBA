@@ -71,7 +71,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Route::get('/dashboard', function () {
     //     return view('home', ['users' => User::get(),]);
     // })->name('dashboard');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::group(['middleware' => ['auth', 'verified', 'role:super-admin|admin-bidiksiba']], function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    });
     Route::get('/welcome', [BiodataController::class, 'index_dash']);
 
     Route::post('/file', [DashboardController::class, 'upload_file'])->name('upload.file');
@@ -180,30 +182,34 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::put('assign-user/{user}', [AssignUserToRoleController::class, 'update'])->name('assign.user.update');
     });
 
-    Route::get('biodata', [BiodataController::class, 'index'])->name('biodata.index');
-    Route::get('biodata-pendukung', [BiodataController::class, 'index_pendukung'])->name('biodata.index_p');
-    Route::post('biodata/store-or-update', [BiodataController::class, 'storeOrUpdate'])->name('biodata.storeOrUpdate');
-    Route::post('biodata/store-or-update-spk', [BiodataSpkController::class, 'storeOrUpdate'])->name('biodata.storeOrUpdateSpk');
-    Route::post('load-filter-prodi', [BiodataController::class, 'loadFilterProdi'])->name('loadFilterProdi');
-    Route::get('get-prodi', [BiodataController::class, 'getProdis'])->name('getProdis');
-    Route::post('load-filter-jurusan', [BiodataController::class, 'loadFilterJurusan'])->name('loadFilterJurusan');
-    Route::get('get-jurusan', [BiodataController::class, 'getJurusans'])->name('getJurusans');
+    Route::group(['middleware' => ['auth', 'verified', 'role:calon-mahasiswa']], function () {
+        Route::get('biodata', [BiodataController::class, 'index'])->name('biodata.index');
+        Route::get('biodata-pendukung', [BiodataController::class, 'index_pendukung'])->name('biodata.index_p');
+        Route::post('biodata/store-or-update', [BiodataController::class, 'storeOrUpdate'])->name('biodata.storeOrUpdate');
+        Route::post('biodata/store-or-update-spk', [BiodataSpkController::class, 'storeOrUpdate'])->name('biodata.storeOrUpdateSpk');
+        Route::post('load-filter-prodi', [BiodataController::class, 'loadFilterProdi'])->name('loadFilterProdi');
+        Route::get('get-prodi', [BiodataController::class, 'getProdis'])->name('getProdis');
+        Route::post('load-filter-jurusan', [BiodataController::class, 'loadFilterJurusan'])->name('loadFilterJurusan');
+        Route::get('get-jurusan', [BiodataController::class, 'getJurusans'])->name('getJurusans');
 
-    Route::get('ujian-pengawas', [PengawasController::class, 'index'])->name('ujian.pengawas');
-    Route::get('ujian-pengawas/detail/{sesiUjian}', [PengawasController::class, 'detail'])->name('pengawas.detail');
-
-    Route::get('token-ujian', [TokenUjianController::class, 'index'])->name('token-ujian.index');
-    Route::get('login-ujian', function () {
-        return view('ujian-user.login');
-    })->name('login.ujian');
-    Route::post('login-ujian', [LoginUjianController::class, 'login_ujian'])->name('login.ujian.post');
-    Route::middleware(['loggedin.ujian'])->group(function () {
-        Route::get('list-ujian', [LoginUjianController::class, 'list_ujian'])->name('list.ujian');
-        Route::get('detail-ujian/{sesiUjian}', [LoginUjianController::class, 'show_ujian'])->name('detail.ujian');
-        Route::get('ujian/{sesiUjian}', [LoginUjianController::class, 'soal'])->name('ujian');
-        Route::post('ujian/jawab/{soalUjian}/{sesiUjian}', [LoginUjianController::class, 'jawab'])->name('ujian.soal');
-        Route::post('ujian/reset/{soalUjian}/{sesiUjian}', [LoginUjianController::class, 'reset_jawaban'])->name('reset.jawaban');
-        Route::post('ujian/selesai/{sesiUjian}', [LoginUjianController::class, 'selesai'])->name('selesai.ujian');
+        Route::get('token-ujian', [TokenUjianController::class, 'index'])->name('token-ujian.index');
+        Route::get('login-ujian', function () {
+            return view('ujian-user.login');
+        })->name('login.ujian');
+        Route::post('login-ujian', [LoginUjianController::class, 'login_ujian'])->name('login.ujian.post');
+        Route::middleware(['loggedin.ujian'])->group(function () {
+            Route::get('list-ujian', [LoginUjianController::class, 'list_ujian'])->name('list.ujian');
+            Route::get('detail-ujian/{sesiUjian}', [LoginUjianController::class, 'show_ujian'])->name('detail.ujian');
+            Route::get('ujian/{sesiUjian}', [LoginUjianController::class, 'soal'])->name('ujian');
+            Route::post('ujian/jawab/{soalUjian}/{sesiUjian}', [LoginUjianController::class, 'jawab'])->name('ujian.soal');
+            Route::post('ujian/reset/{soalUjian}/{sesiUjian}', [LoginUjianController::class, 'reset_jawaban'])->name('reset.jawaban');
+            Route::post('ujian/selesai/{sesiUjian}', [LoginUjianController::class, 'selesai'])->name('selesai.ujian');
+        });
+        Route::post('logout-ujian', [LoginUjianController::class, 'logout_ujian'])->name('logout.ujian');
     });
-    Route::post('logout-ujian', [LoginUjianController::class, 'logout_ujian'])->name('logout.ujian');
+
+    Route::group(['middleware' => ['auth', 'verified', 'role:pengawas']], function () {
+        Route::get('ujian-pengawas', [PengawasController::class, 'index'])->name('ujian.pengawas');
+        Route::get('ujian-pengawas/detail/{sesiUjian}', [PengawasController::class, 'detail'])->name('pengawas.detail');
+    });
 });

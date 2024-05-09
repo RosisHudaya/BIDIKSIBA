@@ -28,41 +28,47 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
         User::create([
-            'name' => "CalonMahasiswa",
-            'email' => "user@gmail.com",
+            'name' => "Calon Mahasiswa",
+            'email' => "siswa@gmail.com",
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ]);
-        User::create([
-            'name' => "Angel",
-            'email' => "angel@gmail.com",
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
-        User::create([
-            'name' => "Wawan",
-            'email' => "wawan@gmail.com",
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
-        User::create([
-            'name' => "Nadya",
-            'email' => "nadya@gmail.com",
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
-        User::create([
-            'name' => "Naila",
-            'email' => "naila@gmail.com",
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
-        User::create([
-            'name' => "Faifa",
-            'email' => "faifa@gmail.com",
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
+        // User::create([
+        //     'name' => "CalonMahasiswa",
+        //     'email' => "user@gmail.com",
+        //     'password' => Hash::make('password'),
+        //     'email_verified_at' => now(),
+        // ]);
+        // User::create([
+        //     'name' => "Angel",
+        //     'email' => "angel@gmail.com",
+        //     'password' => Hash::make('password'),
+        //     'email_verified_at' => now(),
+        // ]);
+        // User::create([
+        //     'name' => "Wawan",
+        //     'email' => "wawan@gmail.com",
+        //     'password' => Hash::make('password'),
+        //     'email_verified_at' => now(),
+        // ]);
+        // User::create([
+        //     'name' => "Nadya",
+        //     'email' => "nadya@gmail.com",
+        //     'password' => Hash::make('password'),
+        //     'email_verified_at' => now(),
+        // ]);
+        // User::create([
+        //     'name' => "Naila",
+        //     'email' => "naila@gmail.com",
+        //     'password' => Hash::make('password'),
+        //     'email_verified_at' => now(),
+        // ]);
+        // User::create([
+        //     'name' => "Faifa",
+        //     'email' => "faifa@gmail.com",
+        //     'password' => Hash::make('password'),
+        //     'email_verified_at' => now(),
+        // ]);
         // User::factory()->count(10)->create();
     }
 }
