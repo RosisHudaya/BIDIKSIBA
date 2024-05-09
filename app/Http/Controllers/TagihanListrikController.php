@@ -14,6 +14,7 @@ class TagihanListrikController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:tagihan-listrik.index')->only('index');
+        $this->middleware('permission:tagihan-listrik.edit')->only('edit', 'update');
     }
 
     public function index()
@@ -41,12 +42,14 @@ class TagihanListrikController extends Controller
 
     public function edit(TagihanListrik $tagihanListrik)
     {
-        //
+        return view('kriteria-ekonomi.tagihan-listrik.edit', compact('tagihanListrik'));
     }
 
     public function update(UpdateTagihanListrikRequest $request, TagihanListrik $tagihanListrik)
     {
-        //
+        $tagihanListrik->update($request->all());
+
+        return redirect()->route('tagihan-listrik.index')->with('success', 'Data tagihan listrik berhasil diperbarui');
     }
 
     public function destroy(TagihanListrik $tagihanListrik)

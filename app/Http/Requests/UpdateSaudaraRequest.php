@@ -13,7 +13,7 @@ class UpdateSaudaraRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,20 @@ class UpdateSaudaraRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('saudara')->id;
         return [
-            //
+            'saudara' => 'required|unique:saudaras,saudara,' . $id,
+            'nilai' => 'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'saudara.required' => 'Form saudara tidak boleh kosong',
+            'saudara.unique' => 'Saudara sudah digunakan sebelumnya',
+            'nilai.required' => 'Form nilai tidak boleh kosong',
+            'nilai.numeric' => 'Nilai harus berupa angka',
         ];
     }
 }

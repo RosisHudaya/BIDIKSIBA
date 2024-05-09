@@ -88,7 +88,8 @@
                                                 <td class="text-right">
                                                     @role('super-admin')
                                                         <div class="d-flex justify-content-center">
-                                                            <a href="" class="btn btn-sm btn-info btn-icon "><i
+                                                            <a href="{{ route('verifikasi-pendaftar.edit', $biodata->id) }}"
+                                                                class="btn btn-sm btn-info btn-icon "><i
                                                                     class="fas fa-edit i-all"></i>
                                                                 Edit
                                                             </a>

@@ -103,7 +103,7 @@
                                             <i class="far fa-clock"></i> {{ $berkas->created_at }}
                                         </p>
                                         <a class="m-0 p-0 i-det" href="{{ asset('storage/' . $berkas->file) }}"
-                                            download="{{ $berkas->judul }}">
+                                            download="{{ $berkas->judul }}.pdf">
                                             <i class="fas fa-download text-secondary"></i>
                                         </a>
                                     </div>

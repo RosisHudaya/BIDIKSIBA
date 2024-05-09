@@ -14,6 +14,7 @@ class HutangController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:hutang.index')->only('index');
+        $this->middleware('permission:hutang.edit')->only('edit', 'update');
     }
 
     public function index()
@@ -41,12 +42,14 @@ class HutangController extends Controller
 
     public function edit(Hutang $hutang)
     {
-        //
+        return view('kriteria-ekonomi.hutang.edit', compact('hutang'));
     }
 
     public function update(UpdateHutangRequest $request, Hutang $hutang)
     {
-        //
+        $hutang->update($request->all());
+
+        return redirect()->route('hutang.index')->with('success', 'Data hutang berhasil diperbarui');
     }
 
     public function destroy(Hutang $hutang)

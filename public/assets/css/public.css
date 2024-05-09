@@ -302,7 +302,7 @@ li.page-item.active {
 }
 
 /* tablet view */
-@media screen and (min-width: 768px) and (max-width: 1280px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
     /* biodata pendaftar */
     .p-alert {
         font-size: 12px !important;

@@ -14,6 +14,7 @@ class GajiOrtuController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:penghasilan-ortu.index')->only('index');
+        $this->middleware('permission:penghasilan-ortu.edit')->only('edit', 'update');
     }
 
     public function index()
@@ -39,14 +40,16 @@ class GajiOrtuController extends Controller
         //
     }
 
-    public function edit(GajiOrtu $gajiOrtu)
+    public function edit(GajiOrtu $penghasilanOrtu)
     {
-        //
+        return view('kriteria-pendaftar.penghasilan-ortu.edit', compact('penghasilanOrtu'));
     }
 
-    public function update(UpdateGajiOrtuRequest $request, GajiOrtu $gajiOrtu)
+    public function update(UpdateGajiOrtuRequest $request, GajiOrtu $penghasilanOrtu)
     {
-        //
+        $penghasilanOrtu->update($request->all());
+
+        return redirect()->route('penghasilan-ortu.index')->with('success', 'Data penghasilan orang tua berhasil diperbarui');
     }
 
     public function destroy(GajiOrtu $gajiOrtu)

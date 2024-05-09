@@ -23,7 +23,9 @@
                                             <th class="text-center">#</th>
                                             <th style="width: 350px;">Jumlah Saudara</th>
                                             <th class="text-center">Nilai</th>
-                                            <th class="text-center">Aksi</th>
+                                            @role('super-admin')
+                                                <th class="text-center">Aksi</th>
+                                            @endrole
                                         </tr>
                                         @foreach ($saudaras as $key => $saudara)
                                             <tr>
@@ -32,14 +34,17 @@
                                                 </td>
                                                 <td>{{ $saudara->saudara }}</td>
                                                 <td class="text-center">{{ $saudara->nilai }}</td>
-                                                <td class="text-right">
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href="" class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit i-all"></i>
-                                                            Edit
-                                                        </a>
-                                                    </div>
-                                                </td>
+                                                @role('super-admin')
+                                                    <td class="text-right">
+                                                        <div class="d-flex justify-content-center">
+                                                            <a href="{{ route('saudara.edit', $saudara->id) }}"
+                                                                class="btn btn-sm btn-info btn-icon "><i
+                                                                    class="fas fa-edit i-all"></i>
+                                                                Edit
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                @endrole
                                             </tr>
                                         @endforeach
                                     </tbody>

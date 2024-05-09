@@ -86,8 +86,14 @@
                         * Ukuran file maksimal 2 MB (2048 KB) | Ektensi (.png, .jpg, atau .jpeg)
                     </p>
                 @endif
-                <input type="file" name="slip-gaji" id="slip-gaji" class="form-control"
+                <input type="file" name="slip-gaji" id="slip-gaji"
+                    class="form-control @error('slip-gaji') is-invalid @enderror"
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                @error('slip-gaji')
+                    <div class="invalid-feedback feed ml-3">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group col-md-6">
                 <label for="">Bukti SHM (Surat Hak Milik) Tanah</label><br>
@@ -112,8 +118,14 @@
                         * Ukuran file maksimal 2 MB (2048 KB) | Ektensi (.png, .jpg, atau .jpeg)
                     </p>
                 @endif
-                <input type="file" name="shm" id="shm" class="form-control"
+                <input type="file" name="shm" id="shm"
+                    class="form-control @error('shm') is-invalid @enderror"
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                @error('shm')
+                    <div class="invalid-feedback feed ml-3">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="form-group col-md-12 d-flex">
@@ -167,8 +179,14 @@
                         * Ukuran file maksimal 2 MB (2048 KB) | Ektensi (.png, .jpg, atau .jpeg)
                     </p>
                 @endif
-                <input type="file" name="foto-kmr" id="foto-kmr" class="form-control"
+                <input type="file" name="foto-kmr" id="foto-kmr"
+                    class="form-control @error('foto-kmr') is-invalid @enderror"
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                @error('foto-kmr')
+                    <div class="invalid-feedback feed ml-3">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group col-md-6">
                 <label for="">Bukti Foto Kamar Mandi</label><br>
@@ -195,8 +213,14 @@
                         * Ukuran file maksimal 2 MB (2048 KB) | Ektensi (.png, .jpg, atau .jpeg)
                     </p>
                 @endif
-                <input type="file" name="kmr-mandi" id="kmr-mandi" class="form-control"
+                <input type="file" name="kmr-mandi" id="kmr-mandi"
+                    class="form-control @error('kmr-mandi') is-invalid @enderror"
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                @error('kmr-mandi')
+                    <div class="invalid-feedback feed ml-3">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="form-group col-md-12 d-flex">
@@ -252,8 +276,14 @@
                         * Ukuran file maksimal 2 MB (2048 KB) | Ektensi (.png, .jpg, atau .jpeg)
                     </p>
                 @endif
-                <input type="file" name="listrik" id="listrik" class="form-control"
+                <input type="file" name="listrik" id="listrik"
+                    class="form-control @error('listrik') is-invalid @enderror"
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                @error('listrik')
+                    <div class="invalid-feedback feed ml-3">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group col-md-6">
                 <label for="">Bukti Slip Pajak Bumi dan Bangunan</label><br>
@@ -279,8 +309,14 @@
                         * Ukuran file maksimal 2 MB (2048 KB) | Ektensi (.png, .jpg, atau .jpeg)
                     </p>
                 @endif
-                <input type="file" name="slip-pbb" id="slip-pbb" class="form-control"
+                <input type="file" name="slip-pbb" id="slip-pbb"
+                    class="form-control @error('slip-pbb') is-invalid @enderror"
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                @error('slip-pbb')
+                    <div class="invalid-feedback feed ml-3">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="form-group col-md-12 d-flex">
@@ -347,8 +383,14 @@
                         * Ukuran file maksimal 2 MB (2048 KB) | Ektensi (.png, .jpg, atau .jpeg)
                     </p>
                 @endif
-                <input type="file" name="sdr" id="sdr" class="form-control"
+                <input type="file" name="sdr" id="sdr"
+                    class="form-control @error('sdr') is-invalid @enderror"
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                @error('sdr')
+                    <div class="invalid-feedback feed ml-3">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group col-md-6">
                 <label for="">Bukti Surat Ket Yatim</label><br>
@@ -376,8 +418,14 @@
                         * Ukuran file maksimal 2 MB (2048 KB) | Ektensi (.png, .jpg, atau .jpeg)
                     </p>
                 @endif
-                <input type="file" name="ket-yatim" id="ket-yatim" class="form-control"
+                <input type="file" name="ket-yatim" id="ket-yatim"
+                    class="form-control @error('ket-yatim') is-invalid @enderror"
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                @error('ket-yatim')
+                    <div class="invalid-feedback feed ml-3">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="form-group col-md-12 d-flex mb-4">

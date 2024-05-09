@@ -13,7 +13,7 @@ class UpdateStatusOrtuRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,21 @@ class UpdateStatusOrtuRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('status_ortu')->id;
         return [
-            //
+            'status_ortu' => 'required|regex:/^[a-zA-Z\s]+$/u|unique:status_ortus,status_ortu,' . $id,
+            'nilai' => 'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'status_ortu.required' => 'Form status orang tua tidak boleh kosong',
+            'status_ortu.unique' => 'Status orang tua sudah digunakan sebelumnya',
+            'status_ortu.regex' => 'Status orang tua tidak boleh mengandung angka dan simbol',
+            'nilai.required' => 'Form nilai tidak boleh kosong',
+            'nilai.numeric' => 'Nilai harus berupa angka',
         ];
     }
 }

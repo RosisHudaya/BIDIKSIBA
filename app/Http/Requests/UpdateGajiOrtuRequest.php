@@ -13,7 +13,7 @@ class UpdateGajiOrtuRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,20 @@ class UpdateGajiOrtuRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('penghasilan_ortu')->id;
         return [
-            //
+            'gaji_ortu' => 'required|unique:gaji_ortus,gaji_ortu,' . $id,
+            'nilai' => 'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'gaji_ortu.required' => 'Form penghasilan orang tua tidak boleh kosong',
+            'gaji_ortu.unique' => 'Penghasilan orang tua sudah digunakan sebelumnya',
+            'nilai.required' => 'Form nilai tidak boleh kosong',
+            'nilai.numeric' => 'Nilai harus berupa angka',
         ];
     }
 }

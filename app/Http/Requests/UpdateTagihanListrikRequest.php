@@ -13,7 +13,7 @@ class UpdateTagihanListrikRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,21 @@ class UpdateTagihanListrikRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('tagihan_listrik')->id;
         return [
-            //
+            'tagihan_listrik' => 'required|regex:/^[a-zA-Z\s]+$/u|unique:tagihan_listriks,tagihan_listrik,' . $id,
+            'nilai' => 'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'tagihan_listrik.required' => 'Form tagihan listrik tidak boleh kosong',
+            'tagihan_listrik.unique' => 'Tagihan listrik sudah digunakan sebelumnya',
+            'tagihan_listrik.regex' => 'Tagihan listrik tidak boleh mengandung angka dan simbol',
+            'nilai.required' => 'Form nilai tidak boleh kosong',
+            'nilai.numeric' => 'Nilai harus berupa angka',
         ];
     }
 }

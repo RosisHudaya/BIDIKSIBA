@@ -9,6 +9,7 @@ use App\Http\Requests\StoreDataSpkRequest;
 use App\Http\Requests\UpdateDataSpkRequest;
 use App\Services\SpkService;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
 
 class DataSpkController extends Controller
 {
@@ -24,36 +25,36 @@ class DataSpkController extends Controller
         $this->middleware('permission:data-spk.export.hasil-spk')->only('export_spk');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $getRankedAlternativeSpk = $this->spkService->getRankedAlternativeSpk();
+        $getRankedAlternativeSpk = $this->spkService->getRankedAlternativeSpk($request);
 
         return view('hasil-ranking.data-spk.index', [
             'results' => $getRankedAlternativeSpk,
         ]);
     }
 
-    public function indexEko()
+    public function indexEko(Request $request)
     {
-        $getRankedAlternative = $this->spkService->getRankedAlternative();
+        $getRankedAlternative = $this->spkService->getRankedAlternative($request);
 
         return view('hasil-ranking.data-ekonomi.index', [
             'results' => $getRankedAlternative,
         ]);
     }
 
-    public function export_alternative()
+    public function export_alternative(Request $request)
     {
-        $query = $this->spkService->getRankedAlternativeExport();
+        $query = $this->spkService->getRankedAlternativeExport($request);
 
         $filename = 'ranking spk.xlsx';
 
         return Excel::download(new RankingEkoExport($query), $filename);
     }
 
-    public function export_spk()
+    public function export_spk(Request $request)
     {
-        $query = $this->spkService->getRankedAlternativeSpkExport();
+        $query = $this->spkService->getRankedAlternativeSpkExport($request);
 
         $filename = 'ranking bidiksiba.xlsx';
 

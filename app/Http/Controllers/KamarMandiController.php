@@ -14,6 +14,7 @@ class KamarMandiController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:kamar-mandi.index')->only('index');
+        $this->middleware('permission:kamar-mandi.edit')->only('edit', 'update');
     }
 
     public function index()
@@ -41,12 +42,14 @@ class KamarMandiController extends Controller
 
     public function edit(KamarMandi $kamarMandi)
     {
-        //
+        return view('kriteria-ekonomi.kamar-mandi.edit', compact('kamarMandi'));
     }
 
     public function update(UpdateKamarMandiRequest $request, KamarMandi $kamarMandi)
     {
-        //
+        $kamarMandi->update($request->all());
+
+        return redirect()->route('kamar-mandi.index')->with('success', 'Data kepemilikan kamar mandi berhasil diperbarui');
     }
 
     public function destroy(KamarMandi $kamarMandi)

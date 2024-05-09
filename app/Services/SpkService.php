@@ -12,7 +12,7 @@ use Illuminate\Pagination\Paginator;
 
 class SpkService
 {
-    public function getValues()
+    public function getValues(Request $request)
     {
         $datas = DB::table('biodata_spks')
             ->leftJoin('users', 'biodata_spks.user_id', '=', 'users.id')
@@ -48,6 +48,9 @@ class SpkService
                 'saudaras.saudara as det_saudara',
                 'status_ortus.status_ortu as det_status_ortu',
             )
+            ->when($request->input('name'), function ($query, $name) {
+                return $query->where('biodatas.nama', 'like', '%' . $name . '%');
+            })
             ->where('biodatas.status', 'Diverifikasi')
             ->get();
 
@@ -92,9 +95,9 @@ class SpkService
         return $bobots;
     }
 
-    public function getNormalizedValues()
+    public function getNormalizedValues(Request $request)
     {
-        $dataValues = $this->getValues();
+        $dataValues = $this->getValues($request);
 
         $sumOfSquares = $dataValues->reduce(function ($carry, $item) {
             foreach ($item['spk'] as $key => $value) {
@@ -126,9 +129,9 @@ class SpkService
         return $normalizedValues;
     }
 
-    public function getOptimizedValues()
+    public function getOptimizedValues(Request $request)
     {
-        $normalizedValues = $this->getNormalizedValues();
+        $normalizedValues = $this->getNormalizedValues($request);
         $bobots = $this->getWights();
 
         $optimizedValues = $normalizedValues->map(function ($item) use ($bobots) {
@@ -145,9 +148,9 @@ class SpkService
         return $optimizedValues;
     }
 
-    public function getRankedAlternativeSpk()
+    public function getRankedAlternativeSpk(Request $request)
     {
-        $optimizedValues = $this->getOptimizedValues();
+        $optimizedValues = $this->getOptimizedValues($request);
 
         $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
             $min = collect($item['spk'])
@@ -208,9 +211,9 @@ class SpkService
         return $rankedAlternatives;
     }
 
-    public function getRankedAlternative()
+    public function getRankedAlternative(Request $request)
     {
-        $optimizedValues = $this->getOptimizedValues();
+        $optimizedValues = $this->getOptimizedValues($request);
 
         $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
             $min = collect($item['spk'])
@@ -269,9 +272,9 @@ class SpkService
         return $rankedAlternatives;
     }
 
-    public function getRankedAlternativeExport()
+    public function getRankedAlternativeExport(Request $request)
     {
-        $optimizedValues = $this->getOptimizedValues();
+        $optimizedValues = $this->getOptimizedValues($request);
 
         $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
             $min = collect($item['spk'])
@@ -322,9 +325,9 @@ class SpkService
         return $rankedAlternatives;
     }
 
-    public function getRankedAlternativeSpkExport()
+    public function getRankedAlternativeSpkExport(Request $request)
     {
-        $optimizedValues = $this->getOptimizedValues();
+        $optimizedValues = $this->getOptimizedValues($request);
 
         $rankedAlternatives = collect($optimizedValues)->map(function ($item) {
             $min = collect($item['spk'])

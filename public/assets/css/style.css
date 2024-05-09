@@ -4304,7 +4304,7 @@ body:not(.sidebar-mini)
 }
 
 /* tablet view */
-@media screen and (min-width: 768px) and (max-width: 1280px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
     /* dashboard */
     .card.card-statistic-1 .card-icon,
     .card.card-statistic-2 .card-icon {
@@ -4441,6 +4441,15 @@ body:not(.sidebar-mini)
 
     .text-c {
         font-size: 9px !important;
+    }
+
+    .form-group {
+        max-width: 100% !important;
+        display: block !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }
 
     /* soal ujian */

@@ -13,7 +13,7 @@ class UpdateHutangRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,20 @@ class UpdateHutangRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('hutang')->id;
         return [
-            //
+            'hutang' => 'required|unique:hutangs,hutang,' . $id,
+            'nilai' => 'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'hutang.required' => 'Form hutang tidak boleh kosong',
+            'hutang.unique' => 'Hutang sudah digunakan sebelumnya',
+            'nilai.required' => 'Form nilai tidak boleh kosong',
+            'nilai.numeric' => 'Nilai harus berupa angka',
         ];
     }
 }

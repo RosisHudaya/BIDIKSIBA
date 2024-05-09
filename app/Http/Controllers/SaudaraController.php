@@ -14,6 +14,7 @@ class SaudaraController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:saudara.index')->only('index');
+        $this->middleware('permission:saudara.edit')->only('edit', 'update');
     }
 
     public function index()
@@ -41,12 +42,14 @@ class SaudaraController extends Controller
 
     public function edit(Saudara $saudara)
     {
-        //
+        return view('kriteria-pendaftar.saudara.edit', compact('saudara'));
     }
 
     public function update(UpdateSaudaraRequest $request, Saudara $saudara)
     {
-        //
+        $saudara->update($request->all());
+
+        return redirect()->route('saudara.index')->with('success', 'Data saudara berhasil diperbarui');
     }
 
     public function destroy(Saudara $saudara)
