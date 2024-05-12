@@ -222,8 +222,8 @@ class RoleAndPermissionSeeder extends Seeder
         $user->assignRole('admin-bidiksiba');
         $user = User::find(3);
         $user->assignRole('calon-mahasiswa');
-        // $user = User::find(4);
-        // $user->assignRole('calon-mahasiswa');
+        $user = User::find(4);
+        $user->assignRole('pengawas');
         // $user = User::find(5);
         // $user->assignRole('calon-mahasiswa');
         // $user = User::find(6);

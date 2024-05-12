@@ -28,8 +28,14 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
         User::create([
-            'name' => "Calon Mahasiswa Test",
+            'name' => "Calon Mahasiswa",
             'email' => "siswa@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+        User::create([
+            'name' => "Pengwas",
+            'email' => "pengawas@gmail.com",
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ]);

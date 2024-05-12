@@ -23,7 +23,7 @@
                                 $number = str_pad($key + 1, 3, '0', STR_PAD_LEFT);
                             @endphp
                             <button
-                                class="btn btn-choice mx-1 px-3 soal {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] ? 'active-number' : '' }}"
+                                class="btn btn-numb btn-choice mx-1 px-3 soal {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] ? 'active-number' : '' }}"
                                 data-id="{{ $soal->id }}">
                                 {{ $number }}
                             </button>
@@ -55,10 +55,10 @@
         <div class="col-md-8 col-ques">
             <div class="p-ujian px-3 py-4">
                 @foreach ($soals as $key => $soal)
-                    <form action="{{ route('ujian.soal', [$soal->id, $soal->id_sesi]) }}" method="post">
+                    <form class="ujianForm" action="{{ route('ujian.soal', [$soal->id, $soal->id_sesi]) }}" method="post">
                         @csrf
                         <div class="m-0 p-0 show-soal-{{ $soal->id }}" style="display: none;">
-                            <p class="m-0 p-0 font-weight-bold">SOAL NO. {{ $key + 1 }}</p>
+                            <p class="p-numb m-0 p-0 font-weight-bold">SOAL NO. {{ $key + 1 }}</p>
                             <hr class="mt-3 mb-2 p-0">
                             @if ($soal->gambar)
                                 <img class="mb-2" src="{{ $soal->gambar }}" alt="gambar-soal"
@@ -66,9 +66,9 @@
                             @endif
                             <p class="mt-0 p-0">{{ $soal->soal }}</p>
                             <div class="d-flex my-2">
-                                <button type="submit"
-                                    class="btn btn-choice mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'A' ? 'active' : '' }}"
-                                    value="A" name="jawab">
+                                <button type="button"
+                                    class="btn btn-choice btn-ans mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'A' ? 'active' : '' }}"
+                                    value="A" name="jawab" data-id="{{ $soal->id }}">
                                     A
                                 </button>
                                 @if (isImageUrl($soal->jawaban_a))
@@ -79,9 +79,9 @@
                                 @endif
                             </div>
                             <div class="d-flex my-2">
-                                <button type="submit"
-                                    class="btn btn-choice mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'B' ? 'active' : '' }}"
-                                    value="B" name="jawab">
+                                <button type="button"
+                                    class="btn btn-choice btn-ans mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'B' ? 'active' : '' }}"
+                                    value="B" name="jawab" data-id="{{ $soal->id }}">
                                     B
                                 </button>
                                 @if (isImageUrl($soal->jawaban_b))
@@ -92,9 +92,9 @@
                                 @endif
                             </div>
                             <div class="d-flex my-2">
-                                <button type="submit"
-                                    class="btn btn-choice mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'C' ? 'active' : '' }}"
-                                    value="C" name="jawab">
+                                <button type="button"
+                                    class="btn btn-choice btn-ans mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'C' ? 'active' : '' }}"
+                                    value="C" name="jawab" data-id="{{ $soal->id }}">
                                     C
                                 </button>
                                 @if (isImageUrl($soal->jawaban_c))
@@ -105,9 +105,9 @@
                                 @endif
                             </div>
                             <div class="d-flex my-2">
-                                <button type="submit"
-                                    class="btn btn-choice mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'D' ? 'active' : '' }}"
-                                    value="D" name="jawab">
+                                <button type="button"
+                                    class="btn btn-choice btn-ans mr-3 ml-4 {{ isset($jawabans[$soal->id]) && $jawabans[$soal->id] == 'D' ? 'active' : '' }}"
+                                    value="D" name="jawab" data-id="{{ $soal->id }}">
                                     D
                                 </button>
                                 @if (isImageUrl($soal->jawaban_d))
@@ -120,7 +120,7 @@
                             <div class="text-right m-0 p-0">
                                 <form action="{{ route('reset.jawaban', [$soal->id, $soal->id_sesi]) }}" method="post">
                                     @csrf
-                                    <button class="btn btn-sm btn-warning text-white font-weight-bold px-3">
+                                    <button class="reset-jawaban btn btn-sm btn-warning text-white font-weight-bold px-3">
                                         Reset Jawaban
                                     </button>
                                 </form>
@@ -191,8 +191,62 @@
                 $('.show-soal-' + soalId).show();
 
                 currentSoalId = soalId;
+
+                $('.btn-ans').click(function(event) {
+                    event.preventDefault();
+
+                    const button = $(this);
+                    const btnAns = button.closest('.btn-ans');
+
+                    const form = $(this).closest('form');
+                    const formData = form.serialize();
+
+                    const url = form.attr('action');
+
+                    const nilaiJawab = $(this).val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: formData + '&jawab=' + nilaiJawab,
+                        success: function(response) {
+                            $(`.btn-ans[data-id="${currentSoalId}"]`).removeClass(
+                                'active');
+                            btnAns.addClass('active');
+                            $(`.soal[data-id="${currentSoalId}"]`).addClass(
+                                'active-number');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Gagal mengirim jawaban:', error);
+                        }
+                    });
+                });
+
+                $('.reset-jawaban').click(function(event) {
+                    event.preventDefault();
+                    const form = $(this).closest('form');
+                    const url = form.attr('action');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                        },
+                        success: function(response) {
+                            $(`.btn-ans[data-id="${currentSoalId}"]`).removeClass(
+                                'active');
+                            $(`.soal[data-id="${currentSoalId}"]`).removeClass(
+                                'active-number');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Gagal mereset jawaban:', error);
+                        }
+                    });
+                });
             });
         });
+    </script>
     </script>
     <script>
         var countdownElement = document.getElementById('countdown-timer');
