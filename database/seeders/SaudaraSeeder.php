@@ -17,15 +17,15 @@ class SaudaraSeeder extends Seeder
     {
         $records = [];
         $saudaras = [
-            "Lebih dari 4 saudara",
-            "2 - 3 saudara",
             "Tidak Memilki",
+            "1 - 3 saudara",
+            "Lebih dari 3 saudara",
         ];
 
         $nilais = [
-            5,
-            3,
             1,
+            3,
+            5,
         ];
 
         foreach ($saudaras as $index => $saudara) {

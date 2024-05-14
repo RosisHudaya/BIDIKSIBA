@@ -7,7 +7,7 @@
                 <div>
                     <p class="mb-0 mt-3" style="color:#78828a; font-size: 20px; font-weight: 800;">BIDIKSIBA</p>
                     <p class="mx-0 mt-0" style="color:#78828a; font-size: 7px; font-weight: 800;">
-                        Politenik Negeri Malang
+                        Politeknik Negeri Malang
                     </p>
                 </div>
             </div>

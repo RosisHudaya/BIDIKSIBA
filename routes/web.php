@@ -145,6 +145,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('soal-ujian/{soalUjian}/{ujian}/edit', [SoalUjianController::class, 'edit'])->name('soal-ujian.edit');
         Route::put('soal-ujian/{soalUjian}/{ujian}', [SoalUjianController::class, 'update'])->name('soal-ujian.update');
         Route::delete('soal-ujian/{soalUjian}/{ujian}', [SoalUjianController::class, 'destroy'])->name('soal-ujian.destroy');
+        Route::delete('soal-ujian/{ujian}', [SoalUjianController::class, 'destroy_all'])->name('soal-ujian.destroyAll');
         Route::post('soal-ujian/import/{ujian}', [SoalUjianController::class, 'import'])->name('soal-ujian.import');
         Route::resource('sesi-ujian', SesiUjianController::class);
         Route::get('sesi-user/{sesi_ujian}', [SesiUjianController::class, 'sesi_user'])->name('sesiUjian');

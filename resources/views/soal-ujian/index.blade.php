@@ -40,9 +40,19 @@
                                 <a class="btn btn-primary mr-1" href="{{ route('soal-ujian.create', $ujian->id) }}">
                                     <i class="fas fa-edit"></i> Tambah Soal
                                 </a>
-                                <a class="btn btn-success import" style="color: white">
+                                <a class="btn btn-success import mr-1" style="color: white">
                                     <i class="fas fa-file-csv"></i> Import Soal
                                 </a>
+                                <form action="{{ route('soal-ujian.destroyAll', ['ujian' => $ujian->id]) }}" method="POST"
+                                    id="delAll-<?= $ujian->id ?>">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-del-all"
+                                        data-confirm="Konfirmasi Hapus | Apakah Anda yakin menghapus semua soal yang ada?"
+                                        data-confirm-yes="submitDelAll(<?= $ujian->id ?>)" data-id="delAll-{{ $ujian->id }}">
+                                        <i class="fas fa-trash"></i> Semua Soal
+                                    </button>
+                                </form>
                             @endrole
                         </div>
                         <div class="card-body">
@@ -167,7 +177,8 @@
                                                     <br>
                                                     @if ($soal_ujian->jawaban_benar == 'C')
                                                         @if (isImageUrl($soal_ujian->jawaban_c))
-                                                            <span class="font-weight-bold" style="color: #3eac57;">C.</span>
+                                                            <span class="font-weight-bold"
+                                                                style="color: #3eac57;">C.</span>
                                                             <img class="mb-2" src="{{ $soal_ujian->jawaban_b }}"
                                                                 alt="Jawaban C"
                                                                 style="max-width: 200px; max-height: 200px; object-fit: contain;">
@@ -267,6 +278,11 @@
     <script>
         function submitDel(id) {
             $('#del-' + id).submit()
+        }
+    </script>
+    <script>
+        function submitDelAll(id) {
+            $('#delAll-' + id).submit()
         }
     </script>
 @endpush

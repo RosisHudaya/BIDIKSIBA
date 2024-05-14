@@ -14,7 +14,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="nama_ujian">Jurusan SMA/SMK</label>
+                            <label for="nama_ujian">Nama Ujian</label>
                             <input type="text" class="form-control @error('nama_ujian') is-invalid @enderror"
                                 id="nama_ujian" name="nama_ujian" value="{{ $ujian->nama_ujian }}">
                             @error('nama_ujian')

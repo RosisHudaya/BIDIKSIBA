@@ -13,7 +13,7 @@ class UpdateBobotRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,21 @@ class UpdateBobotRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('bobot_kriterium')->id;
         return [
-            //
+            'kriteria' => 'required|regex:/^[a-zA-Z\s]+$/u|unique:bobots,kriteria,' . $id,
+            'bobot' => 'required|regex:/^[0-9.]+$/'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'kriteria.required' => 'Form kriteria tidak boleh kosong',
+            'kriteria.unique' => 'Kriteria sudah digunakan sebelumnya',
+            'kriteria.regex' => 'Kriteria tidak boleh mengandung angka dan simbol',
+            'bobot.required' => 'Form bobot tidak boleh kosong',
+            'bobot.regex' => 'Bobot harus berupa angka atau desimal',
         ];
     }
 }

@@ -17,19 +17,19 @@ class PekerjaanOrtuSeeder extends Seeder
     {
         $records = [];
         $pekerjaan_ortus = [
-            "Tidak Bekerja",
-            "Honorer",
-            "Serabutan",
-            "Outsourcing",
             "Wiraswasta",
+            "Outsourcing",
+            "Serabutan",
+            "Honorer",
+            "Tidak Bekerja",
         ];
 
         $nilais = [
-            5,
-            4,
-            3,
-            2,
             1,
+            2,
+            3,
+            4,
+            5,
         ];
 
         foreach ($pekerjaan_ortus as $index => $pekerjaan_ortu) {

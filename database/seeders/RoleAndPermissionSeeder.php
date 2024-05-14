@@ -116,6 +116,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'soal-ujian.create']);
         Permission::create(['name' => 'soal-ujian.edit']);
         Permission::create(['name' => 'soal-ujian.destroy']);
+        Permission::create(['name' => 'soal-ujian.destroyAll']);
         Permission::create(['name' => 'soal-ujian.import']);
 
         //sesi ujian
@@ -182,6 +183,9 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard',
             'user.management',
             'verif-admin.index',
+            'verif-admin.export.biodata',
+            'verif-admin.export.ekonomi',
+            'verif-admin.export.pendaftar',
             'menu.kriteria.pendaftar',
             'pekerjaan-ortu.index',
             'penghasilan-ortu.index',
@@ -231,6 +235,34 @@ class RoleAndPermissionSeeder extends Seeder
         // $user = User::find(7);
         // $user->assignRole('calon-mahasiswa');
         // $user = User::find(8);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(9);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(10);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(11);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(12);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(13);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(14);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(15);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(16);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(17);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(18);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(19);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(20);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(21);
+        // $user->assignRole('calon-mahasiswa');
+        // $user = User::find(22);
         // $user->assignRole('calon-mahasiswa');
     }
 }

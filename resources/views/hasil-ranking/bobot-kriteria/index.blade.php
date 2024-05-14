@@ -24,7 +24,9 @@
                                             <th style="width: 350px;">Nama Kriteria</th>
                                             <th class="text-center">Jenis Kriteria</th>
                                             <th class="text-center">Bobot Kriteria</th>
-                                            <th class="text-center">Aksi</th>
+                                            @role('super-admin')
+                                                <th class="text-center">Aksi</th>
+                                            @endrole
                                         </tr>
                                         @foreach ($bobots as $key => $bobot)
                                             <tr>
@@ -34,14 +36,17 @@
                                                 <td>{{ $bobot->kriteria }}</td>
                                                 <td class="text-center">{{ $bobot->jenis }}</td>
                                                 <td class="text-center">{{ $bobot->bobot }}</td>
-                                                <td class="text-right">
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href="" class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit i-all"></i>
-                                                            Edit
-                                                        </a>
-                                                    </div>
-                                                </td>
+                                                @role('super-admin')
+                                                    <td class="text-right">
+                                                        <div class="d-flex justify-content-center">
+                                                            <a href="{{ route('bobot-kriteria.edit', $bobot->id) }}"
+                                                                class="btn btn-sm btn-info btn-icon "><i
+                                                                    class="fas fa-edit i-all"></i>
+                                                                Edit
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                @endrole
                                             </tr>
                                         @endforeach
                                     </tbody>

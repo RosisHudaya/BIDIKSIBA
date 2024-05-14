@@ -73,8 +73,18 @@ class UjianController extends Controller
 
     public function destroy(Ujian $ujian)
     {
-        $ujian->delete();
-        return redirect()->route('ujian.index')->with('success', 'Data ujian berhasil dihapus');
+        try {
+            $ujian->delete();
+            return redirect()->route('ujian.index')->with('success', 'Data ujian berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            $error_code = $e->errorInfo[1];
+            if ($error_code == 1451) {
+                return redirect()->route('ujian.index')
+                    ->with('error', 'Data ujian digunakan pada tabel lain');
+            } else {
+                return redirect()->route('ujian.index')->with('success', 'Data ujian berhasil dihapus');
+            }
+        }
     }
 
     public function soal_ujian(Request $request, Ujian $ujian)

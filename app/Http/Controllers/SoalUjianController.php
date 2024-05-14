@@ -19,6 +19,7 @@ class SoalUjianController extends Controller
         $this->middleware('permission:soal-ujian.create')->only('create', 'store');
         $this->middleware('permission:soal-ujian.edit')->only('edit', 'update');
         $this->middleware('permission:soal-ujian.destroy')->only('destroy');
+        $this->middleware('permission:soal-ujian.destroyAll')->only('destroy_all');
         $this->middleware('permission:soal-ujian.import')->only('import');
     }
 
@@ -68,6 +69,12 @@ class SoalUjianController extends Controller
     {
         $soalUjian->delete();
         return redirect()->route('soalUjian', ['ujian' => $ujian->id])->with('success', 'Soal ujian berhasil dihapus');
+    }
+
+    public function destroy_all(Ujian $ujian)
+    {
+        SoalUjian::where('id_ujian', $ujian->id)->delete();
+        return redirect()->route('soalUjian', ['ujian' => $ujian->id])->with('success', 'Semua soal ujian berhasil dihapus');
     }
 
     public function import(ImportSoalUjianRequest $request, Ujian $ujian)

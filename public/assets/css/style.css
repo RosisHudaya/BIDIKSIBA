@@ -4481,4 +4481,12 @@ body:not(.sidebar-mini)
     .th-test {
         width: 100px !important;
     }
+
+    .d-test {
+        display: block !important;
+    }
+
+    .btn-del-all {
+        margin-top: 5px !important;
+    }
 }

@@ -14,6 +14,7 @@ class BobotController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:bobot-kriteria.index')->only('index');
+        $this->middleware('permission:bobot-kriteria.edit')->only('edit', 'update');
     }
 
     public function index()
@@ -39,14 +40,16 @@ class BobotController extends Controller
         //
     }
 
-    public function edit(Bobot $bobot)
+    public function edit(Bobot $bobot_kriterium)
     {
-        //
+        return view('hasil-ranking.bobot-kriteria.edit', compact('bobot_kriterium'));
     }
 
-    public function update(UpdateBobotRequest $request, Bobot $bobot)
+    public function update(UpdateBobotRequest $request, Bobot $bobot_kriterium)
     {
-        //
+        $bobot_kriterium->update($request->all());
+
+        return redirect()->route('bobot-kriteria.index')->with('success', 'Data bobot berhasil diperbarui');
     }
 
     public function destroy(Bobot $bobot)

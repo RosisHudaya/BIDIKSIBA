@@ -17,13 +17,13 @@ class KamarMandiSeeder extends Seeder
     {
         $records = [];
         $kamar_mandis = [
-            "Memiliki",
             "Tidak Memiliki",
+            "Memiliki",
         ];
 
         $nilais = [
-            1,
             5,
+            1,
         ];
 
         foreach ($kamar_mandis as $index => $kamar_mandi) {

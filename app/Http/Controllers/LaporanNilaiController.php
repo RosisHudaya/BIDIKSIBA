@@ -47,7 +47,7 @@ class LaporanNilaiController extends Controller
         );
     }
 
-    public function show(SesiUser $sesiUser, Request $request)
+    public function show(SesiUjian $sesiUser, Request $request)
     {
         $ujian = DB::table('sesi_ujians as su')
             ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
@@ -84,7 +84,7 @@ class LaporanNilaiController extends Controller
         ]);
     }
 
-    public function export(SesiUser $sesiUser)
+    public function export(SesiUjian $sesiUser)
     {
         $query = DB::table('sesi_users as su')
             ->leftJoin('nilai_ujians as nu', function ($join) {

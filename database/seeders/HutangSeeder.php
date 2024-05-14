@@ -17,15 +17,15 @@ class HutangSeeder extends Seeder
     {
         $records = [];
         $hutangs = [
-            "Lebih dari 1 Juta",
-            "Kurang dari 1 Juta",
             "Tidak Memiliki",
+            "Kurang dari 1 Juta",
+            "Lebih dari 1 Juta",
         ];
 
         $nilais = [
-            5,
-            3,
             1,
+            3,
+            5,
         ];
 
         foreach ($hutangs as $index => $hutang) {
