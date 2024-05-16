@@ -1,0 +1,28 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\BobotPekerjaan;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class BobotPekerjaanSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        BobotPekerjaan::create([
+            'pekerjaan_ortu' => 1,
+            'to_c2' => 0.33,
+            'to_c5' => 3.03,
+            'to_c6' => 3.03,
+            'to_c8' => 1,
+            'to_c9' => 0.33,
+            'to_c10' => 0.2,
+        ]);
+    }
+}

@@ -32,8 +32,18 @@ class DatabaseSeeder extends Seeder
             SaudaraSeeder::class,
             StatusOrtuSeeder::class,
             BobotSeeder::class,
-            // BiodataSeeder::class,
-            // BiodataSpkSeeder::class,
+                // BiodataSeeder::class,
+                // BiodataSpkSeeder::class,
+            BobotPekerjaanSeeder::class,
+            BobotPenghasilanSeeder::class,
+            BobotTanahSeeder::class,
+            BobotKamarSeeder::class,
+            BobotKamarMandiSeeder::class,
+            BobotListrikSeeder::class,
+            BobotPajakSeeder::class,
+            BobotHutangSeeder::class,
+            BobotSaudaraSeeder::class,
+            BobotStatusOrtusSeeder::class,
         ]);
     }
 }

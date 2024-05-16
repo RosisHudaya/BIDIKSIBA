@@ -4489,4 +4489,25 @@ body:not(.sidebar-mini)
     .btn-del-all {
         margin-top: 5px !important;
     }
+
+    /* bobot */
+    .h-bobot {
+        font-size: 14px !important;
+    }
+
+    .p-bobot {
+        margin: 10px 0 10px 0 !important;
+        padding: 0px !important;
+    }
+
+    .span-bobot {
+        display: none !important;
+    }
+
+    .sub-warp-bobot {
+        margin: 0px !important;
+        padding: 0px !important;
+        display: block !important;
+        max-width: 100% !important;
+    }
 }

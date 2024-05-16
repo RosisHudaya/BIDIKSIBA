@@ -123,6 +123,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //hasil ranking
     Route::prefix('menu-ranking')->group(function () {
         Route::resource('bobot-kriteria', BobotController::class);
+        Route::get('matriks', [BobotController::class, 'matriks'])->name('menu-ranking.matriks');
+        Route::put('update_matriks', [BobotController::class, 'update_matriks'])->name('update.matriks');
         Route::get('data-ekonomi', [DataSpkController::class, 'indexEko'])->name('menu-ranking.data-ekonomi');
         Route::get('export-ekonomi', [DataSpkController::class, 'export_alternative'])->name(('export.alternative'));
         Route::get('data-spk', [DataSpkController::class, 'index'])->name('menu-ranking.data-spk');

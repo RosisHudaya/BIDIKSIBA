@@ -16,6 +16,13 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-body">
+                            <div class="m-0 p-0">
+                                @role('super-admin')
+                                    <a href="{{ route('menu-ranking.matriks') }}" class="btn btn-primary mb-3 text-white">
+                                        <i class="fas fa-square-root-alt"></i> Matriks Perandingan Pasangan
+                                    </a>
+                                @endrole
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-md">
                                     <tbody>
@@ -24,9 +31,6 @@
                                             <th style="width: 350px;">Nama Kriteria</th>
                                             <th class="text-center">Jenis Kriteria</th>
                                             <th class="text-center">Bobot Kriteria</th>
-                                            @role('super-admin')
-                                                <th class="text-center">Aksi</th>
-                                            @endrole
                                         </tr>
                                         @foreach ($bobots as $key => $bobot)
                                             <tr>
@@ -35,18 +39,7 @@
                                                 </td>
                                                 <td>{{ $bobot->kriteria }}</td>
                                                 <td class="text-center">{{ $bobot->jenis }}</td>
-                                                <td class="text-center">{{ $bobot->bobot }}</td>
-                                                @role('super-admin')
-                                                    <td class="text-right">
-                                                        <div class="d-flex justify-content-center">
-                                                            <a href="{{ route('bobot-kriteria.edit', $bobot->id) }}"
-                                                                class="btn btn-sm btn-info btn-icon "><i
-                                                                    class="fas fa-edit i-all"></i>
-                                                                Edit
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                @endrole
+                                                <td class="text-center">{{ number_format($bobot->bobot, 6) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

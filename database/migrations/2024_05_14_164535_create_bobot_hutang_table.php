@@ -12,11 +12,16 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('bobots', function (Blueprint $table) {
+        Schema::create('bobot_hutangs', function (Blueprint $table) {
             $table->id();
-            $table->string('kriteria')->nullable();
-            $table->double('bobot');
-            $table->string('jenis')->nullable();
+            $table->unsignedBigInteger('fk')->nullable();
+            $table->double('hutang');
+            $table->double('to_c1');
+            $table->double('to_c2');
+            $table->double('to_c5');
+            $table->double('to_c6');
+            $table->double('to_c9');
+            $table->double('to_c10');
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('bobots');
+        Schema::dropIfExists('bobot_hutangs');
     }
 };

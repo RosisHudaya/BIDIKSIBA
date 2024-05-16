@@ -36,17 +36,6 @@
                         </div>
                         <div class="form-group">
                             <label for="">Jenis Kriteria</label>
-                            {{-- <select class="form-control select2" name="jenis" id="jenis">
-                                <option value="" disabled>Jenis Kriteria</option>
-                                <option value="BENEFIT"
-                                    {{ isset($bobot_kriterium) && $bobot_kriterium->jenis === 'BENEFIT' ? 'selected' : '' }}>
-                                    BENEFIT
-                                </option>
-                                <option value="COST"
-                                    {{ isset($bobot_kriterium) && $bobot_kriterium->jenis === 'COST' ? 'selected' : '' }}>
-                                    COST
-                                </option>
-                            </select> --}}
                             <input type="text" class="form-control" value="{{ $bobot_kriterium->jenis }}" disabled>
                         </div>
                     </div>

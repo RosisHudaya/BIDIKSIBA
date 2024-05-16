@@ -80,6 +80,8 @@ class RoleAndPermissionSeeder extends Seeder
         //bobot kriteria
         Permission::create(['name' => 'bobot-kriteria.index']);
         Permission::create(['name' => 'bobot-kriteria.edit']);
+        Permission::create(['name' => 'bobot-kriteria.menu-ranking.matriks']);
+        Permission::create(['name' => 'bobot-kriteria.update.matriks']);
 
         //data ranking ekonomi
         Permission::create(['name' => 'data-ekonomi.index']);

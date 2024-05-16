@@ -55,7 +55,7 @@
                                                 <td class="text-center">{{ $result['nilai'] }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-start">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-7">
                                                             {{ $result['rank'] }}
                                                         </div>
                                                         <div class="text-right">

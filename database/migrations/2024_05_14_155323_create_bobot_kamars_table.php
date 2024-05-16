@@ -12,11 +12,13 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('bobots', function (Blueprint $table) {
+        Schema::create('bobot_kamars', function (Blueprint $table) {
             $table->id();
-            $table->string('kriteria')->nullable();
-            $table->double('bobot');
-            $table->string('jenis')->nullable();
+            $table->unsignedBigInteger('fk')->nullable();
+            $table->double('jumlah_kamar');
+            $table->double('to_c3');
+            $table->double('to_c7');
+            $table->foreign('fk')->references('id')->on('bobot_pekerjaans')->restrictOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('bobots');
+        Schema::dropIfExists('bobot_kamars');
     }
 };
