@@ -51,7 +51,7 @@
                                                 </td>
                                                 <td style="text-transform: uppercase;">{{ $result['nama'] }}</td>
                                                 <td style="text-transform: uppercase;">{{ $result['sekolah'] }}</td>
-                                                <td>{{ $result['difference'] }}</td>
+                                                <td>{{ number_format($result['difference'], 6) }}</td>
                                                 <td class="text-center">{{ $result['nilai'] }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-start">

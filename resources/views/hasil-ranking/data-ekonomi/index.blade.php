@@ -52,7 +52,7 @@
                                                 </td>
                                                 <td style="text-transform: uppercase;">{{ $result['nama'] }}</td>
                                                 <td style="text-transform: uppercase;">{{ $result['sekolah'] }}</td>
-                                                <td>{{ $result['difference'] }}</td>
+                                                <td>{{ number_format($result['difference'], 6) }}</td>
                                                 <td class="text-center" style="width: 10%;">
                                                     {{ $result['rank'] }}
                                                 </td>
