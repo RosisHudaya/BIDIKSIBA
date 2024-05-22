@@ -17,7 +17,9 @@
                             <table class="table table-bordered table-md">
                                 <tbody>
                                     <tr>
-                                        <th class="text-center" style="width: 100px;">#</th>
+                                        <th class="text-center" style="width: 100px;">
+                                            <input type="checkbox" id="select-all">
+                                        </th>
                                         <th>Nama</th>
                                         <th class="text-center">Jenis Kelamin</th>
                                     </tr>
@@ -49,4 +51,12 @@
 @endsection
 @push('customScript')
     <script src="/assets/js/pagination.js"></script>
+    <script>
+        document.getElementById('select-all').addEventListener('click', function(event) {
+            let checkboxes = document.querySelectorAll('input[name="user_ids[]"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = event.target.checked;
+            });
+        });
+    </script>
 @endpush

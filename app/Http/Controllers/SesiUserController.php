@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NilaiUjian;
 use App\Models\SesiUjian;
 use App\Models\SesiUser;
 use Illuminate\Http\Request;
@@ -22,11 +23,16 @@ class SesiUserController extends Controller
         $biodatas = DB::table('biodatas as b')
             ->leftJoin('users as u', 'b.id_user', '=', 'u.id')
             ->where('b.status', '=', 'Diverifikasi')
-            ->whereNotExists(function ($query) use ($sesiUjian) {
+            // ->whereNotExists(function ($query) use ($sesiUjian) {
+            //     $query->select(DB::raw(1))
+            //         ->from('sesi_users as su')
+            //         ->whereRaw('su.id_user = u.id')
+            //         ->where('su.id_sesi', '=', $sesiUjian->id);
+            // })
+            ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('sesi_users as su')
-                    ->whereRaw('su.id_user = u.id')
-                    ->where('su.id_sesi', '=', $sesiUjian->id);
+                    ->whereRaw('su.id_user = u.id');
             })
             ->select(
                 'u.id',
@@ -57,6 +63,11 @@ class SesiUserController extends Controller
     public function destroy(SesiUser $sesiUser, SesiUjian $sesiUjian)
     {
         $sesiUser->delete();
+
+        $nilai = NilaiUjian::where('id_user', $sesiUser->id_user)->first();
+        if ($nilai) {
+            $nilai->delete();
+        }
 
         return redirect()->route('sesiUjian', ['sesi_ujian' => $sesiUjian->id])
             ->with('success', 'Peserta ujian berhasil dihapus dari sesi ujian');
