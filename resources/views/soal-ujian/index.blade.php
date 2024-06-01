@@ -109,7 +109,11 @@
                             @php
                                 function isImageUrl($url)
                                 {
-                                    return strpos($url, 'thumbnail?id=') !== false;
+                                    $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+                                    $urlExtension = pathinfo($url, PATHINFO_EXTENSION);
+
+                                    return strpos($url, 'thumbnail?id=') !== false ||
+                                        in_array(strtolower($urlExtension), $imageExtensions);
                                 }
                             @endphp
 

@@ -167,16 +167,29 @@
                 return;
             }
 
-            if (isImageUrl(inputValue)) {
-                previewElement.html('<img src="' + inputValue +
+            var modifiedUrl = processUrl(inputValue);
+
+            if (isImageUrl(modifiedUrl)) {
+                previewElement.html('<img src="' + modifiedUrl +
                     '" alt="preview" style="max-width: 200px; max-height: 200px; object-fit: contain;">');
             } else {
                 previewElement.empty();
             }
         }
 
+        function processUrl(url) {
+            var googleDriveFilePattern = /https:\/\/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view\?usp=sharing/;
+            var match = url.match(googleDriveFilePattern);
+
+            if (match) {
+                var fileId = match[1];
+                return `https://drive.google.com/thumbnail?id=${fileId}`;
+            }
+            return url;
+        }
+
         function isImageUrl(url) {
-            return url.includes('thumbnail?id=');
+            return url.includes('thumbnail?id=') || url.match(/\.(jpeg|jpg|gif|png)$/) != null;
         }
     </script>
 @endpush

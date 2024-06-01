@@ -49,8 +49,12 @@
         @php
             function isImageUrl($url)
             {
-                return strpos($url, 'thumbnail?id=') !== false;
+                $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+                $urlExtension = pathinfo($url, PATHINFO_EXTENSION);
+
+                return strpos($url, 'thumbnail?id=') !== false || in_array(strtolower($urlExtension), $imageExtensions);
             }
+
         @endphp
         <div class="col-md-8 col-ques">
             <div class="p-ujian px-3 py-4">

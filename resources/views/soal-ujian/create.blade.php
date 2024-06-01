@@ -20,7 +20,7 @@
                                 onerror="this.onerror=null;this.src='{{ asset('assets/img/default-img.jpg') }}';"><br>
                             <input type="text" class="form-control @error('soal') is-invalid @enderror" id="gambar"
                                 name="gambar" placeholder="ex. https://acesse.one/LRP2X" value="{{ old('gambar') }}"
-                                oninput="previewGambar()">
+                                oninput="changeLink()">
                             @error('gambar')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -116,15 +116,29 @@
 @push('customScript')
     <script src="/assets/js/select2.min.js"></script>
     <script>
-        function previewGambar() {
-            var linkGambar = $('#gambar').val();
-            if (linkGambar.trim() === '') {
-                $('#gambar-preview').attr('src', '{{ asset('assets/img/default-img.jpg') }}');
-            } else {
-                $('#gambar-preview').attr('src', linkGambar);
-            }
+        function previewGambar(url) {
+            const gambarPreview = document.getElementById('gambar-preview');
+            gambarPreview.src = url;
         }
 
+        function changeLink() {
+            const gambarInput = document.getElementById('gambar');
+            const url = gambarInput.value;
+
+            const googleDriveFilePattern = /https:\/\/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view\?usp=sharing/;
+            const match = url.match(googleDriveFilePattern);
+
+            if (match) {
+                const fileId = match[1];
+                const thumbnailUrl = `https://drive.google.com/thumbnail?id=${fileId}`;
+                gambarInput.value = thumbnailUrl;
+                previewGambar(thumbnailUrl);
+            } else {
+                previewGambar(url);
+            }
+        }
+    </script>
+    <script>
         function previewImage(inputId, previewId) {
             var inputValue = $('#' + inputId).val();
             var previewElement = $('#' + previewId);
@@ -134,16 +148,29 @@
                 return;
             }
 
-            if (isImageUrl(inputValue)) {
-                previewElement.html('<img src="' + inputValue +
+            var modifiedUrl = processUrl(inputValue);
+
+            if (isImageUrl(modifiedUrl)) {
+                previewElement.html('<img src="' + modifiedUrl +
                     '" alt="preview" style="max-width: 200px; max-height: 200px; object-fit: contain;">');
             } else {
                 previewElement.empty();
             }
         }
 
+        function processUrl(url) {
+            var googleDriveFilePattern = /https:\/\/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view\?usp=sharing/;
+            var match = url.match(googleDriveFilePattern);
+
+            if (match) {
+                var fileId = match[1];
+                return `https://drive.google.com/thumbnail?id=${fileId}`;
+            }
+            return url;
+        }
+
         function isImageUrl(url) {
-            return url.includes('thumbnail?id=');
+            return url.includes('thumbnail?id=') || url.match(/\.(jpeg|jpg|gif|png)$/) != null;
         }
     </script>
 @endpush

@@ -27,7 +27,7 @@ class UpdateSoalUjianRequest extends FormRequest
         return [
             'gambar' => 'nullable',
             'soal' => 'required|unique:soal_ujians,soal,' . $id,
-            'jawaban_a' => 'required|unique:soal_ujians,jawaban_a,' . $id,
+            'jawaban_a' => 'required',
             'jawaban_b' => 'required',
             'jawaban_c' => 'required',
             'jawaban_d' => 'required',
