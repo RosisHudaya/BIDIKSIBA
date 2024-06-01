@@ -49,6 +49,8 @@ class LaporanNilaiController extends Controller
 
     public function show(SesiUjian $sesiUser, Request $request)
     {
+        setlocale(LC_ALL, 'IND');
+
         $ujian = DB::table('sesi_ujians as su')
             ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
             ->select(

@@ -33,7 +33,7 @@
         <td>{{ $biodata->kota_lahir ?? '--' }}</td>
         <td>
             @if ($biodata->tgl_lahir)
-                {{ \Carbon\Carbon::parse($biodata->tgl_lahir)->format('d F Y') }}
+                {{ \Carbon\Carbon::parse($biodata->tgl_lahir)->formatLocalized('%d %B %Y') }}
             @else
                 --
             @endif

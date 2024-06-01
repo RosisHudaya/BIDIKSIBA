@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Carbon\Carbon;
 
 return [
 
@@ -70,6 +71,7 @@ return [
     */
 
     'timezone' => 'Asia/Jakarta',
+    Carbon::now()->formatLocalized('%A, %d %B %Y'),
 
     /*
     |--------------------------------------------------------------------------

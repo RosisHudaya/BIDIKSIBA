@@ -45,12 +45,12 @@
                 <div class="d-flex">
                     <p class="p-det col-md-2 ml-4 mr-0 my-1 p-0 p-d">MulaiI</p>
                     <p class="col-md-10 m-1 p-d">:
-                        {{ \Carbon\Carbon::parse($detail_ujians->waktu_mulai)->format('d F Y H:i:s') }}</p>
+                        {{ \Carbon\Carbon::parse($detail_ujians->waktu_mulai)->formatLocalized('%d %B %Y %H:%M:%S') }}</p>
                 </div>
                 <div class="d-flex">
                     <p class="p-det col-md-2 ml-4 mr-0 my-1 p-0 p-d">Selesai</p>
                     <p class="col-md-10 m-1 p-d">:
-                        {{ \Carbon\Carbon::parse($detail_ujians->waktu_akhir)->format('d F Y H:i:s') }}</p>
+                        {{ \Carbon\Carbon::parse($detail_ujians->waktu_akhir)->formatLocalized('%d %B %Y %H:%M:%S') }}</p>
                 </div>
                 <div class="d-flex">
                     <p class="p-det col-md-2 ml-4 mr-0 my-1 p-0 p-d">Soal</p>

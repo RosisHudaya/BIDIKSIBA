@@ -23,6 +23,8 @@ class SesiUjianController extends Controller
 
     public function index(Request $request)
     {
+        setlocale(LC_ALL, 'IND');
+
         $sesiUjians = DB::table('sesi_ujians as su')
             ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
             ->leftJoin('sesi_users as sj', 'su.id', '=', 'sj.id_sesi')
@@ -108,6 +110,8 @@ class SesiUjianController extends Controller
 
     public function sesi_user(Request $request, SesiUjian $sesiUjian)
     {
+        setlocale(LC_ALL, 'IND');
+
         $ujian = DB::table('sesi_ujians as su')
             ->leftJoin('ujians as u', 'su.id_ujian', '=', 'u.id')
             ->select(
