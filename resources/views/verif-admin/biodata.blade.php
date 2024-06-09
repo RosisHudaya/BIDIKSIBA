@@ -43,14 +43,24 @@
     <tr>
         <th></th>
         <th>NOMER TELEPON</th>
-        <th></th>
-        <th></th>
+        <th>ALAMAT</th>
+        <th>JARAK</th>
     </tr>
     <tr>
         <td></td>
         <td> {{ $biodata->no_telp ?? '--' }} </td>
-        <td></td>
-        <td></td>
+        <td id="address-{{ $biodata->id }}"> {{ $biodata->alamat ?? '--' }} </td>
+        <td id="distance-{{ $biodata->id }}"></td>
+    </tr>
+    <tr>
+        <th></th>
+        <th colspan="3" class="text-center">LOKASI</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th></th>
+        <th colspan="3" id="maps-{{ $biodata->id }}" style="height: 250px; width: 100%;"></th>
+        <th></th>
     </tr>
     <tr>
         <th></th>

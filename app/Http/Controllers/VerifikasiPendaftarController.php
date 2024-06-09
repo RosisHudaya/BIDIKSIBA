@@ -224,6 +224,7 @@ class VerifikasiPendaftarController extends Controller
             'id_prodi' => $request->prodi_id,
             'nik' => $request->nik,
             'nama' => $request->nama,
+            'alamat' => $request->alamat,
             'kota_lahir' => $request->kota_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'gender' => $request->gender,

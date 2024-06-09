@@ -1,5 +1,5 @@
 @extends('landing-page.app')
-@section('title', 'BIDIKSIBA POLINEMA | Dashborad')
+@section('title', 'BIDIKSIBA POLINEMA | LandingPage')
 @push('style')
     <link rel="stylesheet" href="/assets/css/dashboard.css">
 @endpush

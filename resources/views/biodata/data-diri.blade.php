@@ -210,7 +210,7 @@
                 <label for="">Jenis Kelamin</label>
                 <select class="form-control select2" name="gender" id="gender"
                     {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
-                    <option value="">Jenis Kelamin</option>
+                    <option value="" selected disabled>Jenis Kelamin</option>
                     <option value="Laki-laki"
                         {{ isset($biodatas) && $biodatas->gender === 'Laki-laki' ? 'selected' : '' }}>
                         Laki-laki
@@ -220,6 +220,19 @@
                         Perempuan
                     </option>
                 </select>
+            </div>
+        </div>
+        <div class="form-group col-md-12 d-flex justify-content-start">
+            <div class="form-group col-md-6">
+                <label for="">Alamat</label>
+                <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat"
+                    name="alamat" value="{{ $biodatas ? $biodatas->alamat : '' }}"
+                    placeholder="Ex. Lowokwaru, Malang" {{ $biodatas?->status == 'Diverifikasi' ? 'disabled' : '' }}>
+                @error('alamat')
+                    <div class="invalid-feedback feed ml-3">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
         @include('biodata.jurusan')

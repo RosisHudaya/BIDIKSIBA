@@ -199,6 +199,19 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group col-md-12 d-flex justify-content-start">
+                        <div class="form-group col-md-6">
+                            <label for="">Alamat</label><br>
+                            <input class="form-control @error('alamat') is-invalid @enderror" type="text"
+                                name="alamat" value="{{ $biodata ? $biodata->alamat : '' }}"
+                                placeholder="masukkan alamat peserta">
+                            @error('alamat')
+                                <div class="invalid-feedback feed ml-3">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                     <hr class="mt-0 p-0">
                     <div class="form-group col-md-12 d-flex justify-content-start">
                         <div class="form-group col-md-6">
