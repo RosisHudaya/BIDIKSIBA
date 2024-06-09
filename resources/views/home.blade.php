@@ -197,4 +197,23 @@
             });
         })
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startInput = document.getElementById('start');
+            const endInput = document.getElementById('end');
+
+            const now = new Date().toISOString().slice(0, 16);
+            startInput.setAttribute('min', now);
+
+            function setEndMinDate() {
+                if (startInput.value) {
+                    endInput.setAttribute('min', startInput.value);
+                }
+            }
+
+            setEndMinDate();
+
+            startInput.addEventListener('change', setEndMinDate);
+        });
+    </script>
 @endpush

@@ -73,6 +73,25 @@
 
 @push('customScript')
     <script src="/assets/js/select2.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startInput = document.getElementById('waktu_mulai');
+            const endInput = document.getElementById('waktu_akhir');
+
+            const now = new Date().toISOString().slice(0, 16);
+            startInput.setAttribute('min', now);
+
+            function setEndMinDate() {
+                if (startInput.value) {
+                    endInput.setAttribute('min', startInput.value);
+                }
+            }
+
+            setEndMinDate();
+
+            startInput.addEventListener('change', setEndMinDate);
+        });
+    </script>
 @endpush
 
 @push('customStyle')
