@@ -52,9 +52,9 @@
                                                 <td class="text-center">{{ $sesiUjian->jumlah_peserta }}</td>
                                                 <td class="text-center">
                                                     Mulai&nbsp;&nbsp; :
-                                                    {{ \Carbon\Carbon::parse($sesiUjian->waktu_mulai)->format('d F Y H:i:s') }}<br>
+                                                    {{ \Carbon\Carbon::parse($sesiUjian->waktu_mulai)->formatLocalized('%d %B %Y %H:%M:%S') }}<br>
                                                     Selesai :
-                                                    {{ \Carbon\Carbon::parse($sesiUjian->waktu_akhir)->format('d F Y H:i:s') }}
+                                                    {{ \Carbon\Carbon::parse($sesiUjian->waktu_akhir)->formatLocalized('%d %B %Y %H:%M:%S') }}
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">

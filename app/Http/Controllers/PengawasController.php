@@ -10,6 +10,8 @@ class PengawasController extends Controller
 {
     public function index(Request $request)
     {
+        setlocale(LC_ALL, 'IND');
+
         $list_ujians = DB::table('sesi_ujians')
             ->leftJoin('ujians', 'sesi_ujians.id_ujian', '=', 'ujians.id')
             ->select(

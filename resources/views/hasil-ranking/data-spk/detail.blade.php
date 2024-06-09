@@ -11,7 +11,7 @@
         <td></td>
         <td>{{ $result['pekerjaan_ortu'] }}</td>
         <td>{{ $result['gaji_ortu'] }}</td>
-        <td>{{ $result['luas_tanah'] }}<sup>2</sup></td>
+        <td>{{ $result['luas_tanah'] }} m<sup>2</sup></td>
         <td class="text-center">{{ $result['kamar'] }}</td>
         <td class="text-center">{{ $result['kamar_mandi'] }}</td>
     </tr>

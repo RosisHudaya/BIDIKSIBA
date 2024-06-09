@@ -326,6 +326,113 @@
     @endforeach
 @endsection
 @push('customScript')
+    <script src="/assets/js/leafet.js"></script>
+    <script src="/assets/js/geolib.min.js"></script>
+    <script>
+        window.onload = function() {
+            const biodatas = @json($biodatas);
+
+            const data = Array.isArray(biodatas.data) ? biodatas.data : [];
+
+            const addressCache = {};
+
+            data.forEach(biodata => {
+                const addressElement = document.getElementById(`address-${biodata.id}`);
+                const address = addressElement ? addressElement.textContent.trim() : null;
+                const posisiTetap = [-7.946636172713554, 112.6160672501871];
+
+                if (address && address !== '--') {
+                    if (addressCache[address]) {
+                        const data = addressCache[address];
+                        handleLocationData(biodata, address, posisiTetap, data);
+                    } else {
+                        fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + address)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data && data.length > 0) {
+                                    addressCache[address] = data;
+                                    handleLocationData(biodata, address, posisiTetap, data);
+                                } else {
+                                    handleEmptyLocationData(biodata);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching data for address:', address, error);
+                                handleEmptyLocationData(biodata);
+                            });
+                    }
+                } else {
+                    handleEmptyLocationData(biodata);
+                }
+            });
+        };
+
+        function handleLocationData(biodata, address, posisiTetap, data) {
+            const latitude = data[0].lat;
+            const longitude = data[0].lon;
+            const location = [latitude, longitude];
+
+            const map = L.map(`maps-${biodata.id}`).setView(location, 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            const addressMarker = L.marker(location, {
+                icon: redIcon
+            }).addTo(map);
+            addressMarker.bindPopup('Rumah');
+
+            const jarak = geolib.getDistance({
+                latitude: posisiTetap[0],
+                longitude: posisiTetap[1]
+            }, {
+                latitude: latitude,
+                longitude: longitude
+            });
+
+            const jarakKm = jarak / 1000;
+            const jarakFormatted = jarakKm.toLocaleString('id-ID', {
+                maximumFractionDigits: 2
+            });
+
+            document.getElementById(`distance-${biodata.id}`).textContent = `${jarakFormatted} km`;
+
+            const latlngs = [posisiTetap, location];
+            const polyline = L.polyline(latlngs, {
+                dashArray: '5, 10'
+            }).addTo(map);
+
+            const fixedMarker = L.marker(posisiTetap, {
+                icon: greenIcon
+            }).addTo(map);
+            fixedMarker.bindPopup('Lokasi');
+        }
+
+        function handleEmptyLocationData(biodata) {
+            document.getElementById(`distance-${biodata.id}`).textContent = "-";
+            const mapContainer = document.getElementById(`maps-${biodata.id}`);
+            mapContainer.innerHTML = "<div style='text-align: center;'>--</div>";
+            mapContainer.style = "";
+        }
+
+        const redIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        const greenIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             var openedDetailId = null;
@@ -373,6 +480,7 @@
 
 @push('customStyle')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/leafet.css">
     <script>
         function submitDel(id) {
             $('#del-' + id).submit()

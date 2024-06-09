@@ -34,14 +34,30 @@ class SoalUjianController extends Controller
 
     public function store(StoreSoalUjianRequest $request, Ujian $ujian)
     {
+        function processUrl($url)
+        {
+            $googleDriveFilePattern = '/https:\/\/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view\?usp=sharing/';
+            if (preg_match($googleDriveFilePattern, $url, $matches)) {
+                $fileId = $matches[1];
+                return "https://drive.google.com/thumbnail?id={$fileId}";
+            }
+            return $url;
+        }
+
+        $gambar = processUrl($request->gambar);
+        $jawaban_a = processUrl($request->jawaban_a);
+        $jawaban_b = processUrl($request->jawaban_b);
+        $jawaban_c = processUrl($request->jawaban_c);
+        $jawaban_d = processUrl($request->jawaban_d);
+
         SoalUjian::create([
             'id_ujian' => $ujian->id,
-            'gambar' => $request->gambar,
+            'gambar' => $gambar,
             'soal' => $request->soal,
-            'jawaban_a' => $request->jawaban_a,
-            'jawaban_b' => $request->jawaban_b,
-            'jawaban_c' => $request->jawaban_c,
-            'jawaban_d' => $request->jawaban_d,
+            'jawaban_a' => $jawaban_a,
+            'jawaban_b' => $jawaban_b,
+            'jawaban_c' => $jawaban_c,
+            'jawaban_d' => $jawaban_d,
             'jawaban_benar' => $request->jawaban_benar,
         ]);
 
@@ -60,7 +76,32 @@ class SoalUjianController extends Controller
 
     public function update(UpdateSoalUjianRequest $request, SoalUjian $soalUjian, Ujian $ujian)
     {
-        $soalUjian->update($request->all());
+        function processUrl($url)
+        {
+            $googleDriveFilePattern = '/https:\/\/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view\?usp=sharing/';
+            if (preg_match($googleDriveFilePattern, $url, $matches)) {
+                $fileId = $matches[1];
+                return "https://drive.google.com/thumbnail?id={$fileId}";
+            }
+            return $url;
+        }
+
+        $gambar = processUrl($request->gambar);
+        $jawaban_a = processUrl($request->jawaban_a);
+        $jawaban_b = processUrl($request->jawaban_b);
+        $jawaban_c = processUrl($request->jawaban_c);
+        $jawaban_d = processUrl($request->jawaban_d);
+
+        // $soalUjian->update($request->all());
+        $soalUjian->update([
+            'gambar' => $gambar,
+            'soal' => $request->soal,
+            'jawaban_a' => $jawaban_a,
+            'jawaban_b' => $jawaban_b,
+            'jawaban_c' => $jawaban_c,
+            'jawaban_d' => $jawaban_d,
+            'jawaban_benar' => $request->jawaban_benar,
+        ]);
 
         return redirect()->route('soalUjian', ['ujian' => $ujian->id])->with('success', 'Soal ujian berhasil diperbarui');
     }

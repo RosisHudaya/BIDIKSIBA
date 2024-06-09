@@ -18,11 +18,11 @@
                     </tr>
                     <tr>
                         <th class="th-test" style="width: 300px;">MULAI</th>
-                        <td>{{ \Carbon\Carbon::parse($ujian->waktu_mulai)->format('d F Y H:i:s') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($ujian->waktu_mulai)->formatLocalized('%d %B %Y %H:%M:%S') }}</td>
                     </tr>
                     <tr>
                         <th class="th-test" style="width: 300px;">SELESAI</th>
-                        <td>{{ \Carbon\Carbon::parse($ujian->waktu_akhir)->format('d F Y H:i:s') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($ujian->waktu_akhir)->formatLocalized('%d %B %Y %H:%M:%S') }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -21,6 +21,7 @@ class Biodata extends Model
         'nik',
         'nama',
         'kota_lahir',
+        'alamat',
         'tgl_lahir',
         'gender',
         'no_telp',

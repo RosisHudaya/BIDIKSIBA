@@ -44,6 +44,7 @@ class VerifikasiPendaftarController extends Controller
 
     public function index(Request $request)
     {
+        setlocale(LC_ALL, 'IND');
         $statusSelected = $request->input('status');
         $biodatas = DB::table('biodatas as b')
             ->leftJoin('users as u', 'b.id_user', '=', 'u.id')
@@ -157,6 +158,16 @@ class VerifikasiPendaftarController extends Controller
                 'slip-pbb' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'sdr' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'ket-yatim' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'pekerjaan_ortu_id' => 'nullable',
+                'gaji_ortu_id' => 'nullable',
+                'luas_tanah' => 'nullable',
+                'kamar' => 'nullable',
+                'kamar_mandi_id' => 'nullable',
+                'tagihan_listrik_id' => 'nullable',
+                'pajak' => 'nullable',
+                'hutang_id' => 'nullable',
+                'saudara_id' => 'nullable',
+                'status_ortu_id' => 'nullable',
             ],
             [
                 'foto.image' => 'File yang diunggah harus berupa gambar',
@@ -213,6 +224,7 @@ class VerifikasiPendaftarController extends Controller
             'id_prodi' => $request->prodi_id,
             'nik' => $request->nik,
             'nama' => $request->nama,
+            'alamat' => $request->alamat,
             'kota_lahir' => $request->kota_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'gender' => $request->gender,

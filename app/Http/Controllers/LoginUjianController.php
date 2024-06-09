@@ -40,6 +40,8 @@ class LoginUjianController extends Controller
 
     public function list_ujian()
     {
+        setlocale(LC_ALL, 'IND');
+
         $id = Auth::id();
         $list_ujians = DB::table('sesi_ujians as sesi')
             ->leftJoin('ujians as ujian', 'sesi.id_ujian', '=', 'ujian.id')
@@ -58,6 +60,8 @@ class LoginUjianController extends Controller
 
     public function show_ujian(SesiUjian $sesiUjian)
     {
+        setlocale(LC_ALL, 'IND');
+
         $id = Auth::id();
         $detail_ujians = DB::table('sesi_users as pivot')
             ->leftJoin('sesi_ujians as sesi', 'pivot.id_sesi', '=', 'sesi.id')

@@ -14,7 +14,9 @@ $(document).ready(function () {
                 asal_jurusan_id: asalJurusanId,
             },
             success: function (response) {
-                $("#jurusan_id").html('<option value="">Jurusan</option>');
+                $("#jurusan_id").html(
+                    '<option value="" selected disabled>Jurusan</option>'
+                );
                 $.each(response.jurusans, function (key, jurusan) {
                     $("#jurusan_id").append(
                         '<option value="' +
@@ -47,7 +49,9 @@ if (selectAsalJurusanId != null) {
         dataType: "json",
         success: function (response) {
             $("#jurusan_id").empty();
-            $("#jurusan_id").append("<option>Jurusan</option>");
+            $("#jurusan_id").append(
+                "<option selected disabled>Jurusan</option>"
+            );
 
             $.each(response["jurusans"], function (key, value) {
                 var option =
@@ -79,7 +83,9 @@ $(document).ready(function () {
                 jurusan_id: jurusanId,
             },
             success: function (response) {
-                $("#prodi_id").html('<option value="">Program Studi</option>');
+                $("#prodi_id").html(
+                    '<option value="" selected disabled>Program Studi</option>'
+                );
                 $.each(response.prodis, function (key, prodi) {
                     $("#prodi_id").append(
                         '<option value="' +
@@ -112,7 +118,9 @@ if (selectJurusanId != null) {
         dataType: "json",
         success: function (response) {
             $("#prodi_id").empty();
-            $("#prodi_id").append("<option>Program Studi</option>");
+            $("#prodi_id").append(
+                "<option selected disabled>Program Studi</option>"
+            );
 
             $.each(response["prodis"], function (key, value) {
                 var option =

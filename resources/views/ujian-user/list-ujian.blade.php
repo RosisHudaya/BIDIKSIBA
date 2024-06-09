@@ -43,9 +43,9 @@
                                     <td>{{ $list_ujian->nama_ujian }}</td>
                                     <td>
                                         Mulai&nbsp;&nbsp; :
-                                        {{ \Carbon\Carbon::parse($list_ujian->waktu_mulai)->format('d F Y H:i:s') }}<br>
+                                        {{ \Carbon\Carbon::parse($list_ujian->waktu_mulai)->formatLocalized('%d %B %Y %H:%M:%S') }}<br>
                                         Selesai :
-                                        {{ \Carbon\Carbon::parse($list_ujian->waktu_akhir)->format('d F Y H:i:s') }}
+                                        {{ \Carbon\Carbon::parse($list_ujian->waktu_akhir)->formatLocalized('%d %B %Y %H:%M:%S') }}
                                     </td>
                                     <td class="text-center align-middle">
                                         @if ($list_ujian->status == 'sudah')

@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('kk')->nullable();
             $table->string('nik')->nullable();
             $table->string('nama')->nullable();
+            $table->string('alamat')->nullable();
             $table->string('kota_lahir')->nullable();
             $table->string('tgl_lahir')->nullable();
             $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
